@@ -28,13 +28,15 @@
     font-size: 32px;
     padding-bottom: 0px;
     margin: 0px;
+    padding-top: 18px;
 }
 
 .DefaultEditorTheme__h2 {
     font-size: 24px;
     font-weight: 600;
     padding-top: 18px;
-    padding-bottom: 4px;
+    padding-bottom: 0px;
+    margin: 0px;
 }
 
 .DefaultEditorTheme__h3 {
@@ -43,7 +45,7 @@
 
 .DefaultEditorTheme__paragraph {
     padding-bottom: 0px;
-    margin: 16px 0px;
+    margin: 8px 0px 16px;
 }
 
 @media only screen and (max-width: 725px) {
@@ -78,7 +80,7 @@
 
 .DefaultEditorTheme__Placeholder {
     position: relative;
-    top: -60px;
+    top: -40px;
     z-index: -10;
     color: rgba(0, 0, 0, 0.507);
 }

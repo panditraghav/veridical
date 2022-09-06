@@ -41,7 +41,7 @@ export default function Editor({ initialConfig }: EditorProps) {
             <div className={"DefaultEditorTheme__EditorContainer"}>
                 <RichTextPlugin
                     contentEditable={<ContentEditable readOnly={false} className={"DefaultEditorTheme__ContentEditable"} />}
-                    placeholder={<Placeholder text="Tell your story..." />}
+                    placeholder={<Placeholder text="Press Ctrl + k for command..." />}
                 />
                 <MarkdownPlugin />
                 <ListPlugin />

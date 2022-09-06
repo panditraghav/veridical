@@ -2,6 +2,7 @@ import React from "react";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react"
 
+// import { Editor } from "../../dist";
 import { Editor } from "../components";
 
 export default {
@@ -14,10 +15,10 @@ const Template: ComponentStory<typeof Editor> = (args) => <Editor {...args} />
 export const BasicEditor = Template.bind({})
 
 export const ConfiguredEditor = Template.bind({})
-ConfiguredEditor.args ={
+ConfiguredEditor.args = {
     initialConfig: {
         namespace: "my-editor",
-        onError: (error:Error) => console.log(error),
+        onError: (error: Error) => console.log(error),
         readOnly: false
     }
 }
