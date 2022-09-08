@@ -25,8 +25,12 @@ function AddNodeBtn({ boundingClientRect, onClick }: AddNodeBtnProps) {
 
     useEffect(() => {
         if (buttonRef && buttonRef.current && boundingClientRect) {
-            buttonRef.current.style.top = `${boundingClientRect.y}px`
-            buttonRef.current.style.left = `${boundingClientRect.x - 30}px`
+
+            let { x, y } = boundingClientRect
+            y = y + window.scrollY
+
+            buttonRef.current.style.top = `${y}px`
+            buttonRef.current.style.left = `${x - 30}px`
         }
     }, [buttonRef, boundingClientRect])
 
