@@ -43,7 +43,7 @@ export const defaultTheme: EditorThemeClasses = {
         h4: 'DefaultEditorTheme__h4',
         h5: 'DefaultEditorTheme__h5',
     },
-    image: 'editor-image',
+    image: 'DefaultEditorTheme__image',
     link: 'DefaultEditorTheme__link',
     list: {
         listitem: 'DefaultEditorTheme__listItem',

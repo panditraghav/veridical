@@ -101,7 +101,7 @@ export default function AddNodePlugin() {
 
     useEffect(() => {
         const keyPressListener = (ev: KeyboardEvent) => {
-            if (ev.key === "k" && ev.ctrlKey) {
+            if ((ev.key === "k" || ev.key === "K") && ev.ctrlKey) {
                 ev.preventDefault()
                 setIsOpen(true)
             }

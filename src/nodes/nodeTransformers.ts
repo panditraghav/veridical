@@ -1,4 +1,4 @@
-import { createCommand, ParagraphNode, LexicalCommand } from "lexical"
+import { createCommand, ParagraphNode, LexicalCommand, $createParagraphNode, $isRootNode, $createTextNode } from "lexical"
 import { $createHeadingNode } from "@lexical/rich-text"
 import H1 from "../images/H1.svg"
 import H2 from "../images/H2.svg"
@@ -6,6 +6,7 @@ import H3 from "../images/H3.svg"
 import Ol from "../images/Ol.svg"
 import Ul from "../images/Ul.svg"
 import { $createListItemNode, $createListNode } from "@lexical/list"
+import { $createImageNode } from "./ImageNode"
 
 export const TRANSFORM_NODE_COMMAND: LexicalCommand<NodeTransformer> = createCommand()
 export type NodeTransformer = (paragraphNode: ParagraphNode) => void
@@ -47,6 +48,17 @@ const unorderedListTransformer: NodeTransformer = (paragraphNode) => {
     paragraphNode.replace(ul)
     li.select(0, 0)
 }
+const imageTransformer: NodeTransformer = (paragraphNode) => {
+    const img = $createImageNode({
+        src: "",
+        altText: "myImage",
+    })
+    const p = $createParagraphNode()
+    p.append($createTextNode(""))
+    paragraphNode.insertAfter(p)
+    paragraphNode.replace(img)
+    p.select(0,0)
+}
 
 export const transformerOptions: transformerOption[] = [
     {
@@ -83,6 +95,13 @@ export const transformerOptions: transformerOption[] = [
         image: Ul,
         description: "Bullet list",
         transformer: unorderedListTransformer,
+    },
+    {
+        name: "Image",
+        shortName: "img",
+        image: Ul,
+        description: "Fixed width image",
+        transformer: imageTransformer,
     },
 ]
 

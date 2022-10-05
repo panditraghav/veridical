@@ -10,6 +10,8 @@ import MarkdownPlugin from "../../plugins/MarkdownPlugin";
 import defaultEditorNodes from "../../nodes";
 import AddNodePlugin from "../../plugins/AddNodePlugin";
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
+import TreeViewPlugin from "../../plugins/TreeViewPlugin"
+// import ImagePlugin from "../../plugins/ImagePlugin";
 
 interface EditorProps {
     initialConfig?: Readonly<{
@@ -46,6 +48,9 @@ export default function Editor({ initialConfig }: EditorProps) {
                 <MarkdownPlugin />
                 <ListPlugin />
                 <AddNodePlugin />
+                {/* Work on Drag and drop later */}
+                {/* <ImagePlugin /> */}
+                {/* <TreeViewPlugin /> */}
             </div>
         </LexicalComposer>
     )

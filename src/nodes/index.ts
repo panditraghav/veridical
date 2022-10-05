@@ -8,6 +8,7 @@ import { OverflowNode } from '@lexical/overflow';
 import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
+import { ImageNode } from "./ImageNode";
 
 const defaultEditorNodes = [
     HeadingNode,
@@ -23,6 +24,7 @@ const defaultEditorNodes = [
     HashtagNode,
     CodeHighlightNode,
     CodeNode,
+    ImageNode,
 ]
 
 export default defaultEditorNodes
