@@ -7,7 +7,7 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin"
 import { defaultTheme } from "./defaultTheme"
 import Placeholder from "../Placeholder";
 import MarkdownPlugin from "../../plugins/MarkdownPlugin";
-import defaultEditorNodes from "../../nodes";
+import { defaultEditorNodes } from "../../nodes";
 import AddNodePlugin from "../../plugins/AddNodePlugin";
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
 import TreeViewPlugin from "../../plugins/TreeViewPlugin"

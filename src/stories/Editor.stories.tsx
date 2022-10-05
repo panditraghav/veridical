@@ -4,6 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react"
 
 // import { Editor } from "../../dist";
 import { Editor } from "../components";
+import { defaultEditorNodes } from "../nodes"
 
 export default {
     title: "Editor",
@@ -19,6 +20,7 @@ ConfiguredEditor.args = {
     initialConfig: {
         namespace: "my-editor",
         onError: (error: Error) => console.log(error),
+        nodes: [...defaultEditorNodes],
         readOnly: false
     }
 }

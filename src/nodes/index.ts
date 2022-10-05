@@ -10,7 +10,7 @@ import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ImageNode } from "./ImageNode";
 
-const defaultEditorNodes = [
+export const defaultEditorNodes = [
     HeadingNode,
     QuoteNode,
     ListNode,
@@ -26,5 +26,3 @@ const defaultEditorNodes = [
     CodeNode,
     ImageNode,
 ]
-
-export default defaultEditorNodes
