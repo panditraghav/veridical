@@ -15,7 +15,7 @@ export default [
             { file: pkg.main, format: "esm" }
         ],
         external: (id, parent, isResolved) => {
-            if (id.includes("lexical")) return true
+            if (id.includes("lexical") && id.includes("react")) return true
         },
         plugins: [
             image(),
