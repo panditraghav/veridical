@@ -67,7 +67,6 @@ export default function ImageComponent({
     }
 
     const onDelete = useCallback((event: KeyboardEvent) => {
-        console.log(nodeKey)
         event.preventDefault()
         const selection = $getSelection()
         const selectedNode = selection?.getNodes()[0]
@@ -115,11 +114,6 @@ export default function ImageComponent({
         },
         [isSelected]
     )
-
-    const makeSelection = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        console.log(event, isSelected)
-        setIsSelected(true)
-    }
 
     useEffect(() => {
         return mergeRegister(

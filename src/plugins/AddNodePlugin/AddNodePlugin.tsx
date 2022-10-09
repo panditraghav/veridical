@@ -3,6 +3,8 @@ import ReactDOM from "react-dom"
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
 import { $getSelection, $isParagraphNode, $isRangeSelection, LexicalEditor } from "lexical"
 import AddNodeDialog from "./AddNodeDialog"
+import AddIcon from '@mui/icons-material/Add';
+import { IconButton } from "@mui/material"
 
 interface AddNodeBtnProps {
     boundingClientRect: DOMRect | null;
@@ -30,20 +32,24 @@ function AddNodeBtn({ boundingClientRect, onClick }: AddNodeBtnProps) {
             y = y + window.scrollY
 
             buttonRef.current.style.top = `${y}px`
-            buttonRef.current.style.left = `${x - 30}px`
+            buttonRef.current.style.left = `${x - 35}px`
         }
     }, [buttonRef, boundingClientRect])
 
     return (
         <>
-            <button
+            <IconButton
                 //@ts-ignore
                 ref={buttonRef}
-                style={{ position: "absolute" }}
+                sx={{
+                    position: "absolute",
+                    border: "1px solid black",
+                    padding: "2px 2px"
+                }}
                 onClick={onClick}
             >
-                +
-            </button>
+                <AddIcon />
+            </IconButton>
         </>
     )
 }

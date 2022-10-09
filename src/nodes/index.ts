@@ -1,4 +1,4 @@
-import { LexicalNode } from "lexical";
+import { Klass, LexicalNode } from "lexical";
 import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { HashtagNode } from '@lexical/hashtag';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
@@ -10,7 +10,7 @@ import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ImageNode } from "./ImageNode";
 
-export const defaultEditorNodes = [
+export const defaultEditorNodes : Array<Klass<LexicalNode>> = [
     HeadingNode,
     QuoteNode,
     ListNode,

@@ -29,22 +29,22 @@ body{
 }
 
 .DefaultEditorTheme__h1 {
-    font-size: 32px;
-    padding-bottom: 0px;
+    font-size: 40px;
+    padding-bottom: 6px;
     margin: 0px;
     padding-top: 18px;
 }
 
 .DefaultEditorTheme__h2 {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: 600;
-    padding-top: 18px;
+    padding-top: 16px;
     padding-bottom: 0px;
     margin: 0px;
 }
 
 .DefaultEditorTheme__h3 {
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .DefaultEditorTheme__paragraph {
