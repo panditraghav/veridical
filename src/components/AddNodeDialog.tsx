@@ -1,18 +1,28 @@
-import "../../style/addNodeDialog.css"
+import "../style/addNodeDialog.css"
 import React, { useEffect, useState } from "react"
-import { $getSelection, $isParagraphNode, $isRangeSelection, COMMAND_PRIORITY_EDITOR, createCommand, LexicalCommand, LexicalEditor, ParagraphNode } from "lexical";
-import { NodeTransformers, NodeTransformer, TRANSFORM_NODE_COMMAND, transformerOptions } from "../../nodes/nodeTransformers"
-import { KEY_ENTER_COMMAND } from "lexical"
+import {
+    $getSelection,
+    $isParagraphNode,
+    $isRangeSelection,
+    COMMAND_PRIORITY_EDITOR,
+    LexicalEditor,
+} from "lexical";
+import {
+    NodeTransformer,
+    TRANSFORM_NODE_COMMAND,
+    NodeTransformerOption
+} from "../nodes/NodeTransformers"
 
 interface AddNodeDialogProps {
     onClose: () => void;
     editor: LexicalEditor;
+    nodeTransformerOptions: NodeTransformerOption[];
 }
 
-export default function AddNodeDialog({ onClose, editor }: AddNodeDialogProps) {
+export default function AddNodeDialog({ onClose, editor, nodeTransformerOptions }: AddNodeDialogProps) {
     const [searchText, setSearchText] = useState("")
-    const [orderedTransformerOptions, setOrderedTransformerOptions] = useState(transformerOptions)
-    const [selectedOption, setSelectedOption] = useState(transformerOptions[0])
+    const [orderedTransformerOptions, setOrderedTransformerOptions] = useState(nodeTransformerOptions)
+    const [selectedOption, setSelectedOption] = useState(nodeTransformerOptions[0])
 
     useEffect(() => {
         const keyPressListener = (ev: KeyboardEvent) => {

@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import ReactDOM from "react-dom"
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
 import { $getSelection, $isParagraphNode, $isRangeSelection, LexicalEditor } from "lexical"
-import AddNodeDialog from "./AddNodeDialog"
+import AddNodeDialog from "../components/AddNodeDialog"
 import AddIcon from '@mui/icons-material/Add';
 import { IconButton } from "@mui/material"
+import { NodeTransformerOption } from "../nodes/NodeTransformers"
 
 interface AddNodeBtnProps {
     boundingClientRect: DOMRect | null;
@@ -54,7 +55,11 @@ function AddNodeBtn({ boundingClientRect, onClick }: AddNodeBtnProps) {
     )
 }
 
-export default function AddNodePlugin() {
+export default function AddNodePlugin({
+    nodeTransformerOptions
+}: {
+    nodeTransformerOptions: NodeTransformerOption[]
+}) {
     const [editor] = useLexicalComposerContext()
     const [addNodeBtn, setAddNodeBtn] = useState<{
         showBtn: boolean;
@@ -67,6 +72,7 @@ export default function AddNodePlugin() {
         <AddNodeDialog
             onClose={() => setIsOpen(false)}
             editor={editor}
+            nodeTransformerOptions={nodeTransformerOptions}
         />
     )
 

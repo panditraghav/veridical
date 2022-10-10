@@ -26,7 +26,7 @@ import {
     $setSelection,
     $createNodeSelection
 } from "lexical";
-import { $isImageNode } from "./ImageNode";
+import { $isImageNode } from "../nodes/ImageNode";
 import AddImageDialog from "./AddImageDialog";
 
 function hasClickOnImage(event: MouseEvent, imageElement: HTMLDivElement | null) {

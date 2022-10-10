@@ -1,2 +1,5 @@
-export { default as Editor } from "./Editor"
-export { default as Placeholder } from "./Placeholder"
+import Editor from "./Editor";
+
+export {
+    Editor
+}

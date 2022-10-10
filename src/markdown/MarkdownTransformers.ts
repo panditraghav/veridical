@@ -5,7 +5,7 @@ import {
     TextFormatTransformer
 } from "@lexical/markdown"
 
-import { $createImageNode, $isImageNode, ImageNode } from "../../nodes/ImageNode"
+import { $createImageNode, $isImageNode, ImageNode } from "../nodes/ImageNode"
 
 import {
     BOLD_ITALIC_STAR,

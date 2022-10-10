@@ -10,7 +10,9 @@ import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ImageNode } from "./ImageNode";
 
-export const defaultEditorNodes : Array<Klass<LexicalNode>> = [
+export { defaultNodeTransformerOptions } from "./NodeTransformers";
+
+export const defaultEditorNodes: Array<Klass<LexicalNode>> = [
     HeadingNode,
     QuoteNode,
     ListNode,

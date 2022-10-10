@@ -1,16 +1,22 @@
-import "../../style/editor.css"
+import "../style/editor.css"
 import React, { useEffect, useState } from "react";
-import { ListPlugin } from "@lexical/react/LexicalListPlugin"
 import { LexicalComposer, InitialEditorStateType } from "@lexical/react/LexicalComposer"
 import { ContentEditable } from "@lexical/react/LexicalContentEditable"
-import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin"
-import { defaultTheme } from "./defaultTheme"
-import Placeholder from "../Placeholder";
-import MarkdownPlugin from "../../plugins/MarkdownPlugin";
-import { defaultEditorNodes } from "../../nodes";
-import AddNodePlugin from "../../plugins/AddNodePlugin";
-import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
-import TreeViewPlugin from "../../plugins/TreeViewPlugin"
+import { defaultTheme } from "../theme/DefaultTheme"
+import Placeholder from "./Placeholder";
+import { defaultEditorNodes, defaultNodeTransformerOptions } from "../nodes";
+import {
+    LexicalEditor,
+    Klass,
+    LexicalNode,
+    EditorThemeClasses
+} from "lexical";
+import {
+    AddNodePlugin,
+    MarkdownPlugin,
+    ListPlugin,
+    RichTextPlugin
+} from "../plugins";
 
 interface EditorProps {
     initialConfig?: Readonly<{
@@ -46,9 +52,9 @@ export default function Editor({ initialConfig }: EditorProps) {
                 />
                 <MarkdownPlugin />
                 <ListPlugin />
-                <AddNodePlugin />
-                {/* Work on Drag and drop later */}
-                {/* <ImagePlugin /> */}
+                <AddNodePlugin
+                    nodeTransformerOptions={ defaultNodeTransformerOptions}
+                />
             </div>
         </LexicalComposer>
     )
