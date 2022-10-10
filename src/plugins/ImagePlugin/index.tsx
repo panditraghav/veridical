@@ -1,7 +1,7 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getSelection, $isNodeSelection, COMMAND_PRIORITY_EDITOR, COMMAND_PRIORITY_HIGH, createCommand, DRAGEND_COMMAND, DRAGOVER_COMMAND, DRAGSTART_COMMAND, DROP_COMMAND } from "lexical";
 import React, { useEffect } from "react";
-import { $createImageNode, $isImageNode, ImageNode } from "../nodes/ImageNode";
+import { $createImageNode, $isImageNode, ImageNode } from "../../nodes/ImageNode";
 import { mergeRegister } from "@lexical/utils"
 
 function getImageNode(): ImageNode | null {

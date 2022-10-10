@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import ReactDOM from "react-dom"
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
 import { $getSelection, $isParagraphNode, $isRangeSelection, LexicalEditor } from "lexical"
-import AddNodeDialog from "../components/AddNodeDialog"
+import AddNodeDialog from "./components/AddNodeDialog"
 import AddIcon from '@mui/icons-material/Add';
 import { IconButton } from "@mui/material"
-import { NodeTransformerOption } from "../nodes/NodeTransformers"
+import { NodeTransformerOption } from "../../nodes/NodeTransformers"
 
 interface AddNodeBtnProps {
     boundingClientRect: DOMRect | null;

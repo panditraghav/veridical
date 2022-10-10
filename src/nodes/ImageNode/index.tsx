@@ -9,7 +9,7 @@ import {
 } from "lexical";
 import React from "react"
 
-import ImageComponent from "../components/ImageComponent"
+import ImageComponent from "./components/ImageComponent"
 
 
 type SerializedImageNode = {

@@ -1,4 +1,4 @@
-import "../style/addNodeDialog.css"
+import "../../../style/addNodeDialog.css"
 import React, { useEffect, useState } from "react"
 import {
     $getSelection,
@@ -11,7 +11,7 @@ import {
     NodeTransformer,
     TRANSFORM_NODE_COMMAND,
     NodeTransformerOption
-} from "../nodes/NodeTransformers"
+} from "../../../nodes/NodeTransformers"
 
 interface AddNodeDialogProps {
     onClose: () => void;

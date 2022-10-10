@@ -1,6 +1,6 @@
 import React from "react"
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin"
-import { defaultTransformers } from "../markdown/MarkdownTransformers"
+import { defaultTransformers } from "./MarkdownTransformers"
 
 export default function MarkdownPlugin() {
     return (

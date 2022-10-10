@@ -1,4 +1,4 @@
-import "../style/addImageDialog.css"
+import "../../../style/addImageDialog.css"
 import React, { useState } from "react"
 import { createPortal } from "react-dom"
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
