@@ -17,6 +17,8 @@ import {
     ListPlugin,
     RichTextPlugin
 } from "../plugins";
+import CodeHighlightPlugin from "../plugins/CodeHighlightPlugin";
+import PrettierPlugin from "../plugins/PrettierPlugin";
 
 interface EditorProps {
     initialConfig?: Readonly<{
@@ -53,8 +55,10 @@ export default function Editor({ initialConfig }: EditorProps) {
                 <MarkdownPlugin />
                 <ListPlugin />
                 <AddNodePlugin
-                    nodeTransformerOptions={ defaultNodeTransformerOptions}
+                    nodeTransformerOptions={defaultNodeTransformerOptions}
                 />
+                <CodeHighlightPlugin />
+                <PrettierPlugin />
             </div>
         </LexicalComposer>
     )

@@ -138,6 +138,19 @@ body{
     cursor: pointer;
 }
 
+/* Code */
+
 .DefaultEditorTheme__code {
     background: #282c34;
+    display: block;
+    width: 100%;
+    color: #ABB2BF;
+}
+
+.DefaultEditorTheme__tokenAttr{
+    color: #C678DD;
+}
+
+.DefaultEditorTheme__tokenFunction{
+    color: #61AEEE;
 }
