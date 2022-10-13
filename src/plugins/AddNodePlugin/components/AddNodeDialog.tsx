@@ -11,7 +11,7 @@ import {
     NodeTransformer,
     TRANSFORM_NODE_COMMAND,
     NodeTransformerOption
-} from "../../../nodes/NodeTransformers"
+} from "../../../nodes/nodeTransformers"
 
 interface AddNodeDialogProps {
     onClose: () => void;

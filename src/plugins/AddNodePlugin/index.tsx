@@ -5,7 +5,7 @@ import { $getSelection, $isParagraphNode, $isRangeSelection, LexicalEditor } fro
 import AddNodeDialog from "./components/AddNodeDialog"
 import AddIcon from '@mui/icons-material/Add';
 import { IconButton } from "@mui/material"
-import { NodeTransformerOption } from "../../nodes/NodeTransformers"
+import { NodeTransformerOption } from "../../nodes/nodeTransformers"
 
 interface AddNodeBtnProps {
     boundingClientRect: DOMRect | null;
