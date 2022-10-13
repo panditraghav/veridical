@@ -5,7 +5,8 @@ import {
     LexicalNode,
     NodeKey,
     SerializedLexicalNode,
-    LexicalEditor
+    LexicalEditor,
+    DOMConversionMap
 } from "lexical";
 import React from "react"
 
@@ -45,9 +46,9 @@ export class ImageNode extends DecoratorNode<JSX.Element>{
 
     static clone(node: ImageNode): ImageNode {
         return new ImageNode(
-            node.__key,
             node.__src,
             node.__altText,
+            node.__key,
         )
     }
 
@@ -82,10 +83,11 @@ export class ImageNode extends DecoratorNode<JSX.Element>{
 
     exportDOM(): DOMExportOutput {
         const element = document.createElement('img');
-        element.setAttribute('src', this.__src);
-        element.setAttribute('alt', this.__altText);
+        element.setAttribute('src', this.getSrc());
+        element.setAttribute('alt', this.getAltText());
         return { element };
     }
+
     getSrc(): string {
         return this.__src
     }

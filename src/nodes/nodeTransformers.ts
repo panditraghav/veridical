@@ -63,6 +63,7 @@ const imageTransformer: NodeTransformer = (node) => {
         src: "",
         altText: "myImage",
     })
+    console.log(img)
     const p = $createParagraphNode()
     p.append($createTextNode(""))
     node.insertAfter(p)
