@@ -1,4 +1,4 @@
-body{
+body {
     font-family: "Poppins", sans-serif;
 }
 
@@ -130,6 +130,7 @@ body{
     object-fit: cover;
     width: 100%;
 }
+
 .DefaultEditorTheme__image button {
     background: none;
     text-decoration: underline;
@@ -145,12 +146,36 @@ body{
     display: block;
     width: 100%;
     color: #ABB2BF;
+    padding: 32px 16px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
-.DefaultEditorTheme__tokenAttr{
+.DefaultEditorTheme__tokenAttr {
     color: #C678DD;
 }
 
-.DefaultEditorTheme__tokenFunction{
+.DefaultEditorTheme__tokenFunction {
     color: #61AEEE;
+}
+
+.language-selector {
+    background: none;
+    color: rgb(189, 188, 188);
+    border: none;
+    margin-left: 8px;
+}
+
+.language-selector:hover{
+    color: white; 
+}
+
+.language-selector:focus{
+    outline: none;
+    color: white; 
+}
+
+.language-selector option {
+    background-color: #282c34;
 }

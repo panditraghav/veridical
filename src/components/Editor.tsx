@@ -15,9 +15,11 @@ import {
     AddNodePlugin,
     MarkdownPlugin,
     ListPlugin,
-    RichTextPlugin
+    RichTextPlugin,
+    TreeViewPlugin
 } from "../plugins";
 import CodeHighlightPlugin from "../plugins/CodeHighlightPlugin";
+import CodeActionPlugin from "../plugins/CodeActionPlugin";
 import PrettierPlugin from "../plugins/PrettierPlugin";
 
 interface EditorProps {
@@ -58,7 +60,9 @@ export default function Editor({ initialConfig }: EditorProps) {
                     nodeTransformerOptions={defaultNodeTransformerOptions}
                 />
                 <CodeHighlightPlugin />
+                <CodeActionPlugin />
                 <PrettierPlugin />
+                <TreeViewPlugin />
             </div>
         </LexicalComposer>
     )
