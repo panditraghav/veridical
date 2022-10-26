@@ -33,7 +33,6 @@ function onDragStart(evt: DragEvent) {
             key: imageNode.getKey()
         }
         dataTransfer?.setData("application/drag-image-editor", JSON.stringify(data))
-        console.log(dataTransfer?.getData("application/drag-image-editor"))
         return true
     }
     return false
@@ -51,8 +50,6 @@ function onDrop(evt: DragEvent) {
         altText: imgData.altText,
         src: imgData.src,
     })
-    console.log(img)
-    console.log(dataTransfer.getData("application/drag-image-editor"))
     // Change later
     return false
 }

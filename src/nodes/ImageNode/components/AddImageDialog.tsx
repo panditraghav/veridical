@@ -20,7 +20,6 @@ export default function AddImageDialog({
         const files = event.target.files
         const file = files ? files[0] : new Blob()
         const url = URL.createObjectURL(file)
-        console.log(url)
         setImageUrl(url)
     }
 

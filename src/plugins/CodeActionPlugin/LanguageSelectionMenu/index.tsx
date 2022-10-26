@@ -18,12 +18,10 @@ export default function LanguageSelectionMenu({
 
             if (!lang && codeLang) {
                 setLang(codeLang);
-                console.log(`CodeLang is:- ${codeLang}`);
             }
 
             if (lang) {
                 codeNode?.setLanguage(lang);
-                console.log(`lang is:- ${lang}, previousLang is:- ${codeLang}`);
             }
         });
     }, [lang]);
