@@ -23,12 +23,7 @@ import {
     KEY_BACKSPACE_COMMAND,
     KEY_DELETE_COMMAND,
     KEY_ENTER_COMMAND,
-    LexicalEditor,
-    LexicalNode,
     NodeKey,
-    RangeSelection,
-    NodeSelection,
-    GridSelection,
     $setSelection,
     $createNodeSelection,
 } from "lexical";
@@ -102,43 +97,42 @@ export default function ImageComponent({
         });
     }
 
-    const onDelete = useCallback(
-        (event: KeyboardEvent) => {
-            event.preventDefault();
-            const selection = $getSelection();
-            const selectedNode = selection?.getNodes()[0];
-            const previousNode = selectedNode?.getPreviousSibling();
-            const root = $getRoot();
+    const onDelete = useCallback((event: KeyboardEvent) => {
+        event.preventDefault();
+        const selection = $getSelection();
+        const selectedNode = selection?.getNodes()[0];
+        const previousNode = selectedNode?.getPreviousSibling();
+        const root = $getRoot();
 
-            if (
-                selectedNode &&
-                $isNodeSelection(selection) &&
-                $isImageNode(selectedNode)
-            ) {
+        if (
+            selectedNode &&
+            $isNodeSelection(selection) &&
+            $isImageNode(selectedNode)
+        ) {
+            if (root.getChildren().length < 2) {
                 const p = $createParagraphNode();
 
                 p.append($createTextNode(""));
                 root.append(p);
                 p.select(0, 0);
-                selectedNode.remove();
-
-                return true;
-            } else if (
-                $isRangeSelection(selection) &&
-                previousNode &&
-                $isImageNode(previousNode)
-            ) {
-                const newSelection = $createNodeSelection();
-                newSelection.add(previousNode.getKey());
-                $setSelection(newSelection);
-
-                selectedNode?.remove();
-                return true;
             }
-            return false;
-        },
-        [editor, isSelected]
-    );
+            selectedNode.remove();
+
+            return true;
+        } else if (
+            $isRangeSelection(selection) &&
+            previousNode &&
+            $isImageNode(previousNode)
+        ) {
+            const newSelection = $createNodeSelection();
+            newSelection.add(previousNode.getKey());
+            $setSelection(newSelection);
+
+            selectedNode?.remove();
+            return true;
+        }
+        return false;
+    }, []);
 
     const onEnter = useCallback(
         (evt: KeyboardEvent | null) => {
@@ -147,11 +141,18 @@ export default function ImageComponent({
             if (isSelected) {
                 evt.preventDefault();
 
+                const selection = $getSelection();
+                const node = selection?.getNodes()[0];
                 const p = $createParagraphNode();
                 const root = $getRoot();
 
+                if ($isNodeSelection(selection) && node && $isImageNode(node)) {
+                    node.insertAfter(p);
+                } else {
+                    root.append(p);
+                }
+
                 p.append($createTextNode(""));
-                root.append(p);
                 p.select(0, 0);
 
                 return true;
