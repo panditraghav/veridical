@@ -11,7 +11,7 @@ body {
     font-family: "Poppins", sans-serif;
     color: rgb(41, 41, 41);
     font-weight: 400;
-    font-size: 20px;
+    font-size: 18px;
     box-sizing: border-box;
 }
 
@@ -19,8 +19,52 @@ body {
     outline: none
 }
 
+
+/* List item */
+
 .DefaultEditorTheme__listItem {
-    margin: 8px 32px;
+    margin: 2px 8px;
+}
+
+
+.DefaultEditorTheme__ol2 {
+    margin: 0px;
+}
+
+.DefaultEditorTheme__ol2>.DefaultEditorTheme__listItem {
+    list-style-type: upper-alpha;
+}
+.DefaultEditorTheme__ol2>.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
+}
+
+.DefaultEditorTheme__ol3>.DefaultEditorTheme__listItem {
+    list-style-type: lower-alpha;
+}
+
+.DefaultEditorTheme__ol3>.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
+}
+
+.DefaultEditorTheme__ol4>.DefaultEditorTheme__listItem {
+    list-style-type: upper-roman;
+}
+
+.DefaultEditorTheme__ol4>.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
+}
+
+.DefaultEditorTheme__ol5>.DefaultEditorTheme__listItem {
+    list-style-type: lower-roman;
+}
+
+.DefaultEditorTheme__ol5>.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
+}
+
+
+.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
 }
 
 .DefaultEditorTheme__h1, .DefaultEditorTheme__h2, .DefaultEditorTheme__h3, .DefaultEditorTheme__h4, .DefaultEditorTheme__h5, .DefaultEditorTheme__h6 {
@@ -32,7 +76,7 @@ body {
     font-size: 40px;
     padding-bottom: 6px;
     margin: 0px;
-    padding-top: 18px;
+    padding-top: 8px;
 }
 
 .DefaultEditorTheme__h2 {
@@ -89,10 +133,12 @@ body {
     color: rgba(0, 0, 0, 0.507);
 }
 
+/* Image */
+
 .DefaultEditorTheme__image>div {
     padding: 0px;
     width: 100%;
-    margin: 8px 0px;
+    margin: 16px 0px;
     align-items: center;
     display: flex;
     border-radius: 5px;
@@ -167,13 +213,13 @@ body {
     margin-left: 8px;
 }
 
-.language-selector:hover{
-    color: white; 
+.language-selector:hover {
+    color: white;
 }
 
-.language-selector:focus{
+.language-selector:focus {
     outline: none;
-    color: white; 
+    color: white;
 }
 
 .language-selector option {

@@ -8,7 +8,7 @@ import React, {
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister } from "@lexical/utils";
 import { useLexicalNodeSelection } from "@lexical/react/useLexicalNodeSelection";
-import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import ImageIcon from "../../../components/Icons/ImageIcon";
 import {
     $createParagraphNode,
     $createTextNode,
@@ -54,7 +54,6 @@ function hasClickOnImage(
 const cachedImages = new Set<string>();
 function useSuspenseImage(src: string) {
     if (!cachedImages.has(src)) {
-        console.log("New image!")
         throw new Promise((resolve) => {
             const img = new Image();
             img.onload = () => {
@@ -209,7 +208,7 @@ export default function ImageComponent({
                     </Suspense>
                 ) : (
                     <div>
-                        <ImageOutlinedIcon />
+                        <ImageIcon size="base" />
                         <button onClick={() => setShowDialog(true)}>
                             Add an image
                         </button>

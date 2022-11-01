@@ -1,3 +1,4 @@
+import React from "react";
 import {
     createCommand,
     ParagraphNode,
@@ -9,13 +10,15 @@ import {
 } from "lexical";
 import { $createHeadingNode } from "@lexical/rich-text";
 import { $createListItemNode, $createListNode } from "@lexical/list";
-import { $createImageNode } from "./ImageNode";
+import { $createImageNode } from "../../nodes/ImageNode";
 
-import H1 from "../images/H1.svg";
-import H2 from "../images/H2.svg";
-import H3 from "../images/H3.svg";
-import Ol from "../images/Ol.svg";
-import Ul from "../images/Ul.svg";
+import H1Icon from "../../components/Icons/H1Icon";
+import H2Icon from "../../components/Icons/H2Icon";
+import H3Icon from "../../components/Icons/H3Icon";
+import CodeIcon from "../../components/Icons/CodeIcon";
+import ImageIcon from "../../components/Icons/ImageIcon";
+import UnorderedListIcon from "../../components/Icons/UlIcon";
+import OrderedListIcon from "../../components/Icons/OlIcon";
 import { $createCodeNode } from "@lexical/code";
 
 export const TRANSFORM_NODE_COMMAND: LexicalCommand<NodeTransformer> =
@@ -27,7 +30,7 @@ export type NodeTransformerOption = {
     description: string;
     shortName: string;
     transformer: NodeTransformer;
-    image: string;
+    image: React.ReactNode;
 };
 
 const heading_1_Transformer: NodeTransformer = (node) => {
@@ -85,49 +88,49 @@ export const defaultNodeTransformerOptions: NodeTransformerOption[] = [
     {
         name: "Heading 1",
         shortName: "h1",
-        image: H1,
+        image: <H1Icon size="md" />,
         description: "Biggest heading or Title of blog",
         transformer: heading_1_Transformer,
     },
     {
         name: "Heading 2",
         shortName: "h2",
-        image: H2,
+        image: <H2Icon size="md" />,
         description: "Second biggest heading",
         transformer: heading_2_Transformer,
     },
     {
         name: "Heading 3",
         shortName: "h3",
-        image: H3,
+        image: <H3Icon size="md" />,
         description: "Smallest heading",
         transformer: heading_3_Transformer,
     },
     {
         name: "Ordered List",
         shortName: "ol",
-        image: Ol,
+        image: <OrderedListIcon size="md" />,
         description: "List with numbers",
         transformer: orderedListTransformer,
     },
     {
         name: "Unordered List",
         shortName: "ul",
-        image: Ul,
+        image: <UnorderedListIcon size="md" />,
         description: "Bullet list",
         transformer: unorderedListTransformer,
     },
     {
         name: "Image",
         shortName: "img",
-        image: Ul,
+        image: <ImageIcon size="md" />,
         description: "Fixed width image",
         transformer: imageTransformer,
     },
     {
         name: "Code",
         shortName: "code",
-        image: Ul,
+        image: <CodeIcon size="md" />,
         description: "Write code with syntax highlighting",
         transformer: codeTransformer,
     },

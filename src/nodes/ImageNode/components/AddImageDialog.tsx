@@ -1,38 +1,55 @@
-import "../../../style/addImageDialog.css"
-import React, { useState } from "react"
-import { createPortal } from "react-dom"
-import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import "./AddImageDialog.css";
+import React, { useState, useRef, useEffect } from "react";
+import useEscape from "../../../hooks/useEscape";
+import { createPortal } from "react-dom";
+import ImageIcon from "../../../components/Icons/ImageIcon";
+import useBackdropClose from "../../../hooks/useBackdropClose";
+
+export interface AddImageDialogStyle {
+    backdrop?: string;
+    dialog?: string;
+}
+
+export interface AddImageDialogProps {
+    showDialog: boolean;
+    onClose: () => void;
+    onSave: (src: string) => void;
+    style?: AddImageDialogStyle;
+}
 
 export default function AddImageDialog({
     showDialog,
     onClose,
-    onSave
-}: {
-    showDialog: boolean;
-    onClose: () => void;
-    onSave: (src: string) => void;
-}) {
-    const [imageUrl, setImageUrl] = useState("")
+    onSave,
+    style,
+}: AddImageDialogProps) {
+    const [imageUrl, setImageUrl] = useState("");
+    const backdropRef = useRef<HTMLDivElement>();
+    useEscape(onClose);
+    useBackdropClose(onClose, backdropRef.current);
 
-    if (!showDialog) return null
+    const handleImageSelection: React.ChangeEventHandler<HTMLInputElement> = (
+        event
+    ) => {
+        const files = event.target.files;
+        const file = files ? files[0] : new Blob();
+        const url = URL.createObjectURL(file);
+        setImageUrl(url);
+    };
 
-    const handleImageSelection: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-        const files = event.target.files
-        const file = files ? files[0] : new Blob()
-        const url = URL.createObjectURL(file)
-        setImageUrl(url)
-    }
+    if (!showDialog) return null;
 
-    return createPortal((
-        <div className="imageDialogBackdrop">
-            <div className="imageDialog">
-                <div className="title">
-                    <ImageOutlinedIcon />
+    return createPortal(
+        <div
+            //@ts-ignore
+            ref={backdropRef}
+            className={style?.backdrop || "imageDialogBackdrop"}
+        >
+            <div className={style?.dialog || "imageDialog"}>
+                <div className={"title"}>
+                    <ImageIcon size="base" />
                     <span>Add an image</span>
                 </div>
-                {imageUrl !== "" &&
-                    <img className="selectedImage" src={imageUrl} alt="image" />
-                }
                 <div className="inputGroup">
                     <label htmlFor="imageLinkInput">Image url:-</label>
                     <input
@@ -43,8 +60,9 @@ export default function AddImageDialog({
                         onChange={(e) => setImageUrl(e.target.value)}
                     />
                 </div>
-                <hr />
-                <label htmlFor="imageFileInput" id="imageFileInputLabel">Choose a file</label>
+                <label htmlFor="imageFileInput" id="imageFileInputLabel">
+                    Choose a file
+                </label>
                 <input
                     type="file"
                     id="imageFileInput"
@@ -54,18 +72,16 @@ export default function AddImageDialog({
                 <div className="actionButtons">
                     <button
                         className="button-success"
-                        onClick={()=> onSave(imageUrl)}
+                        onClick={() => onSave(imageUrl)}
                     >
                         Save
                     </button>
-                    <button
-                        className="button-cancel"
-                        onClick={onClose}
-                    >
+                    <button className="button-cancel" onClick={onClose}>
                         Cancel
                     </button>
                 </div>
             </div>
-        </div>
-    ), document.body)
+        </div>,
+        document.body
+    );
 }

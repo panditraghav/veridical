@@ -1,0 +1,21 @@
+.DefaultAddBtn {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid black; */
+    padding: 0px;
+}
+
+
+.DefaultAddBtnIcon:hover {
+    fill: rgba(0, 0, 0, 0.696);
+}
+
+.DefaultAddBtnIcon {
+    fill: rgba(0, 0, 0, 0.45);
+}

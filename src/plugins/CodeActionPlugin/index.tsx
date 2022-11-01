@@ -9,7 +9,6 @@ import {
     $isRangeSelection,
 } from "lexical";
 import { createPortal } from "react-dom";
-import { StackOwnerState } from "@mui/system/Stack";
 import LanguageSelectionMenu from "./LanguageSelectionMenu/index";
 
 interface Position {
@@ -18,7 +17,8 @@ interface Position {
 }
 
 function getPositionFromHTMLElement(element: HTMLElement): Position {
-    const { top, left } = element.getBoundingClientRect();
+    let { top, left } = element.getBoundingClientRect();
+    top = top + window.scrollY;
     return {
         top,
         left,

@@ -1,22 +1,21 @@
-import "../style/editor.css"
+import "../style/editor.css";
 import React, { useEffect, useState } from "react";
-import { LexicalComposer, InitialEditorStateType } from "@lexical/react/LexicalComposer"
-import { ContentEditable } from "@lexical/react/LexicalContentEditable"
-import { defaultTheme } from "../theme/DefaultTheme"
-import Placeholder from "./Placeholder";
-import { defaultEditorNodes, defaultNodeTransformerOptions } from "../nodes";
 import {
-    LexicalEditor,
-    Klass,
-    LexicalNode,
-    EditorThemeClasses
-} from "lexical";
+    LexicalComposer,
+    InitialEditorStateType,
+} from "@lexical/react/LexicalComposer";
+import { ContentEditable } from "@lexical/react/LexicalContentEditable";
+import { defaultTheme } from "../theme/DefaultTheme";
+import Placeholder from "./Placeholder";
+import { defaultEditorNodes } from "../nodes";
+import { defaultNodeTransformerOptions } from "../plugins/AddNodePlugin/NodeTransformers";
+import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
 import {
     AddNodePlugin,
     MarkdownPlugin,
     ListPlugin,
     RichTextPlugin,
-    TreeViewPlugin
+    TreeViewPlugin,
 } from "../plugins";
 import CodeHighlightPlugin from "../plugins/CodeHighlightPlugin";
 import CodeActionPlugin from "../plugins/CodeActionPlugin";
@@ -35,24 +34,31 @@ interface EditorProps {
 }
 
 export default function Editor({ initialConfig }: EditorProps) {
-    let config = initialConfig
+    let config = initialConfig;
     if (!config) {
         config = {
             namespace: "main-editor",
             theme: defaultTheme,
             nodes: [...defaultEditorNodes],
             onError: (error) => {
-                console.log(error)
-            }
-        }
+                console.log(error);
+            },
+        };
     }
 
     return (
         <LexicalComposer initialConfig={config}>
             <div className={"DefaultEditorTheme__EditorContainer"}>
                 <RichTextPlugin
-                    contentEditable={<ContentEditable readOnly={false} className={"DefaultEditorTheme__ContentEditable"} />}
-                    placeholder={<Placeholder text="Press Ctrl + k for command..." />}
+                    contentEditable={
+                        <ContentEditable
+                            readOnly={false}
+                            className={"DefaultEditorTheme__ContentEditable"}
+                        />
+                    }
+                    placeholder={
+                        <Placeholder text="Press Ctrl + k for command..." />
+                    }
                 />
                 <MarkdownPlugin />
                 <ListPlugin />
@@ -62,8 +68,8 @@ export default function Editor({ initialConfig }: EditorProps) {
                 <CodeHighlightPlugin />
                 <CodeActionPlugin />
                 <PrettierPlugin />
-                <TreeViewPlugin />
+                {/* <TreeViewPlugin /> */}
             </div>
         </LexicalComposer>
-    )
+    );
 }
