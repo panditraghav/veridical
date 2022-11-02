@@ -1,5 +1,1 @@
-import Editor from "./Editor";
-
-export {
-    Editor
-}
+export { default as Placeholder } from "./Placeholder";

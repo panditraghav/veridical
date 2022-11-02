@@ -1,26 +1,25 @@
 import React from "react";
 
-import { ComponentStory, ComponentMeta } from "@storybook/react"
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// import { Editor } from "../../dist";
-import { Editor } from "../components";
-import { defaultEditorNodes } from "../nodes"
+import Editor from "../Editor";
+import { defaultEditorNodes } from "../nodes";
 
 export default {
     title: "Editor",
-    component: Editor
-} as ComponentMeta<typeof Editor>
+    component: Editor,
+} as ComponentMeta<typeof Editor>;
 
-const Template: ComponentStory<typeof Editor> = (args) => <Editor {...args} />
+const Template: ComponentStory<typeof Editor> = (args) => <Editor {...args} />;
 
-export const BasicEditor = Template.bind({})
+export const BasicEditor = Template.bind({});
 
-export const ConfiguredEditor = Template.bind({})
+export const ConfiguredEditor = Template.bind({});
 ConfiguredEditor.args = {
     initialConfig: {
         namespace: "my-editor",
         onError: (error: Error) => console.log(error),
         nodes: [...defaultEditorNodes],
-        readOnly: false
-    }
-}
+        readOnly: false,
+    },
+};

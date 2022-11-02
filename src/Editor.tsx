@@ -1,25 +1,28 @@
-import "../style/editor.css";
+import "./style/editor.css";
 import React, { useEffect, useState } from "react";
+
 import {
     LexicalComposer,
     InitialEditorStateType,
 } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { defaultTheme } from "../theme/DefaultTheme";
-import Placeholder from "./Placeholder";
-import { defaultEditorNodes } from "../nodes";
-import { defaultNodeTransformerOptions } from "../plugins/AddNodePlugin/NodeTransformers";
-import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+
 import {
     AddNodePlugin,
     MarkdownPlugin,
-    ListPlugin,
-    RichTextPlugin,
     TreeViewPlugin,
-} from "../plugins";
-import CodeHighlightPlugin from "../plugins/CodeHighlightPlugin";
-import CodeActionPlugin from "../plugins/CodeActionPlugin";
-import PrettierPlugin from "../plugins/PrettierPlugin";
+    CodeActionPlugin,
+    CodeHighlightPlugin,
+    PrettierPlugin,
+    defaultNodeTransformerOptions,
+} from "./plugins";
+
+import { defaultTheme } from "./theme/DefaultTheme";
+import { Placeholder } from "./components";
+import { defaultEditorNodes } from "./nodes";
+import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
 
 interface EditorProps {
     initialConfig?: Readonly<{

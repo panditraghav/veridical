@@ -2,7 +2,7 @@ import "./AddImageDialog.css";
 import React, { useState, useRef, useEffect } from "react";
 import useEscape from "../../../hooks/useEscape";
 import { createPortal } from "react-dom";
-import ImageIcon from "../../../components/Icons/ImageIcon";
+import ImageIcon from "../../../Icons/ImageIcon";
 import useBackdropClose from "../../../hooks/useBackdropClose";
 
 export interface AddImageDialogStyle {

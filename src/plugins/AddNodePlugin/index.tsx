@@ -94,3 +94,7 @@ export default function AddNodePlugin({
         document.body
     );
 }
+
+export { defaultNodeTransformerOptions } from "./NodeTransformers";
+export { NodeTransformer } from "./NodeTransformers";
+export { NodeTransformerOption };

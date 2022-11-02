@@ -1,7 +1,7 @@
 import React from "react";
 import "./AddNodeBtn.css";
 import { useRef, useEffect } from "react";
-import AddIcon from "../../../components/Icons/AddIcon";
+import AddIcon from "../../../Icons/AddIcon";
 
 interface AddNodeBtnProps {
     boundingClientRect: DOMRect | null;

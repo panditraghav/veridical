@@ -12,13 +12,13 @@ import { $createHeadingNode } from "@lexical/rich-text";
 import { $createListItemNode, $createListNode } from "@lexical/list";
 import { $createImageNode } from "../../nodes/ImageNode";
 
-import H1Icon from "../../components/Icons/H1Icon";
-import H2Icon from "../../components/Icons/H2Icon";
-import H3Icon from "../../components/Icons/H3Icon";
-import CodeIcon from "../../components/Icons/CodeIcon";
-import ImageIcon from "../../components/Icons/ImageIcon";
-import UnorderedListIcon from "../../components/Icons/UlIcon";
-import OrderedListIcon from "../../components/Icons/OlIcon";
+import H1Icon from "../../Icons/H1Icon";
+import H2Icon from "../../Icons/H2Icon";
+import H3Icon from "../../Icons/H3Icon";
+import CodeIcon from "../../Icons/CodeIcon";
+import ImageIcon from "../../Icons/ImageIcon";
+import UnorderedListIcon from "../../Icons/UlIcon";
+import OrderedListIcon from "../../Icons/OlIcon";
 import { $createCodeNode } from "@lexical/code";
 
 export const TRANSFORM_NODE_COMMAND: LexicalCommand<NodeTransformer> =

@@ -8,7 +8,7 @@ import React, {
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister } from "@lexical/utils";
 import { useLexicalNodeSelection } from "@lexical/react/useLexicalNodeSelection";
-import ImageIcon from "../../../components/Icons/ImageIcon";
+import ImageIcon from "../../../Icons/ImageIcon";
 import {
     $createParagraphNode,
     $createTextNode,

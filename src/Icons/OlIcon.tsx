@@ -1,7 +1,7 @@
 import React from "react";
 import { ImgProps } from "./utils";
 
-export default function OLIcon({ className, size = "base", style }: ImgProps) {
+export default function OlIcon({ className, size = "base", style }: ImgProps) {
     switch (size) {
         case "sm":
             return (

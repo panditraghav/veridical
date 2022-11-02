@@ -1,15 +1,25 @@
-import ImagePlugin from "./ImagePlugin";
 import MarkdownPlugin from "./MarkdownPlugin";
-import AddNodePlugin from "./AddNodePlugin";
+import AddNodePlugin, {
+    NodeTransformer,
+    NodeTransformerOption,
+    defaultNodeTransformerOptions,
+} from "./AddNodePlugin";
 import TreeViewPlugin from "./TreeViewPlugin";
-import { ListPlugin } from "@lexical/react/LexicalListPlugin";
-import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin"
+import CodeHighlightPlugin from "./CodeHighlightPlugin";
+import PrettierPlugin from "./PrettierPlugin";
+import CodeActionPlugin from "./CodeActionPlugin";
 
 export {
-    ImagePlugin,
     MarkdownPlugin,
     AddNodePlugin,
     TreeViewPlugin,
-    ListPlugin,
-    RichTextPlugin
-}
+    CodeHighlightPlugin,
+    PrettierPlugin,
+    CodeActionPlugin,
+};
+
+export {
+    NodeTransformer,
+    NodeTransformerOption,
+    defaultNodeTransformerOptions,
+};
