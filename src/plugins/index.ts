@@ -8,6 +8,7 @@ import TreeViewPlugin from "./TreeViewPlugin";
 import CodeHighlightPlugin from "./CodeHighlightPlugin";
 import PrettierPlugin from "./PrettierPlugin";
 import CodeActionPlugin from "./CodeActionPlugin";
+import DragAndDropPlugin from "./DragAndDropPlugin";
 
 export {
     MarkdownPlugin,
@@ -16,6 +17,7 @@ export {
     CodeHighlightPlugin,
     PrettierPlugin,
     CodeActionPlugin,
+    DragAndDropPlugin
 };
 
 export {

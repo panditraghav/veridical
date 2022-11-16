@@ -3,6 +3,9 @@ import "./AddNodeBtn.css";
 import { useRef, useEffect } from "react";
 import AddIcon from "../../../Icons/AddIcon";
 
+const TOP_OFFSET = 2;
+const LEFT_OFFSET = -45;
+
 interface AddNodeBtnProps {
     boundingClientRect: DOMRect | null;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -24,8 +27,8 @@ export default function AddNodeBtn({
             let { x, y } = boundingClientRect;
             y = y + window.scrollY;
 
-            buttonRef.current.style.top = `${y + 6}px`;
-            buttonRef.current.style.left = `${x - 30}px`;
+            buttonRef.current.style.top = `${y + TOP_OFFSET}px`;
+            buttonRef.current.style.left = `${x + LEFT_OFFSET}px`;
         }
     }, [boundingClientRect]);
 

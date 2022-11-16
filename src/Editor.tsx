@@ -16,6 +16,7 @@ import {
     CodeActionPlugin,
     CodeHighlightPlugin,
     PrettierPlugin,
+    DragAndDropPlugin,
     defaultNodeTransformerOptions,
 } from "./plugins";
 
@@ -71,6 +72,7 @@ export default function Editor({ initialConfig }: EditorProps) {
                 <CodeHighlightPlugin />
                 <CodeActionPlugin />
                 <PrettierPlugin />
+                <DragAndDropPlugin />
                 {/* <TreeViewPlugin /> */}
             </div>
         </LexicalComposer>

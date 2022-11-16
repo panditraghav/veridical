@@ -7,6 +7,7 @@ import H3Icon from "./H3Icon";
 import ImageIcon from "./ImageIcon";
 import OlIcon from "./OlIcon";
 import UlIcon from "./UlIcon";
+import DragIcon from "./DragIcon";
 
 export {
     AddIcon,
@@ -18,4 +19,5 @@ export {
     ImageIcon,
     OlIcon,
     UlIcon,
+    DragIcon,
 };
