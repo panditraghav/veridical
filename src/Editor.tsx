@@ -24,6 +24,7 @@ import { defaultTheme } from "./theme/DefaultTheme";
 import { Placeholder } from "./components";
 import { defaultEditorNodes } from "./nodes";
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
+import HighlightMenuPlugin from "./plugins/HighlightMenuPlugin";
 
 interface EditorProps {
     initialConfig?: Readonly<{
@@ -73,7 +74,8 @@ export default function Editor({ initialConfig }: EditorProps) {
                 <CodeActionPlugin />
                 <PrettierPlugin />
                 <DragAndDropPlugin />
-                {/* <TreeViewPlugin /> */}
+                <HighlightMenuPlugin />
+                <TreeViewPlugin />
             </div>
         </LexicalComposer>
     );
