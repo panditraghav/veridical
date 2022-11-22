@@ -1,0 +1,20 @@
+.defaultHoverMenu {
+    position: absolute;
+    left: -100px;
+    top: -100px;
+    display: flex;
+}
+
+.defaultShowMenuAnimation {
+    animation: showMenu .2s ease;
+}
+
+@keyframes showMenu {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}

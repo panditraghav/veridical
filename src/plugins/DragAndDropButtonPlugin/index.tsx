@@ -6,104 +6,48 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import {
     $getNearestNodeFromDOMNode,
     $getNodeByKey,
+    $getSelection,
     COMMAND_PRIORITY_HIGH,
     DRAGOVER_COMMAND,
     DROP_COMMAND,
     LexicalEditor,
+    LexicalNode,
+    $isRangeSelection,
 } from "lexical";
+import {
+    getHoveredDOMNode,
+    Offset,
+    isAboveOrBelowCenter,
+    isHTMLElement,
+} from "../../utils";
 import { mergeRegister } from "@lexical/utils";
+import { useHoverMenuContext } from "../../context/hoverMenuContext";
 
 const LEFT_OFFSET = -25;
 const TOP_OFFSET = 4;
 const DRAG_DATA_FORMAT = "application/x-rb-editor-drag";
-
-function isHTMLElement(x: unknown): x is HTMLElement {
-    return x instanceof HTMLElement;
-}
-
-function getTopLevelNodeKey(editor: LexicalEditor): [string] | [] {
-    const root = editor.getEditorState()._nodeMap.get("root");
-    return root ? root.__children : [];
-}
-
-function isMouseInside(element: HTMLElement | null, ev: MouseEvent): boolean {
-    if (!element) return false;
-    const elementRect = element.getBoundingClientRect();
-    const { paddingTop, paddingBottom, marginTop, marginBottom } =
-        window.getComputedStyle(element);
-    const { x: mouseX, y: mouseY } = ev;
-    const {
-        x: elementX,
-        y: elementY,
-        width: elementWidth,
-        height: elementHeight,
-    } = elementRect;
-    if (
-        mouseX >= elementX + LEFT_OFFSET &&
-        mouseX <= elementX + elementWidth &&
-        mouseY >= elementY &&
-        mouseY <= elementY + elementHeight
-    ) {
-        return true;
-    }
-    return false;
-}
-
-function isAboveOrBelowCenter(
-    ev: MouseEvent,
-    element: HTMLElement
-): "above" | "below" {
-    const { y: elementY, height: elementHeight } =
-        element.getBoundingClientRect();
-    const { y: mouseY } = ev;
-
-    const top = elementY;
-    const bottom = elementY + elementHeight;
-    const center = top + (bottom - top) / 2;
-
-    if (mouseY >= center) {
-        return "below";
-    } else {
-        return "above";
-    }
-}
-
-function getLexicalDOMNode(
-    ev: MouseEvent,
-    editor: LexicalEditor
-): HTMLElement | null {
-    const topKeys = getTopLevelNodeKey(editor);
-    let lexicalDOMNode: HTMLElement | null = null;
-
-    for (const key of topKeys) {
-        const element = editor.getElementByKey(key);
-        if (isMouseInside(element, ev)) {
-            lexicalDOMNode = element;
-            break;
-        }
-    }
-    return lexicalDOMNode;
-}
 
 function setTragetLinePosition(
     ev: DragEvent,
     editor: LexicalEditor,
     targetLine: HTMLDivElement | null
 ) {
-    const targetLexicalDOMNode = getLexicalDOMNode(ev, editor);
+    const targetLexicalDOMNode = getHoveredDOMNode(ev, editor, {
+        left: LEFT_OFFSET,
+    });
     if (!targetLexicalDOMNode || !targetLine) return;
     const { top, width, height, left } =
         targetLexicalDOMNode.getBoundingClientRect();
     switch (isAboveOrBelowCenter(ev, targetLexicalDOMNode)) {
         case "above":
             targetLine.style.display = "block";
-            targetLine.style.top = `${top + window.scrollY}px`;
+            targetLine.style.top = `${top}px`;
             targetLine.style.left = `${left}px`;
             targetLine.style.width = `${width}px`;
             break;
         case "below":
             targetLine.style.display = "block";
-            targetLine.style.top = `${top + window.scrollY + height}px`;
+            targetLine.style.top = `${top + height}px`;
             targetLine.style.left = `${left}px`;
             targetLine.style.width = `${width}px`;
             break;
@@ -117,43 +61,28 @@ function removeTargetLine(targetLine: HTMLDivElement | null) {
     targetLine.style.top = "-1000px";
 }
 
-function setPositionBeside(
-    element: HTMLElement | null,
-    dragger: HTMLElement | null
-) {
-    if (!dragger) return;
-    if (!element) {
-        dragger.style.display = "none";
-        dragger.style.left = `${-1000}px`;
-        dragger.style.top = `${-1000}px`;
-        return;
-    }
-    const elementRect = element.getBoundingClientRect();
-    const { x: elementX, y: elementY, height } = elementRect;
-
-    dragger.style.display = "block";
-    dragger.style.left = `${elementX + LEFT_OFFSET}px`;
-    dragger.style.top = `${elementY + TOP_OFFSET + window.scrollY}px`;
-}
-
 function setDragImage(dt: DataTransfer, draggedElement: HTMLElement) {
     dt.setDragImage(draggedElement, 0, 0);
 }
 
-function Dragger() {
-    const [editor] = useLexicalComposerContext();
-    const [draggedElement, setDraggedElement] = useState<HTMLElement | null>(
-        null
+function TargetLine({
+    targetLineRef,
+}: {
+    targetLineRef: React.MutableRefObject<HTMLDivElement | null>;
+}) {
+    return createPortal(
+        <div
+            style={{ height: 2, background: "black", position: "absolute" }}
+            ref={targetLineRef}
+            className="target-line"
+        />,
+        document.body
     );
+}
 
-    const dragIconRef = useRef<HTMLDivElement | null>(null);
+function useDragAndDropButton(editor: LexicalEditor) {
+    const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const targetLineRef = useRef<HTMLDivElement | null>(null);
-
-    useMouse((ev) => {
-        const lexicalDOMNode = getLexicalDOMNode(ev, editor);
-        setPositionBeside(lexicalDOMNode, dragIconRef.current);
-        setDraggedElement(lexicalDOMNode);
-    });
 
     useEffect(() => {
         function onDragOver(ev: DragEvent) {
@@ -164,7 +93,7 @@ function Dragger() {
 
         function onDrop(ev: DragEvent) {
             const dt = ev.dataTransfer;
-            const target = getLexicalDOMNode(ev, editor);
+            const target = getHoveredDOMNode(ev, editor, { left: LEFT_OFFSET });
 
             if (!dt || !isHTMLElement(target)) return false;
             const nodeKey = dt.getData(DRAG_DATA_FORMAT);
@@ -202,17 +131,12 @@ function Dragger() {
 
     function onDragStart(ev: React.DragEvent<HTMLDivElement>) {
         const dt = ev.dataTransfer;
-        if (!dt || !draggedElement) return;
+        if (!dt || !hoveredDOMNode) return;
 
-        setDragImage(dt, draggedElement);
+        setDragImage(dt, hoveredDOMNode);
         let nodeKey = "";
+        if (hoveredLexicalNode) nodeKey = hoveredLexicalNode.__key;
 
-        editor.update(() => {
-            const lexicalNode = $getNearestNodeFromDOMNode(draggedElement);
-            if (lexicalNode) {
-                nodeKey = lexicalNode.getKey();
-            }
-        });
         dt.setData(DRAG_DATA_FORMAT, nodeKey);
     }
 
@@ -224,29 +148,20 @@ function Dragger() {
         <>
             <div
                 style={{
-                    position: "absolute",
-                    padding: 0,
-                    margin: 0,
-                    left: -100,
-                    top: -100,
                     cursor: "pointer",
                 }}
-                ref={dragIconRef}
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
                 draggable={true}
             >
                 <DragIcon size="base" style={{ padding: 0, margin: 0 }} />
             </div>
-            <div
-                style={{ height: 2, background: "black", position: "absolute" }}
-                ref={targetLineRef}
-                className="target-line"
-            ></div>
+            <TargetLine targetLineRef={targetLineRef} />
         </>
     );
 }
-
-export default function DragAndDropPlugin() {
-    return createPortal(<Dragger />, document.body);
+export default function DragAndDropButtonPlugin() {
+    const [editor] = useLexicalComposerContext();
+    if (!editor.isEditable) return null;
+    return useDragAndDropButton(editor);
 }

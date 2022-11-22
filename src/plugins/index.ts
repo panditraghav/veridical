@@ -1,27 +1,23 @@
 import MarkdownPlugin from "./MarkdownPlugin";
-import AddNodePlugin, {
-    NodeTransformer,
-    NodeTransformerOption,
-    defaultNodeTransformerOptions,
-} from "./AddNodePlugin";
+import AddNodeButtonPlugin from "./AddNodeButtonPlugin";
 import TreeViewPlugin from "./TreeViewPlugin";
 import CodeHighlightPlugin from "./CodeHighlightPlugin";
 import PrettierPlugin from "./PrettierPlugin";
 import CodeActionPlugin from "./CodeActionPlugin";
-import DragAndDropPlugin from "./DragAndDropPlugin";
+import DragAndDropButtonPlugin from "./DragAndDropButtonPlugin";
+import HighlightMenuPlugin from "./HighlightMenuPlugin";
+import HoverMenuPlugin from "./HoverMenuPlugin";
+import AddNodeShortcutPlugin from "./AddNodeShortcutPlugin";
 
 export {
     MarkdownPlugin,
-    AddNodePlugin,
+    AddNodeButtonPlugin,
     TreeViewPlugin,
     CodeHighlightPlugin,
     PrettierPlugin,
     CodeActionPlugin,
-    DragAndDropPlugin
-};
-
-export {
-    NodeTransformer,
-    NodeTransformerOption,
-    defaultNodeTransformerOptions,
+    DragAndDropButtonPlugin,
+    HighlightMenuPlugin,
+    HoverMenuPlugin,
+    AddNodeShortcutPlugin,
 };

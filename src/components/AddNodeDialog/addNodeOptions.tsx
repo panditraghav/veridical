@@ -7,6 +7,7 @@ import {
     $isRootNode,
     $createTextNode,
     LexicalNode,
+    $isParagraphNode,
 } from "lexical";
 import { $createHeadingNode } from "@lexical/rich-text";
 import { $createListItemNode, $createListNode } from "@lexical/list";
@@ -21,117 +22,137 @@ import UnorderedListIcon from "../../Icons/UlIcon";
 import OrderedListIcon from "../../Icons/OlIcon";
 import { $createCodeNode } from "@lexical/code";
 
-export const TRANSFORM_NODE_COMMAND: LexicalCommand<NodeTransformer> =
-    createCommand();
-export type NodeTransformer = (node: LexicalNode) => void;
+export const ADD_NODE_COMMAND: LexicalCommand<NodeCreator> = createCommand();
+export type NodeCreator = (node: LexicalNode) => void;
 
-export type NodeTransformerOption = {
+export type AddNodeOption = {
     name: string;
     description: string;
     shortName: string;
-    transformer: NodeTransformer;
+    creator: NodeCreator;
     image: React.ReactNode;
 };
 
-const heading_1_Transformer: NodeTransformer = (node) => {
+const H1Creator: NodeCreator = (node) => {
     const h1 = $createHeadingNode("h1");
-    node.replace(h1);
+    if ($isParagraphNode(node) && node.getTextContent() == "") {
+        node.replace(h1);
+    } else {
+        node.insertAfter(h1);
+    }
     h1.select(0, 0);
 };
 
-const heading_2_Transformer: NodeTransformer = (node) => {
+const H2Creator: NodeCreator = (node) => {
     const h2 = $createHeadingNode("h2");
-    node.replace(h2);
+    if ($isParagraphNode(node) && node.getTextContent() == "") {
+        node.replace(h2);
+    } else {
+        node.insertAfter(h2);
+    }
     h2.select(0, 0);
 };
-const heading_3_Transformer: NodeTransformer = (node) => {
+const H3Creator: NodeCreator = (node) => {
     const h3 = $createHeadingNode("h3");
-    node.replace(h3);
+    if ($isParagraphNode(node) && node.getTextContent() == "") {
+        node.replace(h3);
+    } else {
+        node.insertAfter(h3);
+    }
     h3.select(0, 0);
 };
-const orderedListTransformer: NodeTransformer = (node) => {
+const OLCreator: NodeCreator = (node) => {
     const ol = $createListNode("number");
     const li = $createListItemNode();
     ol.append(li);
-    node.replace(ol);
+    if ($isParagraphNode(node) && node.getTextContent() == "") {
+        node.replace(ol);
+    } else {
+        node.insertAfter(ol);
+    }
     li.select(0, 0);
 };
-const unorderedListTransformer: NodeTransformer = (node) => {
+const ULCreator: NodeCreator = (node) => {
     const ul = $createListNode("bullet");
     const li = $createListItemNode();
     ul.append(li);
-    node.replace(ul);
+    if ($isParagraphNode(node) && node.getTextContent() == "") {
+        node.replace(ul);
+    } else {
+        node.insertAfter(ul);
+    }
     li.select(0, 0);
 };
-const imageTransformer: NodeTransformer = (node) => {
+const ImageCreator: NodeCreator = (node) => {
     const img = $createImageNode({
         src: "",
         altText: "myImage",
     });
-    const p = $createParagraphNode();
-    p.append($createTextNode(""));
-    node.insertAfter(p);
-    node.replace(img);
-    p.select(0, 0);
+    if ($isParagraphNode(node) && node.getTextContent() == "") {
+        node.insertBefore(img);
+    } else {
+        node.insertAfter(img);
+    }
 };
 
-const codeTransformer: NodeTransformer = (node) => {
+const CodeCreator: NodeCreator = (node) => {
     const codeNode = $createCodeNode("javascript");
-    const p = $createParagraphNode();
-    p.append($createTextNode(""));
-    node.insertAfter(p);
-    node.replace(codeNode);
+    if ($isParagraphNode(node) && node.getTextContent() == "") {
+        node.replace(codeNode);
+    } else {
+        node.insertAfter(codeNode);
+    }
     codeNode.select(0, 0);
 };
 
-export const defaultNodeTransformerOptions: NodeTransformerOption[] = [
+export const defaultAddNodeOptions: AddNodeOption[] = [
     {
         name: "Heading 1",
         shortName: "h1",
         image: <H1Icon size="md" />,
         description: "Biggest heading or Title of blog",
-        transformer: heading_1_Transformer,
+        creator: H1Creator,
     },
     {
         name: "Heading 2",
         shortName: "h2",
         image: <H2Icon size="md" />,
         description: "Second biggest heading",
-        transformer: heading_2_Transformer,
+        creator: H2Creator,
     },
     {
         name: "Heading 3",
         shortName: "h3",
         image: <H3Icon size="md" />,
         description: "Smallest heading",
-        transformer: heading_3_Transformer,
+        creator: H3Creator,
     },
     {
         name: "Ordered List",
         shortName: "ol",
         image: <OrderedListIcon size="md" />,
         description: "List with numbers",
-        transformer: orderedListTransformer,
+        creator: OLCreator,
     },
     {
         name: "Unordered List",
         shortName: "ul",
         image: <UnorderedListIcon size="md" />,
         description: "Bullet list",
-        transformer: unorderedListTransformer,
+        creator: ULCreator,
     },
     {
         name: "Image",
         shortName: "img",
         image: <ImageIcon size="md" />,
         description: "Fixed width image",
-        transformer: imageTransformer,
+        creator: ImageCreator,
     },
     {
         name: "Code",
         shortName: "code",
         image: <CodeIcon size="md" />,
         description: "Write code with syntax highlighting",
-        transformer: codeTransformer,
+        creator: CodeCreator,
     },
 ];

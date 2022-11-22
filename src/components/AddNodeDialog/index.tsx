@@ -1,18 +1,20 @@
 import "./AddNodeDialog.css";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import {
     $getSelection,
     $isParagraphNode,
     $isRangeSelection,
     COMMAND_PRIORITY_EDITOR,
     LexicalEditor,
+    LexicalNode,
 } from "lexical";
 import {
-    NodeTransformer,
-    TRANSFORM_NODE_COMMAND,
-    NodeTransformerOption,
-} from "../NodeTransformers";
-import useBackdropClose from "../../../hooks/useBackdropClose";
+    NodeCreator,
+    AddNodeOption,
+    defaultAddNodeOptions,
+} from "./addNodeOptions";
+import useBackdropClose from "../../hooks/useBackdropClose";
+import { createPortal } from "react-dom";
 
 export interface AddNodeDialogStyle {
     backdrop?: string;
@@ -27,68 +29,81 @@ export interface AddNodeDialogStyle {
 }
 
 export interface AddNodeDialogProps {
-    onClose: () => void;
     editor: LexicalEditor;
-    nodeTransformerOptions: NodeTransformerOption[];
+    isOpen: boolean;
+    onClose: () => void;
+    lexicalNode: LexicalNode | null;
+    addNodeOptions?: AddNodeOption[];
     style?: AddNodeDialogStyle;
 }
 
-export default function AddNodeDialog({
-    onClose,
+function Dialog({
     editor,
-    nodeTransformerOptions,
+    onClose,
+    lexicalNode,
+    addNodeOptions = defaultAddNodeOptions,
+    isOpen,
     style,
 }: AddNodeDialogProps) {
     const [searchText, setSearchText] = useState("");
-    const [orderedTransformerOptions, setOrderedTransformerOptions] = useState(
-        nodeTransformerOptions
-    );
-    const [selectedOption, setSelectedOption] = useState(
-        nodeTransformerOptions[0]
+    const [orderedNodeOptions, setOrderedNodeOptions] =
+        useState(addNodeOptions);
+    const [selectedOption, setSelectedOption] = useState(addNodeOptions[0]);
+    const [selectedNode, setSelectedNode] = useState<LexicalNode | null>(
+        lexicalNode
     );
     const backdropRef = useRef<HTMLDivElement>();
     useBackdropClose(onClose, backdropRef.current);
 
     useEffect(() => {
+        if (lexicalNode && !selectedNode) {
+            setSelectedNode(lexicalNode);
+        }
+    }, [lexicalNode]);
+
+    const createNode = useCallback(
+        (creator: NodeCreator) => {
+            if (!selectedNode) throw Error("No node is selected");
+            editor.update(() => {
+                creator(selectedNode);
+            });
+            onClose();
+        },
+        [editor, selectedNode]
+    );
+
+    useEffect(() => {
         const keyPressListener = (ev: KeyboardEvent) => {
-            let selectedOptionIndex = orderedTransformerOptions.findIndex(
-                (option) => {
-                    return option.name === selectedOption.name;
-                }
-            );
+            let selectedOptionIndex = orderedNodeOptions.findIndex((option) => {
+                return option.name === selectedOption.name;
+            });
 
             switch (ev.key) {
                 case "Escape":
                     onClose();
                     break;
-
                 case "Enter":
-                    editor.dispatchCommand(
-                        TRANSFORM_NODE_COMMAND,
-                        selectedOption.transformer
-                    );
+                    createNode(selectedOption.creator);
+                    onClose();
                     ev.preventDefault();
                     break;
-
                 case "ArrowDown":
                     if (
-                        selectedOptionIndex + 1 <
-                            orderedTransformerOptions.length &&
+                        selectedOptionIndex + 1 < orderedNodeOptions.length &&
                         selectedOptionIndex !== -1
                     ) {
                         setSelectedOption(
-                            orderedTransformerOptions[selectedOptionIndex + 1]
+                            orderedNodeOptions[selectedOptionIndex + 1]
                         );
                     }
                     break;
-
                 case "ArrowUp":
                     if (
                         selectedOptionIndex - 1 >= 0 &&
                         selectedOptionIndex !== -1
                     ) {
                         setSelectedOption(
-                            orderedTransformerOptions[selectedOptionIndex - 1]
+                            orderedNodeOptions[selectedOptionIndex - 1]
                         );
                     }
                     break;
@@ -99,44 +114,20 @@ export default function AddNodeDialog({
     }, [selectedOption]);
 
     useEffect(() => {
-        let searchedTerm = orderedTransformerOptions.filter((option) => {
+        let searchedTerm = orderedNodeOptions.filter((option) => {
             const name = option.name.toLowerCase();
             const st = searchText.toLowerCase();
             const shortName = option.shortName.toLowerCase();
             return name.includes(st) || shortName.includes(st);
         });
-        let optionSet = new Set([
-            ...searchedTerm,
-            ...orderedTransformerOptions,
-        ]);
+        let optionSet = new Set([...searchedTerm, ...orderedNodeOptions]);
         let orderedOptions = new Array(...optionSet);
 
-        setOrderedTransformerOptions(orderedOptions);
+        setOrderedNodeOptions(orderedOptions);
         setSelectedOption(orderedOptions[0]);
     }, [searchText]);
 
-    useEffect(() => {
-        return editor.registerCommand(
-            TRANSFORM_NODE_COMMAND,
-            (payload: NodeTransformer): boolean => {
-                editor.update(() => {
-                    const selection = $getSelection();
-                    if ($isRangeSelection(selection)) {
-                        const anchorNode = selection.anchor.getNode();
-                        if ($isParagraphNode(anchorNode)) {
-                            payload(anchorNode);
-                            onClose();
-                            return true;
-                        }
-                    }
-                });
-                return false;
-            },
-            COMMAND_PRIORITY_EDITOR
-        );
-    });
-
-    return (
+    return createPortal(
         <div
             //@ts-ignore
             ref={backdropRef}
@@ -154,17 +145,12 @@ export default function AddNodeDialog({
                     />
                 </div>
                 <div>
-                    {orderedTransformerOptions.map((option) => {
+                    {orderedNodeOptions.map((option) => {
                         return (
                             <div
                                 key={option.name}
                                 className={style?.option || "nodeOption"}
-                                onClick={() =>
-                                    editor.dispatchCommand(
-                                        TRANSFORM_NODE_COMMAND,
-                                        option.transformer
-                                    )
-                                }
+                                onClick={() => createNode(option.creator)}
                                 style={{
                                     backgroundColor:
                                         selectedOption.name === option.name
@@ -209,6 +195,31 @@ export default function AddNodeDialog({
                     })}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 }
+
+export default function AddNodeDialog({
+    editor,
+    onClose,
+    lexicalNode,
+    addNodeOptions = defaultAddNodeOptions,
+    style,
+    isOpen,
+}: AddNodeDialogProps) {
+    if (!isOpen) return null;
+
+    return (
+        <Dialog
+            editor={editor}
+            onClose={onClose}
+            lexicalNode={lexicalNode}
+            addNodeOptions={addNodeOptions}
+            style={style}
+            isOpen={isOpen}
+        />
+    );
+}
+
+export { AddNodeOption, NodeCreator, defaultAddNodeOptions };

@@ -1,6 +1,5 @@
 import "./style/editor.css";
 import React, { useEffect, useState } from "react";
-
 import {
     LexicalComposer,
     InitialEditorStateType,
@@ -10,21 +9,22 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 
 import {
-    AddNodePlugin,
+    AddNodeButtonPlugin,
     MarkdownPlugin,
     TreeViewPlugin,
     CodeActionPlugin,
     CodeHighlightPlugin,
     PrettierPlugin,
-    DragAndDropPlugin,
-    defaultNodeTransformerOptions,
+    DragAndDropButtonPlugin,
+    HighlightMenuPlugin,
+    HoverMenuPlugin,
+    AddNodeShortcutPlugin
 } from "./plugins";
 
 import { defaultTheme } from "./theme/DefaultTheme";
 import { Placeholder } from "./components";
 import { defaultEditorNodes } from "./nodes";
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
-import HighlightMenuPlugin from "./plugins/HighlightMenuPlugin";
 
 interface EditorProps {
     initialConfig?: Readonly<{
@@ -35,6 +35,7 @@ interface EditorProps {
         readOnly?: boolean;
         theme?: EditorThemeClasses;
         editorState?: InitialEditorStateType;
+        editable?: boolean;
     }>;
 }
 
@@ -67,14 +68,15 @@ export default function Editor({ initialConfig }: EditorProps) {
                 />
                 <MarkdownPlugin />
                 <ListPlugin />
-                <AddNodePlugin
-                    nodeTransformerOptions={defaultNodeTransformerOptions}
-                />
                 <CodeHighlightPlugin />
                 <CodeActionPlugin />
                 <PrettierPlugin />
-                <DragAndDropPlugin />
                 <HighlightMenuPlugin />
+                <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
+                    <AddNodeButtonPlugin />
+                    <DragAndDropButtonPlugin />
+                </HoverMenuPlugin>
+                <AddNodeShortcutPlugin />
                 <TreeViewPlugin />
             </div>
         </LexicalComposer>

@@ -1,9 +1,7 @@
 .DefaultAddBtn {
     background-color: transparent;
     border: none;
-    border-radius: 50%;
     cursor: pointer;
-    color: orange;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,4 +16,6 @@
 
 .DefaultAddBtnIcon {
     fill: rgba(0, 0, 0, 0.45);
+    position:relative;
+    top: -3px;
 }
