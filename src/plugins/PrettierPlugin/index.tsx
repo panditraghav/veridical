@@ -8,6 +8,7 @@ import htmlParser from "prettier/parser-html";
 import markdownParser from "prettier/parser-markdown";
 import cssParser from "prettier/parser-postcss";
 import { Plugin, Options } from "prettier";
+import { LexicalEditor } from "lexical";
 
 interface IParser {
     lang: string[];
@@ -53,9 +54,7 @@ function getOptions(language: string | null | undefined): Options | undefined {
     };
 }
 
-export default function PrettierPlugin() {
-    const [editor] = useLexicalComposerContext();
-
+function usePrettierPlugin(editor: LexicalEditor) {
     useEffect(() => {
         function prettierCommandListener(ev: KeyboardEvent) {
             if (ev.altKey) ev.preventDefault();
@@ -91,4 +90,9 @@ export default function PrettierPlugin() {
     }, [editor]);
 
     return null;
+}
+
+export default function PrettierPlugin() {
+    const [editor] = useLexicalComposerContext();
+    return usePrettierPlugin(editor);
 }

@@ -4,7 +4,11 @@ import React, { useRef, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import useMouse from "../../hooks/useMouse";
 import { getHoveredDOMNode, Offset } from "../../utils";
-import { $getNearestNodeFromDOMNode, LexicalNode } from "lexical";
+import {
+    $getNearestNodeFromDOMNode,
+    LexicalEditor,
+    LexicalNode,
+} from "lexical";
 import { hoverMenuContext } from "../../context/hoverMenuContext";
 
 interface HoverMenuStyle {
@@ -41,16 +45,12 @@ function setMenuPosition(
     menu.classList.add(style?.showMenuAnimation || "defaultShowMenuAnimation");
 }
 
-export default function HoverMenuPlugin({
-    children,
-    offset,
-    style,
-}: {
-    children?: React.ReactNode;
-    offset?: Offset;
-    style?: HoverMenuStyle;
-}) {
-    const [editor] = useLexicalComposerContext();
+function useHoverMenuPlugin(
+    editor: LexicalEditor,
+    children?: React.ReactNode,
+    offset?: Offset,
+    style?: HoverMenuStyle
+) {
     const hoverMenuRef = useRef<HTMLDivElement | null>(null);
     const [hoveredDOMNode, setHoveredDOMNode] = useState<HTMLElement | null>(
         null
@@ -88,4 +88,17 @@ export default function HoverMenuPlugin({
         </hoverMenuContext.Provider>,
         document.body
     );
+}
+
+export default function HoverMenuPlugin({
+    children,
+    offset,
+    style,
+}: {
+    children?: React.ReactNode;
+    offset?: Offset;
+    style?: HoverMenuStyle;
+}) {
+    const [editor] = useLexicalComposerContext();
+    return useHoverMenuPlugin(editor, children, offset, style);
 }

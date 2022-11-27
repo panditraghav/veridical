@@ -162,6 +162,5 @@ function useDragAndDropButton(editor: LexicalEditor) {
 }
 export default function DragAndDropButtonPlugin() {
     const [editor] = useLexicalComposerContext();
-    if (!editor.isEditable) return null;
     return useDragAndDropButton(editor);
 }

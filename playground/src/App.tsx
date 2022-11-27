@@ -1,7 +1,28 @@
-import { Editor } from "rb-editor";
+import {
+    Editor,
+    InitialConfig,
+    defaultEditorNodes,
+    defaultTheme,
+} from "../../src";
+import { createParagraphNode, $getRoot, $createTextNode } from "lexical";
+import { $createLinkNode } from "@lexical/link";
+import { $createHeadingNode } from "@lexical/rich-text";
 
 function App() {
-    return <Editor />;
+    const initialConfig = {
+        namespace: "my-editor",
+        nodes: defaultEditorNodes,
+        onError: (error) => console.log(error),
+        theme: defaultTheme,
+        editable: true,
+        // editorState(editor) {
+        //     const root = $getRoot();
+        //     root.append(
+        //         $createHeadingNode("h1").append($createTextNode("Hello World"))
+        //     );
+        // },
+    };
+    return <Editor initialConfig={initialConfig} />;
 }
 
 export default App;

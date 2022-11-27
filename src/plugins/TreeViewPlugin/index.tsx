@@ -4,6 +4,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 
 export default function TreeViewPlugin() {
     const [editor] = useLexicalComposerContext()
+
     return <TreeView
         editor={editor}
         timeTravelButtonClassName=""

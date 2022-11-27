@@ -48,6 +48,5 @@ export default function AddNodeButtonPlugin({
     style?: AddNodeDialogStyle;
 }) {
     const [editor] = useLexicalComposerContext();
-    if (!editor.isEditable) return null;
     return useAddNodeButtonPlugin(editor, addNodeOptions, style);
 }

@@ -96,6 +96,5 @@ export default function HighlightMenuPlugin({
     style?: HighlightMenuStyle;
 }) {
     const [editor] = useLexicalComposerContext();
-    if (!editor.isEditable) return null;
     return useHighlightMenu(editor, style);
 }

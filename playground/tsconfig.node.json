@@ -4,9 +4,6 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
-    "paths": {
-      "rb-editor": ["../src"]
-    }
   },
   "include": ["vite.config.ts"]
 }

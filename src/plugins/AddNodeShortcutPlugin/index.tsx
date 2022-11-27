@@ -4,6 +4,7 @@ import {
     $getSelection,
     $isNodeSelection,
     $isRangeSelection,
+    LexicalEditor,
     LexicalNode,
 } from "lexical";
 import AddNodeDialog, {
@@ -20,16 +21,12 @@ function defaultIsShortcutTriggered(ev: KeyboardEvent) {
     }
 }
 
-export default function AddNodeShortcutPlugin({
-    isShortcutTriggered = defaultIsShortcutTriggered,
-    addNodeOptions = defaultAddNodeOptions,
-    style,
-}: {
-    isShortcutTriggered?: (ev: KeyboardEvent) => boolean;
-    addNodeOptions?: AddNodeOption[];
-    style?: AddNodeDialogStyle;
-}) {
-    const [editor] = useLexicalComposerContext();
+function useAddNodeShortcutPlugin(
+    editor: LexicalEditor,
+    isShortcutTriggered?: (ev: KeyboardEvent) => boolean,
+    addNodeOptions?: AddNodeOption[],
+    style?: AddNodeDialogStyle
+) {
     const [selectedNode, setSelectedNode] = useState<LexicalNode | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -74,5 +71,24 @@ export default function AddNodeShortcutPlugin({
             onClose={() => setIsDialogOpen(false)}
             style={style}
         />
+    );
+}
+
+export default function AddNodeShortcutPlugin({
+    isShortcutTriggered = defaultIsShortcutTriggered,
+    addNodeOptions = defaultAddNodeOptions,
+    style,
+}: {
+    isShortcutTriggered?: (ev: KeyboardEvent) => boolean;
+    addNodeOptions?: AddNodeOption[];
+    style?: AddNodeDialogStyle;
+}) {
+    const [editor] = useLexicalComposerContext();
+
+    return useAddNodeShortcutPlugin(
+        editor,
+        isShortcutTriggered,
+        addNodeOptions,
+        style
     );
 }

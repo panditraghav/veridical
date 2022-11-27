@@ -16,7 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "rb-editor": ["../src/*"]
+      "rb-editor": ["../src/"]
     }
   },
   "include": ["src"],

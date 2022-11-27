@@ -26,20 +26,23 @@ import { Placeholder } from "./components";
 import { defaultEditorNodes } from "./nodes";
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
 
-interface EditorProps {
-    initialConfig?: Readonly<{
-        editor__DEPRECATED?: LexicalEditor | null;
-        namespace: string;
-        nodes?: ReadonlyArray<Klass<LexicalNode>>;
-        onError: (error: Error, editor: LexicalEditor) => void;
-        readOnly?: boolean;
-        theme?: EditorThemeClasses;
-        editorState?: InitialEditorStateType;
-        editable?: boolean;
-    }>;
+export interface InitialConfig {
+    editor__DEPRECATED?: LexicalEditor | null;
+    namespace: string;
+    nodes?: ReadonlyArray<Klass<LexicalNode>>;
+    onError: (error: Error, editor: LexicalEditor) => void;
+    readOnly?: boolean;
+    theme?: EditorThemeClasses;
+    editorState?: InitialEditorStateType;
+    editable?: boolean;
 }
 
-export default function Editor({ initialConfig }: EditorProps) {
+interface EditorProps {
+    initialConfig?: InitialConfig;
+    children: React.ReactNode;
+}
+
+export function Editor({ initialConfig, children }: EditorProps) {
     let config = initialConfig;
     if (!config) {
         config = {
@@ -66,19 +69,25 @@ export default function Editor({ initialConfig }: EditorProps) {
                         <Placeholder text="Press Ctrl + k for command..." />
                     }
                 />
-                <MarkdownPlugin />
                 <ListPlugin />
                 <CodeHighlightPlugin />
-                <CodeActionPlugin />
-                <PrettierPlugin />
-                <HighlightMenuPlugin />
-                <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
-                    <AddNodeButtonPlugin />
-                    <DragAndDropButtonPlugin />
-                </HoverMenuPlugin>
-                <AddNodeShortcutPlugin />
-                <TreeViewPlugin />
+                {config.editable && (
+                    <>
+                        <CodeActionPlugin />
+                        <PrettierPlugin />
+                        <HighlightMenuPlugin />
+                        <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
+                            <AddNodeButtonPlugin />
+                            <DragAndDropButtonPlugin />
+                        </HoverMenuPlugin>
+                        <AddNodeShortcutPlugin />
+                        <MarkdownPlugin />
+                    </>
+                )}
+                {children}
             </div>
         </LexicalComposer>
     );
 }
+
+export { defaultTheme };
