@@ -23,7 +23,7 @@ function defaultIsShortcutTriggered(ev: KeyboardEvent) {
 
 function useAddNodeShortcutPlugin(
     editor: LexicalEditor,
-    isShortcutTriggered?: (ev: KeyboardEvent) => boolean,
+    isShortcutTriggered: (ev: KeyboardEvent) => boolean,
     addNodeOptions?: AddNodeOption[],
     style?: AddNodeDialogStyle
 ) {
