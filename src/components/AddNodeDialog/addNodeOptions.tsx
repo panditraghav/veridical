@@ -25,13 +25,13 @@ import { $createCodeNode } from "@lexical/code";
 export const ADD_NODE_COMMAND: LexicalCommand<NodeCreator> = createCommand();
 export type NodeCreator = (node: LexicalNode) => void;
 
-export type AddNodeOption = {
+export interface AddNodeOption {
     name: string;
     description: string;
     shortName: string;
     creator: NodeCreator;
     image: React.ReactNode;
-};
+}
 
 const H1Creator: NodeCreator = (node) => {
     const h1 = $createHeadingNode("h1");

@@ -18,7 +18,7 @@ import {
     DragAndDropButtonPlugin,
     HighlightMenuPlugin,
     HoverMenuPlugin,
-    AddNodeShortcutPlugin
+    AddNodeShortcutPlugin,
 } from "./plugins";
 
 import { defaultTheme } from "./theme/DefaultTheme";

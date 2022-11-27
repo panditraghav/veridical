@@ -41,13 +41,13 @@ function setTragetLinePosition(
     switch (isAboveOrBelowCenter(ev, targetLexicalDOMNode)) {
         case "above":
             targetLine.style.display = "block";
-            targetLine.style.top = `${top}px`;
+            targetLine.style.top = `${top + window.scrollY}px`;
             targetLine.style.left = `${left}px`;
             targetLine.style.width = `${width}px`;
             break;
         case "below":
             targetLine.style.display = "block";
-            targetLine.style.top = `${top + height}px`;
+            targetLine.style.top = `${top + height + window.scrollY}px`;
             targetLine.style.left = `${left}px`;
             targetLine.style.width = `${width}px`;
             break;

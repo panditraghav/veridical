@@ -8,13 +8,18 @@ import {
     LexicalEditor,
     LexicalNode,
 } from "lexical";
-import {
-    NodeCreator,
-    AddNodeOption,
-    defaultAddNodeOptions,
-} from "./addNodeOptions";
+import { defaultAddNodeOptions } from "./addNodeOptions";
 import useBackdropClose from "../../hooks/useBackdropClose";
 import { createPortal } from "react-dom";
+
+type NodeCreator = (node: LexicalNode) => void;
+interface AddNodeOption {
+    name: string;
+    description: string;
+    shortName: string;
+    creator: NodeCreator;
+    image: React.ReactNode;
+}
 
 export interface AddNodeDialogStyle {
     backdrop?: string;
