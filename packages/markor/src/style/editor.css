@@ -1,0 +1,411 @@
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.DefaultEditorTheme__EditorContainer {
+    max-width: 740px;
+    margin: 0px auto;
+    margin-top: 50px;
+    margin-bottom: 150px;
+    padding: 0px 24px;
+    font-family: "Poppins", sans-serif;
+    color: rgb(41, 41, 41);
+    font-weight: 400;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.DefaultEditorTheme__ContentEditable:focus {
+    outline: none
+}
+
+
+/* List item */
+
+.DefaultEditorTheme__listItem {
+    margin: 2px 8px;
+}
+
+
+.DefaultEditorTheme__ol2 {
+    margin: 0px;
+}
+
+.DefaultEditorTheme__ol2>.DefaultEditorTheme__listItem {
+    list-style-type: upper-alpha;
+}
+
+.DefaultEditorTheme__ol2>.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
+}
+
+.DefaultEditorTheme__ol3>.DefaultEditorTheme__listItem {
+    list-style-type: lower-alpha;
+}
+
+.DefaultEditorTheme__ol3>.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
+}
+
+.DefaultEditorTheme__ol4>.DefaultEditorTheme__listItem {
+    list-style-type: upper-roman;
+}
+
+.DefaultEditorTheme__ol4>.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
+}
+
+.DefaultEditorTheme__ol5>.DefaultEditorTheme__listItem {
+    list-style-type: lower-roman;
+}
+
+.DefaultEditorTheme__ol5>.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
+}
+
+
+.DefaultEditorTheme__nestedListItem {
+    list-style-type: none;
+}
+
+.DefaultEditorTheme__h1, .DefaultEditorTheme__h2, .DefaultEditorTheme__h3, .DefaultEditorTheme__h4, .DefaultEditorTheme__h5, .DefaultEditorTheme__h6 {
+    font-family: "Poppins", sans-serif;
+    line-height: 1.3;
+}
+
+.DefaultEditorTheme__h1 {
+    font-size: 40px;
+    margin-bottom: 6px;
+    margin-top: 8px;
+}
+
+.DefaultEditorTheme__h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 0px;
+}
+
+.DefaultEditorTheme__h3 {
+    font-size: 24px;
+}
+
+.DefaultEditorTheme__paragraph {
+    margin: 8px 0px 16px;
+}
+
+@media only screen and (max-width: 725px) {
+    body {
+        font-size: 18px;
+    }
+
+    .DefaultEditorTheme__h2 {
+        font-size: 20px;
+    }
+}
+
+.DefaultEditorTheme__textItalic {
+    font-style: italic;
+}
+
+.DefaultEditorTheme__textBold {
+    font-weight: bold;
+}
+
+.DefaultEditorTheme__textUnderline {
+    text-decoration: underline;
+}
+
+.DefaultEditorTheme__textStrikethrough {
+    text-decoration: line-through;
+}
+
+.DefaultEditorTheme__textUnderlineStrikethrough {
+    text-decoration: underline line-through;
+}
+
+.DefaultEditorTheme__Placeholder {
+    position: relative;
+    top: -40px;
+    z-index: -10;
+    color: rgba(0, 0, 0, 0.507);
+}
+
+/* Image */
+
+.DefaultEditorTheme__image>div {
+    padding: 0px;
+    width: 100%;
+    margin: 16px 0px;
+    align-items: center;
+    display: flex;
+    border-radius: 5px;
+    border-color: orange;
+    border-style: solid;
+    background: rgb(207, 207, 207);
+    transition: all 0.1s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.DefaultEditorTheme__image>div:hover {
+    background: rgb(177, 176, 176);
+}
+
+.DefaultEditorTheme__image>div>div {
+    width: 100%;
+    margin: 0px;
+    padding: 8px 8px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.785);
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+}
+
+.DefaultEditorTheme__image>div>div>span {
+    margin-left: 8px;
+}
+
+.DefaultEditorTheme__image img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.DefaultEditorTheme__image button {
+    background: none;
+    text-decoration: underline;
+    border: 0px;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+}
+
+/* Code */
+
+.DefaultEditorTheme__code {
+    background: #282c34;
+    display: block;
+    width: 100%;
+    color: #ABB2BF;
+    padding: 32px 16px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.DefaultEditorTheme__tokenAttr {
+    color: #C678DD;
+}
+
+.DefaultEditorTheme__tokenFunction {
+    color: #61AEEE;
+}
+
+.language-selector {
+    background: none;
+    color: rgb(189, 188, 188);
+    border: none;
+    margin-left: 8px;
+}
+
+.language-selector:hover {
+    color: white;
+}
+
+.language-selector:focus {
+    outline: none;
+    color: white;
+}
+
+.language-selector option {
+    background-color: #282c34;
+}
+
+/* Other styles */
+
+.backdrop {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add Node dialog */
+
+.defaultAddNodeDialog {
+    width: 280px;
+    height: 300px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.208);
+    border-radius: 3px;
+    padding: 2px 6px;
+    box-shadow: -2px 4px 31px -18px rgba(0, 0, 0, 0.81);
+    font-family: "Poppins", sans-serif;
+    overflow-y: scroll;
+}
+
+.defaultAddNodeDialogSearchInput {
+    outline: none;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 6px 4px;
+}
+
+.defaultAddNodeDialog_NodeOption {
+    width: 100%;
+    display: flex;
+    padding: 6px 4px;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.defaultAddNodeDialog_NodeOption:hover {
+    background-color: rgba(0, 0, 0, 0.069);
+    cursor: pointer;
+}
+
+.defaultAddNodeDialog_NodeOptionImage {
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+}
+
+.defaultAddNodeDialog_NodeOptionText {
+    padding: 0px 8px;
+}
+
+.defaultAddNodeDialog_NodeOptionName {
+    font-size: 16px;
+}
+
+.defaultAddNodeDialog_NodeOptionDescription {
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.571);
+}
+
+
+/* Hover menu */
+
+.defaultHoverMenu {
+    position: absolute;
+    left: -100px;
+    top: -100px;
+    display: flex;
+}
+
+.defaultShowMenuAnimation {
+    animation: showMenu .2s ease;
+}
+
+@keyframes showMenu {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+/* Add Button fo Hover Menu */
+
+.DefaultAddBtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid black; */
+    padding: 0px;
+}
+
+
+.DefaultAddBtnIcon:hover {
+    fill: rgba(0, 0, 0, 0.696);
+}
+
+.DefaultAddBtnIcon {
+    fill: rgba(0, 0, 0, 0.45);
+    position: relative;
+    top: -3px;
+}
+
+/* DraggableNodeButton for hover menu */
+
+.DefaultDraggableNodeButton_iconContainer {
+    cursor: pointer;
+}
+
+.DefaultDraggableNodeButton_dragIcon {
+    padding: 0;
+    margin: 0;
+    fill: rgba(0, 0, 0, 0.45);
+}
+
+.DefaultDraggableNodeButton_dragIcon:hover {
+    fill: rgba(0, 0, 0, 0.696);
+}
+
+.DefaultDraggableNodeButton_targetLine {
+    position: absolute;
+    background: rgba(0, 200, 255, 0.374);
+    height: 5px;
+    border-radius: 1px;
+}
+
+
+/* Highlight Menu */
+
+.defaultHighlightMenu {
+    position: absolute;
+    left: -100px;
+    top: -100px;
+    background-color: rgba(0, 0, 0, 0.977);
+    border-radius: 5px;
+}
+
+.defaultHighlightMenuAnimation {
+    animation: menuShow .3s ease;
+}
+
+.defaultHighlightMenuContainer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.defaultHighlightMenuBtn {
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    padding: 0px;
+    margin: 0px 2px;
+}
+
+.defaultHighlightMenuIcon {
+    fill: white;
+    margin: 8px 4px;
+}
+
+@keyframes menuShow {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 100;
+    }
+}

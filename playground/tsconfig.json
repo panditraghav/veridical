@@ -16,8 +16,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "rb-editor": ["../src/"]
-    }
+      "markor": ["../../packages/markor/src"],
+      "@markor/plugins": ["../../packages/plugins/src"],
+      "@markor/nodes": ["../../packages/nodes/src"],
+      "@markor/components": ["../../packages/components/src"],
+      "@markor/icons": ["../../packages/icons/src"],
+      "@markor/utils": ["../../utils/src"],
+    },                
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
