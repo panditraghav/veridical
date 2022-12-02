@@ -1,5 +1,5 @@
-import { Editor, InitialConfig, defaultTheme } from "../../src";
-import { defaultEditorNodes } from "../../src/nodes";
+import { Editor, InitialConfig, defaultTheme } from "markor";
+import { defaultEditorNodes } from "@markor/nodes";
 import { createParagraphNode, $getRoot, $createTextNode } from "lexical";
 import { $createLinkNode } from "@lexical/link";
 import { $createHeadingNode } from "@lexical/rich-text";

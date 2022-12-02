@@ -1,0 +1,36 @@
+{
+  "name": "@markor/nodes",
+  "version": "0.1.0",
+  "description": "Nodes for markor",
+  "main": "index.js",
+  "peerDependencies": {
+    "lexical": "^0.5.0",
+    "@lexical/code": "^0.5.0",
+    "@lexical/link": "^0.5.0",
+    "@lexical/list": "^0.5.0",
+    "@lexical/table": "^0.5.0",
+    "@lexical/rich-text": "^0.5.0",
+    "@lexical/overflow": "^0.5.0",
+    "@lexical/react": "^0.5.0",
+    "react": ">=17.x",
+    "react-dom": ">=17.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panditraghav/markor.git"
+  },
+  "keywords": [
+    "nodes",
+    "markor",
+    "WYSIWYG",
+    "Editor",
+    "Blog",
+    "editor"
+  ],
+  "author": "Raghav Pandit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/panditraghav/markor/issues"
+  },
+  "homepage": "https://github.com/panditraghav/markor#readme"
+}
