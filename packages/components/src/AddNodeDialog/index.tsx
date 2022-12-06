@@ -67,6 +67,7 @@ function Dialog({
     );
 
     useEffect(() => {
+        if (!isOpen) return;
         const keyPressListener = (ev: KeyboardEvent) => {
             let selectedOptionIndex = orderedNodeOptions.findIndex((option) => {
                 return option.name === selectedOption.name;
@@ -105,7 +106,7 @@ function Dialog({
         };
         document.addEventListener("keydown", keyPressListener);
         return () => document.removeEventListener("keydown", keyPressListener);
-    }, [selectedOption]);
+    }, [selectedOption, isOpen]);
 
     useEffect(() => {
         let searchedTerm = orderedNodeOptions.filter((option) => {
@@ -131,7 +132,7 @@ function Dialog({
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
                     autoFocus
-                    type="text"
+                    type="search"
                     placeholder="Search.."
                 />
                 <div>

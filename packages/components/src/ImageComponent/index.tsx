@@ -27,8 +27,7 @@ import {
     $setSelection,
     $createNodeSelection,
 } from "lexical";
-import { $isImageNode } from "..";
-import AddImageDialog from "./AddImageDialog";
+import { $isImageNode } from "@markor/nodes";
 
 function hasClickOnImage(
     event: MouseEvent,
@@ -72,30 +71,36 @@ function LazyImage({ src, alt, style, className }: LazyImageProps) {
     return <img src={src} alt={alt} style={style} className={className} />;
 }
 
+function FallBack({ width, height }: { width?: number; height?: number }) {
+    return <div style={{ width, height }}></div>;
+}
+
 export default function ImageComponent({
     src,
     alt,
+    width,
+    height,
+    maxWidth,
     nodeKey,
 }: {
     src: string;
     alt: string;
+    width?: number;
+    height?: number;
+    maxWidth: number;
     nodeKey: NodeKey;
 }) {
-    const imageComponentRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        console.log("Src ", src);
+        console.log("Alt Text ", alt);
+        console.log("Width ", width);
+        console.log("Height ", height);
+        console.log("maxWidth ", maxWidth);
+    }, [src, alt, width, height, maxWidth]);
+    const imageComponentRef = useRef<HTMLDivElement | null>(null);
     const [editor] = useLexicalComposerContext();
     const [isSelected, setIsSelected, clearSelection] =
         useLexicalNodeSelection(nodeKey);
-    const [showDialog, setShowDialog] = useState(false);
-
-    function onSave(src: string) {
-        editor.update(() => {
-            const imageNode = $getNodeByKey(nodeKey);
-            if ($isImageNode(imageNode)) {
-                imageNode.setSrc(src);
-                setShowDialog(false);
-            }
-        });
-    }
 
     const onDelete = useCallback((event: KeyboardEvent) => {
         event.preventDefault();
@@ -203,24 +208,23 @@ export default function ImageComponent({
                 className="imageComponent"
                 ref={imageComponentRef}
             >
-                {src !== "" ? (
-                    <Suspense fallback={null}>
-                        <LazyImage src={src} alt={alt} />
+                {src !== "" && (
+                    <Suspense
+                        fallback={
+                            <FallBack
+                                width={width || maxWidth}
+                                height={height}
+                            />
+                        }
+                    >
+                        <LazyImage
+                            src={src}
+                            alt={alt}
+                            style={{ width, height }}
+                        />
                     </Suspense>
-                ) : (
-                    <div>
-                        <ImageIcon size="base" />
-                        <button onClick={() => setShowDialog(true)}>
-                            Add an image
-                        </button>
-                    </div>
                 )}
             </div>
-            <AddImageDialog
-                showDialog={showDialog}
-                onClose={() => setShowDialog(false)}
-                onSave={onSave}
-            />
         </>
     );
 }

@@ -19,6 +19,7 @@ import {
     HighlightMenuPlugin,
     HoverMenuPlugin,
     AddNodeShortcutPlugin,
+    ImagePlugin,
 } from "@markor/plugins";
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
@@ -92,6 +93,7 @@ export function Editor({
                         </HoverMenuPlugin>
                         <AddNodeShortcutPlugin />
                         <MarkdownPlugin />
+                        <ImagePlugin />
                     </>
                 )}
                 {children}

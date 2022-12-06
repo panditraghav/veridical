@@ -88,7 +88,8 @@ const ULCreator: NodeCreator = (node) => {
 const ImageCreator: NodeCreator = (node) => {
     const img = $createImageNode({
         src: "",
-        altText: "myImage",
+        altText: "",
+        maxWidth: 740,
     });
     if ($isParagraphNode(node) && node.getTextContent() == "") {
         node.insertBefore(img);

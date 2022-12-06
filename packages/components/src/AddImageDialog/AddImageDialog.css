@@ -1,0 +1,145 @@
+:root {
+    --colorSuccess: rgb(0, 144, 160, 0.995);
+    --colorDanger: rgb(227, 0, 0, 0.82);
+}
+
+.DefaultAddImageDialog {
+    box-sizing: border-box;
+    width: 430px;
+    height: auto;
+    padding: 16px 16px;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Poppins", sans-serif;
+}
+
+.DefaultAddImageDialogTitle {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.DefaultAddImageDialog_ImageInputGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 0px;
+}
+
+.DefaultAddImageDialog_DimensionsInputGroup{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.DefaultAddImageDialog_LinkInput {
+    display: block;
+    flex-grow: 2;
+    padding: 8px 4px;
+    border: none;
+    border: 1px solid var(--colorSuccess);
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+.DefaultAddImageDialog_DimensionInput {
+    width: 100px;
+    padding: 8px 0px;
+    padding-left: 4px;
+    border: none;
+    border: 1px solid var(--colorSuccess);
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+.DefaultAddImageDialog_DimensionInput[name="width"] {
+    margin-right: 2px;
+}
+
+.DefaultAddImageDialog_DimensionInput[name="height"] {
+    margin-left: 2px;
+}
+
+.DefaultAddImageDialog_LinkInput:focus {
+    outline: 1px solid var(--colorSuccess);
+}
+
+.DefaultAddImageDialog_ImageFileInput {
+    display: none;
+}
+
+.DefaultAddImageDialog_ImageFileInputLabel {
+    display: flex;
+    flex-grow: 1;
+    margin-left: 8px;
+    width: auto;
+    align-items: center;
+    padding: 8px 4px;
+    border-color: var(--colorSuccess);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+.DefaultAddImageDialog_ImageFileInputLabel:hover {
+    animation: onHoverColorChangeSuccess .2s ease forwards;
+    cursor: pointer;
+}
+
+.DefaultAddImageDialog_ActionButtonGroup {
+    display: flex;
+    justify-content: right;
+    margin: 8px 0px;
+}
+
+.DefaultAddImageDialog_SaveButton, .DefaultAddImageDialog_CancelButton {
+    width: 64px;
+    padding: 8px 0px;
+    margin-left: 8px;
+    background: none;
+    border: 1px solid;
+    border-radius: 2px;
+}
+
+.DefaultAddImageDialog_SaveButton, .DefaultAddImageDialog_CancelButton:hover {
+    cursor: pointer;
+}
+
+.DefaultAddImageDialog_SaveButton {
+    border-color: var(--colorSuccess);
+}
+
+.DefaultAddImageDialog_SaveButton:hover {
+    animation: onHoverColorChangeSuccess .2s ease forwards;
+}
+
+.DefaultAddImageDialog_CancelButton {
+    border-color: var(--colorDanger);
+}
+
+.DefaultAddImageDialog_CancelButton:hover {
+    animation: onHoverColorChangeDanger .2s ease forwards;
+}
+
+@keyframes onHoverColorChangeSuccess {
+    100% {
+        fill: white;
+        background-color: var(--colorSuccess);
+        color: white;
+    }
+}
+
+@keyframes onHoverColorChangeDanger {
+    100% {
+        fill: white;
+        background-color: var(--colorDanger);
+        color: white;
+    }
+}

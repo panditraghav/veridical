@@ -9,5 +9,5 @@ export default function useEscape(handler: () => void) {
         }
         document.addEventListener("keydown", handleKeyDown);
         return () => document.removeEventListener("keydown", handleKeyDown);
-    }, []);
+    }, [handler]);
 }

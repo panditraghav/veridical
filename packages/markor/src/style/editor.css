@@ -1,13 +1,8 @@
-body {
-    font-family: "Poppins", sans-serif;
-}
-
 .DefaultEditorTheme__EditorContainer {
     max-width: 740px;
     margin: 0px auto;
     margin-top: 50px;
     margin-bottom: 150px;
-    padding: 0px 24px;
     font-family: "Poppins", sans-serif;
     color: rgb(41, 41, 41);
     font-weight: 400;
@@ -139,7 +134,7 @@ body {
     margin: 16px 0px;
     align-items: center;
     display: flex;
-    border-radius: 5px;
+    border-radius: 1px;
     border-color: orange;
     border-style: solid;
     background: rgb(207, 207, 207);
@@ -226,7 +221,7 @@ body {
 
 /* Other styles */
 
-.backdrop {
+.DefaultBackdrop {
     position: fixed;
     top: 0px;
     width: 100%;
@@ -236,6 +231,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.279);
 }
 
 /* Add Node dialog */

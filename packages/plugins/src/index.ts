@@ -12,6 +12,7 @@ import {
     hoverMenuContext,
 } from "./HoverMenuPlugin";
 import AddNodeShortcutPlugin from "./AddNodeShortcutPlugin";
+import ImagePlugin from "./ImagePlugin";
 
 export {
     MarkdownPlugin,
@@ -24,6 +25,7 @@ export {
     HighlightMenuPlugin,
     HoverMenuPlugin,
     AddNodeShortcutPlugin,
+    ImagePlugin,
 };
 
 export { hoverMenuContext, useHoverMenuContext };

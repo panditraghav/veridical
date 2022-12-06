@@ -14,7 +14,7 @@ export default function Backdrop({
     useBackdropClose(onClose, backdropRef.current);
     return (
         //@ts-ignore
-        <div className={className || "backdrop"} ref={backdropRef}>
+        <div className={className || "DefaultBackdrop"} ref={backdropRef}>
             {children}
         </div>
     );
