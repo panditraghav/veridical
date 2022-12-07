@@ -23,7 +23,12 @@ import {
 } from "@markor/plugins";
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
-import { defaultTheme } from "./theme/DefaultTheme";
+import {
+    defaultMarkorTheme,
+    useMarkorTheme,
+    MarkorThemeComposer,
+} from "./theme";
+import type { MarkorThemeClasses } from "./theme";
 import { Placeholder } from "@markor/components";
 import { defaultEditorNodes } from "@markor/nodes";
 
@@ -32,42 +37,30 @@ interface InitialConfig {
     nodes?: ReadonlyArray<Klass<LexicalNode>>;
     onError: (error: Error, editor: LexicalEditor) => void;
     readOnly?: boolean;
-    theme?: EditorThemeClasses;
+    theme?: MarkorThemeClasses;
     editorState?: InitialEditorStateType;
     editable?: boolean;
 }
 
-interface EditorProps {
-    namespace?: string;
-    nodes?: ReadonlyArray<Klass<LexicalNode>>;
-    onError?: (error: Error, editor: LexicalEditor) => void;
-    readOnly?: boolean;
-    theme?: EditorThemeClasses;
-    editorState?: InitialEditorStateType;
-    editable?: boolean;
-    children?: React.ReactNode;
-}
-
-export function Editor({
-    namespace,
-    nodes,
-    onError,
-    readOnly,
-    editable,
-    theme,
+function Markor({
+    initialConfig,
     children,
-}: EditorProps) {
+}: {
+    initialConfig?: InitialConfig;
+    children?: React.ReactNode;
+}) {
     const config: InitialConfig = {
-        namespace: namespace || "main-editor",
-        nodes: nodes || defaultEditorNodes,
-        onError: onError || ((error, editor) => console.error(error)),
-        editable: editable || true,
-        readOnly: readOnly || false,
-        theme: theme || defaultTheme,
+        namespace: initialConfig?.namespace || "markor-editor",
+        nodes: initialConfig?.nodes || defaultEditorNodes,
+        onError:
+            initialConfig?.onError || ((error, editor) => console.error(error)),
+        editable: initialConfig?.editable || true,
+        readOnly: initialConfig?.readOnly || false,
+        theme: initialConfig?.theme || defaultMarkorTheme,
     };
 
     return (
-        <LexicalComposer initialConfig={config}>
+        <MarkorBase initialConfig={config}>
             <div className={"DefaultEditorTheme__EditorContainer"}>
                 <RichTextPlugin
                     contentEditable={
@@ -98,8 +91,31 @@ export function Editor({
                 )}
                 {children}
             </div>
+        </MarkorBase>
+    );
+}
+
+function MarkorBase({
+    initialConfig,
+    children,
+}: {
+    initialConfig: InitialConfig;
+    children?: React.ReactNode;
+}) {
+    return (
+        <LexicalComposer initialConfig={initialConfig}>
+            <MarkorThemeComposer theme={initialConfig.theme}>
+                {children}
+            </MarkorThemeComposer>
         </LexicalComposer>
     );
 }
 
-export { defaultTheme, InitialConfig };
+export {
+    defaultMarkorTheme,
+    InitialConfig,
+    useMarkorTheme,
+    MarkorThemeClasses,
+    Markor,
+    MarkorBase,
+};
