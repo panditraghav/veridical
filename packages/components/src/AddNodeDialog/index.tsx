@@ -15,7 +15,7 @@ import { defaultAddNodeOptions } from "./addNodeOptions";
 import type { NodeCreator, AddNodeOption } from "./addNodeOptions";
 import type { NodeOptionStyle } from "./NodeOption";
 import NodeOption from "./NodeOption";
-import Backdrop from "../Backdrop";
+import { DialogAnimation, Backdrop } from "..";
 
 export type AddNodeDialogStyle = {
     backdrop?: string;
@@ -33,7 +33,7 @@ export type AddNodeDialogProps = {
     style?: AddNodeDialogStyle;
 };
 
-function Dialog({
+export default function AddNodeDialog({
     editor,
     onClose,
     lexicalNode,
@@ -48,6 +48,13 @@ function Dialog({
     const [selectedNode, setSelectedNode] = useState<LexicalNode | null>(
         lexicalNode
     );
+
+    useEffect(() => {
+        setSearchText("");
+        setOrderedNodeOptions(addNodeOptions);
+        setSelectedOption(addNodeOptions[0]);
+        setSelectedNode(lexicalNode);
+    }, [isOpen]);
 
     useEffect(() => {
         if (lexicalNode && !selectedNode) {
@@ -122,56 +129,38 @@ function Dialog({
         setSelectedOption(orderedOptions[0]);
     }, [searchText]);
 
+    if (!isOpen) return null;
     return createPortal(
         <Backdrop onClose={onClose} className={style?.backdrop}>
-            <div className={style?.dialog || "defaultAddNodeDialog"}>
-                <input
-                    className={
-                        style?.searchInput || "defaultAddNodeDialogSearchInput"
-                    }
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
-                    autoFocus
-                    type="search"
-                    placeholder="Search.."
-                />
-                <div>
-                    {orderedNodeOptions.map((option) => {
-                        return (
-                            <NodeOption
-                                key={option.name}
-                                option={option}
-                                selectedOption={selectedOption}
-                                createNode={createNode}
-                                style={style?.nodeOption}
-                            />
-                        );
-                    })}
+            <DialogAnimation>
+                <div className={style?.dialog || "defaultAddNodeDialog"}>
+                    <input
+                        className={
+                            style?.searchInput ||
+                            "defaultAddNodeDialogSearchInput"
+                        }
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                        autoFocus
+                        type="search"
+                        placeholder="Search.."
+                    />
+                    <div>
+                        {orderedNodeOptions.map((option) => {
+                            return (
+                                <NodeOption
+                                    key={option.name}
+                                    option={option}
+                                    selectedOption={selectedOption}
+                                    createNode={createNode}
+                                    style={style?.nodeOption}
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
+            </DialogAnimation>
         </Backdrop>,
         document.body
-    );
-}
-
-export function AddNodeDialog({
-    editor,
-    onClose,
-    lexicalNode,
-    addNodeOptions = defaultAddNodeOptions,
-    style,
-    isOpen,
-}: AddNodeDialogProps) {
-    if (!isOpen) return null;
-
-    return (
-        <Dialog
-            editor={editor}
-            onClose={onClose}
-            lexicalNode={lexicalNode}
-            addNodeOptions={addNodeOptions}
-            style={style}
-            isOpen={isOpen}
-        />
     );
 }

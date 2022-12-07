@@ -242,7 +242,7 @@
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.208);
     border-radius: 3px;
-    padding: 2px 6px;
+    padding: 8px 8px;
     box-shadow: -2px 4px 31px -18px rgba(0, 0, 0, 0.81);
     font-family: "Poppins", sans-serif;
     overflow-y: scroll;
@@ -403,5 +403,23 @@
 
     to {
         opacity: 100;
+    }
+}
+
+/* DialogAnimation */
+
+.DefaultDialogAnimation {
+    animation: dialogShow .2s ease forwards;
+}
+
+@keyframes dialogShow {
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to {
+        opacity: 100;
+        transform: scale(1);
     }
 }

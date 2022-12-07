@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 
 import { AddIcon, ImageIcon } from "@markor/icons";
 import { useBackdropClose, useEscape } from "@markor/utils";
-import { TextInput, Backdrop, NumberInput, Button } from "..";
+import { TextInput, Backdrop, NumberInput, Button, DialogAnimation } from "..";
 
 export interface AddImageDialogStyle {
     backdrop?: string;
@@ -99,55 +99,59 @@ export default function AddImageDialog({
 
     return createPortal(
         <Backdrop onClose={onClose}>
-            <div className={style?.dialog || "DefaultAddImageDialog"}>
-                <div className={"DefaultAddImageDialogTitle"}>
-                    <ImageIcon
-                        size="base"
-                        className={"DefaultAddImageDialogIcon"}
-                    />
-                    <span>Add an image</span>
-                </div>
-                <div className={"DefaultAddImageDialog_ImageInputGroup"}>
+            <DialogAnimation>
+                <div className={style?.dialog || "DefaultAddImageDialog"}>
+                    <div className={"DefaultAddImageDialogTitle"}>
+                        <ImageIcon
+                            size="base"
+                            className={"DefaultAddImageDialogIcon"}
+                        />
+                        <span>Add an image</span>
+                    </div>
+                    <div className={"DefaultAddImageDialog_ImageInputGroup"}>
+                        <TextInput
+                            value={src}
+                            onChange={(e) => setSrc(e.target.value)}
+                            placeholder="Enter image url"
+                            name="Image url"
+                        />
+                        <label
+                            htmlFor="DefaultAddImageDialog_ImageFileInput"
+                            className={
+                                "DefaultAddImageDialog_ImageFileInputLabel"
+                            }
+                        >
+                            <AddIcon size="base" />
+                            <div>Choose a file</div>
+                        </label>
+                        <input
+                            type="file"
+                            id="DefaultAddImageDialog_ImageFileInput"
+                            className={"DefaultAddImageDialog_ImageFileInput"}
+                            onChange={handleImageSelection}
+                            accept="image/png, image/jpeg"
+                        />
+                    </div>
                     <TextInput
-                        value={src}
-                        onChange={(e) => setSrc(e.target.value)}
-                        placeholder="Enter image url"
-                        name="Image url"
+                        value={altText}
+                        onChange={(e) => setAltText(e.target.value)}
+                        placeholder="Alternative text"
+                        name="Alt text"
                     />
-                    <label
-                        htmlFor="DefaultAddImageDialog_ImageFileInput"
-                        className={"DefaultAddImageDialog_ImageFileInputLabel"}
-                    >
-                        <AddIcon size="base" />
-                        <div>Choose a file</div>
-                    </label>
-                    <input
-                        type="file"
-                        id="DefaultAddImageDialog_ImageFileInput"
-                        className={"DefaultAddImageDialog_ImageFileInput"}
-                        onChange={handleImageSelection}
-                        accept="image/png, image/jpeg"
-                    />
+                    <div className={"DefaultAddImageDialog_ActionButtonGroup"}>
+                        <Button
+                            type="primary"
+                            onClick={handleSave}
+                            isDisabled={isLoading}
+                        >
+                            {"Save"}
+                        </Button>
+                        <Button type="secondary" onClick={onClose}>
+                            {"Cancel"}
+                        </Button>
+                    </div>
                 </div>
-                <TextInput
-                    value={altText}
-                    onChange={(e) => setAltText(e.target.value)}
-                    placeholder="Alternative text"
-                    name="Alt text"
-                />
-                <div className={"DefaultAddImageDialog_ActionButtonGroup"}>
-                    <Button
-                        type="primary"
-                        onClick={handleSave}
-                        isDisabled={isLoading}
-                    >
-                        {"Save"}
-                    </Button>
-                    <Button type="secondary" onClick={onClose}>
-                        {"Cancel"}
-                    </Button>
-                </div>
-            </div>
+            </DialogAnimation>
         </Backdrop>,
         document.body
     );
