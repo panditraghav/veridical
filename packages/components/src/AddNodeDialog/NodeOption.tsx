@@ -1,5 +1,6 @@
 import React from "react";
 import type { NodeCreator, AddNodeOption } from "./addNodeOptions";
+import { MarkorThemeClasses, useMarkorTheme } from "markor";
 
 export type NodeOptionStyle = {
     container?: string;
@@ -12,48 +13,40 @@ export type NodeOptionStyle = {
 
 export default function NodeOption({
     option,
-    style,
     selectedOption,
     createNode,
 }: {
     option: AddNodeOption;
-    style?: NodeOptionStyle;
     selectedOption: AddNodeOption;
     createNode: (creator: NodeCreator) => void;
 }) {
+    const theme = useMarkorTheme();
     return (
         <div
             key={option.name}
-            className={style?.container || "defaultAddNodeDialog_NodeOption"}
+            className={`${theme?.addNodeDialog?.nodeOption?.container} ${
+                selectedOption.name === option.name
+                    ? `${theme?.addNodeDialog?.nodeOption?.selected}`
+                    : ""
+            }`}
             onClick={() => createNode(option.creator)}
             style={{
                 backgroundColor:
                     selectedOption.name === option.name
-                        ? `${style?.selectedBgColor || "rgba(0, 0, 0, 0.069)"}`
+                        ? `${theme?.addNodeDialog?.nodeOption?.selected}`
                         : "",
             }}
         >
-            <div
-                className={
-                    style?.image || "defaultAddNodeDialog_NodeOptionImage"
-                }
-            >
+            <div className={theme?.addNodeDialog?.nodeOption?.image}>
                 {option.image}
             </div>
-            <div
-                className={style?.text || "defaultAddNodeDialog_NodeOptionText"}
-            >
-                <div
-                    className={
-                        style?.name || "defaultAddNodeDialog_NodeOptionName"
-                    }
-                >
+            <div className={theme?.addNodeDialog?.nodeOption?.text?.container}>
+                <div className={theme?.addNodeDialog?.nodeOption?.text?.name}>
                     {option.name}
                 </div>
                 <div
                     className={
-                        style?.description ||
-                        "defaultAddNodeDialog_NodeOptionDescription"
+                        theme?.addNodeDialog?.nodeOption?.text?.description
                     }
                 >
                     {option.description}

@@ -90,13 +90,6 @@ export default function ImageComponent({
     maxWidth: number;
     nodeKey: NodeKey;
 }) {
-    useEffect(() => {
-        console.log("Src ", src);
-        console.log("Alt Text ", alt);
-        console.log("Width ", width);
-        console.log("Height ", height);
-        console.log("maxWidth ", maxWidth);
-    }, [src, alt, width, height, maxWidth]);
     const imageComponentRef = useRef<HTMLDivElement | null>(null);
     const [editor] = useLexicalComposerContext();
     const [isSelected, setIsSelected, clearSelection] =

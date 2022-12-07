@@ -3,7 +3,44 @@ import { EditorThemeClasses } from "lexical/LexicalEditor";
 import { defaultMarkorTheme } from "./defaultMarkorTheme";
 
 interface MarkorThemeClasses extends EditorThemeClasses {
-    dialog: string;
+    placeholder?: string;
+    backdrop?: string;
+    dialog?: {
+        dialog?: string;
+        animation?: string;
+    };
+    button?:{
+        base?: string;
+        primary?: string;
+        secondary?: string;
+        disabled?: string;
+    }
+    addNodeDialog?: {
+        dialog?: string;
+        searchInput?: string;
+        nodeOption?: {
+            container?: string;
+            selected?: string;
+            image?: string;
+            text?: {
+                container?: string;
+                name?: string;
+                description?: string;
+            };
+        };
+    };
+    addImageDialog?: {
+        dialog?: string;
+        title?: string;
+        imageInput?: {
+            container?: string;
+            urlInput?: string;
+            fileInput?: string;
+            fileInputLabel?: string;
+        };
+        altTextInput?: string;
+        actionButtonGroup?: string;
+    };
 }
 
 const MarkorThemeContext = React.createContext<

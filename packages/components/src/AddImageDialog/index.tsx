@@ -1,10 +1,10 @@
-import "./AddImageDialog.css";
 import React, { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 import { AddIcon, ImageIcon } from "@markor/icons";
 import { useBackdropClose, useEscape } from "@markor/utils";
-import { TextInput, Backdrop, NumberInput, Button, DialogAnimation } from "..";
+import { Backdrop, Button, DialogAnimation } from "..";
+import { useMarkorTheme } from "markor";
 
 export interface AddImageDialogStyle {
     backdrop?: string;
@@ -29,6 +29,7 @@ export default function AddImageDialog({
     onSave,
     style,
 }: AddImageDialogProps) {
+    const theme = useMarkorTheme();
     const [src, setSrc] = useState("");
     const [altText, setAltText] = useState("");
     const [width, setWidth] = useState<number | null>(null);
@@ -81,17 +82,14 @@ export default function AddImageDialog({
     }
 
     async function handleSave() {
-        console.log("URL: ", src);
         try {
             setIsLoading(true);
             const { width, height } = await getImageDimensions(src);
-            console.log({ width, height });
             setIsLoading(false);
             onSave(src, altText, width, height);
         } catch (error) {
             setIsLoading(false);
             setIsError("Invalid image url");
-            console.log(error);
         }
     }
 
@@ -100,25 +98,34 @@ export default function AddImageDialog({
     return createPortal(
         <Backdrop onClose={onClose}>
             <DialogAnimation>
-                <div className={style?.dialog || "DefaultAddImageDialog"}>
-                    <div className={"DefaultAddImageDialogTitle"}>
+                <div
+                    className={`${theme?.addImageDialog?.dialog} ${theme?.dialog?.dialog}`}
+                >
+                    <div className={theme?.addImageDialog?.title}>
                         <ImageIcon
                             size="base"
                             className={"DefaultAddImageDialogIcon"}
                         />
                         <span>Add an image</span>
                     </div>
-                    <div className={"DefaultAddImageDialog_ImageInputGroup"}>
-                        <TextInput
-                            value={src}
-                            onChange={(e) => setSrc(e.target.value)}
+                    <div
+                        className={theme?.addImageDialog?.imageInput?.container}
+                    >
+                        <input
+                            type="url"
                             placeholder="Enter image url"
                             name="Image url"
+                            value={src}
+                            onChange={(e) => setSrc(e.target.value)}
+                            className={
+                                theme?.addImageDialog?.imageInput?.urlInput
+                            }
                         />
                         <label
                             htmlFor="DefaultAddImageDialog_ImageFileInput"
                             className={
-                                "DefaultAddImageDialog_ImageFileInputLabel"
+                                theme?.addImageDialog?.imageInput
+                                    ?.fileInputLabel
                             }
                         >
                             <AddIcon size="base" />
@@ -127,18 +134,22 @@ export default function AddImageDialog({
                         <input
                             type="file"
                             id="DefaultAddImageDialog_ImageFileInput"
-                            className={"DefaultAddImageDialog_ImageFileInput"}
+                            className={
+                                theme?.addImageDialog?.imageInput?.fileInput
+                            }
                             onChange={handleImageSelection}
                             accept="image/png, image/jpeg"
                         />
                     </div>
-                    <TextInput
+                    <input
+                        type="text"
+                        name="Alternative text"
                         value={altText}
                         onChange={(e) => setAltText(e.target.value)}
                         placeholder="Alternative text"
-                        name="Alt text"
+                        className={theme?.addImageDialog?.altTextInput}
                     />
-                    <div className={"DefaultAddImageDialog_ActionButtonGroup"}>
+                    <div className={theme?.addImageDialog?.actionButtonGroup}>
                         <Button
                             type="primary"
                             onClick={handleSave}

@@ -8,7 +8,7 @@ import {
     LexicalNode,
 } from "lexical";
 import { AddNodeDialog, defaultAddNodeOptions } from "@markor/components";
-import type { AddNodeOption, AddNodeDialogStyle } from "@markor/components";
+import type { AddNodeOption } from "@markor/components";
 
 function defaultIsShortcutTriggered(ev: KeyboardEvent) {
     if (ev.ctrlKey && ev.key === "k") {
@@ -21,8 +21,7 @@ function defaultIsShortcutTriggered(ev: KeyboardEvent) {
 function useAddNodeShortcutPlugin(
     editor: LexicalEditor,
     isShortcutTriggered: (ev: KeyboardEvent) => boolean,
-    addNodeOptions?: AddNodeOption[],
-    style?: AddNodeDialogStyle
+    addNodeOptions?: AddNodeOption[]
 ) {
     const [selectedNode, setSelectedNode] = useState<LexicalNode | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -66,7 +65,6 @@ function useAddNodeShortcutPlugin(
             addNodeOptions={addNodeOptions}
             isOpen={isDialogOpen}
             onClose={() => setIsDialogOpen(false)}
-            style={style}
         />
     );
 }
@@ -74,18 +72,15 @@ function useAddNodeShortcutPlugin(
 export default function AddNodeShortcutPlugin({
     isShortcutTriggered = defaultIsShortcutTriggered,
     addNodeOptions = defaultAddNodeOptions,
-    style,
 }: {
     isShortcutTriggered?: (ev: KeyboardEvent) => boolean;
     addNodeOptions?: AddNodeOption[];
-    style?: AddNodeDialogStyle;
 }) {
     const [editor] = useLexicalComposerContext();
 
     return useAddNodeShortcutPlugin(
         editor,
         isShortcutTriggered,
-        addNodeOptions,
-        style
+        addNodeOptions
     );
 }

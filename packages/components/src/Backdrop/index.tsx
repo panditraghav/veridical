@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useBackdropClose } from "@markor/utils";
+import { useMarkorTheme } from "markor";
 
 export default function Backdrop({
     children,
@@ -11,10 +12,11 @@ export default function Backdrop({
     onClose: () => void;
 }) {
     const backdropRef = useRef<HTMLDivElement>();
+    const theme = useMarkorTheme();
     useBackdropClose(onClose, backdropRef.current);
     return (
         //@ts-ignore
-        <div className={className || "DefaultBackdrop"} ref={backdropRef}>
+        <div className={theme?.backdrop} ref={backdropRef}>
             {children}
         </div>
     );

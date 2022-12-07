@@ -1,5 +1,5 @@
-import "./index.css";
 import React from "react";
+import { useMarkorTheme } from "markor";
 
 export interface ButtonProps {
     type: "primary" | "secondary";
@@ -14,13 +14,14 @@ export default function Button({
     children,
     isDisabled,
 }: ButtonProps) {
+    const theme = useMarkorTheme();
     return (
         <button
-            className={`DefaultButton ${
+            className={`${theme?.button?.base} ${
                 type == "primary"
-                    ? "DefaultButton_Primary"
-                    : "DefaultButton_Secondary"
-            } ${isDisabled ? "DefaultButton_Disabled" : ""}`}
+                    ? theme?.button?.primary
+                    : theme?.button?.secondary
+            } ${isDisabled ? theme?.button?.disabled : ""}`}
             onClick={isDisabled ? undefined : onClick}
         >
             {children}

@@ -16,13 +16,7 @@ import type { NodeCreator, AddNodeOption } from "./addNodeOptions";
 import type { NodeOptionStyle } from "./NodeOption";
 import NodeOption from "./NodeOption";
 import { DialogAnimation, Backdrop } from "..";
-
-export type AddNodeDialogStyle = {
-    backdrop?: string;
-    dialog?: string;
-    searchInput?: string;
-    nodeOption?: NodeOptionStyle;
-};
+import { useMarkorTheme } from "markor";
 
 export type AddNodeDialogProps = {
     editor: LexicalEditor;
@@ -30,7 +24,6 @@ export type AddNodeDialogProps = {
     onClose: () => void;
     lexicalNode: LexicalNode | null;
     addNodeOptions?: AddNodeOption[];
-    style?: AddNodeDialogStyle;
 };
 
 export default function AddNodeDialog({
@@ -39,8 +32,8 @@ export default function AddNodeDialog({
     lexicalNode,
     addNodeOptions = defaultAddNodeOptions,
     isOpen,
-    style,
 }: AddNodeDialogProps) {
+    const theme = useMarkorTheme();
     const [searchText, setSearchText] = useState("");
     const [orderedNodeOptions, setOrderedNodeOptions] =
         useState(addNodeOptions);
@@ -131,14 +124,13 @@ export default function AddNodeDialog({
 
     if (!isOpen) return null;
     return createPortal(
-        <Backdrop onClose={onClose} className={style?.backdrop}>
+        <Backdrop onClose={onClose}>
             <DialogAnimation>
-                <div className={style?.dialog || "defaultAddNodeDialog"}>
+                <div
+                    className={`${theme?.addNodeDialog?.dialog} ${theme?.dialog?.dialog}`}
+                >
                     <input
-                        className={
-                            style?.searchInput ||
-                            "defaultAddNodeDialogSearchInput"
-                        }
+                        className={theme?.addNodeDialog?.searchInput}
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
                         autoFocus
@@ -153,7 +145,6 @@ export default function AddNodeDialog({
                                     option={option}
                                     selectedOption={selectedOption}
                                     createNode={createNode}
-                                    style={style?.nodeOption}
                                 />
                             );
                         })}

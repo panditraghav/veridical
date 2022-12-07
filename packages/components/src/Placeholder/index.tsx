@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
+import { useMarkorTheme } from "markor";
 
 export function Placeholder({ text }: { text: string }) {
-    return (
-        <div className="DefaultEditorTheme__Placeholder">{text}</div>
-    )
+    const theme = useMarkorTheme();
+    return <div className={theme?.placeholder}>{text}</div>;
 }

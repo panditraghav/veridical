@@ -12,7 +12,6 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import AddNodeBtn from "./AddNodeBtn";
 import {
     AddNodeDialog,
-    AddNodeDialogStyle,
     AddNodeOption,
 } from "@markor/components";
 import { useHoverMenuContext } from "..";
@@ -20,7 +19,6 @@ import { useHoverMenuContext } from "..";
 function useAddNodeButtonPlugin(
     editor: LexicalEditor,
     addNodeOptions?: AddNodeOption[],
-    style?: AddNodeDialogStyle
 ) {
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -45,11 +43,9 @@ function useAddNodeButtonPlugin(
 
 export default function AddNodeButtonPlugin({
     addNodeOptions,
-    style,
 }: {
     addNodeOptions?: AddNodeOption[];
-    style?: AddNodeDialogStyle;
 }) {
     const [editor] = useLexicalComposerContext();
-    return useAddNodeButtonPlugin(editor, addNodeOptions, style);
+    return useAddNodeButtonPlugin(editor, addNodeOptions);
 }

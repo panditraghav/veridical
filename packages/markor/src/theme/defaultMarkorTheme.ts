@@ -81,5 +81,42 @@ export const defaultMarkorTheme: MarkorThemeClasses = {
         underlineStrikethrough:
             "DefaultEditorTheme__textUnderlineStrikethrough",
     },
-    dialog: "DefaultEditorDialog",
+    placeholder: "DefaultEditorTheme__Placeholder",
+    backdrop: "DefaultMarkorBackdrop",
+    dialog: {
+        dialog: "DefaultMarkorDialog",
+        animation: "DefaultMarkorDialogAnimation",
+    },
+    button: {
+        base: "DefaultButton",
+        primary: "DefaultButton_Primary",
+        secondary: "DefaultButton_Secondary",
+        disabled: "DefaultButton_Disabled",
+    },
+    addNodeDialog: {
+        dialog: "DefaultMarkorAddNodeDialog",
+        searchInput: "DefaultAddNodeDialogSearchInput",
+        nodeOption: {
+            selected: "DefaultAddNodeDialogOptionSelected",
+            container: "DefaultAddNodeDialogNodeOption",
+            image: "DefaultAddNodeDialogNodeOptionImage",
+            text: {
+                container: "DefaultAddNodeDialogNodeOptionText",
+                name: "DefaultAddNodeDialogNodeOptionName",
+                description: "DefaultAddNodeDialogNodeOptionDescription",
+            },
+        },
+    },
+    addImageDialog: {
+        dialog: "DefaultAddImageDialog",
+        title: "DefaultAddImageDialogTitle",
+        imageInput: {
+            container: "DefaultAddImageDialog_ImageInputGroup",
+            urlInput: "DefaultAddImageDialog_LinkInput",
+            fileInput: "DefaultAddImageDialog_ImageFileInput",
+            fileInputLabel: "DefaultAddImageDialog_ImageFileInputLabel",
+        },
+        altTextInput: "DefaultAddImageDialog_LinkInput",
+        actionButtonGroup: "DefaultAddImageDialog_ActionButtonGroup",
+    },
 };

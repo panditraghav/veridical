@@ -1,3 +1,10 @@
+:root {
+    --colorSuccess: rgb(0, 144, 160, 0.995);
+    --colorDanger: rgb(227, 0, 0, 0.82);
+    --colorPrimary: rgb(0, 144, 160, 0.995);
+    --colorSecondary: rgba(67, 67, 67, 0.82);
+}
+
 .DefaultEditorTheme__EditorContainer {
     max-width: 740px;
     margin: 0px auto;
@@ -221,7 +228,7 @@
 
 /* Other styles */
 
-.DefaultBackdrop {
+.DefaultMarkorBackdrop {
     position: fixed;
     top: 0px;
     width: 100%;
@@ -234,21 +241,25 @@
     background-color: rgba(0, 0, 0, 0.279);
 }
 
+/* Dialog */
+
+.DefaultMarkorDialog {
+    background: white;
+    font-family: "Poppins", sans-serif;
+    box-shadow: -2px 4px 31px -18px rgba(0, 0, 0, 0.81);
+}
+
 /* Add Node dialog */
 
-.defaultAddNodeDialog {
+.DefaultMarkorAddNodeDialog {
     width: 280px;
     height: 300px;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.208);
     border-radius: 3px;
     padding: 8px 8px;
-    box-shadow: -2px 4px 31px -18px rgba(0, 0, 0, 0.81);
-    font-family: "Poppins", sans-serif;
     overflow-y: scroll;
 }
 
-.defaultAddNodeDialogSearchInput {
+.DefaultAddNodeDialogSearchInput {
     outline: none;
     border: none;
     width: 100%;
@@ -258,7 +269,7 @@
     padding: 6px 4px;
 }
 
-.defaultAddNodeDialog_NodeOption {
+.DefaultAddNodeDialogNodeOption {
     width: 100%;
     display: flex;
     padding: 6px 4px;
@@ -266,26 +277,30 @@
     border-radius: 2px;
 }
 
-.defaultAddNodeDialog_NodeOption:hover {
+.DefaultAddNodeDialogOptionSelected {
+    background-color: rgba(0, 0, 0, 0.069);
+}
+
+.DefaultAddNodeDialogNodeOption:hover {
     background-color: rgba(0, 0, 0, 0.069);
     cursor: pointer;
 }
 
-.defaultAddNodeDialog_NodeOptionImage {
+.DefaultAddNodeDialogNodeOptionImage {
     width: 40px;
     height: 40px;
     box-sizing: border-box;
 }
 
-.defaultAddNodeDialog_NodeOptionText {
+.DefaultAddNodeDialogNodeOptionText {
     padding: 0px 8px;
 }
 
-.defaultAddNodeDialog_NodeOptionName {
+.DefaultAddNodeDialogNodeOptionName {
     font-size: 16px;
 }
 
-.defaultAddNodeDialog_NodeOptionDescription {
+.DefaultAddNodeDialogNodeOptionDescription {
     font-size: 10px;
     color: rgba(0, 0, 0, 0.571);
 }
@@ -408,7 +423,7 @@
 
 /* DialogAnimation */
 
-.DefaultDialogAnimation {
+.DefaultMarkorDialogAnimation {
     animation: dialogShow .2s ease forwards;
 }
 
@@ -421,5 +436,186 @@
     to {
         opacity: 100;
         transform: scale(1);
+    }
+}
+
+/* Add Image Dialog */
+
+.DefaultAddImageDialog {
+    box-sizing: border-box;
+    width: 430px;
+    height: auto;
+    padding: 16px 16px;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Poppins", sans-serif;
+}
+
+.DefaultAddImageDialogTitle {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.DefaultAddImageDialog_ImageInputGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 0px;
+}
+
+.DefaultAddImageDialog_DimensionsInputGroup {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.DefaultAddImageDialog_LinkInput {
+    display: block;
+    flex-grow: 2;
+    padding: 8px 4px;
+    border: none;
+    border: 1px solid var(--colorSuccess);
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+.DefaultAddImageDialog_LinkInput:focus {
+    outline: 1px solid var(--colorSuccess);
+}
+
+.DefaultAddImageDialog_ImageFileInput {
+    display: none;
+}
+
+.DefaultAddImageDialog_ImageFileInputLabel {
+    display: flex;
+    flex-grow: 1;
+    margin-left: 8px;
+    width: auto;
+    align-items: center;
+    padding: 8px 4px;
+    border-color: var(--colorSuccess);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+.DefaultAddImageDialog_ImageFileInputLabel:hover {
+    animation: onHoverColorChangeSuccess .2s ease forwards;
+    cursor: pointer;
+}
+
+.DefaultAddImageDialog_ActionButtonGroup {
+    display: flex;
+    justify-content: right;
+    margin: 8px 0px;
+}
+
+.DefaultAddImageDialog_SaveButton, .DefaultAddImageDialog_CancelButton {
+    width: 64px;
+    padding: 8px 0px;
+    margin-left: 8px;
+    background: none;
+    border: 1px solid;
+    border-radius: 2px;
+}
+
+.DefaultAddImageDialog_SaveButton, .DefaultAddImageDialog_CancelButton:hover {
+    cursor: pointer;
+}
+
+.DefaultAddImageDialog_SaveButton {
+    border-color: var(--colorSuccess);
+}
+
+.DefaultAddImageDialog_SaveButton:hover {
+    animation: onHoverColorChangeSuccess .2s ease forwards;
+}
+
+.DefaultAddImageDialog_CancelButton {
+    border-color: var(--colorDanger);
+}
+
+.DefaultAddImageDialog_CancelButton:hover {
+    animation: onHoverColorChangeDanger .2s ease forwards;
+}
+
+@keyframes onHoverColorChangeSuccess {
+    100% {
+        fill: white;
+        background-color: var(--colorSuccess);
+        color: white;
+    }
+}
+
+@keyframes onHoverColorChangeDanger {
+    100% {
+        fill: white;
+        background-color: var(--colorDanger);
+        color: white;
+    }
+}
+
+/* Button */
+
+.DefaultButton {
+    width: 64px;
+    padding: 8px 0px;
+    margin-left: 8px;
+    background: none;
+    border: 1px solid;
+    border-radius: 2px;
+}
+
+.DefaultButton:hover {
+    cursor: pointer;
+}
+
+.DefaultButton_Primary {
+    border-color: var(--colorPrimary);
+}
+
+.DefaultButton_Primary:hover {
+    animation: onHoverColorChangePrimary .2s ease forwards;
+}
+
+.DefaultButton_Secondary {
+    border-color: var(--colorSecondary);
+}
+
+.DefaultButton_Secondary:hover {
+    animation: onHoverColorChangeSecondary .2s ease forwards;
+}
+
+.DefaultButton_Disabled {
+    border-color: var(--colorSecondary);
+}
+
+.DefaultButton_Disabled:hover {
+    cursor: default;
+    animation: none;
+}
+
+@keyframes onHoverColorChangePrimary {
+    100% {
+        fill: white;
+        background-color: var(--colorPrimary);
+        color: white;
+    }
+}
+
+@keyframes onHoverColorChangeSecondary {
+    100% {
+        fill: white;
+        background-color: var(--colorSecondary);
+        color: white;
     }
 }

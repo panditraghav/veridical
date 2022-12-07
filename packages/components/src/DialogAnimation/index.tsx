@@ -1,26 +1,10 @@
 import React from "react";
+import { useMarkorTheme } from "markor";
 
 interface DialogProps {
-    className?: string;
     children: React.ReactNode;
 }
-
-function getWidthFromSize(size: "md" | "lg" | "xl") {
-    switch (size) {
-        case "md":
-            return 280;
-            break;
-        case "lg":
-            return 430;
-            break;
-        case "xl":
-            return 740;
-            break;
-    }
-}
-
-export default function DialogAnimation({ className, children }: DialogProps) {
-    return (
-        <div className={className || "DefaultDialogAnimation"}>{children}</div>
-    );
+export default function DialogAnimation({ children }: DialogProps) {
+    const theme = useMarkorTheme();
+    return <div className={theme?.dialog?.animation}>{children}</div>;
 }
