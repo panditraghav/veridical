@@ -28,25 +28,26 @@ const packages = [
         name: "markor",
         inputFile: "index.tsx",
         outputFile: "index.js",
-        external: [...external, "@markor/plugins", "@markor/nodes", "@markor/icons"]
+        external: [...external, "@markor/plugins", "@markor/nodes", "@markor/icons", "@markor/components", "@makor/utils"]
     },
     {
         name: "nodes",
         inputFile: "index.ts",
         outputFile: "index.js",
-        external
+        external: [...external, "@markor/plugins", "@markor/icons", "@markor/components", "@makor/utils"]
+
     },
     {
         name: "plugins",
         inputFile: "index.ts",
         outputFile: "index.js",
-        external
+        external: [...external, "@markor/nodes", "@markor/icons", "@markor/components", "@makor/utils"]
     },
     {
         name: "components",
         inputFile: "index.ts",
         outputFile: "index.js",
-        external
+        external: [...external, "@markor/nodes", "@markor/icons", "@markor/plugins", "@makor/utils"]
     },
     {
         name: "icons",
@@ -58,7 +59,7 @@ const packages = [
         name: "utils",
         inputFile: "index.ts",
         outputFile: "index.js",
-        external
+        external: [...external, "@markor/nodes", "@markor/icons", "@markor/plugins", "@makor/components"]
     },
 ]
 const SRC_FOLDER = "src"
