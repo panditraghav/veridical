@@ -44,7 +44,7 @@ function App() {
     };
     return (
         <Markor initialConfig={initialConfig}>
-            <TreeViewPlugin />
+            {/* <TreeViewPlugin /> */}
             {/* <EditorStatePlugin /> */}
             {/* <EditorFromState
                 stringifiedEditorState={JSON.stringify(previousEditorState)}
