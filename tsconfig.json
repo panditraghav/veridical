@@ -5,12 +5,12 @@
     "module": "ESNext", /* Specify what module code is generated. */
     "moduleResolution": "node", /* Specify how TypeScript looks up a file from a given module specifier. */
     "paths": {
-      "markor": ["./packages/markor/src"],
-      "@markor/plugins": ["./packages/plugins/src"],
-      "@markor/nodes": ["./packages/nodes/src"],
-      "@markor/utils": ["./packages/utils/src"],
-      "@markor/components": ["./packages/components/src"],
-      "@markor/icons": ["./packages/icons/src"],
+      "veridical": ["./packages/veridical/src"],
+      "@veridical/plugins": ["./packages/plugins/src"],
+      "@veridical/nodes": ["./packages/nodes/src"],
+      "@veridical/utils": ["./packages/utils/src"],
+      "@veridical/components": ["./packages/components/src"],
+      "@veridical/icons": ["./packages/icons/src"],
     },                
     "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
     "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */

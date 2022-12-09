@@ -20,29 +20,29 @@ import {
     HoverMenuPlugin,
     AddNodeShortcutPlugin,
     ImagePlugin,
-} from "@markor/plugins";
+} from "@veridical/plugins";
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
 import {
-    defaultMarkorTheme,
-    useMarkorTheme,
-    MarkorThemeComposer,
-} from "./theme";
-import type { MarkorThemeClasses } from "./theme";
-import { Placeholder } from "@markor/components";
-import { defaultEditorNodes } from "@markor/nodes";
+    defaultVeridicalTheme,
+    useVeridicalTheme,
+    VeridicalThemeComposer,
+} from "@veridical/utils";
+import type { VeridicalThemeClasses } from "@veridical/utils";
+import { Placeholder } from "@veridical/components";
+import { defaultEditorNodes } from "@veridical/nodes";
 
 interface InitialConfig {
     namespace: string;
     nodes?: ReadonlyArray<Klass<LexicalNode>>;
     onError: (error: Error, editor: LexicalEditor) => void;
     readOnly?: boolean;
-    theme?: MarkorThemeClasses;
+    theme?: VeridicalThemeClasses;
     editorState?: InitialEditorStateType;
     editable?: boolean;
 }
 
-function Markor({
+function Veridical({
     initialConfig,
     children,
 }: {
@@ -50,17 +50,17 @@ function Markor({
     children?: React.ReactNode;
 }) {
     const config: InitialConfig = {
-        namespace: initialConfig?.namespace || "markor-editor",
+        namespace: initialConfig?.namespace || "veridical-editor",
         nodes: initialConfig?.nodes || defaultEditorNodes,
         onError:
             initialConfig?.onError || ((error, editor) => console.error(error)),
         editable: initialConfig?.editable || true,
         readOnly: initialConfig?.readOnly || false,
-        theme: initialConfig?.theme || defaultMarkorTheme,
+        theme: initialConfig?.theme || defaultVeridicalTheme,
     };
 
     return (
-        <MarkorBase initialConfig={config}>
+        <VeridicalBase initialConfig={config}>
             <div className={"DefaultEditorTheme__EditorContainer"}>
                 <RichTextPlugin
                     contentEditable={
@@ -91,11 +91,11 @@ function Markor({
                 )}
                 {children}
             </div>
-        </MarkorBase>
+        </VeridicalBase>
     );
 }
 
-function MarkorBase({
+function VeridicalBase({
     initialConfig,
     children,
 }: {
@@ -104,18 +104,15 @@ function MarkorBase({
 }) {
     return (
         <LexicalComposer initialConfig={initialConfig}>
-            <MarkorThemeComposer theme={initialConfig.theme}>
+            <VeridicalThemeComposer theme={initialConfig.theme}>
                 {children}
-            </MarkorThemeComposer>
+            </VeridicalThemeComposer>
         </LexicalComposer>
     );
 }
 
 export {
-    defaultMarkorTheme,
     InitialConfig,
-    useMarkorTheme,
-    MarkorThemeClasses,
-    Markor,
-    MarkorBase,
+    Veridical,
+    VeridicalBase,
 };

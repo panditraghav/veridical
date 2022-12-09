@@ -7,8 +7,8 @@ import {
     LexicalEditor,
     LexicalNode,
 } from "lexical";
-import { AddNodeDialog, defaultAddNodeOptions } from "@markor/components";
-import type { AddNodeOption } from "@markor/components";
+import { AddNodeDialog, defaultAddNodeOptions } from "@veridical/components";
+import type { AddNodeOption } from "@veridical/components";
 
 function defaultIsShortcutTriggered(ev: KeyboardEvent) {
     if (ev.ctrlKey && ev.key === "k") {

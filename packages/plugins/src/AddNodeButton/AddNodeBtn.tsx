@@ -1,5 +1,5 @@
 import React from "react";
-import { AddIcon } from "@markor/icons";
+import { AddIcon } from "@veridical/icons";
 
 interface AddNodeBtnProps {
     onClick: () => void;

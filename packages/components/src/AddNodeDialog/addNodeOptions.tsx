@@ -21,8 +21,8 @@ import {
     ImageIcon,
     UlIcon,
     OlIcon,
-} from "@markor/icons";
-import { $createImageNode } from "@markor/nodes";
+} from "@veridical/icons";
+import { $createImageNode } from "@veridical/nodes";
 
 export const ADD_NODE_COMMAND: LexicalCommand<NodeCreator> = createCommand();
 

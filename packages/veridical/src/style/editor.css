@@ -228,7 +228,7 @@
 
 /* Other styles */
 
-.DefaultMarkorBackdrop {
+.DefaultVeridicalBackdrop {
     position: fixed;
     top: 0px;
     width: 100%;
@@ -243,7 +243,7 @@
 
 /* Dialog */
 
-.DefaultMarkorDialog {
+.DefaultVeridicalDialog {
     background: white;
     font-family: "Poppins", sans-serif;
     box-shadow: -2px 4px 31px -18px rgba(0, 0, 0, 0.81);
@@ -251,7 +251,7 @@
 
 /* Add Node dialog */
 
-.DefaultMarkorAddNodeDialog {
+.DefaultVeridicalAddNodeDialog {
     width: 280px;
     height: 300px;
     border-radius: 3px;
@@ -423,7 +423,7 @@
 
 /* DialogAnimation */
 
-.DefaultMarkorDialogAnimation {
+.DefaultVeridicalDialogAnimation {
     animation: dialogShow .2s ease forwards;
 }
 

@@ -7,7 +7,7 @@ import {
     FormatBold,
     FormatItalic,
     FormatUnderline,
-} from "@markor/icons";
+} from "@veridical/icons";
 
 export interface HighlightMenuStyle {
     highlightMenu?: string;

@@ -8,7 +8,7 @@ import {
 } from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
-import { getHoveredDOMNode, Offset, useMouse } from "@markor/utils";
+import { getHoveredDOMNode, Offset, useMouse } from "@veridical/utils";
 import { useHoverMenuContext, hoverMenuContext } from "./hoverMenuContext";
 
 interface HoverMenuStyle {

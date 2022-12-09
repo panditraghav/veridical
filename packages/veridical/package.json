@@ -1,7 +1,7 @@
 {
-    "name": "@veridical/icons",
+    "name": "veridical",
     "version": "0.1.1",
-    "description": "Icons for veridical",
+    "description": "A WYSIWYG editor for blogs",
     "main": "index.js",
     "types": "dts/index.d.ts",
     "scripts": {
@@ -15,16 +15,25 @@
         "WYSIWYG",
         "Editor",
         "Blog",
+        "editor",
         "lexical"
     ],
+    "dependencies": {
+        "lexical": "^0.5.0",
+        "@lexical/react": "^0.5.0",
+        "@veridical/plugins": "^0.1.0",
+        "@veridical/nodes": "^0.1.0",
+        "@veridical/components": "^0.1.0",
+        "@veridical/utils": "^0.1.0"
+    },
+    "peerDependencies": {
+        "react": ">=17.x",
+        "react-dom": ">=17.x"
+    },
     "author": "Raghav Pandit",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/panditraghav/veridical/issues"
     },
-    "homepage": "https://github.com/panditraghav/veridical#readme",
-    "peerDependencies": {
-        "react": ">=17.x",
-        "react-dom": ">=17.x"
-    }
+    "homepage": "https://github.com/panditraghav/veridical#readme"
 }

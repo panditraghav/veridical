@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { LexicalEditor, $getNodeByKey } from "lexical";
-import { $isImageNode, ImageNode } from "@markor/nodes";
-import { AddImageDialog } from "@markor/components";
+import { $isImageNode, ImageNode } from "@veridical/nodes";
+import { AddImageDialog } from "@veridical/components";
 
 function getImageHeight(
     maxWidth: number,

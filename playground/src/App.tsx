@@ -1,12 +1,8 @@
 import "./main.css";
-import {
-    Markor,
-    InitialConfig,
-    defaultMarkorTheme,
-    useMarkorTheme,
-} from "markor";
-import { defaultEditorNodes } from "@markor/nodes";
-import { TreeViewPlugin } from "@markor/plugins";
+import { Veridical, InitialConfig } from "veridical";
+import { defaultVeridicalTheme, useVeridicalTheme } from "@veridical/utils";
+import { defaultEditorNodes } from "@veridical/nodes";
+import { TreeViewPlugin } from "@veridical/plugins";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useEffect } from "react";
 import { LexicalEditor } from "lexical/LexicalEditor";
@@ -39,17 +35,17 @@ function App() {
         namespace: "my-editor",
         nodes: defaultEditorNodes,
         onError: (error) => console.log(error),
-        theme: defaultMarkorTheme,
+        theme: defaultVeridicalTheme,
         editable: true,
     };
     return (
-        <Markor initialConfig={initialConfig}>
+        <Veridical initialConfig={initialConfig}>
             {/* <TreeViewPlugin /> */}
             {/* <EditorStatePlugin /> */}
             {/* <EditorFromState
                 stringifiedEditorState={JSON.stringify(previousEditorState)}
             /> */}
-        </Markor>
+        </Veridical>
     );
 }
 

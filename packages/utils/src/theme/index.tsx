@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { EditorThemeClasses } from "lexical/LexicalEditor";
-import { defaultMarkorTheme } from "./defaultMarkorTheme";
+import { defaultVeridicalTheme } from "./defaultVeridicalTheme";
 
-interface MarkorThemeClasses extends EditorThemeClasses {
+interface VeridicalThemeClasses extends EditorThemeClasses {
     placeholder?: string;
     backdrop?: string;
     dialog?: {
@@ -43,31 +43,31 @@ interface MarkorThemeClasses extends EditorThemeClasses {
     };
 }
 
-const MarkorThemeContext = React.createContext<
-    MarkorThemeClasses | null | undefined
+const VeridicalThemeContext = React.createContext<
+    VeridicalThemeClasses | null | undefined
 >(null);
 
-function MarkorThemeComposer({
+function VeridicalThemeComposer({
     theme,
     children,
 }: {
-    theme?: MarkorThemeClasses;
+    theme?: VeridicalThemeClasses;
     children?: React.ReactNode;
 }) {
     return (
-        <MarkorThemeContext.Provider value={theme}>
+        <VeridicalThemeContext.Provider value={theme}>
             {children}
-        </MarkorThemeContext.Provider>
+        </VeridicalThemeContext.Provider>
     );
 }
 
-function useMarkorTheme(): MarkorThemeClasses | null | undefined {
-    return useContext(MarkorThemeContext);
+function useVeridicalTheme(): VeridicalThemeClasses | null | undefined {
+    return useContext(VeridicalThemeContext);
 }
 
 export {
-    MarkorThemeClasses,
-    useMarkorTheme,
-    MarkorThemeComposer,
-    defaultMarkorTheme,
+    VeridicalThemeClasses,
+    useVeridicalTheme,
+    VeridicalThemeComposer,
+    defaultVeridicalTheme,
 };

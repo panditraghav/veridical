@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
-import { useBackdropClose } from "@markor/utils";
-import { useMarkorTheme } from "markor";
+import { useBackdropClose, useVeridicalTheme } from "@veridical/utils";
 
 export default function Backdrop({
     children,
@@ -12,7 +11,7 @@ export default function Backdrop({
     onClose: () => void;
 }) {
     const backdropRef = useRef<HTMLDivElement>();
-    const theme = useMarkorTheme();
+    const theme = useVeridicalTheme();
     useBackdropClose(onClose, backdropRef.current);
     return (
         //@ts-ignore

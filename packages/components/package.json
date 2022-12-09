@@ -1,32 +1,37 @@
-
 {
-  "name": "@markor/components",
-  "version": "0.1.0",
-  "description": "Plugins for markor",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/panditraghav/markor.git"
-  },
-  "keywords": [
-    "WYSIWYG",
-    "Editor",
-    "Blog",
-    "lexical"
-  ],
-  "author": "Raghav Pandit",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/panditraghav/markor/issues"
-  },
-  "homepage": "https://github.com/panditraghav/markor#readme",
-  "peerDependencies": {
-    "react": ">=17.x",
-    "react-dom": ">=17.x",
-    "@lexical/react": "^0.5.0",
-    "lexical": "^0.5.0"
-  }
+    "name": "@veridical/components",
+    "version": "0.1.1",
+    "description": "Plugins for veridical",
+    "main": "index.js",
+    "types": "dts/index.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/panditraghav/veridical.git"
+    },
+    "keywords": [
+        "WYSIWYG",
+        "Editor",
+        "Blog",
+        "lexical"
+    ],
+    "author": "Raghav Pandit",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/panditraghav/veridical/issues"
+    },
+    "homepage": "https://github.com/panditraghav/veridical#readme",
+    "dependencies": {
+        "@veridical/icons": "^0.1.0",
+        "@veridical/utils": "^0.1.0"
+    },
+    "peerDependencies": {
+        "react": ">=17.x",
+        "react-dom": ">=17.x",
+        "lexical": "^0.5.0",
+        "@lexical/react": "^0.5.0",
+        "veridical": "^0.1.0"
+    }
 }

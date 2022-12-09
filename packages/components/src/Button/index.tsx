@@ -1,5 +1,5 @@
 import React from "react";
-import { useMarkorTheme } from "markor";
+import { useVeridicalTheme } from "@veridical/utils";
 
 export interface ButtonProps {
     type: "primary" | "secondary";
@@ -14,7 +14,7 @@ export default function Button({
     children,
     isDisabled,
 }: ButtonProps) {
-    const theme = useMarkorTheme();
+    const theme = useVeridicalTheme();
     return (
         <button
             className={`${theme?.button?.base} ${

@@ -1,6 +1,6 @@
-import { MarkorThemeClasses } from ".";
+import { VeridicalThemeClasses } from ".";
 
-export const defaultMarkorTheme: MarkorThemeClasses = {
+export const defaultVeridicalTheme: VeridicalThemeClasses = {
     characterLimit: "DefaultEditorTheme__characterLimit",
     code: "DefaultEditorTheme__code",
     codeHighlight: {
@@ -82,10 +82,10 @@ export const defaultMarkorTheme: MarkorThemeClasses = {
             "DefaultEditorTheme__textUnderlineStrikethrough",
     },
     placeholder: "DefaultEditorTheme__Placeholder",
-    backdrop: "DefaultMarkorBackdrop",
+    backdrop: "DefaultVeridicalBackdrop",
     dialog: {
-        dialog: "DefaultMarkorDialog",
-        animation: "DefaultMarkorDialogAnimation",
+        dialog: "DefaultVeridicalDialog",
+        animation: "DefaultVeridicalDialogAnimation",
     },
     button: {
         base: "DefaultButton",
@@ -94,7 +94,7 @@ export const defaultMarkorTheme: MarkorThemeClasses = {
         disabled: "DefaultButton_Disabled",
     },
     addNodeDialog: {
-        dialog: "DefaultMarkorAddNodeDialog",
+        dialog: "DefaultVeridicalAddNodeDialog",
         searchInput: "DefaultAddNodeDialogSearchInput",
         nodeOption: {
             selected: "DefaultAddNodeDialogOptionSelected",

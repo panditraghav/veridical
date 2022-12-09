@@ -8,7 +8,7 @@ import React, {
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister } from "@lexical/utils";
 import { useLexicalNodeSelection } from "@lexical/react/useLexicalNodeSelection";
-import { ImageIcon } from "@markor/icons";
+import { ImageIcon } from "@veridical/icons";
 import {
     $createParagraphNode,
     $createTextNode,
@@ -27,7 +27,7 @@ import {
     $setSelection,
     $createNodeSelection,
 } from "lexical";
-import { $isImageNode } from "@markor/nodes";
+import { $isImageNode } from "@veridical/nodes";
 
 function hasClickOnImage(
     event: MouseEvent,

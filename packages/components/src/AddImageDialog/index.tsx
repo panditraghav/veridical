@@ -1,10 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
-import { AddIcon, ImageIcon } from "@markor/icons";
-import { useBackdropClose, useEscape } from "@markor/utils";
+import { AddIcon, ImageIcon } from "@veridical/icons";
+import {
+    useBackdropClose,
+    useEscape,
+    useVeridicalTheme,
+} from "@veridical/utils";
 import { Backdrop, Button, DialogAnimation } from "..";
-import { useMarkorTheme } from "markor";
 
 export interface AddImageDialogStyle {
     backdrop?: string;
@@ -29,7 +32,7 @@ export default function AddImageDialog({
     onSave,
     style,
 }: AddImageDialogProps) {
-    const theme = useMarkorTheme();
+    const theme = useVeridicalTheme();
     const [src, setSrc] = useState("");
     const [altText, setAltText] = useState("");
     const [width, setWidth] = useState<number | null>(null);

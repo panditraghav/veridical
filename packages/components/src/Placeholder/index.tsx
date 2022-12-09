@@ -1,7 +1,7 @@
 import React from "react";
-import { useMarkorTheme } from "markor";
+import { useVeridicalTheme } from "@veridical/utils";
 
 export function Placeholder({ text }: { text: string }) {
-    const theme = useMarkorTheme();
+    const theme = useVeridicalTheme();
     return <div className={theme?.placeholder}>{text}</div>;
 }

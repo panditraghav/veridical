@@ -10,13 +10,12 @@ import {
     LexicalNode,
 } from "lexical";
 
-import { useBackdropClose } from "@markor/utils";
+import { useBackdropClose , useVeridicalTheme} from "@veridical/utils";
 import { defaultAddNodeOptions } from "./addNodeOptions";
 import type { NodeCreator, AddNodeOption } from "./addNodeOptions";
 import type { NodeOptionStyle } from "./NodeOption";
 import NodeOption from "./NodeOption";
 import { DialogAnimation, Backdrop } from "..";
-import { useMarkorTheme } from "markor";
 
 export type AddNodeDialogProps = {
     editor: LexicalEditor;
@@ -33,7 +32,7 @@ export default function AddNodeDialog({
     addNodeOptions = defaultAddNodeOptions,
     isOpen,
 }: AddNodeDialogProps) {
-    const theme = useMarkorTheme();
+    const theme = useVeridicalTheme();
     const [searchText, setSearchText] = useState("");
     const [orderedNodeOptions, setOrderedNodeOptions] =
         useState(addNodeOptions);

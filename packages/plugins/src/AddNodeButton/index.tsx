@@ -13,7 +13,7 @@ import AddNodeBtn from "./AddNodeBtn";
 import {
     AddNodeDialog,
     AddNodeOption,
-} from "@markor/components";
+} from "@veridical/components";
 import { useHoverMenuContext } from "..";
 
 function useAddNodeButtonPlugin(

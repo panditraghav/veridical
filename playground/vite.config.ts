@@ -10,27 +10,27 @@ export default defineConfig({
     resolve: {
         alias: [
             {
-                find: "markor",
-                replacement: `${packagesDir}/markor/src`,
+                find: "veridical",
+                replacement: `${packagesDir}/veridical/src`,
             },
             {
-                find: "@markor/plugins",
+                find: "@veridical/plugins",
                 replacement: `${packagesDir}/plugins/src`,
             },
             {
-                find: "@markor/nodes",
+                find: "@veridical/nodes",
                 replacement: `${packagesDir}/nodes/src`,
             },
             {
-                find: "@markor/icons",
+                find: "@veridical/icons",
                 replacement: `${packagesDir}/icons/src`,
             },
             {
-                find: "@markor/components",
+                find: "@veridical/components",
                 replacement: `${packagesDir}/components/src`,
             },
             {
-                find: "@markor/utils",
+                find: "@veridical/utils",
                 replacement: `${packagesDir}/utils/src`,
             },
         ],

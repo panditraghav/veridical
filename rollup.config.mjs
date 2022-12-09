@@ -10,8 +10,8 @@ import postcss from "rollup-plugin-postcss";
 const baseDir = process.cwd()
 const packagesPath = `${baseDir}/src/packages`
 
-const markorPackage = JSON.parse(readFileSync(`${packagesPath}/markor/package.json`, { encoding: "utf-8" }))
-const markorPeerDeps = Object.keys(markorPackage.peerDependencies)
+const veridicalPackage = JSON.parse(readFileSync(`${packagesPath}/veridical/package.json`, { encoding: "utf-8" }))
+const veridicalPeerDeps = Object.keys(veridicalPackage.peerDependencies)
 
 function isExternal(peerDeps) {
     return (id) => {
@@ -21,10 +21,10 @@ function isExternal(peerDeps) {
     }
 }
 
-const markorBuildConfig = {
-    input: `${packagesPath}/markor/src/index.tsx`,
-    output: [{ file: `${packagesPath}/markor/dist/${markorPackage.main}`, format: "esm" }],
-    external: isExternal(markorPeerDeps),
+const veridicalBuildConfig = {
+    input: `${packagesPath}/veridical/src/index.tsx`,
+    output: [{ file: `${packagesPath}/veridical/dist/${veridicalPackage.main}`, format: "esm" }],
+    external: isExternal(veridicalPeerDeps),
     plugins: [
         image(),
         resolve(),
@@ -35,11 +35,11 @@ const markorBuildConfig = {
     ],
 };
 
-const markorTypesConfig = {
-    input: `${packagesPath}/markor/dist/packages/markor/src/index.d.ts`,
+const veridicalTypesConfig = {
+    input: `${packagesPath}/veridical/dist/packages/veridical/src/index.d.ts`,
     output: [
         {
-            file: `${packagesPath}/markor/dist/index.d.ts`,
+            file: `${packagesPath}/veridical/dist/index.d.ts`,
             format: 'es'
         }
     ],
@@ -47,6 +47,6 @@ const markorTypesConfig = {
 }
 
 export default [
-    // markorBuildConfig,
-    markorTypesConfig
+    // veridicalBuildConfig,
+    veridicalTypesConfig
 ];

@@ -44,12 +44,12 @@ async function build(package) {
         external: isExternal(package.external),
         plugins: [
             nodeResolve(),
-            postcss(),
+            postcss({ extract: true, minimize: true }),
             commonjs(),
             typescript(),
             image(),
-            PeerDepsExternalPlugin()
-            // treser()
+            PeerDepsExternalPlugin(),
+            // terser()
         ],
         onwarn(warning) {
             if (warning.code === 'CIRCULAR_DEPENDENCY') {

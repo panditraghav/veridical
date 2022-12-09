@@ -20,13 +20,13 @@ import {
     Offset,
     isAboveOrBelowCenter,
     isHTMLElement,
-} from "@markor/utils";
-import { DragIcon } from "@markor/icons";
+} from "@veridical/utils";
+import { DragIcon } from "@veridical/icons";
 import { useHoverMenuContext } from "..";
 
 const LEFT_OFFSET = -25;
 const TOP_OFFSET = 4;
-const DRAG_DATA_FORMAT = "application/x-markor-drag";
+const DRAG_DATA_FORMAT = "application/x-veridical-drag";
 
 function setTragetLinePosition(
     ev: DragEvent,

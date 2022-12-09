@@ -2,52 +2,52 @@
 const external = [
     'lexical',
     '@lexical/react',
-    '@lexical/clipboard',
-    '@lexical/code',
-    '@lexical/dragon',
-    '@lexical/hashtag',
-    '@lexical/history',
-    '@lexical/link',
-    '@lexical/list',
-    '@lexical/mark',
-    '@lexical/markdown',
-    '@lexical/overflow',
-    '@lexical/plain-text',
-    '@lexical/rich-text',
-    '@lexical/selection',
-    '@lexical/table',
-    '@lexical/text',
-    '@lexical/utils',
-    '@lexical/yjs',
+    // '@lexical/clipboard',
+    // '@lexical/code',
+    // '@lexical/dragon',
+    // '@lexical/hashtag',
+    // '@lexical/history',
+    // '@lexical/link',
+    // '@lexical/list',
+    // '@lexical/mark',
+    // '@lexical/markdown',
+    // '@lexical/overflow',
+    // '@lexical/plain-text',
+    // '@lexical/rich-text',
+    // '@lexical/selection',
+    // '@lexical/table',
+    // '@lexical/text',
+    // '@lexical/utils',
+    // '@lexical/yjs',
     'react',
     'react-dom'
 ]
 
 const packages = [
     {
-        name: "markor",
+        name: "veridical",
         inputFile: "index.tsx",
         outputFile: "index.js",
-        external: [...external, "@markor/plugins", "@markor/nodes", "@markor/icons", "@markor/components", "@makor/utils"]
+        external: [...external, "@veridical/plugins", "@veridical/nodes", "@veridical/icons", "@veridical/components", "@veridical/utils"]
     },
     {
         name: "nodes",
         inputFile: "index.ts",
         outputFile: "index.js",
-        external: [...external, "@markor/plugins", "@markor/icons", "@markor/components", "@makor/utils"]
+        external: [...external, "@veridical/plugins", "@veridical/icons", "@veridical/components", "@veridical/utils"]
 
     },
     {
         name: "plugins",
         inputFile: "index.ts",
         outputFile: "index.js",
-        external: [...external, "@markor/nodes", "@markor/icons", "@markor/components", "@makor/utils"]
+        external: [...external, "@veridical/nodes", "@veridical/icons", "@veridical/components", "@veridical/utils"]
     },
     {
         name: "components",
         inputFile: "index.ts",
         outputFile: "index.js",
-        external: [...external, "@markor/nodes", "@markor/icons", "@markor/plugins", "@makor/utils"]
+        external: [...external, "@veridical/nodes", "@veridical/icons", "@veridical/plugins", "@veridical/utils"]
     },
     {
         name: "icons",
@@ -59,7 +59,7 @@ const packages = [
         name: "utils",
         inputFile: "index.ts",
         outputFile: "index.js",
-        external: [...external, "@markor/nodes", "@markor/icons", "@markor/plugins", "@makor/components"]
+        external: [...external, "@veridical/nodes", "@veridical/icons", "@veridical/plugins" ]
     },
 ]
 const SRC_FOLDER = "src"

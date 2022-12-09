@@ -1,4 +1,10 @@
 import { LexicalEditor } from "lexical";
+export {
+    useVeridicalTheme,
+    defaultVeridicalTheme,
+    VeridicalThemeComposer,
+} from "./theme";
+export type { VeridicalThemeClasses } from "./theme";
 
 export function isHTMLElement(x: any): x is HTMLElement {
     return x instanceof HTMLElement;

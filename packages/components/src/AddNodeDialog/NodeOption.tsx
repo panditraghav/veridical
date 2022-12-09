@@ -1,6 +1,6 @@
 import React from "react";
 import type { NodeCreator, AddNodeOption } from "./addNodeOptions";
-import { MarkorThemeClasses, useMarkorTheme } from "markor";
+import { VeridicalThemeClasses, useVeridicalTheme } from "@veridical/utils";
 
 export type NodeOptionStyle = {
     container?: string;
@@ -20,7 +20,7 @@ export default function NodeOption({
     selectedOption: AddNodeOption;
     createNode: (creator: NodeCreator) => void;
 }) {
-    const theme = useMarkorTheme();
+    const theme = useVeridicalTheme();
     return (
         <div
             key={option.name}

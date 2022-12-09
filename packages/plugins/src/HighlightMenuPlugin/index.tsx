@@ -10,7 +10,7 @@ import {
 } from "lexical";
 import { HighlightMenu, HighlightMenuStyle } from "./HighlightMenu";
 
-import { isHTMLElement } from "@markor/utils";
+import { isHTMLElement } from "@veridical/utils";
 
 const MENU_MARGIN = 5;
 
