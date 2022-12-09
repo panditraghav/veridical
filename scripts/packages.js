@@ -64,5 +64,6 @@ const packages = [
 ]
 const SRC_FOLDER = "src"
 const BUILD_FOLDER = "dist"
+const PROJECT_NAME = "veridical"
 
-module.exports = { SRC_FOLDER, BUILD_FOLDER, packages }
+module.exports = { SRC_FOLDER, BUILD_FOLDER, packages , PROJECT_NAME}

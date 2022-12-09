@@ -24,8 +24,8 @@
     },
     "homepage": "https://github.com/panditraghav/veridical#readme",
     "dependencies": {
-        "@veridical/icons": "^0.1.0",
-        "@veridical/utils": "^0.1.0",
+        "@veridical/icons": "0.1.1",
+        "@veridical/utils": "0.1.1",
         "lexical": "^0.5.0",
         "@lexical/react": "^0.5.0",
         "prettier": "^2.7.1"
