@@ -3,18 +3,20 @@ import { EditorThemeClasses } from "lexical/LexicalEditor";
 import { defaultVeridicalTheme } from "./defaultVeridicalTheme";
 
 interface VeridicalThemeClasses extends EditorThemeClasses {
+    imageContainer?: string;
+    imageSelected?: string;
     placeholder?: string;
     backdrop?: string;
     dialog?: {
         dialog?: string;
         animation?: string;
     };
-    button?:{
+    button?: {
         base?: string;
         primary?: string;
         secondary?: string;
         disabled?: string;
-    }
+    };
     addNodeDialog?: {
         dialog?: string;
         searchInput?: string;

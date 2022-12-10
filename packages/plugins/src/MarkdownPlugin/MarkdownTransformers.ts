@@ -36,8 +36,13 @@ const IMAGE: ElementTransformer = {
         const altText = match[1];
         const src = match[2];
         if (altText !== "" && src !== "") {
-            //TODO: Change maxWidth
-            const image = $createImageNode({ src, altText, maxWidth: 740 });
+            //TODO: Change naturalWidth and naturalHeight
+            const image = $createImageNode({
+                src,
+                altText,
+                naturalWidth: 1,
+                naturalHeight: 1,
+            });
             parentNode.insertAfter($createParagraphNode());
             parentNode.replace(image);
         }

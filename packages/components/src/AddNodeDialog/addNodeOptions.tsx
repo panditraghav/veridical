@@ -89,7 +89,8 @@ const ImageCreator: NodeCreator = (node) => {
     const img = $createImageNode({
         src: "",
         altText: "",
-        maxWidth: 740,
+        naturalWidth: 1,
+        naturalHeight: 1,
     });
     if ($isParagraphNode(node) && node.getTextContent() == "") {
         node.insertBefore(img);

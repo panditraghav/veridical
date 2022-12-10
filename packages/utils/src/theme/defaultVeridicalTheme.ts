@@ -43,7 +43,9 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         h4: "DefaultEditorTheme__h4",
         h5: "DefaultEditorTheme__h5",
     },
-    image: "DefaultEditorTheme__image",
+    image: "DefaultVeridicalImage",
+    imageSelected: "DefaultVeridicalImageSelected",
+    imageContainer: "DefaultVeridicalImageContainer",
     link: "DefaultEditorTheme__link",
     list: {
         listitem: "DefaultEditorTheme__listItem",

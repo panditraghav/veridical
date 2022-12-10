@@ -70,7 +70,7 @@
     list-style-type: none;
 }
 
-.DefaultEditorTheme__h1, .DefaultEditorTheme__h2, .DefaultEditorTheme__h3, .DefaultEditorTheme__h4, .DefaultEditorTheme__h5, .DefaultEditorTheme__h6 {
+.DefaultEditorTheme__h1, .DefaultEditorTheme__h2, .DefaultEditorTheme__h3 {
     font-family: "Poppins", sans-serif;
     line-height: 1.3;
 }
@@ -89,6 +89,7 @@
 }
 
 .DefaultEditorTheme__h3 {
+    font-weight: 600;
     font-size: 24px;
 }
 
@@ -97,11 +98,16 @@
 }
 
 @media only screen and (max-width: 725px) {
-    body {
+    .DefaultEditorTheme__EditorContainer {
+        padding: 0px 16px;
         font-size: 18px;
     }
 
     .DefaultEditorTheme__h2 {
+        font-size: 24px;
+    }
+
+    .DefaultEditorTheme__h3 {
         font-size: 20px;
     }
 }
@@ -135,54 +141,21 @@
 
 /* Image */
 
-.DefaultEditorTheme__image>div {
-    padding: 0px;
+.DefaultVeridicalImageContainer {
     width: 100%;
-    margin: 16px 0px;
-    align-items: center;
-    display: flex;
+    height: auto;
+}
+
+.DefaultVeridicalImage {
+    width: 100%;
+    height: auto;
     border-radius: 1px;
-    border-color: orange;
-    border-style: solid;
-    background: rgb(207, 207, 207);
-    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.DefaultVeridicalImageSelected {
     box-sizing: border-box;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.DefaultEditorTheme__image>div:hover {
-    background: rgb(177, 176, 176);
-}
-
-.DefaultEditorTheme__image>div>div {
-    width: 100%;
-    margin: 0px;
-    padding: 8px 8px;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    color: rgba(0, 0, 0, 0.785);
-    font-size: 16px;
-    font-family: "Poppins", sans-serif;
-}
-
-.DefaultEditorTheme__image>div>div>span {
-    margin-left: 8px;
-}
-
-.DefaultEditorTheme__image img {
-    object-fit: cover;
-    width: 100%;
-}
-
-.DefaultEditorTheme__image button {
-    background: none;
-    text-decoration: underline;
-    border: 0px;
-    font-family: "Poppins", sans-serif;
-    cursor: pointer;
+    border: 2px solid orange
 }
 
 /* Code */

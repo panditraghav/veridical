@@ -20,8 +20,8 @@ export interface AddImageDialogProps {
     onSave: (
         src: string,
         altText: string,
-        width: number,
-        height: number
+        naturalWidth: number,
+        naturalHeight: number
     ) => void;
     style?: AddImageDialogStyle;
 }
@@ -35,8 +35,8 @@ export default function AddImageDialog({
     const theme = useVeridicalTheme();
     const [src, setSrc] = useState("");
     const [altText, setAltText] = useState("");
-    const [width, setWidth] = useState<number | null>(null);
-    const [height, setHeight] = useState<number | null>(null);
+    const [naturalWidth, setNaturalWidth] = useState<number | null>(null);
+    const [naturalHeight, setNaturalHeight] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState<null | string>(null);
 
@@ -55,20 +55,20 @@ export default function AddImageDialog({
         setIsLoading(false);
         setSrc("");
         setAltText("");
-        setWidth(null);
-        setHeight(null);
+        setNaturalWidth(null);
+        setNaturalHeight(null);
         setIsError(null);
     }, [showDialog]);
 
     function getImageDimensions(src: string) {
         const img = new Image();
         img.src = src;
-        return new Promise<{ width: number; height: number }>(
+        return new Promise<{ naturalWidth: number; naturalHeight: number }>(
             (resolve, reject) => {
                 img.onload = () => {
-                    const width = img.naturalWidth;
-                    const height = img.naturalHeight;
-                    resolve({ width, height });
+                    const naturalWidth = img.naturalWidth;
+                    const naturalHeight = img.naturalHeight;
+                    resolve({ naturalWidth, naturalHeight });
                 };
                 img.onerror = (ev) => {
                     reject(ev);
@@ -87,9 +87,11 @@ export default function AddImageDialog({
     async function handleSave() {
         try {
             setIsLoading(true);
-            const { width, height } = await getImageDimensions(src);
+            const { naturalHeight, naturalWidth } = await getImageDimensions(
+                src
+            );
             setIsLoading(false);
-            onSave(src, altText, width, height);
+            onSave(src, altText, naturalWidth, naturalHeight);
         } catch (error) {
             setIsLoading(false);
             setIsError("Invalid image url");

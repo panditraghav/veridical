@@ -28,10 +28,11 @@ import {
     $createNodeSelection,
 } from "lexical";
 import { $isImageNode } from "@veridical/nodes";
+import { useVeridicalTheme } from "@veridical/utils";
 
 function hasClickOnImage(
     event: MouseEvent,
-    imageElement: HTMLDivElement | null
+    imageElement: HTMLImageElement | null
 ) {
     let ele = event.target;
     if (ele === imageElement) return true;
@@ -64,33 +65,52 @@ interface LazyImageProps {
     alt: string;
     style?: React.CSSProperties;
     className?: string;
+    ref?: React.MutableRefObject<HTMLImageElement | null>;
+    onClick: () => void;
 }
 
-function LazyImage({ src, alt, style, className }: LazyImageProps) {
+function LazyImage({ src, alt, style, className, onClick }: LazyImageProps) {
+    const imgRef = useRef<HTMLImageElement | null>(null);
+    useEffect(() => {
+        function clickListener(ev: MouseEvent) {
+            if (hasClickOnImage(ev, imgRef.current)) {
+                onClick();
+            }
+        }
+        document.addEventListener("click", clickListener);
+
+        return () => document.removeEventListener("click", clickListener);
+    }, [onClick]);
     useSuspenseImage(src);
-    return <img src={src} alt={alt} style={style} className={className} />;
+    return (
+        <img
+            src={src}
+            alt={alt}
+            style={style}
+            className={className}
+            ref={imgRef}
+        />
+    );
 }
 
-function FallBack({ width, height }: { width?: number; height?: number }) {
-    return <div style={{ width, height }}></div>;
+function FallBack({ style }: { style?: React.CSSProperties }) {
+    return <div style={style}></div>;
 }
 
 export default function ImageComponent({
     src,
     alt,
-    width,
-    height,
-    maxWidth,
+    naturalHeight,
+    naturalWidth,
     nodeKey,
 }: {
     src: string;
     alt: string;
-    width?: number;
-    height?: number;
-    maxWidth: number;
+    naturalWidth: number;
+    naturalHeight: number;
     nodeKey: NodeKey;
 }) {
-    const imageComponentRef = useRef<HTMLDivElement | null>(null);
+    const theme = useVeridicalTheme();
     const [editor] = useLexicalComposerContext();
     const [isSelected, setIsSelected, clearSelection] =
         useLexicalNodeSelection(nodeKey);
@@ -162,18 +182,6 @@ export default function ImageComponent({
 
     useEffect(() => {
         return mergeRegister(
-            editor.registerCommand<MouseEvent>(
-                CLICK_COMMAND,
-                (payload) => {
-                    const event: MouseEvent = payload;
-                    if (hasClickOnImage(event, imageComponentRef.current)) {
-                        setIsSelected(!isSelected);
-                        return true;
-                    }
-                    return false;
-                },
-                COMMAND_PRIORITY_LOW
-            ),
             editor.registerCommand(
                 KEY_DELETE_COMMAND,
                 onDelete,
@@ -194,30 +202,29 @@ export default function ImageComponent({
 
     return (
         <>
-            <div
-                style={{
-                    borderWidth: isSelected ? "2px" : "0px",
-                }}
-                className="imageComponent"
-                ref={imageComponentRef}
-            >
-                {src !== "" && (
-                    <Suspense
-                        fallback={
-                            <FallBack
-                                width={width || maxWidth}
-                                height={height}
-                            />
-                        }
-                    >
-                        <LazyImage
-                            src={src}
-                            alt={alt}
-                            style={{ width, height }}
+            {src !== "" && (
+                <Suspense
+                    fallback={
+                        <FallBack
+                            style={{
+                                aspectRatio: naturalWidth / naturalHeight,
+                            }}
                         />
-                    </Suspense>
-                )}
-            </div>
+                    }
+                >
+                    <LazyImage
+                        src={src}
+                        alt={alt}
+                        style={{
+                            aspectRatio: naturalWidth / naturalHeight,
+                        }}
+                        className={`${theme?.image} ${
+                            isSelected ? theme?.imageSelected : ""
+                        }`}
+                        onClick={() => setIsSelected(true)}
+                    />
+                </Suspense>
+            )}
         </>
     );
 }
