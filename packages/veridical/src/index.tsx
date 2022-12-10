@@ -5,8 +5,6 @@ import {
     InitialEditorStateType,
 } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
-import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 
 import {
     AddNodeButtonPlugin,
@@ -20,6 +18,8 @@ import {
     HoverMenuPlugin,
     AddNodeShortcutPlugin,
     ImagePlugin,
+    RichTextPlugin,
+    ListPlugin,
 } from "@veridical/plugins";
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
@@ -111,8 +111,4 @@ function VeridicalBase({
     );
 }
 
-export {
-    InitialConfig,
-    Veridical,
-    VeridicalBase,
-};
+export { InitialConfig, Veridical, VeridicalBase };
