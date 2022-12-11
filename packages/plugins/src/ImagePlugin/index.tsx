@@ -5,7 +5,7 @@ import { LexicalEditor, $getNodeByKey } from "lexical";
 import { $isImageNode, ImageNode } from "@veridical/nodes";
 import { AddImageDialog } from "@veridical/components";
 
-function useImagePlugin(editor: LexicalEditor) {
+function useImagePlugin(editor: LexicalEditor, maxWidth: number) {
     const [imageNodeKey, setImageNodeKey] = useState<string | null>(null);
     const [showImageDialog, setShowImageDialog] = useState(false);
 
@@ -20,12 +20,7 @@ function useImagePlugin(editor: LexicalEditor) {
         });
     }, [editor]);
 
-    function onSave(
-        src: string,
-        altText: string,
-        naturalWidth: number,
-        naturalHeight: number
-    ) {
+    function onSave(src: string, altText: string, imageAspectRatio: number) {
         if (!imageNodeKey) return;
         setShowImageDialog(false);
         editor.update(() => {
@@ -33,8 +28,9 @@ function useImagePlugin(editor: LexicalEditor) {
             if ($isImageNode(imageNode)) {
                 imageNode.setSrc(src);
                 imageNode.setAltText(altText);
-                imageNode.setNaturalWidth(naturalWidth);
-                imageNode.setNaturalHeight(naturalHeight);
+                imageNode.setImageAspectRatio(imageAspectRatio);
+                imageNode.setFallbackAspectRatio(imageAspectRatio);
+                imageNode.setMaxWidth(maxWidth);
             }
         });
     }
@@ -57,7 +53,7 @@ function useImagePlugin(editor: LexicalEditor) {
     );
 }
 
-export default function ImagePlugin() {
+export default function ImagePlugin({ maxWidth }: { maxWidth: number }) {
     const [editor] = useLexicalComposerContext();
-    return useImagePlugin(editor);
+    return useImagePlugin(editor, maxWidth);
 }

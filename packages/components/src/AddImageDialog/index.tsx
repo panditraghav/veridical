@@ -20,8 +20,7 @@ export interface AddImageDialogProps {
     onSave: (
         src: string,
         altText: string,
-        naturalWidth: number,
-        naturalHeight: number
+        imageAspectRatio: number,
     ) => void;
     style?: AddImageDialogStyle;
 }
@@ -91,7 +90,7 @@ export default function AddImageDialog({
                 src
             );
             setIsLoading(false);
-            onSave(src, altText, naturalWidth, naturalHeight);
+            onSave(src, altText, naturalWidth / naturalHeight);
         } catch (error) {
             setIsLoading(false);
             setIsError("Invalid image url");

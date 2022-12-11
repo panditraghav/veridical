@@ -36,12 +36,13 @@ const IMAGE: ElementTransformer = {
         const altText = match[1];
         const src = match[2];
         if (altText !== "" && src !== "") {
-            //TODO: Change naturalWidth and naturalHeight
+            //TODO: Change aspect ratios and maxWidth
             const image = $createImageNode({
                 src,
                 altText,
-                naturalWidth: 1,
-                naturalHeight: 1,
+                imageAspectRatio: 1,
+                fallbackAspectRatio: 1,
+                maxWidth: 1,
             });
             parentNode.insertAfter($createParagraphNode());
             parentNode.replace(image);

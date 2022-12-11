@@ -86,7 +86,7 @@ function Veridical({
                         </HoverMenuPlugin>
                         <AddNodeShortcutPlugin />
                         <MarkdownPlugin />
-                        <ImagePlugin />
+                        <ImagePlugin maxWidth={740} />
                     </>
                 )}
                 {children}

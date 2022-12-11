@@ -94,20 +94,23 @@ function LazyImage({ src, alt, style, className, onClick }: LazyImageProps) {
 }
 
 function FallBack({ style }: { style?: React.CSSProperties }) {
-    return <div style={style}></div>;
+    const theme = useVeridicalTheme();
+    return <div className={`${theme?.imageFallback}`} style={style}></div>;
 }
 
 export default function ImageComponent({
     src,
     alt,
-    naturalHeight,
-    naturalWidth,
+    maxWidth,
+    imageAspectRatio,
+    fallbackAspectRatio,
     nodeKey,
 }: {
     src: string;
     alt: string;
-    naturalWidth: number;
-    naturalHeight: number;
+    maxWidth: number;
+    imageAspectRatio: number;
+    fallbackAspectRatio: number;
     nodeKey: NodeKey;
 }) {
     const theme = useVeridicalTheme();
@@ -207,7 +210,7 @@ export default function ImageComponent({
                     fallback={
                         <FallBack
                             style={{
-                                aspectRatio: naturalWidth / naturalHeight,
+                                aspectRatio: fallbackAspectRatio,
                             }}
                         />
                     }
@@ -216,7 +219,8 @@ export default function ImageComponent({
                         src={src}
                         alt={alt}
                         style={{
-                            aspectRatio: naturalWidth / naturalHeight,
+                            aspectRatio: imageAspectRatio,
+                            maxWidth: maxWidth,
                         }}
                         className={`${theme?.image} ${
                             isSelected ? theme?.imageSelected : ""

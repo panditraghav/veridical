@@ -5,6 +5,7 @@ import { defaultVeridicalTheme } from "./defaultVeridicalTheme";
 interface VeridicalThemeClasses extends EditorThemeClasses {
     imageContainer?: string;
     imageSelected?: string;
+    imageFallback?: string;
     placeholder?: string;
     backdrop?: string;
     dialog?: {
