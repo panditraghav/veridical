@@ -25,6 +25,11 @@ const initialHolderStyle: HolderStyle = {
     display: "none",
 };
 
+function getElementAspectRatio(element: HTMLElement) {
+    const { width, height } = element.getBoundingClientRect();
+    return width / height;
+}
+
 function Holder({
     style,
     onResize,
@@ -152,20 +157,20 @@ function Resizer({
             imageContainer.getBoundingClientRect();
         const rightEdge = leftEdge + width;
 
+        let containerAspectRatio = getElementAspectRatio(imageContainer);
         editor.update(() => {
             let width;
             switch (type) {
                 case "right":
                     width = clientX - leftEdge;
-                    if (width > maxWidth) return;
-                    imageNode.setMaxWidth(width);
                     break;
                 case "left":
                     width = leftEdge - clientX;
-                    if (width > maxWidth) return;
-                    imageNode.setMaxWidth(width);
                     break;
             }
+            if (width > maxWidth) return;
+            imageNode.setMaxWidth(width);
+            imageNode.setFallbackAspectRatio(containerAspectRatio);
         });
     }
 
