@@ -88,19 +88,25 @@ function useDraggableNode(
 ) {
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const targetLineRef = useRef<HTMLDivElement | null>(null);
+    const [isDragging, setIsDragging] = useState(false);
 
-    useEffect(() => {
-        function onDragOver(ev: DragEvent) {
+    const onDragOver = useCallback(
+        (ev: DragEvent) => {
             ev.preventDefault();
+            if (!isDragging) return false;
             setTragetLinePosition(ev, editor, targetLineRef.current);
             return true;
-        }
+        },
+        [isDragging]
+    );
 
-        function onDrop(ev: DragEvent) {
+    const onDrop = useCallback(
+        (ev: DragEvent) => {
             const dt = ev.dataTransfer;
             const target = getHoveredDOMNode(ev, editor, { left: LEFT_OFFSET });
 
             if (!dt || !isHTMLElement(target)) return false;
+            setIsDragging(false);
             const nodeKey = dt.getData(DRAG_DATA_FORMAT);
             editor.update(() => {
                 const draggedNode = $getNodeByKey(nodeKey);
@@ -123,20 +129,14 @@ function useDraggableNode(
                 }
             });
             return true;
-        }
-        return mergeRegister(
-            editor.registerCommand(
-                DRAGOVER_COMMAND,
-                onDragOver,
-                COMMAND_PRIORITY_HIGH
-            ),
-            editor.registerCommand(DROP_COMMAND, onDrop, COMMAND_PRIORITY_HIGH)
-        );
-    }, [editor]);
+        },
+        [editor]
+    );
 
     function onDragStart(ev: React.DragEvent<HTMLDivElement>) {
         const dt = ev.dataTransfer;
         if (!dt || !hoveredDOMNode) return;
+        setIsDragging(true);
 
         setDragImage(dt, hoveredDOMNode);
         let nodeKey = "";
@@ -148,6 +148,17 @@ function useDraggableNode(
     function onDragEnd() {
         removeTargetLine(targetLineRef.current);
     }
+
+    useEffect(() => {
+        return mergeRegister(
+            editor.registerCommand(
+                DRAGOVER_COMMAND,
+                onDragOver,
+                COMMAND_PRIORITY_HIGH
+            ),
+            editor.registerCommand(DROP_COMMAND, onDrop, COMMAND_PRIORITY_HIGH)
+        );
+    }, [editor, onDragOver, onDrop]);
 
     return (
         <>

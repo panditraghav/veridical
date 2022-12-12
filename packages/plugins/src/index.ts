@@ -1,11 +1,13 @@
 import MarkdownPlugin from "./MarkdownPlugin";
-import AddNodeButtonPlugin from "./AddNodeButton";
+import AddNodeButton from "./AddNodeButton";
 import TreeViewPlugin from "./TreeViewPlugin";
 import CodeHighlightPlugin from "./CodeHighlightPlugin";
 import PrettierPlugin from "./PrettierPlugin";
 import CodeActionPlugin from "./CodeActionPlugin";
 import DraggableNodeButton from "./DraggableNodeButton";
 import HighlightMenuPlugin from "./HighlightMenuPlugin";
+import ImageResizerPlugin from "./ImageResizerPlugin";
+import HoverBlockOptions from "./HoverBlockOptions";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import {
@@ -18,7 +20,7 @@ import ImagePlugin from "./ImagePlugin";
 
 export {
     MarkdownPlugin,
-    AddNodeButtonPlugin,
+    AddNodeButton,
     TreeViewPlugin,
     CodeHighlightPlugin,
     PrettierPlugin,
@@ -26,10 +28,12 @@ export {
     DraggableNodeButton,
     HighlightMenuPlugin,
     HoverMenuPlugin,
+    HoverBlockOptions,
     AddNodeShortcutPlugin,
     ImagePlugin,
     RichTextPlugin,
     ListPlugin,
+    ImageResizerPlugin,
 };
 
 export { hoverMenuContext, useHoverMenuContext };

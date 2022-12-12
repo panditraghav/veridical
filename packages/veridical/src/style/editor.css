@@ -284,16 +284,10 @@
 
 /* Hover menu */
 
-.defaultHoverMenu {
-    position: absolute;
-    left: -100px;
-    top: -100px;
-    display: flex;
+.defaultShowMenuAnimation {
+    animation: showMenu .5s ease;
 }
 
-.defaultShowMenuAnimation {
-    animation: showMenu .2s ease;
-}
 
 @keyframes showMenu {
     from {
@@ -303,6 +297,10 @@
     to {
         opacity: 100%;
     }
+}
+
+.DefaultHoverBlockContainer {
+    display: flex;
 }
 
 /* Add Button fo Hover Menu */
@@ -594,4 +592,19 @@
         background-color: var(--colorSecondary);
         color: white;
     }
+}
+
+/* Image Resizer */
+
+.DefaultImageResizerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.DefaultImageResizerPaddle {
+    height: 48px;
+    width: 6px;
+    border-radius: 5px;
+    background: rgba(42, 42, 42, 0.454);
 }

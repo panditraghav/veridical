@@ -122,4 +122,14 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         altTextInput: "DefaultAddImageDialog_LinkInput",
         actionButtonGroup: "DefaultAddImageDialog_ActionButtonGroup",
     },
+    hoverMenu: {
+        animation: "defaultShowMenuAnimation",
+    },
+    hoverBlockOption: {
+        container: "DefaultHoverBlockContainer",
+    },
+    imageResizer: {
+        container: "DefaultImageResizerContainer",
+        paddle: "DefaultImageResizerPaddle",
+    },
 };

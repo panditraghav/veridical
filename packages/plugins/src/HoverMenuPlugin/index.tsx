@@ -8,50 +8,42 @@ import {
 } from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
-import { getHoveredDOMNode, Offset, useMouse } from "@veridical/utils";
+import {
+    getHoveredDOMNode,
+    Offset,
+    useMouse,
+    useVeridicalTheme,
+    VeridicalThemeClasses,
+} from "@veridical/utils";
 import { useHoverMenuContext, hoverMenuContext } from "./hoverMenuContext";
 
-interface HoverMenuStyle {
-    hoverMenu?: string;
-    showMenuAnimation?: string;
-    hideMenuAnimation?: string;
-}
-
-function hideMenu(menu: HTMLElement | null, style?: HoverMenuStyle) {
-    if (!menu) return;
-    menu.style.left = "-100px";
-    menu.style.top = "-100px";
-    menu.classList.remove(
-        style?.showMenuAnimation || "defaultShowMenuAnimation"
-    );
-}
-
-function setMenuPosition(
-    element: HTMLElement | null,
+function hideMenu(
     menu: HTMLElement | null,
-    offset?: Offset,
-    style?: HoverMenuStyle
+    style: VeridicalThemeClasses["hoverMenu"]
 ) {
     if (!menu) return;
-    if (!element) {
-        hideMenu(menu, style);
-        return;
-    }
-    const elementRect = element.getBoundingClientRect();
-    const { x: elementX, y: elementY, height } = elementRect;
 
-    menu.style.left = `${elementX + (offset?.left || 0)}px`;
-    menu.style.top = `${elementY + (offset?.top || 0) + window.scrollY}px`;
-    menu.classList.add(style?.showMenuAnimation || "defaultShowMenuAnimation");
+    menu.style.display = "none";
+    menu.classList.remove(style?.animation || "");
+}
+
+function showMenu(
+    menu: HTMLElement | null,
+    style: VeridicalThemeClasses["hoverMenu"]
+) {
+    if (!menu) return;
+
+    menu.style.display = "block";
+    menu.classList.add(style?.animation || "");
 }
 
 function useHoverMenuPlugin(
     editor: LexicalEditor,
     children?: React.ReactNode,
-    offset?: Offset,
-    style?: HoverMenuStyle
+    offset?: Offset
 ) {
     const hoverMenuRef = useRef<HTMLDivElement | null>(null);
+    const theme = useVeridicalTheme();
     const [hoveredDOMNode, setHoveredDOMNode] = useState<HTMLElement | null>(
         null
     );
@@ -61,7 +53,7 @@ function useHoverMenuPlugin(
     useMouse((ev) => {
         const domNode = getHoveredDOMNode(ev, editor, offset);
         setHoveredDOMNode(domNode);
-        setMenuPosition(domNode, hoverMenuRef.current, offset, style);
+        showMenu(hoverMenuRef.current, theme?.hoverMenu);
         editor.update(() => {
             if (!domNode) return;
             const lexicalNode = $getNearestNodeFromDOMNode(domNode);
@@ -71,20 +63,22 @@ function useHoverMenuPlugin(
 
     useEffect(() => {
         return editor.registerUpdateListener(({ dirtyElements }) => {
-            if (dirtyElements.get("root")) hideMenu(hoverMenuRef.current);
+            if (dirtyElements.get("root"))
+                hideMenu(hoverMenuRef.current, theme?.hoverMenu);
         });
     });
+
+    useEffect(() => {
+        if (!hoveredDOMNode) {
+            hideMenu(hoverMenuRef.current, theme?.hoverMenu);
+        }
+    }, [hoveredDOMNode]);
 
     return createPortal(
         <hoverMenuContext.Provider
             value={{ hoveredDOMNode, hoveredLexicalNode }}
         >
-            <div
-                className={style?.hoverMenu || "defaultHoverMenu"}
-                ref={hoverMenuRef}
-            >
-                {children}
-            </div>
+            <div ref={hoverMenuRef}>{children}</div>
         </hoverMenuContext.Provider>,
         document.body
     );
@@ -93,14 +87,12 @@ function useHoverMenuPlugin(
 export function HoverMenuPlugin({
     children,
     offset,
-    style,
 }: {
     children?: React.ReactNode;
     offset?: Offset;
-    style?: HoverMenuStyle;
 }) {
     const [editor] = useLexicalComposerContext();
-    return useHoverMenuPlugin(editor, children, offset, style);
+    return useHoverMenuPlugin(editor, children, offset);
 }
 
 export { useHoverMenuContext, hoverMenuContext };

@@ -44,6 +44,16 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         altTextInput?: string;
         actionButtonGroup?: string;
     };
+    hoverMenu?: {
+        animation?: string;
+    };
+    hoverBlockOption?: {
+        container?: string;
+    };
+    imageResizer?:{
+        container?: string;
+        paddle?: string;
+    }
 }
 
 const VeridicalThemeContext = React.createContext<
