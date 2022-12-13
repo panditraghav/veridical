@@ -2,11 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 import { AddIcon, ImageIcon } from "@veridical/icons";
-import {
-    useBackdropClose,
-    useEscape,
-    useVeridicalTheme,
-} from "@veridical/utils";
+import { useVeridicalTheme } from "@veridical/utils";
 import { Backdrop, Button, DialogAnimation } from "..";
 
 export interface AddImageDialogStyle {
@@ -17,11 +13,7 @@ export interface AddImageDialogStyle {
 export interface AddImageDialogProps {
     showDialog: boolean;
     onClose: () => void;
-    onSave: (
-        src: string,
-        altText: string,
-        imageAspectRatio: number,
-    ) => void;
+    onSave: (src: string, altText: string, imageAspectRatio: number) => void;
     style?: AddImageDialogStyle;
 }
 

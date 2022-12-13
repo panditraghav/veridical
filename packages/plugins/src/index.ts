@@ -1,5 +1,4 @@
 import MarkdownPlugin from "./MarkdownPlugin";
-import AddNodeButton from "./AddNodeButton";
 import TreeViewPlugin from "./TreeViewPlugin";
 import CodeHighlightPlugin from "./CodeHighlightPlugin";
 import PrettierPlugin from "./PrettierPlugin";
@@ -16,11 +15,11 @@ import {
     hoverMenuContext,
 } from "./HoverMenuPlugin";
 import AddNodeShortcutPlugin from "./AddNodeShortcutPlugin";
+import AddNodeButton from "./AddNodeButton";
 import ImagePlugin from "./ImagePlugin";
 
 export {
     MarkdownPlugin,
-    AddNodeButton,
     TreeViewPlugin,
     CodeHighlightPlugin,
     PrettierPlugin,
@@ -34,6 +33,7 @@ export {
     RichTextPlugin,
     ListPlugin,
     ImageResizerPlugin,
+    AddNodeButton,
 };
 
 export { hoverMenuContext, useHoverMenuContext };

@@ -232,27 +232,38 @@
 /* Add Node dialog */
 
 .DefaultVeridicalAddNodeDialog {
-    width: 280px;
-    height: 300px;
+    font-family: "Poppins", sans-serif;
+    width: auto;
     border-radius: 3px;
-    padding: 8px 8px;
+    background: white;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.DefaultAddNodeDialogNodeOptionsContainer {
     overflow-y: scroll;
+    height: 290px;
+    width: 280px;
 }
 
 .DefaultAddNodeDialogSearchInput {
     outline: none;
-    border: none;
-    width: 100%;
+    border: 1.2px solid rgba(0, 0, 0, 0.733);
     box-sizing: border-box;
-    border-radius: 5px;
+    width: 95%;
+    border-radius: 2px;
     font-size: 16px;
     padding: 6px 4px;
+    margin: 8px auto;
 }
 
+
 .DefaultAddNodeDialogNodeOption {
-    width: 100%;
     display: flex;
     padding: 6px 4px;
+    margin: 0px 4px;
     box-sizing: border-box;
     border-radius: 2px;
 }
@@ -277,12 +288,12 @@
 }
 
 .DefaultAddNodeDialogNodeOptionName {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .DefaultAddNodeDialogNodeOptionDescription {
-    font-size: 10px;
-    color: rgba(0, 0, 0, 0.571);
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.726);
 }
 
 

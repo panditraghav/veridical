@@ -7,7 +7,6 @@ import {
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 
 import {
-    AddNodeButton,
     MarkdownPlugin,
     TreeViewPlugin,
     CodeActionPlugin,
@@ -22,6 +21,7 @@ import {
     ListPlugin,
     ImageResizerPlugin,
     HoverBlockOptions,
+    AddNodeButton,
 } from "@veridical/plugins";
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";

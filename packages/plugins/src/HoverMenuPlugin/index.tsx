@@ -10,8 +10,8 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 
 import {
     getHoveredDOMNode,
+    isHTMLElement,
     Offset,
-    useMouse,
     useVeridicalTheme,
     VeridicalThemeClasses,
 } from "@veridical/utils";
@@ -37,6 +37,16 @@ function showMenu(
     menu.classList.add(style?.animation || "");
 }
 
+function isBackdrop(ev: MouseEvent, backdropClass?: string): boolean {
+    let target: HTMLElement | null = ev.target as HTMLElement;
+    if (!backdropClass) return false;
+    while (target) {
+        if (target.classList.contains(backdropClass)) return true;
+        target = target.parentElement;
+    }
+    return false;
+}
+
 function useHoverMenuPlugin(
     editor: LexicalEditor,
     children?: React.ReactNode,
@@ -50,15 +60,21 @@ function useHoverMenuPlugin(
     const [hoveredLexicalNode, setHoveredLexicalNode] =
         useState<LexicalNode | null>(null);
 
-    useMouse((ev) => {
-        const domNode = getHoveredDOMNode(ev, editor, offset);
-        setHoveredDOMNode(domNode);
-        showMenu(hoverMenuRef.current, theme?.hoverMenu);
-        editor.update(() => {
-            if (!domNode) return;
-            const lexicalNode = $getNearestNodeFromDOMNode(domNode);
-            setHoveredLexicalNode(lexicalNode);
-        });
+    useEffect(() => {
+        function mouseEventListener(ev: MouseEvent) {
+            if (isBackdrop(ev, theme?.backdrop)) return;
+            const domNode = getHoveredDOMNode(ev, editor, offset);
+            setHoveredDOMNode(domNode);
+            showMenu(hoverMenuRef.current, theme?.hoverMenu);
+            editor.update(() => {
+                if (!domNode) return;
+                const lexicalNode = $getNearestNodeFromDOMNode(domNode);
+                setHoveredLexicalNode(lexicalNode);
+            });
+        }
+        document.addEventListener("mousemove", mouseEventListener);
+        return () =>
+            document.removeEventListener("mousemove", mouseEventListener);
     });
 
     useEffect(() => {

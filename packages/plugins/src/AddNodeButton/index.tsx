@@ -10,13 +10,10 @@ import {
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 import AddNodeBtn from "./AddNodeBtn";
-import { AddNodeDialog, AddNodeOption } from "@veridical/components";
+import { AddNodeDialog, NodeOption } from "@veridical/components";
 import { useHoverMenuContext } from "..";
 
-function useAddNodeButton(
-    editor: LexicalEditor,
-    addNodeOptions?: AddNodeOption[]
-) {
+function useAddNodeButton(editor: LexicalEditor, nodeOptions?: NodeOption[]) {
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -27,22 +24,23 @@ function useAddNodeButton(
                     setIsDialogOpen(true);
                 }}
             />
-            <AddNodeDialog
-                editor={editor}
-                isOpen={isDialogOpen}
-                onClose={() => setIsDialogOpen(false)}
-                lexicalNode={hoveredLexicalNode}
-                addNodeOptions={addNodeOptions}
-            />
+            {hoveredLexicalNode && (
+                <AddNodeDialog
+                    isOpen={isDialogOpen}
+                    onClose={() => setIsDialogOpen(false)}
+                    selectedNode={hoveredLexicalNode}
+                    nodeOptions={nodeOptions}
+                />
+            )}
         </>
     );
 }
 
 export default function AddNodeButton({
-    addNodeOptions,
+    nodeOptions,
 }: {
-    addNodeOptions?: AddNodeOption[];
+    nodeOptions?: NodeOption[];
 }) {
     const [editor] = useLexicalComposerContext();
-    return useAddNodeButton(editor, addNodeOptions);
+    return useAddNodeButton(editor, nodeOptions);
 }

@@ -99,10 +99,11 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     addNodeDialog: {
         dialog: "DefaultVeridicalAddNodeDialog",
         searchInput: "DefaultAddNodeDialogSearchInput",
+        nodeOptions: "DefaultAddNodeDialogNodeOptionsContainer",
         nodeOption: {
             selected: "DefaultAddNodeDialogOptionSelected",
             container: "DefaultAddNodeDialogNodeOption",
-            image: "DefaultAddNodeDialogNodeOptionImage",
+            icon: "DefaultAddNodeDialogNodeOptionImage",
             text: {
                 container: "DefaultAddNodeDialogNodeOptionText",
                 name: "DefaultAddNodeDialogNodeOptionName",

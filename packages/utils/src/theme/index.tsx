@@ -21,10 +21,11 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     addNodeDialog?: {
         dialog?: string;
         searchInput?: string;
+        nodeOptions?: string;
         nodeOption?: {
             container?: string;
             selected?: string;
-            image?: string;
+            icon?: string;
             text?: {
                 container?: string;
                 name?: string;
@@ -50,10 +51,10 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     hoverBlockOption?: {
         container?: string;
     };
-    imageResizer?:{
+    imageResizer?: {
         container?: string;
         paddle?: string;
-    }
+    };
 }
 
 const VeridicalThemeContext = React.createContext<

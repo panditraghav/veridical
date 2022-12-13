@@ -1,86 +1,52 @@
 import React, { useEffect, useState } from "react";
+import { AddNodeDialog } from "@veridical/components";
+import { LexicalNode, $getSelection } from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import {
-    $getSelection,
-    $isNodeSelection,
-    $isRangeSelection,
-    LexicalEditor,
-    LexicalNode,
-} from "lexical";
-import { AddNodeDialog, defaultAddNodeOptions } from "@veridical/components";
-import type { AddNodeOption } from "@veridical/components";
 
-function defaultIsShortcutTriggered(ev: KeyboardEvent) {
-    if (ev.ctrlKey && ev.key === "k") {
-        return true;
-    } else {
-        return false;
-    }
+function defaultIsKeydown(ev: KeyboardEvent) {
+    if (ev.ctrlKey && ev.key === "k") return true;
+    return false;
 }
 
-function useAddNodeShortcutPlugin(
-    editor: LexicalEditor,
-    isShortcutTriggered: (ev: KeyboardEvent) => boolean,
-    addNodeOptions?: AddNodeOption[]
-) {
-    const [selectedNode, setSelectedNode] = useState<LexicalNode | null>(null);
+export default function AddNodeShortcutPlugin({
+    isKeyPressed: isKeydown = defaultIsKeydown,
+}: {
+    isKeyPressed?: (ev: KeyboardEvent) => boolean;
+}) {
+    const [editor] = useLexicalComposerContext();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [selectedNode, setSelectedNode] = useState<
+        LexicalNode | null | undefined
+    >(null);
 
     useEffect(() => {
-        if (!selectedNode) return;
-        function keyboardShortcutListener(ev: KeyboardEvent) {
-            if (isShortcutTriggered(ev)) {
+        function keydownListener(ev: KeyboardEvent) {
+            if (isKeydown(ev)) {
                 ev.preventDefault();
                 setIsDialogOpen(true);
+            } else if (ev.key === "Escape") {
+                setIsDialogOpen(false);
             }
         }
-        document.addEventListener("keydown", keyboardShortcutListener);
-
-        return () =>
-            document.removeEventListener("keydown", keyboardShortcutListener);
-    }, [selectedNode]);
+        document.addEventListener("keydown", keydownListener);
+        return () => document.removeEventListener("keydown", keydownListener);
+    });
 
     useEffect(() => {
         return editor.registerUpdateListener(({ editorState }) => {
             editorState.read(() => {
                 const selection = $getSelection();
-                if (
-                    !(
-                        $isRangeSelection(selection) ||
-                        $isNodeSelection(selection)
-                    )
-                )
-                    return;
-                const nodes = selection.getNodes();
-                const firstNode = nodes[0];
-                setSelectedNode(firstNode);
+                const node = selection?.getNodes()[0];
+                setSelectedNode(node);
             });
         });
     });
-
+    if (!selectedNode) return null;
     return (
         <AddNodeDialog
-            editor={editor}
-            lexicalNode={selectedNode}
-            addNodeOptions={addNodeOptions}
             isOpen={isDialogOpen}
+            selectedNode={selectedNode}
             onClose={() => setIsDialogOpen(false)}
         />
-    );
-}
-
-export default function AddNodeShortcutPlugin({
-    isShortcutTriggered = defaultIsShortcutTriggered,
-    addNodeOptions = defaultAddNodeOptions,
-}: {
-    isShortcutTriggered?: (ev: KeyboardEvent) => boolean;
-    addNodeOptions?: AddNodeOption[];
-}) {
-    const [editor] = useLexicalComposerContext();
-
-    return useAddNodeShortcutPlugin(
-        editor,
-        isShortcutTriggered,
-        addNodeOptions
     );
 }
