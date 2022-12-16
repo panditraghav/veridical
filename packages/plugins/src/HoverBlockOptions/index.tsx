@@ -2,11 +2,13 @@ import { useVeridicalTheme, VeridicalThemeClasses } from "@veridical/utils";
 import React, { useEffect, useRef } from "react";
 import { useHoverMenuContext } from "..";
 import { Offset } from "@veridical/utils";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 function setMenuPosition(
     element: HTMLElement | null,
     menu: HTMLElement | null,
-    offset?: Offset
+    offset?: Offset,
+    animationClassName?: string
 ) {
     if (!menu) return;
     if (!element) {
@@ -18,12 +20,14 @@ function setMenuPosition(
 
     menu.style.left = `${elementX + (offset?.left || 0)}px`;
     menu.style.top = `${elementY + (offset?.top || 0) + window.scrollY}px`;
+    menu.classList.add(`${animationClassName || "hoverMenuAnimation$$"}`);
 }
 
-function hideMenu(menu: HTMLElement | null) {
+function hideMenu(menu: HTMLElement | null, animationClassName?: string) {
     if (!menu) return;
     menu.style.left = "-100px";
     menu.style.top = "-100px";
+    menu.classList.remove(`${animationClassName || "hoverMenuAnimation$$"}`);
 }
 
 export default function HoverBlockOptions({
@@ -34,11 +38,28 @@ export default function HoverBlockOptions({
     offset?: Offset;
 }) {
     const { hoveredDOMNode } = useHoverMenuContext();
+    const [editor] = useLexicalComposerContext();
     const hoverMenuRef = useRef<HTMLDivElement | null>(null);
     const theme = useVeridicalTheme();
     useEffect(() => {
-        setMenuPosition(hoveredDOMNode, hoverMenuRef.current, offset);
+        setMenuPosition(
+            hoveredDOMNode,
+            hoverMenuRef.current,
+            offset,
+            theme?.hoverMenu?.animation
+        );
+        if (!hoveredDOMNode)
+            hideMenu(hoverMenuRef.current, theme?.hoverMenu?.animation);
     }, [hoveredDOMNode]);
+
+    useEffect(() => {
+        return editor.registerUpdateListener(({ dirtyElements }) => {
+            if (dirtyElements.get("root")) {
+                hideMenu(hoverMenuRef.current, theme?.hoverMenu?.animation);
+            }
+        });
+    }, [editor]);
+
     return (
         <div
             className={theme?.hoverBlockOption?.container}

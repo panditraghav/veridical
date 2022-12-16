@@ -300,7 +300,7 @@
 /* Hover menu */
 
 .defaultShowMenuAnimation {
-    animation: showMenu .5s ease;
+    animation: showMenu .15s ease-in;
 }
 
 
@@ -622,4 +622,10 @@
     width: 6px;
     border-radius: 5px;
     background: rgba(42, 42, 42, 0.454);
+}
+
+/* CodeActionMenu */
+
+.DefaultCodeActionMenuLeft {
+    flex-direction: row-reverse;
 }

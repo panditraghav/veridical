@@ -33,9 +33,13 @@ function setTragetLinePosition(
     editor: LexicalEditor,
     targetLine: HTMLDivElement | null
 ) {
-    const targetLexicalDOMNode = getHoveredDOMNode(ev, editor, {
-        left: LEFT_OFFSET,
-    });
+    const { lexicalDOMNode: targetLexicalDOMNode } = getHoveredDOMNode(
+        ev,
+        editor,
+        {
+            left: LEFT_OFFSET,
+        }
+    );
     if (!targetLexicalDOMNode || !targetLine) return;
     const { top, width, height, left } =
         targetLexicalDOMNode.getBoundingClientRect();
@@ -103,7 +107,9 @@ function useDraggableNode(
     const onDrop = useCallback(
         (ev: DragEvent) => {
             const dt = ev.dataTransfer;
-            const target = getHoveredDOMNode(ev, editor, { left: LEFT_OFFSET });
+            const { lexicalDOMNode: target } = getHoveredDOMNode(ev, editor, {
+                left: LEFT_OFFSET,
+            });
 
             if (!dt || !isHTMLElement(target)) return false;
             setIsDragging(false);

@@ -24,8 +24,6 @@ export default function AddNodeShortcutPlugin({
             if (isKeydown(ev)) {
                 ev.preventDefault();
                 setIsDialogOpen(true);
-            } else if (ev.key === "Escape") {
-                setIsDialogOpen(false);
             }
         }
         document.addEventListener("keydown", keydownListener);

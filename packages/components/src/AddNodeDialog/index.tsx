@@ -7,6 +7,7 @@ import { useVeridicalTheme } from "@veridical/utils";
 import NodeOptions from "./NodeOptions";
 import { defaultNodeOptions } from "./DefaultNodeOptions";
 import type { NodeOption } from "./DefaultNodeOptions";
+import OverlayContainer from "../OverlayContainer";
 
 interface AddNodeDialogProps {
     isOpen: boolean;
@@ -28,28 +29,40 @@ export default function AddNodeDialog({
         setSearchText("");
     }, [isOpen]);
 
+    useEffect(() => {
+        function escapeListener(ev: KeyboardEvent) {
+            if (ev.key === "Escape") {
+                onClose();
+            }
+        }
+        document.addEventListener("keydown", escapeListener);
+        return () => document.removeEventListener("keydown", escapeListener);
+    });
+
     if (!isOpen) return null;
     return createPortal(
-        <Backdrop onClose={onClose}>
-            <DialogAnimation>
-                <div className={theme?.addNodeDialog?.dialog}>
-                    <input
-                        placeholder="Search"
-                        type="text"
-                        value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
-                        className={theme?.addNodeDialog?.searchInput}
-                        autoFocus
-                    />
-                    <NodeOptions
-                        onClose={onClose}
-                        searchText={searchText}
-                        selectedNode={selectedNode}
-                        nodeOptions={nodeOptions}
-                    />
-                </div>
-            </DialogAnimation>
-        </Backdrop>,
+        <OverlayContainer>
+            <Backdrop onClose={onClose}>
+                <DialogAnimation>
+                    <div className={theme?.addNodeDialog?.dialog}>
+                        <input
+                            placeholder="Search"
+                            type="text"
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            className={theme?.addNodeDialog?.searchInput}
+                            autoFocus
+                        />
+                        <NodeOptions
+                            onClose={onClose}
+                            searchText={searchText}
+                            selectedNode={selectedNode}
+                            nodeOptions={nodeOptions}
+                        />
+                    </div>
+                </DialogAnimation>
+            </Backdrop>
+        </OverlayContainer>,
         document.body
     );
 }

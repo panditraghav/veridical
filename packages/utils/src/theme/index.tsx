@@ -55,6 +55,10 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         container?: string;
         paddle?: string;
     };
+    codeActionMenu?: {
+        menuLeft?: string;
+        menuRight?: string;
+    }
 }
 
 const VeridicalThemeContext = React.createContext<

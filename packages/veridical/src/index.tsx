@@ -9,8 +9,9 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import {
     MarkdownPlugin,
     TreeViewPlugin,
-    CodeActionPlugin,
     CodeHighlightPlugin,
+    CodeActionMenuLeft,
+    CodeActionMenuRight,
     PrettierPlugin,
     DraggableNodeButton,
     HighlightMenuPlugin,
@@ -79,7 +80,6 @@ function Veridical({
                 <CodeHighlightPlugin />
                 {config.editable && (
                     <>
-                        <CodeActionPlugin />
                         <PrettierPlugin />
                         <HighlightMenuPlugin />
                         <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
@@ -88,6 +88,8 @@ function Veridical({
                                 <DraggableNodeButton />
                             </HoverBlockOptions>
                             <ImageResizerPlugin maxWidth={740} />
+                            <CodeActionMenuLeft />
+                            <CodeActionMenuRight />
                         </HoverMenuPlugin>
                         <AddNodeShortcutPlugin />
                         <MarkdownPlugin />

@@ -133,4 +133,8 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         container: "DefaultImageResizerContainer",
         paddle: "DefaultImageResizerPaddle",
     },
+    codeActionMenu: {
+        menuLeft: "DefaultCodeActionMenuLeft",
+        menuRight: "DefaultCodeActionMenuRight",
+    },
 };

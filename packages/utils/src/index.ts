@@ -44,18 +44,20 @@ export function getHoveredDOMNode(
     ev: MouseEvent,
     editor: LexicalEditor,
     offset?: Offset
-): HTMLElement | null {
+): { lexicalDOMNode: HTMLElement | null; key: string | null } {
     const topKeys = getTopLevelNodeKey(editor);
     let lexicalDOMNode: HTMLElement | null = null;
     let low = 0;
     let high = topKeys.length - 1;
+    let key = topKeys[Math.floor((low + high) / 2)];
 
     while (low <= high) {
         const middle = Math.floor((low + high) / 2);
         const element = editor.getElementByKey(topKeys[middle]);
-        if (!element) return lexicalDOMNode;
+        if (!element) return { lexicalDOMNode, key: null };
         if (isMouseInside(element, ev, offset)) {
             lexicalDOMNode = element;
+            key = topKeys[middle];
             break;
         }
 
@@ -68,7 +70,7 @@ export function getHoveredDOMNode(
                 break;
         }
     }
-    return lexicalDOMNode;
+    return { lexicalDOMNode, key };
 }
 
 export function isMouseInside(

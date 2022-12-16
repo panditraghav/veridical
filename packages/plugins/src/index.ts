@@ -2,7 +2,6 @@ import MarkdownPlugin from "./MarkdownPlugin";
 import TreeViewPlugin from "./TreeViewPlugin";
 import CodeHighlightPlugin from "./CodeHighlightPlugin";
 import PrettierPlugin from "./PrettierPlugin";
-import CodeActionPlugin from "./CodeActionPlugin";
 import DraggableNodeButton from "./DraggableNodeButton";
 import HighlightMenuPlugin from "./HighlightMenuPlugin";
 import ImageResizerPlugin from "./ImageResizerPlugin";
@@ -17,13 +16,14 @@ import {
 import AddNodeShortcutPlugin from "./AddNodeShortcutPlugin";
 import AddNodeButton from "./AddNodeButton";
 import ImagePlugin from "./ImagePlugin";
+import CodeActionMenuLeft from "./CodeActionMenuLeft";
+import CodeActionMenuRight from "./CodeActionMenuRight";
 
 export {
     MarkdownPlugin,
     TreeViewPlugin,
     CodeHighlightPlugin,
     PrettierPlugin,
-    CodeActionPlugin,
     DraggableNodeButton,
     HighlightMenuPlugin,
     HoverMenuPlugin,
@@ -34,6 +34,8 @@ export {
     ListPlugin,
     ImageResizerPlugin,
     AddNodeButton,
+    CodeActionMenuLeft,
+    CodeActionMenuRight,
 };
 
 export { hoverMenuContext, useHoverMenuContext };
