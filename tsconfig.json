@@ -10,7 +10,6 @@
       "@veridical/nodes": ["./packages/nodes/src"],
       "@veridical/utils": ["./packages/utils/src"],
       "@veridical/components": ["./packages/components/src"],
-      "@veridical/icons": ["./packages/icons/src"],
     },                
     "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
     "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */

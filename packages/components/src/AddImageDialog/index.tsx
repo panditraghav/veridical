@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
-import { AddIcon, ImageIcon } from "@veridical/icons";
+import { AddIcon, ImageIcon } from "@veridical/components";
 import { useVeridicalTheme } from "@veridical/utils";
 import { Backdrop, Button, DialogAnimation } from "..";
 import OverlayContainer from "../OverlayContainer";

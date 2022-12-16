@@ -6,7 +6,13 @@ import {
     $isParagraphNode,
     $createParagraphNode,
 } from "lexical";
-import { CodeIcon, H1Icon, H2Icon, H3Icon, ImageIcon } from "@veridical/icons";
+import {
+    CodeIcon,
+    H1Icon,
+    H2Icon,
+    H3Icon,
+    ImageIcon,
+} from "@veridical/components";
 import { $createImageNode } from "@veridical/nodes";
 import { $createCodeNode } from "@lexical/code";
 

@@ -22,10 +22,6 @@ export default defineConfig({
                 replacement: `${packagesDir}/nodes/src`,
             },
             {
-                find: "@veridical/icons",
-                replacement: `${packagesDir}/icons/src`,
-            },
-            {
                 find: "@veridical/components",
                 replacement: `${packagesDir}/components/src`,
             },

@@ -6,6 +6,7 @@ import Button from "./Button";
 import DialogAnimation from "./DialogAnimation";
 import AddNodeDialog from "./AddNodeDialog";
 import type { NodeOption } from "./AddNodeDialog";
+export * from "./Icons"
 
 export {
     Placeholder,

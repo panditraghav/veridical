@@ -20,7 +20,6 @@
       "@veridical/plugins": ["../packages/plugins/src"],
       "@veridical/nodes": ["../packages/nodes/src"],
       "@veridical/components": ["../packages/components/src"],
-      "@veridical/icons": ["../packages/icons/src"],
       "@veridical/utils": ["../packages/utils/src"],
     },                
   },

@@ -7,7 +7,7 @@ import {
     FormatBold,
     FormatItalic,
     FormatUnderline,
-} from "@veridical/icons";
+} from "@veridical/components";
 
 export interface HighlightMenuStyle {
     highlightMenu?: string;

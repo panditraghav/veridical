@@ -1,5 +1,5 @@
 import React from "react";
-import { AddIcon } from "@veridical/icons";
+import { AddIcon } from "@veridical/components";
 
 interface AddNodeBtnProps {
     onClick: () => void;
