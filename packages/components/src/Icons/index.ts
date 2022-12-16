@@ -12,6 +12,7 @@ import LinkIcon from "./LinkIcon";
 import FormatBold from "./FormatBold";
 import FormatItalic from "./FormatItalic";
 import FormatUnderline from "./FormatUnderline";
+import ExpandMoreIcon from "./ExpandMoreIcon";
 
 export {
     AddIcon,
@@ -28,4 +29,5 @@ export {
     FormatBold,
     FormatItalic,
     FormatUnderline,
+    ExpandMoreIcon,
 };
