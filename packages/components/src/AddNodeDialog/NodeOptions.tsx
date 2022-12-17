@@ -15,24 +15,20 @@ interface NodeOptionsProps {
 function useSorteNodeOptions(nodeOptions: NodeOption[], searchText: string) {
     const [sortedNodeOptions, setSortedNodeOptions] = useState(nodeOptions);
     useEffect(() => {
+        if (searchText === "") {
+            setSortedNodeOptions(nodeOptions);
+            return;
+        }
+        const searchRegex = new RegExp(`^${searchText}`, "i");
         setSortedNodeOptions((options) => {
             let filteredOptions = options.filter((value) => {
                 return (
-                    value.name
-                        .toLowerCase()
-                        .includes(searchText.toLowerCase()) ||
-                    value.shortName
-                        .toLowerCase()
-                        .includes(searchText.toLowerCase()) ||
+                    value.name.match(searchRegex) ||
+                    value.shortName.match(searchRegex) ||
                     value.description
                         .toLowerCase()
                         .includes(searchText.toLowerCase())
                 );
-            });
-            filteredOptions.sort((a, b) => {
-                const indexA = nodeOptions.findIndex((v) => v.name === a.name);
-                const indexB = nodeOptions.findIndex((v) => v.name === b.name);
-                return indexA - indexB;
             });
             return [...new Set([...filteredOptions, ...nodeOptions])];
         });

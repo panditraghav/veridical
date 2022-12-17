@@ -12,9 +12,12 @@ import {
     H2Icon,
     H3Icon,
     ImageIcon,
+    OlIcon,
+    UlIcon,
 } from "@veridical/components";
 import { $createImageNode } from "@veridical/nodes";
 import { $createCodeNode } from "@lexical/code";
+import { $createListItemNode, $createListNode } from "@lexical/list";
 
 export type NodeOption = {
     name: string;
@@ -32,14 +35,14 @@ const TEXT_OPTIONS: NodeOption[] = [
         nodeCreator: (node) => {
             const h1 = $createHeadingNode("h1");
             h1.append($createTextNode(""));
-            if (node.getTextContent() === "") {
+            if (node.getTextContent() === "" && $isParagraphNode(node)) {
                 node.replace(h1);
             } else {
                 node.insertAfter(h1);
             }
             h1.select(0, 0);
         },
-        icon: <H1Icon size="lg" />,
+        icon: <H1Icon size="md" />,
     },
     {
         name: "Heading 2",
@@ -48,14 +51,14 @@ const TEXT_OPTIONS: NodeOption[] = [
         nodeCreator: (node) => {
             const h2 = $createHeadingNode("h2");
             h2.append($createTextNode(""));
-            if (node.getTextContent() === "") {
+            if (node.getTextContent() === "" && $isParagraphNode(node)) {
                 node.replace(h2);
             } else {
                 node.insertAfter(h2);
             }
             h2.select(0, 0);
         },
-        icon: <H2Icon size="lg" />,
+        icon: <H2Icon size="md" />,
     },
     {
         name: "Heading 3",
@@ -64,14 +67,48 @@ const TEXT_OPTIONS: NodeOption[] = [
         nodeCreator: (node) => {
             const h3 = $createHeadingNode("h3");
             h3.append($createTextNode(""));
-            if (node.getTextContent() === "") {
+            if (node.getTextContent() === "" && $isParagraphNode(node)) {
                 node.replace(h3);
             } else {
                 node.insertAfter(h3);
             }
             h3.select(0, 0);
         },
-        icon: <H3Icon size="lg" />,
+        icon: <H3Icon size="md" />,
+    },
+    {
+        name: "Unordered List",
+        shortName: "ul",
+        description: "List with bullet points",
+        nodeCreator: (node) => {
+            const ul = $createListNode("bullet");
+            const li = $createListItemNode();
+            ul.append(li);
+            if (node.getTextContent() === "" && $isParagraphNode(node)) {
+                node.replace(ul);
+            } else {
+                node.insertAfter(ul);
+            }
+            li.select(0, 0);
+        },
+        icon: <UlIcon size="md" />,
+    },
+    {
+        name: "Ordered List",
+        shortName: "ol",
+        description: "List with numbers points",
+        nodeCreator: (node) => {
+            const ol = $createListNode("number");
+            const li = $createListItemNode();
+            ol.append(li);
+            if (node.getTextContent() === "" && $isParagraphNode(node)) {
+                node.replace(ol);
+            } else {
+                node.insertAfter(ol);
+            }
+            li.select(0, 0);
+        },
+        icon: <OlIcon size="md" />,
     },
 ];
 
