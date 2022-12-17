@@ -5,8 +5,9 @@ import AddImageDialog from "./AddImageDialog";
 import Button from "./Button";
 import DialogAnimation from "./DialogAnimation";
 import AddNodeDialog from "./AddNodeDialog";
+import OverlayContainer from "./OverlayContainer";
 import type { NodeOption } from "./AddNodeDialog";
-export * from "./Icons"
+export * from "./Icons";
 
 export {
     Placeholder,
@@ -16,6 +17,7 @@ export {
     Button,
     DialogAnimation,
     AddNodeDialog,
+    OverlayContainer,
 };
 
 export type { NodeOption };

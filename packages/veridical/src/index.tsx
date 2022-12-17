@@ -23,6 +23,7 @@ import {
     ImageResizerPlugin,
     HoverBlockOptions,
     AddNodeButton,
+    CodeLanguageSelection,
 } from "@veridical/plugins";
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
@@ -88,7 +89,9 @@ function Veridical({
                                 <DraggableNodeButton />
                             </HoverBlockOptions>
                             <ImageResizerPlugin maxWidth={740} />
-                            <CodeActionMenuLeft />
+                            <CodeActionMenuLeft>
+                                <CodeLanguageSelection />
+                            </CodeActionMenuLeft>
                             <CodeActionMenuRight />
                         </HoverMenuPlugin>
                         <AddNodeShortcutPlugin />

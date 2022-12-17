@@ -629,3 +629,62 @@
 .DefaultCodeActionMenuLeft {
     flex-direction: row-reverse;
 }
+
+.DefaultCodeLanguageSelectionContainer {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 3px 4px;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+}
+
+.DefaultCodeLanguageSelectionContainer:hover {
+    cursor: pointer;
+}
+
+.DefaultCodeLanguageSelectionIcon {
+    fill: rgb(190, 190, 190);
+}
+
+.DefaultCodeLanguageSelectionName {
+    color: rgb(190, 190, 190);
+    margin-left: 6px;
+}
+
+.DefaultCodeLanguageSelectionMenuContainer {
+    box-shadow: -2px 4px 31px -18px rgba(0, 0, 0, 0.81);
+    font-family: "Poppins", sans-serif;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2px;
+    background-color: rgb(246, 246, 246);
+}
+
+.DefaultCodeLanguageSelectionMenuSearch {
+    padding: 4px 2px;
+    width: 90%;
+    margin: 8px 0px;
+}
+
+.DefaultCodeLanguageSelectionMenuOptionContainer {
+    overflow-y: scroll;
+    max-height: 250px;
+    width: 100%;
+}
+
+.DefaultCodeLanguageSelectionMenuOption {
+    padding: 8px 4px;
+    margin: 0px 8px;
+    cursor: pointer;
+}
+
+.DefaultCodeLanguageSelectionMenuOption:hover {
+    background: rgb(238, 237, 237);
+}
+
+.DefaultCodeLanguageSelectionMenuOptionSelected {
+    background: rgb(238, 237, 237);
+}

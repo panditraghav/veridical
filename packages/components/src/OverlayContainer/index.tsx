@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 export default function OverlayContainer({
     children,
 }: {
@@ -7,6 +7,13 @@ export default function OverlayContainer({
     return (
         <div
             data-type={"overlay"}
+            style={{
+                width: "100vw",
+                height: "100vh",
+                position: "fixed",
+                top: 0,
+                left: 0,
+            }}
         >
             {children}
         </div>

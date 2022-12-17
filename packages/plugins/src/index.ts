@@ -18,6 +18,7 @@ import AddNodeButton from "./AddNodeButton";
 import ImagePlugin from "./ImagePlugin";
 import CodeActionMenuLeft from "./CodeActionMenuLeft";
 import CodeActionMenuRight from "./CodeActionMenuRight";
+import CodeLanguageSelection from "./CodeLanguageSelection";
 
 export {
     MarkdownPlugin,
@@ -36,6 +37,7 @@ export {
     AddNodeButton,
     CodeActionMenuLeft,
     CodeActionMenuRight,
+    CodeLanguageSelection,
 };
 
 export { hoverMenuContext, useHoverMenuContext };

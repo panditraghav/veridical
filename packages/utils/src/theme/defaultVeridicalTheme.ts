@@ -137,4 +137,17 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         menuLeft: "DefaultCodeActionMenuLeft",
         menuRight: "DefaultCodeActionMenuRight",
     },
+    codeLanguageSelection: {
+        container: "DefaultCodeLanguageSelectionContainer",
+        icon: "DefaultCodeLanguageSelectionIcon",
+        name: "DefaultCodeLanguageSelectionName",
+        menu: {
+            container: "DefaultCodeLanguageSelectionMenuContainer",
+            search: "DefaultCodeLanguageSelectionMenuSearch",
+            optionContainer: "DefaultCodeLanguageSelectionMenuOptionContainer",
+            option: "DefaultCodeLanguageSelectionMenuOption",
+            optionSelected: "DefaultCodeLanguageSelectionMenuOptionSelected",
+            animation: "DefaultVeridicalDialogAnimation",
+        },
+    },
 };

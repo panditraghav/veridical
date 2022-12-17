@@ -3,23 +3,32 @@ import { useHoverMenuContext } from "..";
 import { $isCodeNode, CodeNode } from "@lexical/code";
 import { createPortal } from "react-dom";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useVeridicalTheme } from "@veridical/utils";
 
 function setMenuPosition(
     menuElement: HTMLDivElement | null,
-    codeDomNode: HTMLElement | null
+    codeDomNode: HTMLElement | null,
+    animationClassname?: string
 ) {
     if (!menuElement || !codeDomNode) return;
     const { top, left } = codeDomNode.getBoundingClientRect();
-    const { width: menuWidth } = menuElement.getBoundingClientRect();
-    console.log(menuWidth);
     menuElement.style.top = `${top + window.scrollY}px`;
-    menuElement.style.left = `${left - menuWidth}px`;
+    menuElement.style.left = `${left}px`;
     menuElement.style.display = `flex`;
+    menuElement.classList.add(
+        `${animationClassname || "defaultHoverMenuAnimation"}`
+    );
 }
 
-function hideMenu(menuElement: HTMLElement | null) {
+function hideMenu(
+    menuElement: HTMLElement | null,
+    animationClassname?: string
+) {
     if (!menuElement) return;
     menuElement.style.display = "none";
+    menuElement.classList.remove(
+        `${animationClassname || "defaultHoverMenuAnimation"}`
+    );
 }
 
 export default function CodeActionMenuLeft({
@@ -30,12 +39,17 @@ export default function CodeActionMenuLeft({
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const menuRef = useRef<HTMLDivElement | null>(null);
     const [editor] = useLexicalComposerContext();
+    const theme = useVeridicalTheme();
 
     useEffect(() => {
         if ($isCodeNode(hoveredLexicalNode) && hoveredDOMNode) {
-            setMenuPosition(menuRef.current, hoveredDOMNode);
+            setMenuPosition(
+                menuRef.current,
+                hoveredDOMNode,
+                theme?.hoverMenu?.animation
+            );
         } else {
-            hideMenu(menuRef.current);
+            hideMenu(menuRef.current, theme?.hoverMenu?.animation);
         }
     }, [hoveredLexicalNode, hoveredDOMNode]);
 
@@ -50,7 +64,11 @@ export default function CodeActionMenuLeft({
     }, [editor]);
 
     return createPortal(
-        <div style={{ position: "absolute", display: "none" }} ref={menuRef}>
+        <div
+            style={{ position: "absolute", display: "none" }}
+            className={theme?.codeActionMenu?.menuLeft}
+            ref={menuRef}
+        >
             {children}
         </div>,
         document.body
