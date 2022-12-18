@@ -150,4 +150,5 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
             animation: "DefaultVeridicalDialogAnimation",
         },
     },
+    copyCodeButton: "DefaultCopyCodeButton",
 };

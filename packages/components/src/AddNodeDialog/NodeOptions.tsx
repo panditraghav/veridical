@@ -31,8 +31,8 @@ function useSorteNodeOptions(nodeOptions: NodeOption[], searchText: string) {
                 );
             });
             filteredOptions.sort((a, b) => {
-                let aMatch = a.name.match(searchRegex);
-                let bMatch = b.name.match(searchRegex);
+                const aMatch = a.name.match(searchRegex);
+                const bMatch = b.name.match(searchRegex);
                 const aLen = aMatch ? aMatch[0].length : 0;
                 const bLen = bMatch ? bMatch[0].length : 0;
                 return bLen - aLen;

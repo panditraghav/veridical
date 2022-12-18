@@ -176,11 +176,14 @@
     border-radius: 5px;
     font-size: 16px;
     box-sizing: border-box;
+    tab-size: 4;
 }
 
 .DefaultEditorTheme__tokenAttr {
     color: #C678DD;
 }
+
+.DefaultEditorTheme__tokenPunctuation {}
 
 .DefaultEditorTheme__tokenFunction {
     color: #61AEEE;
@@ -687,4 +690,14 @@
 
 .DefaultCodeLanguageSelectionMenuOptionSelected {
     background: rgb(238, 237, 237);
+}
+
+.DefaultCopyCodeButton {
+    padding: 4px 8px;
+    color: rgb(190, 190, 190);
+    font-family: sans-serif;
+    font-size: 12px;
+}
+.DefaultCopyCodeButton:hover {
+    cursor: pointer;
 }

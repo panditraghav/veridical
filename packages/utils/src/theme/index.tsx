@@ -72,6 +72,7 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
             animation?: string;
         };
     };
+    copyCodeButton?: string;
 }
 
 const VeridicalThemeContext = React.createContext<

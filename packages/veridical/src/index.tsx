@@ -24,6 +24,7 @@ import {
     HoverBlockOptions,
     AddNodeButton,
     CodeLanguageSelection,
+    CopyCodeButton,
 } from "@veridical/plugins";
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
@@ -92,7 +93,9 @@ function Veridical({
                             <CodeActionMenuLeft>
                                 <CodeLanguageSelection />
                             </CodeActionMenuLeft>
-                            <CodeActionMenuRight />
+                            <CodeActionMenuRight>
+                                <CopyCodeButton />
+                            </CodeActionMenuRight>
                         </HoverMenuPlugin>
                         <AddNodeShortcutPlugin />
                         <MarkdownPlugin />

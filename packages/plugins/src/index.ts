@@ -19,6 +19,7 @@ import ImagePlugin from "./ImagePlugin";
 import CodeActionMenuLeft from "./CodeActionMenuLeft";
 import CodeActionMenuRight from "./CodeActionMenuRight";
 import CodeLanguageSelection from "./CodeLanguageSelection";
+import CopyCodeButton from "./CopyCodeButton";
 
 export {
     MarkdownPlugin,
@@ -38,6 +39,7 @@ export {
     CodeActionMenuLeft,
     CodeActionMenuRight,
     CodeLanguageSelection,
+    CopyCodeButton,
 };
 
 export { hoverMenuContext, useHoverMenuContext };
