@@ -40,9 +40,8 @@ const IMAGE: ElementTransformer = {
             const image = $createImageNode({
                 src,
                 altText,
-                imageAspectRatio: 1,
-                fallbackAspectRatio: 1,
-                maxWidth: 1,
+                width: 1,
+                height: 1,
             });
             parentNode.insertAfter($createParagraphNode());
             parentNode.replace(image);

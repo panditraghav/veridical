@@ -34,10 +34,9 @@ const previousEditorState = {
         children: [
             {
                 src: "https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                altText: "",
-                maxWidth: 531.3333282470703,
-                imageAspectRatio: 1.5,
-                fallbackAspectRatio: 2.089104543449493,
+                altText: "ss",
+                height: 780,
+                width: 1170,
                 type: "image",
                 version: 1,
             },
@@ -48,7 +47,7 @@ const previousEditorState = {
                         format: 0,
                         mode: "normal",
                         style: "",
-                        text: "This is first heading",
+                        text: "This is heading 1",
                         type: "text",
                         version: 1,
                     },
@@ -61,7 +60,36 @@ const previousEditorState = {
                 tag: "h1",
             },
             {
-                children: [],
+                children: [
+                    {
+                        detail: 0,
+                        format: 0,
+                        mode: "normal",
+                        style: "",
+                        text: "This is heading 2",
+                        type: "text",
+                        version: 1,
+                    },
+                ],
+                direction: "ltr",
+                format: "",
+                indent: 0,
+                type: "heading",
+                version: 1,
+                tag: "h2",
+            },
+            {
+                children: [
+                    {
+                        detail: 0,
+                        format: 0,
+                        mode: "normal",
+                        style: "",
+                        text: "ok!",
+                        type: "text",
+                        version: 1,
+                    },
+                ],
                 direction: "ltr",
                 format: "",
                 indent: 0,
@@ -88,11 +116,11 @@ export default function Editor() {
 
     return (
         <Veridical initialConfig={initialConfig}>
-            <TreeViewPlugin />
-            {/* <EditorStatePlugin />
+            {/* <TreeViewPlugin /> */}
+            <EditorStatePlugin />
             <EditorFromState
                 stringifiedEditorState={JSON.stringify(previousEditorState)}
-            /> */}
+            />
         </Veridical>
     );
 }

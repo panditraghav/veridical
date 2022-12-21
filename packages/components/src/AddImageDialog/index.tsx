@@ -14,7 +14,12 @@ export interface AddImageDialogStyle {
 export interface AddImageDialogProps {
     showDialog: boolean;
     onClose: () => void;
-    onSave: (src: string, altText: string, imageAspectRatio: number) => void;
+    onSave: (
+        src: string,
+        altText: string,
+        height: number,
+        width: number
+    ) => void;
     style?: AddImageDialogStyle;
 }
 
@@ -27,8 +32,6 @@ export default function AddImageDialog({
     const theme = useVeridicalTheme();
     const [src, setSrc] = useState("");
     const [altText, setAltText] = useState("");
-    const [naturalWidth, setNaturalWidth] = useState<number | null>(null);
-    const [naturalHeight, setNaturalHeight] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState<null | string>(null);
 
@@ -47,8 +50,6 @@ export default function AddImageDialog({
         setIsLoading(false);
         setSrc("");
         setAltText("");
-        setNaturalWidth(null);
-        setNaturalHeight(null);
         setIsError(null);
     }, [showDialog]);
 
@@ -83,7 +84,7 @@ export default function AddImageDialog({
                 src
             );
             setIsLoading(false);
-            onSave(src, altText, naturalWidth / naturalHeight);
+            onSave(src, altText, naturalHeight, naturalWidth);
         } catch (error) {
             setIsLoading(false);
             setIsError("Invalid image url");

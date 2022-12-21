@@ -121,9 +121,8 @@ const BLOCK_OPTIONS: NodeOption[] = [
             const img = $createImageNode({
                 src: "",
                 altText: "",
-                imageAspectRatio: 1,
-                fallbackAspectRatio: 1,
-                maxWidth: 1,
+                width: 1,
+                height: 1,
             });
             if ($isParagraphNode(node) && node.getTextContent() == "") {
                 node.insertBefore(img);

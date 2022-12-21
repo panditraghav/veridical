@@ -4,7 +4,6 @@ import CodeHighlightPlugin from "./CodeHighlightPlugin";
 import PrettierPlugin from "./PrettierPlugin";
 import DraggableNodeButton from "./DraggableNodeButton";
 import HighlightMenuPlugin from "./HighlightMenuPlugin";
-import ImageResizerPlugin from "./ImageResizerPlugin";
 import HoverBlockOptions from "./HoverBlockOptions";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
@@ -20,6 +19,7 @@ import CodeActionMenuLeft from "./CodeActionMenuLeft";
 import CodeActionMenuRight from "./CodeActionMenuRight";
 import CodeLanguageSelection from "./CodeLanguageSelection";
 import CopyCodeButton from "./CopyCodeButton";
+import AutoLinkPlugin from "./AutoLinkPlugin";
 
 export {
     MarkdownPlugin,
@@ -34,12 +34,12 @@ export {
     ImagePlugin,
     RichTextPlugin,
     ListPlugin,
-    ImageResizerPlugin,
     AddNodeButton,
     CodeActionMenuLeft,
     CodeActionMenuRight,
     CodeLanguageSelection,
     CopyCodeButton,
+    AutoLinkPlugin,
 };
 
 export { hoverMenuContext, useHoverMenuContext };

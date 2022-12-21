@@ -20,12 +20,15 @@ import {
     ImagePlugin,
     RichTextPlugin,
     ListPlugin,
-    ImageResizerPlugin,
     HoverBlockOptions,
     AddNodeButton,
     CodeLanguageSelection,
     CopyCodeButton,
+    AutoLinkPlugin,
 } from "@veridical/plugins";
+
+import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
+import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
 import {
@@ -82,6 +85,9 @@ function Veridical({
                 <CodeHighlightPlugin />
                 {config.editable && (
                     <>
+                        <AutoFocusPlugin />
+                        <AutoLinkPlugin />
+                        <LinkPlugin />
                         <PrettierPlugin />
                         <HighlightMenuPlugin />
                         <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
@@ -89,7 +95,6 @@ function Veridical({
                                 <AddNodeButton />
                                 <DraggableNodeButton />
                             </HoverBlockOptions>
-                            <ImageResizerPlugin maxWidth={740} />
                             <CodeActionMenuLeft>
                                 <CodeLanguageSelection />
                             </CodeActionMenuLeft>

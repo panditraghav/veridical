@@ -20,7 +20,12 @@ function useImagePlugin(editor: LexicalEditor, maxWidth: number) {
         });
     }, [editor]);
 
-    function onSave(src: string, altText: string, imageAspectRatio: number) {
+    function onSave(
+        src: string,
+        altText: string,
+        height: number,
+        width: number
+    ) {
         if (!imageNodeKey) return;
         setShowImageDialog(false);
         editor.update(() => {
@@ -28,9 +33,8 @@ function useImagePlugin(editor: LexicalEditor, maxWidth: number) {
             if ($isImageNode(imageNode)) {
                 imageNode.setSrc(src);
                 imageNode.setAltText(altText);
-                imageNode.setImageAspectRatio(imageAspectRatio);
-                imageNode.setFallbackAspectRatio(imageAspectRatio);
-                imageNode.setMaxWidth(maxWidth);
+                imageNode.setHeight(height);
+                imageNode.setWidth(width);
             }
         });
     }

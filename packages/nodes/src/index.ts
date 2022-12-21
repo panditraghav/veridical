@@ -21,6 +21,8 @@ export const defaultEditorNodes: Array<Klass<LexicalNode>> = [
     CodeHighlightNode,
     CodeNode,
     ImageNode,
+    LinkNode,
+    AutoLinkNode,
 ];
 export {
     HeadingNode,

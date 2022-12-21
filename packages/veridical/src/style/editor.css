@@ -142,22 +142,24 @@
 /* Image */
 
 .DefaultVeridicalImageContainer {
-    width: 100%;
-    display: flex;
     justify-content: center;
     margin: 16px 0px;
+    display: flex;
     height: auto;
+    background-color: blue;
 }
 
 .DefaultVeridicalImage {
-    width: 100%;
-    height: auto;
+    width: 100% !important;
+    height: auto !important;
     border-radius: 1px;
     cursor: pointer;
+    background-color: purple;
 }
 
 .DefaultVeridicalImageFallback {
     width: 100%;
+    background-color: orange;
 }
 
 .DefaultVeridicalImageSelected {
@@ -698,6 +700,7 @@
     font-family: sans-serif;
     font-size: 12px;
 }
+
 .DefaultCopyCodeButton:hover {
     cursor: pointer;
 }

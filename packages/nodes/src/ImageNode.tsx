@@ -15,9 +15,8 @@ import { ImageComponent } from "@veridical/components";
 type SerializedImageNode = {
     altText: string;
     src: string;
-    maxWidth: number;
-    imageAspectRatio: number;
-    fallbackAspectRatio: number;
+    height: number;
+    width: number;
     type: "image";
     version: 1;
 } & SerializedLexicalNode;
@@ -25,18 +24,16 @@ type SerializedImageNode = {
 export interface ImageProps {
     src: string;
     altText: string;
-    maxWidth: number;
-    imageAspectRatio: number;
-    fallbackAspectRatio: number;
+    height: number;
+    width: number;
     key?: NodeKey;
 }
 
 export class ImageNode extends DecoratorNode<JSX.Element> {
     __src: string;
     __altText: string;
-    __imageAspectRatio: number;
-    __fallbackAspectRatio: number;
-    __maxWidth: number;
+    __width: number;
+    __height: number;
 
     static getType(): string {
         return "image";
@@ -45,44 +42,34 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     constructor(
         src: string,
         altText: string,
-        maxWidth: number,
-        imageAspectRatio: number,
-        fallbackAspectRatio: number,
+        height: number,
+        width: number,
         key?: NodeKey
     ) {
         super(key);
         this.__src = src;
         this.__altText = altText;
-        this.__maxWidth = maxWidth;
-        this.__imageAspectRatio = imageAspectRatio;
-        this.__fallbackAspectRatio = fallbackAspectRatio;
+        this.__height = height;
+        this.__width = width;
     }
 
     static clone(node: ImageNode): ImageNode {
         return new ImageNode(
             node.getSrc(),
             node.getAltText(),
-            node.getMaxWidth(),
-            node.getImageAspectRatio(),
-            node.getFallbackAspectRatio(),
+            node.getHeight(),
+            node.getWidth(),
             node.getKey()
         );
     }
 
     static importJSON(serializedNode: SerializedImageNode): ImageNode {
-        const {
-            src,
-            altText,
-            maxWidth,
-            imageAspectRatio,
-            fallbackAspectRatio,
-        } = serializedNode;
+        const { src, altText, height, width } = serializedNode;
         return $createImageNode({
             src,
             altText,
-            maxWidth,
-            imageAspectRatio,
-            fallbackAspectRatio,
+            height,
+            width,
         });
     }
 
@@ -90,9 +77,8 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         return {
             src: this.getSrc(),
             altText: this.getAltText(),
-            maxWidth: this.getMaxWidth(),
-            imageAspectRatio: this.getImageAspectRatio(),
-            fallbackAspectRatio: this.getFallbackAspectRatio(),
+            height: this.getHeight(),
+            width: this.getWidth(),
             type: "image",
             version: 1,
         };
@@ -131,23 +117,17 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         this.getWritable().__altText = altText;
     }
 
-    getMaxWidth(): number {
-        return this.__maxWidth;
+    getHeight(): number {
+        return this.__height;
     }
-    setMaxWidth(maxWidth: number) {
-        this.getWritable().__maxWidth = maxWidth;
+    setHeight(height: number) {
+        this.getWritable().__height = height;
     }
-    getImageAspectRatio(): number {
-        return this.__imageAspectRatio;
+    getWidth(): number {
+        return this.__width;
     }
-    setImageAspectRatio(ratio: number) {
-        this.getWritable().__imageAspectRatio = ratio;
-    }
-    getFallbackAspectRatio(): number {
-        return this.__fallbackAspectRatio;
-    }
-    setFallbackAspectRatio(ratio: number) {
-        this.getWritable().__fallbackAspectRatio = ratio;
+    setWidth(width: number) {
+        this.getWritable().__width = width;
     }
 
     decorate(editor: LexicalEditor, config: EditorConfig): JSX.Element {
@@ -155,9 +135,8 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
             <ImageComponent
                 src={this.getSrc()}
                 alt={this.getAltText()}
-                maxWidth={this.getMaxWidth()}
-                imageAspectRatio={this.getImageAspectRatio()}
-                fallbackAspectRatio={this.getFallbackAspectRatio()}
+                height={this.getHeight()}
+                width={this.getWidth()}
                 nodeKey={this.getKey()}
             />
         );
@@ -167,19 +146,11 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
 export function $createImageNode({
     src,
     altText,
-    maxWidth,
-    imageAspectRatio,
-    fallbackAspectRatio,
+    height,
+    width,
     key,
 }: ImageProps): ImageNode {
-    return new ImageNode(
-        src,
-        altText,
-        maxWidth,
-        imageAspectRatio,
-        fallbackAspectRatio,
-        key
-    );
+    return new ImageNode(src, altText, height, width, key);
 }
 
 export function $isImageNode(

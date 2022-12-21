@@ -46,77 +46,39 @@ function hasClickOnImage(
     return false;
 }
 
-const cachedImages = new Set<string>();
-function useSuspenseImage(src: string) {
-    if (!cachedImages.has(src)) {
-        throw new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => {
-                cachedImages.add(src);
-                resolve(null);
-            };
-            img.src = src;
-        });
-    }
-}
-
-interface LazyImageProps {
-    src: string;
-    alt: string;
-    style?: React.CSSProperties;
-    className?: string;
-    ref?: React.MutableRefObject<HTMLImageElement | null>;
-    onClick: () => void;
-}
-
-function LazyImage({ src, alt, style, className, onClick }: LazyImageProps) {
-    const imgRef = useRef<HTMLImageElement | null>(null);
-    useEffect(() => {
-        function clickListener(ev: MouseEvent) {
-            if (hasClickOnImage(ev, imgRef.current)) {
-                onClick();
-            }
-        }
-        document.addEventListener("click", clickListener);
-
-        return () => document.removeEventListener("click", clickListener);
-    }, [onClick]);
-    useSuspenseImage(src);
-    return (
-        <img
-            src={src}
-            alt={alt}
-            style={style}
-            className={className}
-            ref={imgRef}
-        />
-    );
-}
-
-function FallBack({ style }: { style?: React.CSSProperties }) {
-    const theme = useVeridicalTheme();
-    return <div className={`${theme?.imageFallback}`} style={style}></div>;
-}
-
 export default function ImageComponent({
     src,
     alt,
-    maxWidth,
-    imageAspectRatio,
-    fallbackAspectRatio,
+    height,
+    width,
     nodeKey,
 }: {
     src: string;
     alt: string;
-    maxWidth: number;
-    imageAspectRatio: number;
-    fallbackAspectRatio: number;
+    height: number;
+    width: number;
     nodeKey: NodeKey;
 }) {
     const theme = useVeridicalTheme();
     const [editor] = useLexicalComposerContext();
     const [isSelected, setIsSelected, clearSelection] =
         useLexicalNodeSelection(nodeKey);
+    const imgRef = useRef<HTMLImageElement | null>(null);
+
+    useEffect(() => {
+        console.log(isSelected);
+    }, [width, height, isSelected]);
+
+    useEffect(() => {
+        function clickListener(ev: MouseEvent) {
+            if (hasClickOnImage(ev, imgRef.current)) {
+                setIsSelected(true);
+            }
+        }
+        document.addEventListener("click", clickListener);
+
+        return () => document.removeEventListener("click", clickListener);
+    });
 
     const onDelete = useCallback((event: KeyboardEvent) => {
         event.preventDefault();
@@ -206,28 +168,19 @@ export default function ImageComponent({
     return (
         <>
             {src !== "" && (
-                <Suspense
-                    fallback={
-                        <FallBack
-                            style={{
-                                aspectRatio: fallbackAspectRatio,
-                            }}
-                        />
-                    }
-                >
-                    <LazyImage
-                        src={src}
-                        alt={alt}
-                        style={{
-                            aspectRatio: imageAspectRatio,
-                            maxWidth: maxWidth,
-                        }}
-                        className={`${theme?.image} ${
-                            isSelected ? theme?.imageSelected : ""
-                        }`}
-                        onClick={() => setIsSelected(true)}
-                    />
-                </Suspense>
+                <img
+                    ref={imgRef}
+                    src={src}
+                    alt={alt}
+                    style={{
+                        width: width,
+                        height: height,
+                        aspectRatio: `auto ${width / height}`,
+                    }}
+                    className={`${theme?.image} ${
+                        isSelected && theme?.imageSelected
+                    }`}
+                />
             )}
         </>
     );
