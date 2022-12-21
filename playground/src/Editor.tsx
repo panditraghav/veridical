@@ -116,7 +116,7 @@ export default function Editor() {
 
     return (
         <Veridical initialConfig={initialConfig}>
-            {/* <TreeViewPlugin /> */}
+            <TreeViewPlugin />
             <EditorStatePlugin />
             <EditorFromState
                 stringifiedEditorState={JSON.stringify(previousEditorState)}

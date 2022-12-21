@@ -1,6 +1,7 @@
 import React from "react";
 
 import { LexicalEditor, FORMAT_TEXT_COMMAND } from "lexical";
+import { TOGGLE_LINK_COMMAND } from "@lexical/link";
 
 import {
     LinkIcon,
@@ -91,7 +92,7 @@ export function HighlightMenu({
                         style?.highlightMenuButton || "defaultHighlightMenuBtn"
                     }
                     onClick={() =>
-                        editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")
+                        editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)
                     }
                 >
                     <LinkIcon

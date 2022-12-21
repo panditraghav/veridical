@@ -11,7 +11,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 
 import AddNodeBtn from "./AddNodeBtn";
 import { AddNodeDialog, NodeOption } from "@veridical/components";
-import { useHoverMenuContext } from "..";
+import { useHoverMenuContext } from "@veridical/plugins";
 
 function useAddNodeButton(editor: LexicalEditor, nodeOptions?: NodeOption[]) {
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();

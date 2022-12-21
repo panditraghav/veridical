@@ -66,10 +66,6 @@ export default function ImageComponent({
     const imgRef = useRef<HTMLImageElement | null>(null);
 
     useEffect(() => {
-        console.log(isSelected);
-    }, [width, height, isSelected]);
-
-    useEffect(() => {
         function clickListener(ev: MouseEvent) {
             if (hasClickOnImage(ev, imgRef.current)) {
                 setIsSelected(true);

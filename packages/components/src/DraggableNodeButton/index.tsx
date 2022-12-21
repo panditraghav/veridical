@@ -22,7 +22,7 @@ import {
     isHTMLElement,
 } from "@veridical/utils";
 import { DragIcon } from "@veridical/components";
-import { useHoverMenuContext } from "..";
+import { useHoverMenuContext } from "@veridical/plugins";
 
 const LEFT_OFFSET = -25;
 const TOP_OFFSET = 4;

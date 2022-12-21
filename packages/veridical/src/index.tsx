@@ -13,7 +13,6 @@ import {
     CodeActionMenuLeft,
     CodeActionMenuRight,
     PrettierPlugin,
-    DraggableNodeButton,
     HighlightMenuPlugin,
     HoverMenuPlugin,
     AddNodeShortcutPlugin,
@@ -21,9 +20,7 @@ import {
     RichTextPlugin,
     ListPlugin,
     HoverBlockOptions,
-    AddNodeButton,
     CodeLanguageSelection,
-    CopyCodeButton,
     AutoLinkPlugin,
 } from "@veridical/plugins";
 
@@ -37,7 +34,12 @@ import {
     VeridicalThemeComposer,
 } from "@veridical/utils";
 import type { VeridicalThemeClasses } from "@veridical/utils";
-import { Placeholder } from "@veridical/components";
+import {
+    Placeholder,
+    AddNodeButton,
+    DraggableNodeButton,
+    CopyCodeButton,
+} from "@veridical/components";
 import { defaultEditorNodes } from "@veridical/nodes";
 
 interface InitialConfig {
