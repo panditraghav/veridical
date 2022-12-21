@@ -4,20 +4,29 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import {
     $getNearestNodeFromDOMNode,
     $getSelection,
+    $isParagraphNode,
     $isRangeSelection,
     $isTextNode,
     LexicalEditor,
 } from "lexical";
-import { HighlightMenu, HighlightMenuStyle } from "./HighlightMenu";
+import {
+    LinkIcon,
+    FormatBoldButton,
+    FormatItalicButton,
+    FormatUnderlineButton,
+    FormatLinkButton,
+} from "@veridical/components";
+import { useVeridicalTheme } from "@veridical/utils";
 
 import { isHTMLElement } from "@veridical/utils";
+import { $isLinkNode } from "@lexical/link";
 
 const MENU_MARGIN = 5;
 
 function setMenuPosition(
     menuElement: HTMLDivElement | null,
     domSelection: Selection | null,
-    style?: HighlightMenuStyle
+    animationClassName?: string
 ) {
     if (!menuElement || !domSelection) return;
     const range = domSelection.getRangeAt(0);
@@ -29,11 +38,11 @@ function setMenuPosition(
         menuElement.style.left = `${-100}px`;
         menuElement.style.top = `${-100}px`;
         menuElement.classList.remove(
-            style?.highlightMenuAnimation || "defaultHighlightMenuAnimation"
+            animationClassName || "defaultHighlightMenuAnimation"
         );
     } else {
         menuElement.classList.add(
-            style?.highlightMenuAnimation || "defaultHighlightMenuAnimation"
+            animationClassName || "defaultHighlightMenuAnimation"
         );
         menuElement.style.left = `${left}px`;
         menuElement.style.top = `${
@@ -44,24 +53,26 @@ function setMenuPosition(
 
 function hideMenu(
     menuElement: HTMLDivElement | null,
-    style?: HighlightMenuStyle
+    animationClassName?: string
 ) {
     if (!menuElement) return;
     menuElement.style.left = `${-100}px`;
     menuElement.style.top = `${-100}px`;
     menuElement.classList.remove(
-        style?.highlightMenuAnimation || "defaultHighlightMenuAnimation"
+        animationClassName || "defaultHighlightMenuAnimation"
     );
 }
 
-function useHighlightMenu(editor: LexicalEditor, style?: HighlightMenuStyle) {
+function useHighlightMenu(editor: LexicalEditor) {
     const menuRef = useRef<HTMLDivElement | null>(null);
+    const theme = useVeridicalTheme();
 
     useEffect(() => {
         function handleSelectionChange(ev: Event) {
             const selection = window.getSelection();
-            if (selection?.anchorOffset == selection?.focusOffset)
-                hideMenu(menuRef.current, style);
+            if (selection?.anchorOffset == selection?.focusOffset) {
+                hideMenu(menuRef.current);
+            }
         }
         document.addEventListener("selectionchange", handleSelectionChange);
         return () =>
@@ -75,27 +86,37 @@ function useHighlightMenu(editor: LexicalEditor, style?: HighlightMenuStyle) {
         return editor.registerUpdateListener(({ editorState }) => {
             editorState.read(() => {
                 const selection = $getSelection();
-                if ($isRangeSelection(selection)) {
+                const selectedNode = selection?.getNodes()[0];
+                const selectedNodeParent = selectedNode?.getParent();
+                if (
+                    $isRangeSelection(selection) &&
+                    ($isParagraphNode(selectedNode) ||
+                        $isParagraphNode(selectedNodeParent) ||
+                        $isLinkNode(selectedNodeParent))
+                ) {
                     const domSelection = window.getSelection();
-                    setMenuPosition(menuRef.current, domSelection, style);
+                    setMenuPosition(menuRef.current, domSelection);
                 } else {
-                    hideMenu(menuRef.current, style);
+                    hideMenu(menuRef.current);
                 }
             });
         });
     }, [editor]);
 
     return createPortal(
-        <HighlightMenu style={style} menuRef={menuRef} editor={editor} />,
+        <div ref={menuRef} className={theme?.highlightMenu?.menu}>
+            <div className={theme?.highlightMenu?.menuContainer}>
+                <FormatBoldButton />
+                <FormatItalicButton />
+                <FormatUnderlineButton />
+                <FormatLinkButton />
+            </div>
+        </div>,
         document.body
     );
 }
 
-export default function HighlightMenuPlugin({
-    style,
-}: {
-    style?: HighlightMenuStyle;
-}) {
+export default function HighlightMenuPlugin() {
     const [editor] = useLexicalComposerContext();
-    return useHighlightMenu(editor, style);
+    return useHighlightMenu(editor);
 }

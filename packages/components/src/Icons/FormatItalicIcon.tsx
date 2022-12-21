@@ -1,7 +1,7 @@
 import React from "react";
 import { IconProps } from "./interfaces";
 
-export default function FormatItalic({
+export default function FormatItalicIcon({
     className,
     style,
     size = "base",

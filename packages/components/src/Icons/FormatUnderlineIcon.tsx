@@ -1,11 +1,7 @@
 import React from "react";
 import { IconProps } from "./interfaces";
 
-export default function FormatUnderline({
-    className,
-    style,
-    size = "base",
-}: IconProps) {
+export default function FormatUnderlineIcon({ className, style, size = "base" }: IconProps) {
     switch (size) {
         case "sm":
             return (

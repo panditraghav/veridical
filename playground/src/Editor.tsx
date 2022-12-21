@@ -117,10 +117,10 @@ export default function Editor() {
     return (
         <Veridical initialConfig={initialConfig}>
             <TreeViewPlugin />
-            <EditorStatePlugin />
+            {/* <EditorStatePlugin />
             <EditorFromState
                 stringifiedEditorState={JSON.stringify(previousEditorState)}
-            />
+            /> */}
         </Veridical>
     );
 }

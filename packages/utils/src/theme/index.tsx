@@ -45,6 +45,12 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         altTextInput?: string;
         actionButtonGroup?: string;
     };
+    highlightMenu?:{
+        menu?: string;
+        menuContainer?: string;
+        menuButton?: string;
+        menuButtonIcon?: string;
+    },
     hoverMenu?: {
         animation?: string;
     };

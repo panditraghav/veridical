@@ -1,7 +1,7 @@
 import React from "react";
 import { IconProps } from "./interfaces";
 
-export default function FormatBold({
+export default function FormatBoldIcon({
     className,
     size = "md",
     style,

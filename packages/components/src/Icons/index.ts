@@ -9,9 +9,9 @@ import OlIcon from "./OlIcon";
 import UlIcon from "./UlIcon";
 import DragIcon from "./DragIcon";
 import LinkIcon from "./LinkIcon";
-import FormatBold from "./FormatBold";
-import FormatItalic from "./FormatItalic";
-import FormatUnderline from "./FormatUnderline";
+import FormatBoldIcon from "./FormatBoldIcon";
+import FormatItalicIcon from "./FormatItalicIcon";
+import FormatUnderlineIcon from "./FormatUnderlineIcon";
 import ExpandMoreIcon from "./ExpandMoreIcon";
 
 export {
@@ -26,8 +26,8 @@ export {
     UlIcon,
     DragIcon,
     LinkIcon,
-    FormatBold,
-    FormatItalic,
-    FormatUnderline,
+    FormatBoldIcon,
+    FormatItalicIcon,
+    FormatUnderlineIcon,
     ExpandMoreIcon,
 };

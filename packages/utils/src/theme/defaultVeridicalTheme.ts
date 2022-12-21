@@ -151,4 +151,10 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         },
     },
     copyCodeButton: "DefaultCopyCodeButton",
+    highlightMenu: {
+        menu: "defaultHighlightMenu",
+        menuContainer: "defaultHighlightMenuContainer",
+        menuButton: "defaultHighlightMenuBtn",
+        menuButtonIcon: "defaultHighlightMenuIcon",
+    },
 };
