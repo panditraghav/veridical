@@ -74,7 +74,7 @@ function Veridical({
                     contentEditable={
                         <ContentEditable
                             readOnly={false}
-                            className={"DefaultEditorTheme__ContentEditable"}
+                            className={config.theme.contentEditable}
                         />
                     }
                     placeholder={

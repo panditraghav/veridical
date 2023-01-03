@@ -2,6 +2,7 @@ import { VeridicalThemeClasses } from ".";
 
 export let defaultVeridicalTheme: VeridicalThemeClasses = {
     editorContainer: "max-w-[800px] m-auto",
+    contentEditable: "focus:outline-none",
     characterLimit: "DefaultEditorTheme__characterLimit",
     code: "DefaultEditorTheme__code",
     codeHighlight: {
