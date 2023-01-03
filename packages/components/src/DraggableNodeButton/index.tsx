@@ -5,27 +5,23 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import {
     $getNearestNodeFromDOMNode,
     $getNodeByKey,
-    $getSelection,
     COMMAND_PRIORITY_HIGH,
     DRAGOVER_COMMAND,
     DROP_COMMAND,
     LexicalEditor,
-    LexicalNode,
-    $isRangeSelection,
 } from "lexical";
 import { mergeRegister } from "@lexical/utils";
 
 import {
     getHoveredDOMNode,
-    Offset,
     isAboveOrBelowCenter,
     isHTMLElement,
+    useVeridicalTheme,
 } from "@veridical/utils";
 import { DragIcon } from "@veridical/components";
 import { useHoverMenuContext } from "@veridical/plugins";
 
 const LEFT_OFFSET = -25;
-const TOP_OFFSET = 4;
 const DRAG_DATA_FORMAT = "application/x-veridical-drag";
 
 function setTragetLinePosition(
@@ -86,13 +82,17 @@ function TargetLine({
     );
 }
 
-function useDraggableNode(
-    editor: LexicalEditor,
-    style?: DraggableNodeButtonStyle
-) {
+export type DraggableNodeButtonStyle = {
+    iconContainer?: string;
+    dragIcon?: string;
+    targetLine?: string;
+};
+export default function DraggableNodeButton() {
+    const [editor] = useLexicalComposerContext();
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const targetLineRef = useRef<HTMLDivElement | null>(null);
     const [isDragging, setIsDragging] = useState(false);
+    const theme = useVeridicalTheme()?.hoverBlockOption?.dragNodeButton;
 
     const onDragOver = useCallback(
         (ev: DragEvent) => {
@@ -169,40 +169,22 @@ function useDraggableNode(
     return (
         <>
             <div
-                className={
-                    style?.iconContainer ||
-                    "DefaultDraggableNodeButton_iconContainer"
-                }
+                className={theme?.button}
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
                 draggable={true}
             >
                 <DragIcon
                     size="base"
-                    className={
-                        style?.dragIcon || "DefaultDraggableNodeButton_dragIcon"
-                    }
+                    className={theme?.icon}
                 />
             </div>
             <TargetLine
                 className={
-                    style?.targetLine || "DefaultDraggableNodeButton_targetLine"
+                    "DefaultDraggableNodeButton_targetLine"
                 }
                 targetLineRef={targetLineRef}
             />
         </>
     );
-}
-export type DraggableNodeButtonStyle = {
-    iconContainer?: string;
-    dragIcon?: string;
-    targetLine?: string;
-};
-export default function DraggableNodeButton({
-    style,
-}: {
-    style?: DraggableNodeButtonStyle;
-}) {
-    const [editor] = useLexicalComposerContext();
-    return useDraggableNode(editor, style);
 }

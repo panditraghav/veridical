@@ -1,5 +1,4 @@
-import "./style/editor.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
     LexicalComposer,
     InitialEditorStateType,
@@ -8,7 +7,6 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 
 import {
     MarkdownPlugin,
-    TreeViewPlugin,
     CodeHighlightPlugin,
     CodeActionMenuLeft,
     CodeActionMenuRight,
@@ -22,6 +20,7 @@ import {
     HoverBlockOptions,
     CodeLanguageSelection,
     AutoLinkPlugin,
+    AddLinkDialogPlugin,
 } from "@veridical/plugins";
 
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
@@ -30,7 +29,6 @@ import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
 import {
     defaultVeridicalTheme,
-    useVeridicalTheme,
     VeridicalThemeComposer,
 } from "@veridical/utils";
 import type { VeridicalThemeClasses } from "@veridical/utils";
@@ -42,15 +40,15 @@ import {
 } from "@veridical/components";
 import { defaultEditorNodes } from "@veridical/nodes";
 
-interface InitialConfig {
-    namespace: string;
+type InitialConfig = Readonly<{
+    namespace?: string;
     nodes?: ReadonlyArray<Klass<LexicalNode>>;
-    onError: (error: Error, editor: LexicalEditor) => void;
+    onError?: (error: Error, editor: LexicalEditor) => void;
     readOnly?: boolean;
     theme?: VeridicalThemeClasses;
     editorState?: InitialEditorStateType;
     editable?: boolean;
-}
+}>
 
 function Veridical({
     initialConfig,
@@ -59,7 +57,7 @@ function Veridical({
     initialConfig?: InitialConfig;
     children?: React.ReactNode;
 }) {
-    const config: InitialConfig = {
+    const config = {
         namespace: initialConfig?.namespace || "veridical-editor",
         nodes: initialConfig?.nodes || defaultEditorNodes,
         onError:
@@ -71,7 +69,7 @@ function Veridical({
 
     return (
         <VeridicalBase initialConfig={config}>
-            <div className={"DefaultEditorTheme__EditorContainer"}>
+            <div className={config?.theme?.editorContainer}>
                 <RichTextPlugin
                     contentEditable={
                         <ContentEditable
@@ -85,41 +83,52 @@ function Veridical({
                 />
                 <ListPlugin />
                 <CodeHighlightPlugin />
-                {config.editable && (
-                    <>
-                        <AutoFocusPlugin />
-                        <AutoLinkPlugin />
-                        <LinkPlugin />
-                        <PrettierPlugin />
-                        <HighlightMenuPlugin />
-                        <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
-                            <HoverBlockOptions offset={{ left: -50, top: 4 }}>
-                                <AddNodeButton />
-                                <DraggableNodeButton />
-                            </HoverBlockOptions>
-                            <CodeActionMenuLeft>
-                                <CodeLanguageSelection />
-                            </CodeActionMenuLeft>
-                            <CodeActionMenuRight>
-                                <CopyCodeButton />
-                            </CodeActionMenuRight>
-                        </HoverMenuPlugin>
-                        <AddNodeShortcutPlugin />
-                        <MarkdownPlugin />
-                        <ImagePlugin maxWidth={740} />
-                    </>
-                )}
                 {children}
             </div>
         </VeridicalBase>
     );
 }
 
+function VeridicalEditorPlugins() {
+    return (
+        <>
+            <AutoFocusPlugin />
+            <AutoLinkPlugin />
+            <LinkPlugin />
+            <PrettierPlugin />
+            <HighlightMenuPlugin />
+            <AddLinkDialogPlugin />
+            <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
+                <HoverBlockOptions offset={{ left: -50, top: 4 }}>
+                    <AddNodeButton />
+                    <DraggableNodeButton />
+                </HoverBlockOptions>
+                <CodeActionMenuLeft>
+                    <CodeLanguageSelection />
+                </CodeActionMenuLeft>
+                <CodeActionMenuRight>
+                    <CopyCodeButton />
+                </CodeActionMenuRight>
+            </HoverMenuPlugin>
+            <AddNodeShortcutPlugin />
+            <MarkdownPlugin />
+            <ImagePlugin maxWidth={740} />
+        </>
+    )
+}
+
 function VeridicalBase({
     initialConfig,
     children,
 }: {
-    initialConfig: InitialConfig;
+    initialConfig: Readonly<{
+        namespace: string;
+        nodes?: readonly Klass<LexicalNode>[] | undefined;
+        onError: (error: Error, editor: LexicalEditor) => void;
+        editable?: boolean | undefined;
+        theme?: EditorThemeClasses | undefined;
+        editorState?: InitialEditorStateType | undefined;
+    }>;
     children?: React.ReactNode;
 }) {
     return (
@@ -131,4 +140,4 @@ function VeridicalBase({
     );
 }
 
-export { InitialConfig, Veridical, VeridicalBase };
+export { InitialConfig, Veridical, VeridicalBase, VeridicalEditorPlugins };

@@ -1,20 +1,14 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
-
-import {
-    $getSelection,
-    $isParagraphNode,
-    $isRangeSelection,
-    LexicalEditor,
-} from "lexical";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-
+import React, { useState } from "react";
 import AddNodeBtn from "./AddNodeBtn";
 import { AddNodeDialog, NodeOption } from "@veridical/components";
 import { useHoverMenuContext } from "@veridical/plugins";
 
-function useAddNodeButton(editor: LexicalEditor, nodeOptions?: NodeOption[]) {
-    const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
+export default function AddNodeButton({
+    nodeOptions,
+}: {
+    nodeOptions?: NodeOption[];
+}) {
+    const { hoveredLexicalNode } = useHoverMenuContext();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     return (
@@ -34,13 +28,4 @@ function useAddNodeButton(editor: LexicalEditor, nodeOptions?: NodeOption[]) {
             )}
         </>
     );
-}
-
-export default function AddNodeButton({
-    nodeOptions,
-}: {
-    nodeOptions?: NodeOption[];
-}) {
-    const [editor] = useLexicalComposerContext();
-    return useAddNodeButton(editor, nodeOptions);
 }

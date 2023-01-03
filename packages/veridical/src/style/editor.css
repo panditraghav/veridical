@@ -325,7 +325,7 @@
 
 /* Add Button fo Hover Menu */
 
-.DefaultAddBtn {
+.DefaultAddNodeBtn {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -337,7 +337,7 @@
 }
 
 
-.DefaultAddBtnIcon:hover {
+.DefaultAddNodeBtnIcon:hover {
     fill: rgba(0, 0, 0, 0.696);
 }
 

@@ -1,6 +1,7 @@
 import { VeridicalThemeClasses } from ".";
 
-export const defaultVeridicalTheme: VeridicalThemeClasses = {
+export let defaultVeridicalTheme: VeridicalThemeClasses = {
+    editorContainer: "max-w-[800px] m-auto",
     characterLimit: "DefaultEditorTheme__characterLimit",
     code: "DefaultEditorTheme__code",
     codeHighlight: {
@@ -37,44 +38,49 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     hashtag: "DefaultEditorTheme__hashtag",
     heading: {
-        h1: "DefaultEditorTheme__h1",
-        h2: "DefaultEditorTheme__h2",
-        h3: "DefaultEditorTheme__h3",
-        h4: "DefaultEditorTheme__h4",
-        h5: "DefaultEditorTheme__h5",
+        h1: "text-6xl text-title-light dark:text-title-dark font-bold mt-8 mb-12",
+        h2: "text-5xl font-bold text-h2-light dark:text-h2-dark my-6",
+        h3: "text-3xl font-semibold text-h3-light dark:text-h3-dark my-4",
     },
     image: "DefaultVeridicalImage",
     imageSelected: "DefaultVeridicalImageSelected",
     imageContainer: "DefaultVeridicalImageContainer",
     imageFallback: "DefaultVeridicalImageFallback",
-    link: "DefaultEditorTheme__link",
+    link: "text-blue-800 underline",
     list: {
-        listitem: "DefaultEditorTheme__listItem",
+        ol: "my-2 pl-8",
+        ul: "my-2 pl-8",
+        listitem: "text-xl my-1 mx-2 text-p-light dark:text-p-dark",
         listitemChecked: "DefaultEditorTheme__listItemChecked",
         listitemUnchecked: "DefaultEditorTheme__listItemUnchecked",
         nested: {
-            listitem: "DefaultEditorTheme__nestedListItem",
+            listitem: "list-none",
         },
         olDepth: [
-            "DefaultEditorTheme__ol1",
-            "DefaultEditorTheme__ol2",
-            "DefaultEditorTheme__ol3",
-            "DefaultEditorTheme__ol4",
-            "DefaultEditorTheme__ol5",
+            "list-decimal",
+            "list-[upper-alpha]",
+            "list-[lower-alpha]",
+            "list-[upper-roman]",
+            "list-[lower-roman]",
         ],
-        ul: "DefaultEditorTheme__ul",
+        ulDepth: [
+            "list-disc",
+            "list-[square]",
+            "list-[circle]",
+            "list-[circle]",
+        ]
     },
     ltr: "DefaultEditorTheme__ltr",
     mark: "DefaultEditorTheme__mark",
     markOverlap: "DefaultEditorTheme__markOverlap",
-    paragraph: "DefaultEditorTheme__paragraph",
+    paragraph: "text-xl text-p-light dark:text-p-dark my-2",
     quote: "DefaultEditorTheme__quote",
     rtl: "DefaultEditorTheme__rtl",
     table: "DefaultEditorTheme__table",
     tableCell: "DefaultEditorTheme__tableCell",
     tableCellHeader: "DefaultEditorTheme__tableCellHeader",
     text: {
-        bold: "DefaultEditorTheme__textBold",
+        bold: "font-bold",
         code: "DefaultEditorTheme__textCode",
         italic: "DefaultEditorTheme__textItalic",
         strikethrough: "DefaultEditorTheme__textStrikethrough",
@@ -124,10 +130,18 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         actionButtonGroup: "DefaultAddImageDialog_ActionButtonGroup",
     },
     hoverMenu: {
-        animation: "defaultShowMenuAnimation",
+        animation: "animate-appear",
     },
     hoverBlockOption: {
-        container: "DefaultHoverBlockContainer",
+        container: "flex",
+        addNodeButton: {
+            button: "bg-transparent border-none flex justify-center items-center",
+            icon: "dark:fill-icon-dark dark:hover:fill-icon-dark-hover fill-icon-light hover:fill-icon-light-hover"
+        },
+        dragNodeButton: {
+            button: "bg-transparent border-none flex justify-center items-center hover:cursor-pointer",
+            icon: "dark:fill-icon-dark dark:hover:fill-icon-dark-hover fill-icon-light hover:fill-icon-light-hover"
+        }
     },
     imageResizer: {
         container: "DefaultImageResizerContainer",
@@ -152,9 +166,14 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     copyCodeButton: "DefaultCopyCodeButton",
     highlightMenu: {
-        menu: "defaultHighlightMenu",
-        menuContainer: "defaultHighlightMenuContainer",
-        menuButton: "defaultHighlightMenuBtn",
-        menuButtonIcon: "defaultHighlightMenuIcon",
+        menu: "bg-bg-dark dark:bg-bg-light flex rounded-md drop-shadow-sm",
+        menuButton: "bg-transparent cursor-pointer border-none p-0 my-0.5 mx-0",
+        menuButtonIcon: "fill-icon-dark-hover dark:fill-icon-light my-2 mx-1",
+        menuButtonIconSelected: "my-2 mx-1 fill-icon-dark-selected dark:fill-icon-light-selected",
+        animation: "animate-appear"
+    },
+    addLinkDialog: {
+        input: "bg-bg-dark dark:bg-bg-light drop-shadow-sm rounded-sm p-2 text-h3-dark dark:text-h3-light text-sm focus:outline-none",
+        animation: "animate-appear"
     },
 };

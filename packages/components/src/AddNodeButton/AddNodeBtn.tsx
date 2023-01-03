@@ -1,24 +1,22 @@
 import React from "react";
 import { AddIcon } from "@veridical/components";
+import { useVeridicalTheme } from "@veridical/utils";
 
 interface AddNodeBtnProps {
     onClick: () => void;
-    style?: {
-        button?: string;
-        icon?: string;
-    };
 }
 
-export default function AddNodeBtn({ onClick, style }: AddNodeBtnProps) {
+export default function AddNodeBtn({ onClick }: AddNodeBtnProps) {
+    const theme = useVeridicalTheme()?.hoverBlockOption?.addNodeButton;
     return (
         <>
             <button
-                className={style?.button || "DefaultAddBtn"}
+                className={theme?.button}
                 onClick={onClick}
             >
                 <AddIcon
                     size="base"
-                    className={style?.icon || "DefaultAddBtnIcon"}
+                    className={theme?.icon}
                 />
             </button>
         </>

@@ -3,6 +3,7 @@ import { EditorThemeClasses } from "lexical/LexicalEditor";
 import { defaultVeridicalTheme } from "./defaultVeridicalTheme";
 
 interface VeridicalThemeClasses extends EditorThemeClasses {
+    editorContainer?: string;
     imageContainer?: string;
     imageSelected?: string;
     imageFallback?: string;
@@ -45,25 +46,35 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         altTextInput?: string;
         actionButtonGroup?: string;
     };
-    highlightMenu?:{
-        menu?: string;
-        menuContainer?: string;
-        menuButton?: string;
-        menuButtonIcon?: string;
-    },
     hoverMenu?: {
         animation?: string;
     };
     hoverBlockOption?: {
         container?: string;
+        addNodeButton?: {
+            button?: string;
+            icon?: string;
+        };
+        dragNodeButton?: {
+            button?: string;
+            icon?: string;
+        };
     };
     imageResizer?: {
         container?: string;
         paddle?: string;
     };
+
     codeActionMenu?: {
         menuLeft?: string;
         menuRight?: string;
+    };
+    highlightMenu?: {
+        menu?: string;
+        menuButton?: string;
+        menuButtonIconSelected?: string;
+        menuButtonIcon?: string;
+        animation?: string;
     };
     codeLanguageSelection?: {
         container?: string;
@@ -79,6 +90,10 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         };
     };
     copyCodeButton?: string;
+    addLinkDialog?: {
+        input?: string;
+        animation?: string;
+    }
 }
 
 const VeridicalThemeContext = React.createContext<
