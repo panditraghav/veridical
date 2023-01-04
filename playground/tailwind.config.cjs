@@ -34,7 +34,6 @@ module.exports = {
 
                 "dialog-bg-dark":"",
                 "dialog-bg-light":"",
-
             },
             keyframes: {
                 appear: {

@@ -1,9 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-const baseDir = `${__dirname}/..`;
-const packagesDir = `${baseDir}/packages`;
-
+const basedir = `${__dirname}/..`;
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
@@ -11,23 +9,23 @@ export default defineConfig({
         alias: [
             {
                 find: "veridical",
-                replacement: `${packagesDir}/veridical/src`,
+                replacement: `${basedir}`,
             },
             {
                 find: "@veridical/plugins",
-                replacement: `${packagesDir}/plugins/src`,
+                replacement: `${basedir}/plugins`,
             },
             {
                 find: "@veridical/nodes",
-                replacement: `${packagesDir}/nodes/src`,
+                replacement: `${basedir}/nodes`,
             },
             {
                 find: "@veridical/components",
-                replacement: `${packagesDir}/components/src`,
+                replacement: `${basedir}/components`,
             },
             {
                 find: "@veridical/utils",
-                replacement: `${packagesDir}/utils/src`,
+                replacement: `${basedir}/utils`,
             },
         ],
     },

@@ -16,12 +16,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "veridical": ["../packages/veridical/src"],
-      "@veridical/plugins": ["../packages/plugins/src"],
-      "@veridical/nodes": ["../packages/nodes/src"],
-      "@veridical/components": ["../packages/components/src"],
-      "@veridical/utils": ["../packages/utils/src"],
-    },                
+      "veridical": [".."],
+      "@veridical/plugins": ["../plugins"],
+      "@veridical/nodes": ["../nodes"],
+      "@veridical/components": ["../components"],
+      "@veridical/utils": ["../utils"]
+    }                
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
