@@ -177,8 +177,14 @@ export let defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     addLinkDialog: {
         input: "bg-bg-dark dark:bg-bg-light" +
-            " drop-shadow-[0_1.5px_2px_#9ca3af] rounded-sm p-2" +
+            " drop-shadow-[0_1.5px_2px_#9ca3af] rounded-md p-2" +
             " text-h3-light dark:text-h3-dark text-sm focus:outline-none",
         animation: "animate-appear"
+    },
+    openLinkDialog: {
+        link: "bg-bg-dark dark:bg-bg-light" +
+            " drop-shadow-[0_1.5px_2px_#9ca3af] rounded-md p-2" +
+            " text-h3-light dark:text-h3-dark text-sm focus:outline-none" +
+            " max-w-44 overflow-hidden text-center animate-appear",
     },
 };

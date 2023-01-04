@@ -18,6 +18,7 @@ import CodeActionMenuRight from "./CodeActionMenuRight";
 import CodeLanguageSelection from "./CodeLanguageSelection";
 import AutoLinkPlugin from "./AutoLinkPlugin";
 import AddLinkDialogPlugin from "./AddLinkDialogPlugin";
+import OpenLinkPlugin from "./OpenLinkPlugin";
 
 export {
     MarkdownPlugin,
@@ -36,6 +37,7 @@ export {
     CodeLanguageSelection,
     AutoLinkPlugin,
     AddLinkDialogPlugin,
+    OpenLinkPlugin,
 };
 
 export { hoverMenuContext, useHoverMenuContext };

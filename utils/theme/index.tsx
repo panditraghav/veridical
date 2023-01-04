@@ -88,7 +88,10 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     addLinkDialog?: {
         input?: string;
         animation?: string;
-    }
+    };
+    openLinkDialog?: {
+        link?: string;
+    };
 }
 
 const VeridicalThemeContext = React.createContext<

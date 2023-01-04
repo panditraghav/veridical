@@ -22,6 +22,7 @@ import {
     CodeLanguageSelection,
     AutoLinkPlugin,
     AddLinkDialogPlugin,
+    OpenLinkPlugin
 } from "./plugins";
 
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
@@ -114,6 +115,7 @@ function VeridicalEditorPlugins() {
             <AddNodeShortcutPlugin />
             <MarkdownPlugin />
             <ImagePlugin maxWidth={740} />
+            <OpenLinkPlugin />
         </>
     )
 }
