@@ -16,6 +16,9 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "./packages/**/*",
+    "./components/**/*",
+    "./plugins/**/*",
+    "./nodes/**/*",
+    "./utils/**/*",
   ]
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AddNodeBtn from "./AddNodeBtn";
-import { AddNodeDialog, NodeOption } from "@veridical/components";
+import { AddNodeDialog, NodeOption } from "..";
 import { useHoverMenuContext } from "@veridical/plugins";
 
 export default function AddNodeButton({

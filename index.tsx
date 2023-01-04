@@ -22,7 +22,7 @@ import {
     CodeLanguageSelection,
     AutoLinkPlugin,
     AddLinkDialogPlugin,
-} from "@veridical/plugins";
+} from "./plugins";
 
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
@@ -31,15 +31,15 @@ import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
 import {
     defaultVeridicalTheme,
     VeridicalThemeComposer,
-} from "@veridical/utils";
-import type { VeridicalThemeClasses } from "@veridical/utils";
+} from "./utils";
+import type { VeridicalThemeClasses } from "./utils/";
 import {
     Placeholder,
     AddNodeButton,
     DraggableNodeButton,
     CopyCodeButton,
-} from "@veridical/components";
-import { defaultEditorNodes } from "@veridical/nodes";
+} from "./components/";
+import { defaultEditorNodes } from "./nodes";
 
 type InitialConfig = Readonly<{
     namespace?: string;

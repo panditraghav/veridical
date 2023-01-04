@@ -1,4 +1,4 @@
-import { ExpandMoreIcon } from "@veridical/components";
+import { ExpandMoreIcon } from "../../components";
 import React, { useEffect, useState, useRef } from "react";
 import { useVeridicalTheme } from "@veridical/utils";
 import { useHoverMenuContext } from "..";

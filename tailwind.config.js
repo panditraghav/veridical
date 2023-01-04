@@ -2,7 +2,7 @@
 module.exports = {
     darkMode: "class",
     content: [
-        "**/*.{js,ts,jsx,tsx}",
+        "./utils/theme/defaultVeridicalTheme.ts",
     ],
     theme: {
         extend: {

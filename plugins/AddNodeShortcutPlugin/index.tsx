@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AddNodeDialog } from "@veridical/components";
+import { AddNodeDialog } from "../../components";
 import { LexicalNode, $getSelection } from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 

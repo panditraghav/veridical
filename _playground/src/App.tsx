@@ -1,4 +1,6 @@
 import "./main.css"
+import "../../style/editor.css"
+import "../../style/editor_old.css"
 import Editor from "./Editor";
 import { useEffect, useState } from "react";
 

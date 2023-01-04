@@ -13,8 +13,9 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
     FormatBoldIcon,
     FormatItalicIcon,
-    FormatUnderlineIcon, LinkIcon
-} from "@veridical/components"
+    FormatUnderlineIcon,
+    LinkIcon
+} from "../../components"
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
 
 const OFFSET_Y = -50;

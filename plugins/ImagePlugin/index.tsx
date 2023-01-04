@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { LexicalEditor, $getNodeByKey } from "lexical";
 import { $isImageNode, ImageNode } from "@veridical/nodes";
-import { AddImageDialog } from "@veridical/components";
+import { AddImageDialog } from "../../components";
 
 function useImagePlugin(editor: LexicalEditor, maxWidth: number) {
     const [imageNodeKey, setImageNodeKey] = useState<string | null>(null);

@@ -10,7 +10,7 @@ import {
 } from "lexical";
 import React from "react";
 
-import { ImageComponent } from "@veridical/components";
+import { ImageComponent } from "../components";
 
 type SerializedImageNode = {
     altText: string;

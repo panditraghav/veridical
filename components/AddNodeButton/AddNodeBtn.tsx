@@ -1,5 +1,5 @@
 import React from "react";
-import { AddIcon } from "@veridical/components";
+import { AddIcon } from "..";
 import { useVeridicalTheme } from "@veridical/utils";
 
 interface AddNodeBtnProps {
