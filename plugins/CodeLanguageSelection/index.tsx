@@ -1,6 +1,6 @@
 import { ExpandMoreIcon } from "../../components";
 import React, { useEffect, useState, useRef } from "react";
-import { useVeridicalTheme } from "@veridical/utils";
+import { useVeridicalTheme } from "../../utils";
 import { useHoverMenuContext } from "..";
 import { $isCodeNode } from "@lexical/code";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";

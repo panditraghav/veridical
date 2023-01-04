@@ -1,7 +1,7 @@
 import React, {useRef, useCallback, useEffect} from "react";
 import { NodeOption } from "./DefaultNodeOptions";
 import {LexicalNode, LexicalEditor} from "lexical"
-import { useVeridicalTheme } from "@veridical/utils";
+import { useVeridicalTheme } from "../..//utils";
 
 export default function Option({
     option,

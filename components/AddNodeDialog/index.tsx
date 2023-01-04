@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import Backdrop from "../Backdrop";
 import DialogAnimation from "../DialogAnimation";
 import { LexicalNode } from "lexical";
-import { useVeridicalTheme } from "@veridical/utils";
+import { useVeridicalTheme } from "../../utils";
 import NodeOptions from "./NodeOptions";
 import { defaultNodeOptions } from "./DefaultNodeOptions";
 import type { NodeOption } from "./DefaultNodeOptions";

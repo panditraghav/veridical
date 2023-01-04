@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 import { AddIcon, ImageIcon } from "..";
-import { useVeridicalTheme } from "@veridical/utils";
+import { useVeridicalTheme } from "../../utils";
 import { Backdrop, Button, DialogAnimation } from "..";
 import OverlayContainer from "../OverlayContainer";
 

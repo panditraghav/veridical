@@ -10,7 +10,7 @@ import {
     Offset,
     useVeridicalTheme,
     VeridicalThemeClasses,
-} from "@veridical/utils";
+} from "../../utils";
 import { useHoverMenuContext, hoverMenuContext } from "./hoverMenuContext";
 
 function isOverlay(ev: MouseEvent): boolean {

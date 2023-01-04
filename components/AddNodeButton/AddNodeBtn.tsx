@@ -1,6 +1,6 @@
 import React from "react";
 import { AddIcon } from "..";
-import { useVeridicalTheme } from "@veridical/utils";
+import { useVeridicalTheme } from "../../utils";
 
 interface AddNodeBtnProps {
     onClick: () => void;

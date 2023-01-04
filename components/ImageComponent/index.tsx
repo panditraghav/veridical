@@ -27,8 +27,8 @@ import {
     $setSelection,
     $createNodeSelection,
 } from "lexical";
-import { $isImageNode } from "@veridical/nodes";
-import { useVeridicalTheme } from "@veridical/utils";
+import { $isImageNode } from "../../nodes";
+import { useVeridicalTheme } from "../../utils";
 
 function hasClickOnImage(
     event: MouseEvent,

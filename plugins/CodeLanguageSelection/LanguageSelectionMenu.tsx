@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { OverlayContainer } from "../../components";
-import { VeridicalThemeClasses, useVeridicalTheme } from "@veridical/utils";
+import { VeridicalThemeClasses, useVeridicalTheme } from "../../utils";
 
 export type Language = { name: string; value: string };
 

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
-import { useVeridicalTheme } from "@veridical/utils";
-import { useHoverMenuContext } from "@veridical/plugins";
+import { useVeridicalTheme } from "../..//utils";
+import { useHoverMenuContext } from "../../plugins";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $isCodeNode } from "@lexical/code";
 

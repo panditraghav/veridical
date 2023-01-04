@@ -1,8 +1,8 @@
-import { Veridical, VeridicalEditorPlugins } from "veridical";
-import { TreeViewPlugin } from "@veridical/plugins";
+import { Veridical, VeridicalEditorPlugins } from "../../";
+import { TreeViewPlugin } from "../../plugins";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useEffect } from "react";
-import { defaultVeridicalTheme } from "@veridical/utils";
+import { defaultVeridicalTheme } from "../../utils";
 
 function EditorStatePlugin() {
     const [editor] = useLexicalComposerContext();

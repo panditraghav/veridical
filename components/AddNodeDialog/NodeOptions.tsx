@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { LexicalNode, LexicalEditor } from "lexical";
 import { NodeOption } from "./DefaultNodeOptions";
-import { useVeridicalTheme } from "@veridical/utils";
+import { useVeridicalTheme } from "../../utils";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import Option from "./Option";
 

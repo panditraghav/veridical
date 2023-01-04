@@ -1,7 +1,6 @@
-import { useVeridicalTheme } from "@veridical/utils";
+import { useVeridicalTheme, Offset } from "../../utils";
 import React, { useEffect, useRef } from "react";
 import { useHoverMenuContext } from "..";
-import { Offset } from "@veridical/utils";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 function setMenuPosition(

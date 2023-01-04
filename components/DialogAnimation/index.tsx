@@ -1,5 +1,5 @@
 import React from "react";
-import { useVeridicalTheme } from "@veridical/utils";
+import { useVeridicalTheme } from "../../utils";
 
 interface DialogProps {
     children: React.ReactNode;

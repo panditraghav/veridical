@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { useVeridicalTheme } from "@veridical/utils";
+import { useVeridicalTheme } from "../..//utils";
 
 export default function Backdrop({
     children,
