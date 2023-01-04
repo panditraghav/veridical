@@ -4,6 +4,7 @@ import { defaultVeridicalTheme } from "./defaultVeridicalTheme";
 
 interface VeridicalThemeClasses extends EditorThemeClasses {
     editorContainer?: string;
+    contentEditable?: string;
     imageContainer?: string;
     imageSelected?: string;
     imageFallback?: string;
@@ -51,14 +52,8 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     };
     hoverBlockOption?: {
         container?: string;
-        addNodeButton?: {
-            button?: string;
-            icon?: string;
-        };
-        dragNodeButton?: {
-            button?: string;
-            icon?: string;
-        };
+        button?: string;
+        icon?: string;
     };
     imageResizer?: {
         container?: string;

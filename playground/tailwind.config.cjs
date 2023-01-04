@@ -9,28 +9,31 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                "bg-dark": "#0d0d0d",
+                "bg-dark": "#171717",
                 "bg-light": "#f5f5f5",
 
-                "title-dark": "#f5f5f5",
-                "title-light": "#0d0d0d",
+                "title-light": "#f5f5f5",
+                "title-dark": "#0d0d0d",
 
-                "h2-dark": "#f5f5f5",
-                "h2-light": "#0d0d0d",
+                "h2-light": "#f5f5f5",
+                "h2-dark": "#0d0d0d",
 
-                "h3-dark": "#e3e3e3",
-                "h3-light": "#1c1c1c",
+                "h3-light": "#e3e3e3",
+                "h3-dark": "#1c1c1c",
 
-                "p-dark": "#e3e3e3",
-                "p-light": "#1c1c1c",
+                "p-light": "#e3e3e3",
+                "p-dark": "#1c1c1c",
 
-                "icon-dark": "#94a3b8",
-                "icon-dark-hover": "#f1f5f9",
-                "icon-dark-selected": "#f87171",
+                "icon-light": "#e5e7eb",
+                "icon-light-hover": "#f9fafb",
+                "icon-light-selected": "#fb923c",
 
-                "icon-light": "#64748b",
-                "icon-light-hover": "#0f172a",
-                "icon-light-selected": "#f87171",
+                "icon-dark": "#374151",
+                "icon-dark-hover": "#1f2937",
+                "icon-dark-selected": "#fb923c",
+
+                "dialog-bg-dark":"",
+                "dialog-bg-light":"",
 
             },
             keyframes: {

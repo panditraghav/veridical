@@ -7,7 +7,7 @@ interface AddNodeBtnProps {
 }
 
 export default function AddNodeBtn({ onClick }: AddNodeBtnProps) {
-    const theme = useVeridicalTheme()?.hoverBlockOption?.addNodeButton;
+    const theme = useVeridicalTheme()?.hoverBlockOption;
     return (
         <>
             <button

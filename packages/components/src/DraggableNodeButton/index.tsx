@@ -92,7 +92,7 @@ export default function DraggableNodeButton() {
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const targetLineRef = useRef<HTMLDivElement | null>(null);
     const [isDragging, setIsDragging] = useState(false);
-    const theme = useVeridicalTheme()?.hoverBlockOption?.dragNodeButton;
+    const theme = useVeridicalTheme()?.hoverBlockOption;
 
     const onDragOver = useCallback(
         (ev: DragEvent) => {

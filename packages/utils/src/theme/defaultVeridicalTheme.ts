@@ -39,9 +39,9 @@ export let defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     hashtag: "DefaultEditorTheme__hashtag",
     heading: {
-        h1: "text-6xl text-title-light dark:text-title-dark font-bold mt-8 mb-12",
-        h2: "text-5xl font-bold text-h2-light dark:text-h2-dark my-6",
-        h3: "text-3xl font-semibold text-h3-light dark:text-h3-dark my-4",
+        h1: "text-6xl text-title-dark font-bold mt-8 mb-12 dark:text-title-light",
+        h2: "text-5xl font-bold text-h2-dark dark:text-h2-light my-6",
+        h3: "text-3xl font-semibold text-h3-dark dark:text-h3-light my-4",
     },
     image: "DefaultVeridicalImage",
     imageSelected: "DefaultVeridicalImageSelected",
@@ -51,7 +51,7 @@ export let defaultVeridicalTheme: VeridicalThemeClasses = {
     list: {
         ol: "my-2 pl-8",
         ul: "my-2 pl-8",
-        listitem: "text-xl my-1 mx-2 text-p-light dark:text-p-dark",
+        listitem: "text-xl my-1 mx-2 text-p-dark dark:text-p-light",
         listitemChecked: "DefaultEditorTheme__listItemChecked",
         listitemUnchecked: "DefaultEditorTheme__listItemUnchecked",
         nested: {
@@ -74,7 +74,7 @@ export let defaultVeridicalTheme: VeridicalThemeClasses = {
     ltr: "DefaultEditorTheme__ltr",
     mark: "DefaultEditorTheme__mark",
     markOverlap: "DefaultEditorTheme__markOverlap",
-    paragraph: "text-xl text-p-light dark:text-p-dark my-2",
+    paragraph: "text-xl text-p-dark dark:text-p-light my-2",
     quote: "DefaultEditorTheme__quote",
     rtl: "DefaultEditorTheme__rtl",
     table: "DefaultEditorTheme__table",
@@ -135,14 +135,10 @@ export let defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     hoverBlockOption: {
         container: "flex",
-        addNodeButton: {
-            button: "bg-transparent border-none flex justify-center items-center",
-            icon: "dark:fill-icon-dark dark:hover:fill-icon-dark-hover fill-icon-light hover:fill-icon-light-hover"
-        },
-        dragNodeButton: {
-            button: "bg-transparent border-none flex justify-center items-center hover:cursor-pointer",
-            icon: "dark:fill-icon-dark dark:hover:fill-icon-dark-hover fill-icon-light hover:fill-icon-light-hover"
-        }
+        button: "bg-transparent border-none flex \
+            justify-center items-center",
+        icon: "fill-icon-dark hover:fill-icon-dark-hover \
+            dark:fill-icon-light dark:hover:fill-icon-light-hover"
     },
     imageResizer: {
         container: "DefaultImageResizerContainer",
@@ -167,14 +163,22 @@ export let defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     copyCodeButton: "DefaultCopyCodeButton",
     highlightMenu: {
-        menu: "bg-bg-dark dark:bg-bg-light flex rounded-md drop-shadow-sm",
-        menuButton: "bg-transparent cursor-pointer border-none p-0 my-0.5 mx-0",
-        menuButtonIcon: "fill-icon-dark-hover dark:fill-icon-light my-2 mx-1",
-        menuButtonIconSelected: "my-2 mx-1 fill-icon-dark-selected dark:fill-icon-light-selected",
+        menu: "bg-bg-dark dark:bg-bg-light flex" +
+            " rounded-md dark:drop-shadow-[0_1.5px_2px_#e5e7eb]" +
+            " drop-shadow-[0_1.5px_2px_#1e293b]",
+        menuButton: "bg-transparent cursor-pointer" +
+            " border-none p-0 my-0.5 mx-0",
+        menuButtonIcon: "fill-icon-light dark:fill-icon-dark" +
+            " dark:hover:fill-icon-dark-hover" +
+            " hover:fill-icon-light-hover my-2 mx-1",
+        menuButtonIconSelected: "my-2 mx-1 fill-icon-light-selected" +
+            " dark:fill-icon-light-selected",
         animation: "animate-appear"
     },
     addLinkDialog: {
-        input: "bg-bg-dark dark:bg-bg-light drop-shadow-sm rounded-sm p-2 text-h3-dark dark:text-h3-light text-sm focus:outline-none",
+        input: "bg-bg-dark dark:bg-bg-light" +
+            " drop-shadow-[0_1.5px_2px_#9ca3af] rounded-sm p-2" +
+            " text-h3-light dark:text-h3-dark text-sm focus:outline-none",
         animation: "animate-appear"
     },
 };

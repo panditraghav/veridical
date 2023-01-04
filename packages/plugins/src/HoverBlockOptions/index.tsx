@@ -1,4 +1,4 @@
-import { useVeridicalTheme, VeridicalThemeClasses } from "@veridical/utils";
+import { useVeridicalTheme } from "@veridical/utils";
 import React, { useEffect, useRef } from "react";
 import { useHoverMenuContext } from "..";
 import { Offset } from "@veridical/utils";
@@ -16,7 +16,7 @@ function setMenuPosition(
         return;
     }
     const elementRect = element.getBoundingClientRect();
-    const { x: elementX, y: elementY, height } = elementRect;
+    const { x: elementX, y: elementY } = elementRect;
 
     menu.style.left = `${elementX + (offset?.left || 0)}px`;
     menu.style.top = `${elementY + (offset?.top || 0) + window.scrollY}px`;
