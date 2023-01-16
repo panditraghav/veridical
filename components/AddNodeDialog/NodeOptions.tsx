@@ -50,7 +50,7 @@ export default function NodeOptions({
     nodeOptions,
     onClose,
 }: NodeOptionsProps) {
-    const theme = useVeridicalTheme();
+    const theme = useVeridicalTheme()?.addNodeDialog;
     const [sortedNodeOptions] = useSorteNodeOptions(nodeOptions, searchText);
     const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
     const [editor] = useLexicalComposerContext();
@@ -94,7 +94,7 @@ export default function NodeOptions({
     }, [sortedNodeOptions, selectedNode, selectedOptionIndex]);
 
     return (
-        <div className={theme?.addNodeDialog?.nodeOptions}>
+        <div className={theme?.nodeOptions}>
             {sortedNodeOptions.map((option) => {
                 return (
                     <Option

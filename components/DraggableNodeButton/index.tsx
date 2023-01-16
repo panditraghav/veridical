@@ -139,7 +139,7 @@ export default function DraggableNodeButton() {
         [editor]
     );
 
-    function onDragStart(ev: React.DragEvent<HTMLDivElement>) {
+    function onDragStart(ev: React.DragEvent<HTMLButtonElement>) {
         const dt = ev.dataTransfer;
         if (!dt || !hoveredDOMNode) return;
         setIsDragging(true);
@@ -168,7 +168,7 @@ export default function DraggableNodeButton() {
 
     return (
         <>
-            <div
+            <button
                 className={theme?.button}
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
@@ -178,7 +178,7 @@ export default function DraggableNodeButton() {
                     size="base"
                     className={theme?.icon}
                 />
-            </div>
+            </button>
             <TargetLine
                 className={
                     "DefaultDraggableNodeButton_targetLine"

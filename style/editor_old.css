@@ -238,13 +238,10 @@
 
 .DefaultVeridicalAddNodeDialog {
     font-family: "Poppins", sans-serif;
-    width: auto;
     border-radius: 3px;
     background: white;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .DefaultAddNodeDialogNodeOptionsContainer {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
 
 import { AddIcon, ImageIcon } from "..";
 import { useVeridicalTheme } from "../../utils";
-import { Backdrop, Button, DialogAnimation } from "..";
-import OverlayContainer from "../OverlayContainer";
+import { Button } from "..";
+import Dialog from "../Dialog";
+import { DialogContentContainer } from "..";
 
 export interface AddImageDialogStyle {
     backdrop?: string;
@@ -20,14 +20,12 @@ export interface AddImageDialogProps {
         height: number,
         width: number
     ) => void;
-    style?: AddImageDialogStyle;
 }
 
 export default function AddImageDialog({
     showDialog,
     onClose,
     onSave,
-    style,
 }: AddImageDialogProps) {
     const theme = useVeridicalTheme();
     const [src, setSrc] = useState("");
@@ -91,83 +89,81 @@ export default function AddImageDialog({
         }
     }
 
-    if (!showDialog) return null;
 
-    return createPortal(
-        <OverlayContainer>
-            <Backdrop onClose={onClose}>
-                <DialogAnimation>
-                    <div
-                        className={`${theme?.addImageDialog?.dialog} ${theme?.dialog?.dialog}`}
+    return (
+        <Dialog
+            showDialog={showDialog}
+            onClose={onClose}
+            width={430}
+            height={"auto"}
+            anchorElement={document.body}
+        >
+            <DialogContentContainer>
+                <div className={theme?.addImageDialog?.title}>
+                    <ImageIcon
+                        size="base"
+                        className={"DefaultAddImageDialogIcon"}
+                    />
+                    <span>Add an image</span>
+                </div>
+                <div
+                    className={
+                        theme?.addImageDialog?.imageInput?.container
+                    }
+                >
+                    <input
+                        type="url"
+                        placeholder="Enter image url"
+                        name="Image url"
+                        value={src}
+                        onChange={(e) => setSrc(e.target.value)}
+                        className={
+                            theme?.addImageDialog?.imageInput?.urlInput
+                        }
+                    />
+                    <label
+                        htmlFor="DefaultAddImageDialog_ImageFileInput"
+                        className={
+                            theme?.addImageDialog?.imageInput
+                                ?.fileInputLabel
+                        }
                     >
-                        <div className={theme?.addImageDialog?.title}>
-                            <ImageIcon
-                                size="base"
-                                className={"DefaultAddImageDialogIcon"}
-                            />
-                            <span>Add an image</span>
-                        </div>
-                        <div
-                            className={
-                                theme?.addImageDialog?.imageInput?.container
-                            }
-                        >
-                            <input
-                                type="url"
-                                placeholder="Enter image url"
-                                name="Image url"
-                                value={src}
-                                onChange={(e) => setSrc(e.target.value)}
-                                className={
-                                    theme?.addImageDialog?.imageInput?.urlInput
-                                }
-                            />
-                            <label
-                                htmlFor="DefaultAddImageDialog_ImageFileInput"
-                                className={
-                                    theme?.addImageDialog?.imageInput
-                                        ?.fileInputLabel
-                                }
-                            >
-                                <AddIcon size="base" />
-                                <div>Choose a file</div>
-                            </label>
-                            <input
-                                type="file"
-                                id="DefaultAddImageDialog_ImageFileInput"
-                                className={
-                                    theme?.addImageDialog?.imageInput?.fileInput
-                                }
-                                onChange={handleImageSelection}
-                                accept="image/png, image/jpeg"
-                            />
-                        </div>
-                        <input
-                            type="text"
-                            name="Alternative text"
-                            value={altText}
-                            onChange={(e) => setAltText(e.target.value)}
-                            placeholder="Alternative text"
-                            className={theme?.addImageDialog?.altTextInput}
-                        />
-                        <div
-                            className={theme?.addImageDialog?.actionButtonGroup}
-                        >
-                            <Button
-                                type="primary"
-                                onClick={handleSave}
-                                isDisabled={isLoading}
-                            >
-                                {"Save"}
-                            </Button>
-                            <Button type="secondary" onClick={onClose}>
-                                {"Cancel"}
-                            </Button>
-                        </div>
-                    </div>
-                </DialogAnimation>
-            </Backdrop>
-        </OverlayContainer>,
-        document.body
-    );
+                        <AddIcon size="base" />
+                        <div>Choose a file</div>
+                    </label>
+                    <input
+                        type="file"
+                        id="DefaultAddImageDialog_ImageFileInput"
+                        className={
+                            theme?.addImageDialog?.imageInput?.fileInput
+                        }
+                        onChange={handleImageSelection}
+                        accept="image/png, image/jpeg"
+                    />
+                </div>
+                <input
+                    type="text"
+                    name="Alternative text"
+                    value={altText}
+                    onChange={(e) => setAltText(e.target.value)}
+                    placeholder="Alternative text"
+                    className={theme?.addImageDialog?.altTextInput}
+                />
+                <div
+                    className={theme?.addImageDialog?.actionButtonGroup}
+                >
+                    <Button
+                        type="primary"
+                        onClick={handleSave}
+                        isDisabled={isLoading}
+                    >
+                        {"Save"}
+                    </Button>
+                    <Button type="secondary" onClick={onClose}>
+                        {"Cancel"}
+                    </Button>
+                </div>
+            </DialogContentContainer>
+        </Dialog>
+    )
 }

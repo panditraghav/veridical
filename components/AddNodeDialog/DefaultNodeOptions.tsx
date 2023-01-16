@@ -1,11 +1,12 @@
-import React from "react";
-import { $createHeadingNode } from "@lexical/rich-text";
+import React from 'react';
+import { $createHeadingNode } from '@lexical/rich-text';
 import {
     LexicalNode,
     $createTextNode,
     $isParagraphNode,
     $createParagraphNode,
-} from "lexical";
+    $isRootNode,
+} from 'lexical';
 import {
     CodeIcon,
     H1Icon,
@@ -14,10 +15,10 @@ import {
     ImageIcon,
     OlIcon,
     UlIcon,
-} from "..";
-import { $createImageNode } from "../../nodes";
-import { $createCodeNode } from "@lexical/code";
-import { $createListItemNode, $createListNode } from "@lexical/list";
+} from '..';
+import { $createImageNode } from '../../nodes';
+import { $createCodeNode } from '@lexical/code';
+import { $createListItemNode, $createListNode } from '@lexical/list';
 
 export type NodeOption = {
     name: string;
@@ -27,84 +28,114 @@ export type NodeOption = {
     icon: JSX.Element;
 };
 
+function getTopLevelParent(node: LexicalNode): LexicalNode | null {
+    let parent = node.getParent();
+    if ($isRootNode(parent)) return parent;
+
+    while (parent && !$isRootNode(parent.getParent())) {
+        parent = parent.getParent();
+    }
+    return parent;
+}
+
 const TEXT_OPTIONS: NodeOption[] = [
     {
-        name: "Heading 1",
-        shortName: "h1",
-        description: "Highest level heading or title",
-        nodeCreator: (node) => {
-            const h1 = $createHeadingNode("h1");
-            h1.append($createTextNode(""));
-            if (node.getTextContent() === "" && $isParagraphNode(node)) {
-                node.replace(h1);
+        name: 'Title',
+        shortName: 'h1',
+        description: 'Title of blog',
+        nodeCreator: (selectedNode) => {
+            const h1 = $createHeadingNode('h1');
+            h1.append($createTextNode(''));
+            const topParent = getTopLevelParent(selectedNode);
+            if (
+                topParent?.getTextContent() === '' &&
+                $isParagraphNode(topParent)
+            ) {
+                topParent.replace(h1);
             } else {
-                node.insertAfter(h1);
+                topParent?.insertAfter(h1);
             }
             h1.select(0, 0);
         },
         icon: <H1Icon size="md" />,
     },
     {
-        name: "Heading 2",
-        shortName: "h2",
-        description: "Second level heading",
-        nodeCreator: (node) => {
-            const h2 = $createHeadingNode("h2");
-            h2.append($createTextNode(""));
-            if (node.getTextContent() === "" && $isParagraphNode(node)) {
-                node.replace(h2);
+        name: 'Heading 2',
+        shortName: 'h2',
+        description: 'Second level heading',
+        nodeCreator: (selectedNode) => {
+            const h2 = $createHeadingNode('h2');
+            h2.append($createTextNode(''));
+            const topParent = getTopLevelParent(selectedNode);
+            if (
+                $isParagraphNode(topParent) &&
+                topParent?.getTextContent() === ''
+            ) {
+                topParent.replace(h2);
             } else {
-                node.insertAfter(h2);
+                topParent?.insertAfter(h2);
             }
             h2.select(0, 0);
         },
         icon: <H2Icon size="md" />,
     },
     {
-        name: "Heading 3",
-        shortName: "h3",
-        description: "Third level heading",
-        nodeCreator: (node) => {
-            const h3 = $createHeadingNode("h3");
-            h3.append($createTextNode(""));
-            if (node.getTextContent() === "" && $isParagraphNode(node)) {
-                node.replace(h3);
+        name: 'Heading 3',
+        shortName: 'h3',
+        description: 'Third level heading',
+        nodeCreator: (selectedNode) => {
+            const h3 = $createHeadingNode('h3');
+            h3.append($createTextNode(''));
+            const topParent = getTopLevelParent(selectedNode);
+            if (
+                $isParagraphNode(topParent) &&
+                topParent.getTextContent() === ''
+            ) {
+                topParent.replace(h3);
             } else {
-                node.insertAfter(h3);
+                topParent?.insertAfter(h3);
             }
             h3.select(0, 0);
         },
         icon: <H3Icon size="md" />,
     },
     {
-        name: "Unordered List",
-        shortName: "ul",
-        description: "List with bullet points",
+        name: 'Unordered List',
+        shortName: 'ul',
+        description: 'List with bullet points',
         nodeCreator: (node) => {
-            const ul = $createListNode("bullet");
+            const ul = $createListNode('bullet');
             const li = $createListItemNode();
             ul.append(li);
-            if (node.getTextContent() === "" && $isParagraphNode(node)) {
-                node.replace(ul);
+            const topParent = getTopLevelParent(node);
+            if (
+                $isParagraphNode(topParent) &&
+                topParent.getTextContent() === ''
+            ) {
+                topParent.replace(ul);
             } else {
-                node.insertAfter(ul);
+                topParent?.insertAfter(ul);
             }
             li.select(0, 0);
         },
         icon: <UlIcon size="md" />,
     },
     {
-        name: "Ordered List",
-        shortName: "ol",
-        description: "List with numbers points",
+        name: 'Ordered List',
+        shortName: 'ol',
+        description: 'List with numbers points',
         nodeCreator: (node) => {
-            const ol = $createListNode("number");
+            const ol = $createListNode('number');
             const li = $createListItemNode();
             ol.append(li);
-            if (node.getTextContent() === "" && $isParagraphNode(node)) {
-                node.replace(ol);
+            const topParent = getTopLevelParent(node);
+            if (
+                $isParagraphNode(topParent) &&
+                topParent.getTextContent() === ''
+            ) {
+                topParent.replace(ol);
             } else {
-                node.insertAfter(ol);
+                topParent?.insertAfter(ol);
             }
             li.select(0, 0);
         },
@@ -114,22 +145,26 @@ const TEXT_OPTIONS: NodeOption[] = [
 
 const BLOCK_OPTIONS: NodeOption[] = [
     {
-        name: "Image",
-        shortName: "img",
-        description: "Image node",
+        name: 'Image',
+        shortName: 'img',
+        description: 'Image node',
         nodeCreator(node) {
             const img = $createImageNode({
-                src: "",
-                altText: "",
+                src: '',
+                altText: '',
                 width: 1,
                 height: 1,
             });
-            if ($isParagraphNode(node) && node.getTextContent() == "") {
-                node.insertBefore(img);
+            const topParent = getTopLevelParent(node);
+            if (
+                $isParagraphNode(topParent) &&
+                topParent.getTextContent() == ''
+            ) {
+                topParent.insertBefore(img);
             } else {
-                node.insertAfter(img);
+                topParent?.insertAfter(img);
                 const p = $createParagraphNode();
-                p.append($createTextNode(""));
+                p.append($createTextNode(''));
                 img.insertAfter(p);
                 p.select(0, 0);
             }
@@ -137,15 +172,19 @@ const BLOCK_OPTIONS: NodeOption[] = [
         icon: <ImageIcon size="md" />,
     },
     {
-        name: "Code",
-        shortName: "code",
-        description: "Write code",
+        name: 'Code',
+        shortName: 'code',
+        description: 'Write code',
         nodeCreator(node) {
-            const code = $createCodeNode("JavaScript");
-            if ($isParagraphNode(node) && node.getTextContent() == "") {
-                node.replace(code);
+            const code = $createCodeNode('JavaScript');
+            const topParent = getTopLevelParent(node);
+            if (
+                $isParagraphNode(topParent) &&
+                topParent.getTextContent() == ''
+            ) {
+                topParent.replace(code);
             } else {
-                node.insertAfter(code);
+                topParent?.insertAfter(code);
             }
             code.select(0, 0);
         },

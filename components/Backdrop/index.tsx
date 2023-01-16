@@ -3,11 +3,9 @@ import { useVeridicalTheme } from "../..//utils";
 
 export default function Backdrop({
     children,
-    className,
     onClose,
 }: {
     children?: React.ReactNode;
-    className?: string;
     onClose: () => void;
 }) {
     const backdropRef = useRef<HTMLDivElement | null>(null);

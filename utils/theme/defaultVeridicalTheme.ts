@@ -94,8 +94,8 @@ export let defaultVeridicalTheme: VeridicalThemeClasses = {
     placeholder: "DefaultEditorTheme__Placeholder",
     backdrop: "DefaultVeridicalBackdrop",
     dialog: {
-        dialog: "DefaultVeridicalDialog",
-        animation: "DefaultVeridicalDialogAnimation",
+        dialog: "box-border bg-dialog-bg-light dark:bg-dialog-bg-dark flex flex-col rounded-md animate-appear",
+        contentContainer: "py-2 px-4"
     },
     button: {
         base: "DefaultButton",
@@ -104,17 +104,17 @@ export let defaultVeridicalTheme: VeridicalThemeClasses = {
         disabled: "DefaultButton_Disabled",
     },
     addNodeDialog: {
-        dialog: "DefaultVeridicalAddNodeDialog",
-        searchInput: "DefaultAddNodeDialogSearchInput",
-        nodeOptions: "DefaultAddNodeDialogNodeOptionsContainer",
+        dialog: "rounded-md w-auto bg-dialog-bg-light flex flex-col items-center dark:bg-dialog-bg-dark drop-shadow-md dark:drop-shadow-[0_35px_35px_#27272a]",
+        searchInput: "outline-none w-[95%] dark:bg-dialog-bg-dark dark:text-p-light drop-shadow-sm rounded-md py-2 px-3 my-3",
+        nodeOptions: "overflow-y-scroll h-[290px] w-[300px]",
         nodeOption: {
-            selected: "DefaultAddNodeDialogOptionSelected",
-            container: "DefaultAddNodeDialogNodeOption",
-            icon: "DefaultAddNodeDialogNodeOptionImage",
+            selected: "bg-item-selected-dark",
+            container: "flex my-1 py-2 px-2 mx-2 rounded-md hover:cursor-pointer dark:hover:bg-item-selected-dark",
+            icon: "w-10 h-10 fill-icon-dark-hover dark:fill-icon-light-hover",
             text: {
-                container: "DefaultAddNodeDialogNodeOptionText",
-                name: "DefaultAddNodeDialogNodeOptionName",
-                description: "DefaultAddNodeDialogNodeOptionDescription",
+                container: "px-3",
+                name: "text-xl font-medium dark:text-title-light",
+                description: "text-sm text-p-light dark:text-p-light",
             },
         },
     },
@@ -135,10 +135,8 @@ export let defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     hoverBlockOption: {
         container: "flex",
-        button: "bg-transparent border-none flex \
-            justify-center items-center",
-        icon: "fill-icon-dark hover:fill-icon-dark-hover \
-            dark:fill-icon-light dark:hover:fill-icon-light-hover"
+        button: "bg-transparent border-none flex justify-center items-center",
+        icon: "fill-icon-dark hover:fill-icon-dark-hover dark:fill-icon-light dark:hover:fill-icon-light-hover"
     },
     imageResizer: {
         container: "DefaultImageResizerContainer",

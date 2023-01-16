@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
-import Backdrop from "../Backdrop";
-import DialogAnimation from "../DialogAnimation";
 import { LexicalNode } from "lexical";
 import { useVeridicalTheme } from "../../utils";
 import NodeOptions from "./NodeOptions";
 import { defaultNodeOptions } from "./DefaultNodeOptions";
 import type { NodeOption } from "./DefaultNodeOptions";
-import OverlayContainer from "../OverlayContainer";
+import Dialog from "../Dialog";
 
 interface AddNodeDialogProps {
     isOpen: boolean;
@@ -39,32 +36,32 @@ export default function AddNodeDialog({
         return () => document.removeEventListener("keydown", escapeListener);
     });
 
-    if (!isOpen) return null;
-    return createPortal(
-        <OverlayContainer>
-            <Backdrop onClose={onClose}>
-                <DialogAnimation>
-                    <div className={theme?.addNodeDialog?.dialog}>
-                        <input
-                            placeholder="Search"
-                            type="text"
-                            value={searchText}
-                            onChange={(e) => setSearchText(e.target.value)}
-                            className={theme?.addNodeDialog?.searchInput}
-                            autoFocus
-                        />
-                        <NodeOptions
-                            onClose={onClose}
-                            searchText={searchText}
-                            selectedNode={selectedNode}
-                            nodeOptions={nodeOptions}
-                        />
-                    </div>
-                </DialogAnimation>
-            </Backdrop>
-        </OverlayContainer>,
-        document.body
-    );
+    return (
+        <Dialog
+            showDialog={isOpen}
+            onClose={onClose}
+            width="auto"
+            height="auto"
+            anchorElement={document.body}
+        >
+            <input
+                placeholder="Search"
+                type="text"
+                value={searchText}
+                onChange={(e) => {
+                    setSearchText(e.target.value)
+                }}
+                className={theme?.addNodeDialog?.searchInput}
+                autoFocus
+            />
+            <NodeOptions
+                onClose={onClose}
+                searchText={searchText}
+                selectedNode={selectedNode}
+                nodeOptions={nodeOptions}
+            />
+        </Dialog>
+    )
 }
 
 export type { NodeOption };

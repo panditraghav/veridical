@@ -12,7 +12,8 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     backdrop?: string;
     dialog?: {
         dialog?: string;
-        animation?: string;
+        contentContainer?: string;
+        title?: string;
     };
     button?: {
         base?: string;

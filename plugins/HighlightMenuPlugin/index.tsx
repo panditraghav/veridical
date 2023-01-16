@@ -17,6 +17,7 @@ import {
     LinkIcon
 } from "../../components"
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
+import { $isCodeNode } from "@lexical/code";
 
 const OFFSET_Y = -50;
 
@@ -36,6 +37,18 @@ function selectionHasLinkNode(selection: RangeSelection): boolean {
     })
 
     return hasLink;
+}
+
+function selectionHasCodeNode(selection: RangeSelection): boolean {
+    let hasCode = false;
+    const nodes = selection.getNodes()
+    nodes.forEach(node => {
+        const parent = node.getParent();
+        if ($isCodeNode(node) || $isCodeNode(parent)) {
+            hasCode = true;
+        }
+    })
+    return hasCode;
 }
 
 function FormatLinkButton({ onClose, isLink }: { onClose: () => void, isLink: boolean }) {
@@ -194,6 +207,7 @@ export default function HighlightMenuPlugin({ children }: { children?: React.Rea
                 const selection = $getSelection()
                 if (
                     $isRangeSelection(selection) &&
+                    !selectionHasCodeNode(selection) &&
                     selection.getTextContent() !== ""
                 ) {
                     positionMenu()

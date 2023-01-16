@@ -1,10 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = require("tailwindcss/colors")
+
 module.exports = {
     darkMode: "class",
     content: [
         "./src/**/*.{js,ts,jsx,tsx}",
         "index.html",
-        "../packages/utils/src/theme/defaultVeridicalTheme.ts"
+        "../utils/theme/defaultVeridicalTheme.ts"
     ],
     theme: {
         extend: {
@@ -32,8 +35,11 @@ module.exports = {
                 "icon-dark-hover": "#1f2937",
                 "icon-dark-selected": "#fb923c",
 
-                "dialog-bg-dark":"",
-                "dialog-bg-light":"",
+                "dialog-bg-dark": colors.stone["900"],
+                "dialog-bg-light":"#f5f5f5",
+
+                "item-selected-dark": colors.stone["800"],
+                "item-selected-light":""
             },
             keyframes: {
                 appear: {

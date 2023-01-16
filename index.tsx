@@ -1,5 +1,4 @@
 import React from "react";
-// import "./style/editor.css"
 import {
     LexicalComposer,
     InitialEditorStateType,
@@ -22,17 +21,14 @@ import {
     CodeLanguageSelection,
     AutoLinkPlugin,
     AddLinkDialogPlugin,
-    OpenLinkPlugin
+    OpenLinkPlugin,
 } from "./plugins";
 
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from "lexical";
-import {
-    defaultVeridicalTheme,
-    VeridicalThemeComposer,
-} from "./utils";
+import { defaultVeridicalTheme, VeridicalThemeComposer } from "./utils";
 import type { VeridicalThemeClasses } from "./utils/";
 import {
     Placeholder,
@@ -50,7 +46,7 @@ type InitialConfig = Readonly<{
     theme?: VeridicalThemeClasses;
     editorState?: InitialEditorStateType;
     editable?: boolean;
-}>
+}>;
 
 function Veridical({
     initialConfig,
@@ -79,9 +75,7 @@ function Veridical({
                             className={config.theme.contentEditable}
                         />
                     }
-                    placeholder={
-                        <Placeholder text="Press Ctrl + k for command..." />
-                    }
+                    placeholder={<Placeholder text="Press Ctrl + k for command..." />}
                 />
                 <ListPlugin />
                 <CodeHighlightPlugin />
@@ -117,7 +111,7 @@ function VeridicalEditorPlugins() {
             <ImagePlugin maxWidth={740} />
             <OpenLinkPlugin />
         </>
-    )
+    );
 }
 
 function VeridicalBase({
