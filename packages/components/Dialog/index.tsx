@@ -4,7 +4,7 @@ import { useVeridicalTheme } from '@veridical/utils';
 import { Backdrop, OverlayContainer } from '@veridical/components';
 
 import DialogContentContainer from './DialogContentContainer';
-import TextInput from './Input/TextInput';
+import DialogActionGroup from './DialogActionGroup';
 import ButtonSuccess from './Button/ButtonSuccess';
 import ButtonDanger from './Button/ButtonDanger';
 
@@ -42,4 +42,9 @@ export function Dialog({
         anchorElement,
     );
 }
-export { DialogContentContainer, TextInput, ButtonSuccess, ButtonDanger };
+export {
+    DialogContentContainer,
+    ButtonSuccess,
+    ButtonDanger,
+    DialogActionGroup,
+};

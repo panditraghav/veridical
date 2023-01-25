@@ -12,20 +12,20 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'bg-dark': '#171717',
-                'bg-light': '#f5f5f5',
+                'bg-dark': colors.neutral['900'],
+                'bg-light': colors.neutral['100'],
 
-                'title-light': '#f5f5f5',
-                'title-dark': '#0d0d0d',
+                'title-light': colors.neutral['200'],
+                'title-dark': colors.neutral['900'],
 
-                'h2-light': '#f5f5f5',
-                'h2-dark': '#0d0d0d',
+                'h2-light': colors.neutral['200'],
+                'h2-dark': colors.neutral['800'],
 
-                'h3-light': '#e3e3e3',
-                'h3-dark': '#1c1c1c',
+                'h3-light': colors.neutral['300'],
+                'h3-dark': colors.neutral['700'],
 
-                'p-light': '#e3e3e3',
-                'p-dark': '#1c1c1c',
+                'p-light': colors.neutral['300'],
+                'p-dark': colors.neutral['700'],
 
                 'icon-light': '#e5e7eb',
                 'icon-light-hover': '#f9fafb',
@@ -35,11 +35,14 @@ module.exports = {
                 'icon-dark-hover': '#1f2937',
                 'icon-dark-selected': '#fb923c',
 
-                'dialog-bg-dark': colors.stone['900'],
+                'dialog-bg-dark': colors.neutral['900'],
                 'dialog-bg-light': '#f5f5f5',
 
                 'item-selected-dark': colors.stone['800'],
                 'item-selected-light': colors.neutral['200'],
+
+                'button-primary': colors.blue['400'],
+                'button-secondary': colors.neutral['600']
             },
             keyframes: {
                 appear: {

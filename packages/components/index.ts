@@ -11,7 +11,8 @@ import AddNodeButton from './AddNodeButton';
 import CopyCodeButton from './CopyCodeButton';
 import DraggableNodeButton from './DraggableNodeButton';
 import type { NodeOption } from './AddNodeDialog';
-import { DialogContentContainer, Dialog } from './Dialog';
+import { DialogContentContainer, Dialog, DialogActionGroup } from './Dialog';
+import { FileInput, TextInput } from './Input';
 export * from './Icons';
 
 export {
@@ -26,7 +27,10 @@ export {
     DraggableNodeButton,
     CopyCodeButton,
     Dialog,
+    TextInput,
+    FileInput,
     DialogContentContainer,
+    DialogActionGroup,
     ErrorBoundary,
 };
 

@@ -41,6 +41,7 @@ import {
     ErrorBoundary,
 } from '@veridical/components';
 import { defaultEditorNodes } from '@veridical/nodes';
+import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 
 type InitialConfig = Readonly<{
     namespace?: string;
@@ -102,6 +103,7 @@ function VeridicalEditorPlugins() {
             <PrettierPlugin />
             <HighlightMenuPlugin />
             <AddLinkDialogPlugin />
+            <HistoryPlugin />
             <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
                 <HoverBlockOptions offset={{ left: -50, top: 4 }}>
                     <AddNodeButton />

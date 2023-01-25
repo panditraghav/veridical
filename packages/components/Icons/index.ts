@@ -1,18 +1,19 @@
-import AddIcon from "./AddIcon";
-import CodeIcon from "./CodeIcon";
-import EditIcon from "./EditIcon";
-import H1Icon from "./H1Icon";
-import H2Icon from "./H2Icon";
-import H3Icon from "./H3Icon";
-import ImageIcon from "./ImageIcon";
-import OlIcon from "./OlIcon";
-import UlIcon from "./UlIcon";
-import DragIcon from "./DragIcon";
-import LinkIcon from "./LinkIcon";
-import FormatBoldIcon from "./FormatBoldIcon";
-import FormatItalicIcon from "./FormatItalicIcon";
-import FormatUnderlineIcon from "./FormatUnderlineIcon";
-import ExpandMoreIcon from "./ExpandMoreIcon";
+import AddIcon from './AddIcon';
+import CodeIcon from './CodeIcon';
+import EditIcon from './EditIcon';
+import H1Icon from './H1Icon';
+import H2Icon from './H2Icon';
+import H3Icon from './H3Icon';
+import ImageIcon from './ImageIcon';
+import OlIcon from './OlIcon';
+import UlIcon from './UlIcon';
+import DragIcon from './DragIcon';
+import LinkIcon from './LinkIcon';
+import FormatBoldIcon from './FormatBoldIcon';
+import FormatItalicIcon from './FormatItalicIcon';
+import FormatUnderlineIcon from './FormatUnderlineIcon';
+import ExpandMoreIcon from './ExpandMoreIcon';
+import UploadFileIcon from './UploadFileIcon';
 
 export {
     AddIcon,
@@ -30,4 +31,5 @@ export {
     FormatItalicIcon,
     FormatUnderlineIcon,
     ExpandMoreIcon,
+    UploadFileIcon,
 };

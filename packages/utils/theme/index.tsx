@@ -14,11 +14,14 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         dialog?: string;
         contentContainer?: string;
         title?: string;
-        input?: {
-            text?: string;
+        actionGroup?: string;
+        button?: {
             buttonSuccess?: string;
-            buttonDanger?: string; 
+            buttonDanger?: string;
         };
+    };
+    input?: {
+        text?: string;
     };
     button?: {
         base?: string;
@@ -42,15 +45,9 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         };
     };
     addImageDialog?: {
-        dialog?: string;
-        title?: string;
         imageInput?: {
             container?: string;
-            urlInput?: string;
-            fileInput?: string;
-            fileInputLabel?: string;
         };
-        altTextInput?: string;
         actionButtonGroup?: string;
     };
     hoverMenu?: {

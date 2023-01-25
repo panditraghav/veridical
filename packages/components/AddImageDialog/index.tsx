@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import {
-    AddIcon,
-    ImageIcon,
     Button,
     Dialog,
     DialogContentContainer,
+    TextInput,
+    FileInput,
+    DialogActionGroup,
 } from '@veridical/components';
 import { useVeridicalTheme } from '@veridical/utils';
 
@@ -96,65 +97,44 @@ export default function AddImageDialog({
         <Dialog
             showDialog={showDialog}
             onClose={onClose}
-            width={430}
+            width={480}
             height={'auto'}
             anchorElement={document.body}
         >
+            <div className={theme?.dialog?.title}>Add an image</div>
             <DialogContentContainer>
-                <div className={theme?.dialog?.title}>
-                    <ImageIcon
-                        size="base"
-                        className={'DefaultAddImageDialogIcon'}
-                    />
-                    <span>Add an image</span>
-                </div>
                 <div className={theme?.addImageDialog?.imageInput?.container}>
-                    <input
+                    <TextInput
                         type="url"
                         placeholder="Enter image url"
-                        name="Image url"
                         value={src}
                         onChange={(e) => setSrc(e.target.value)}
-                        className={theme?.addImageDialog?.imageInput?.urlInput}
                     />
-                    <label
-                        htmlFor="DefaultAddImageDialog_ImageFileInput"
-                        className={
-                            theme?.addImageDialog?.imageInput?.fileInputLabel
-                        }
-                    >
-                        <AddIcon size="base" />
-                        <div>Choose a file</div>
-                    </label>
-                    <input
-                        type="file"
-                        id="DefaultAddImageDialog_ImageFileInput"
-                        className={theme?.addImageDialog?.imageInput?.fileInput}
+                    <FileInput
+                        label=""
                         onChange={handleImageSelection}
-                        accept="image/png, image/jpeg"
+                        accept="image/jpeg, image/png"
                     />
                 </div>
-                <input
+                <TextInput
                     type="text"
-                    name="Alternative text"
                     value={altText}
                     onChange={(e) => setAltText(e.target.value)}
                     placeholder="Alternative text"
-                    className={theme?.addImageDialog?.altTextInput}
                 />
-                <div className={theme?.addImageDialog?.actionButtonGroup}>
-                    <Button
-                        type="primary"
-                        onClick={handleSave}
-                        isDisabled={isLoading}
-                    >
-                        {'Save'}
-                    </Button>
-                    <Button type="secondary" onClick={onClose}>
-                        {'Cancel'}
-                    </Button>
-                </div>
             </DialogContentContainer>
+            <DialogActionGroup>
+                <Button
+                    type="primary"
+                    onClick={handleSave}
+                    isDisabled={isLoading}
+                >
+                    {'Save'}
+                </Button>
+                <Button type="secondary" onClick={onClose}>
+                    {'Cancel'}
+                </Button>
+            </DialogActionGroup>
         </Dialog>
     );
 }

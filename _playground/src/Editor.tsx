@@ -4,6 +4,7 @@ import { TreeViewPlugin } from '@veridical/plugins';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
 import { defaultVeridicalTheme } from '@veridical/utils';
+import { AddImageDialog } from '../../packages/components';
 
 function EditorStatePlugin() {
     const [editor] = useLexicalComposerContext();
