@@ -1,7 +1,7 @@
 import { VeridicalThemeClasses } from '.';
 
 export const defaultVeridicalTheme: VeridicalThemeClasses = {
-    editorContainer: 'max-w-[800px] m-auto',
+    editorContainer: 'max-w-[760px] mx-16',
     contentEditable: 'focus:outline-none',
     characterLimit: 'DefaultEditorTheme__characterLimit',
     code: 'DefaultEditorTheme__code',
@@ -43,10 +43,12 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         h2: 'text-5xl font-bold text-h2-dark dark:text-h2-light my-6',
         h3: 'text-3xl font-semibold text-h3-dark dark:text-h3-light my-4',
     },
-    image: 'DefaultVeridicalImage',
-    imageSelected: 'DefaultVeridicalImageSelected',
-    imageContainer: 'DefaultVeridicalImageContainer',
-    imageFallback: 'DefaultVeridicalImageFallback',
+    image: 'w-full h-auto rounded-sm cursor-pointer',
+    veridicalImage: {
+        selected: 'DefaultVeridicalImageSelected',
+        container: 'justify-center my-4 mx-0',
+        fallback: 'bg-gray-600 animate-pulse',
+    },
     link: 'text-blue-800 underline',
     list: {
         ol: 'my-2 pl-8',
@@ -98,7 +100,7 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         dialog: 'box-border bg-dialog-bg-light dark:bg-dialog-bg-dark flex flex-col rounded-md animate-appear border-[1px] border-neutral-700',
         contentContainer: 'mx-4',
         title: 'text-lg my-4 mx-4 font-semibold text-text-title-light dark:text-title-light',
-        actionGroup:'flex mt-8 mb-4 justify-end px-4'
+        actionGroup: 'flex mt-8 mb-4 justify-end px-4',
     },
     input: {
         text: 'py-2 w-full rounded-sm px-2 dark:bg-neutral-800 dark:text-p-light focus:outline-button-primary',
@@ -107,7 +109,8 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         base: 'flex py-2 px-4 rounded-sm font-medium mx-2 min-w-8 ease-linear duration-100',
         primary:
             'dark:text-p-light dark:fill-p-light border-[1px] border-button-primary hover:cursor-pointer hover:dark:text-title-dark hover:dark:fill-title-dark hover:bg-button-primary',
-        secondary: 'dark:text-p-light border-[1px] border-button-secondary hover:bg-button-secondary hover:text-p-light',
+        secondary:
+            'dark:text-p-light border-[1px] border-button-secondary hover:bg-button-secondary hover:text-p-light',
         disabled: 'DefaultButton_Disabled',
     },
     addNodeDialog: {

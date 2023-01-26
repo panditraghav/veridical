@@ -5,6 +5,11 @@ import { defaultVeridicalTheme } from './defaultVeridicalTheme';
 interface VeridicalThemeClasses extends EditorThemeClasses {
     editorContainer?: string;
     contentEditable?: string;
+    veridicalImage?: {
+        container?: string;
+        selected?: string;
+        fallback?: string;
+    };
     imageContainer?: string;
     imageSelected?: string;
     imageFallback?: string;
@@ -15,10 +20,6 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         contentContainer?: string;
         title?: string;
         actionGroup?: string;
-        button?: {
-            buttonSuccess?: string;
-            buttonDanger?: string;
-        };
     };
     input?: {
         text?: string;

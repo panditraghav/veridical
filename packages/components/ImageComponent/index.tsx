@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { Suspense, useCallback, useEffect, useRef } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { mergeRegister } from '@lexical/utils';
 import { useLexicalNodeSelection } from '@lexical/react/useLexicalNodeSelection';
@@ -32,6 +32,69 @@ function hasClickOnImage(
     }
 
     return false;
+}
+
+const imageCache = new Set();
+
+function useSuspenseImage(src: string) {
+    if (!imageCache.has(src)) {
+        throw new Promise((resolve) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                imageCache.add(src);
+                resolve(null);
+            };
+        });
+    }
+}
+
+function SuspenseImage({
+    src,
+    alt,
+    height,
+    width,
+    isSelected,
+    imgRef,
+}: {
+    src: string;
+    alt: string;
+    height: number;
+    width: number;
+    isSelected: boolean;
+    imgRef: React.MutableRefObject<HTMLImageElement | null>;
+}) {
+    useSuspenseImage(src);
+    const theme = useVeridicalTheme();
+    return (
+        <img
+            ref={imgRef}
+            src={src}
+            alt={alt}
+            style={{
+                height: 'auto',
+                width: '100%',
+                aspectRatio: `auto ${width / height}`,
+            }}
+            className={`${theme?.image} ${
+                isSelected ? theme?.veridicalImage?.selected : ''
+            }`}
+        />
+    );
+}
+
+function ImageFallback({ width, height }: { width: number; height: number }) {
+    const theme = useVeridicalTheme()?.veridicalImage;
+    return (
+        <div
+            style={{
+                width: '100%',
+                height: 'auto',
+                aspectRatio: `auto ${width / height}`,
+            }}
+            className={theme?.fallback}
+        ></div>
+    );
 }
 
 export default function ImageComponent({
@@ -152,19 +215,18 @@ export default function ImageComponent({
     return (
         <>
             {src !== '' && (
-                <img
-                    ref={imgRef}
-                    src={src}
-                    alt={alt}
-                    style={{
-                        width: width,
-                        height: height,
-                        aspectRatio: `auto ${width / height}`,
-                    }}
-                    className={`${theme?.image} ${
-                        isSelected && theme?.imageSelected
-                    }`}
-                />
+                <Suspense
+                    fallback={<ImageFallback width={width} height={height} />}
+                >
+                    <SuspenseImage
+                        imgRef={imgRef}
+                        src={src}
+                        alt={alt}
+                        width={width}
+                        height={height}
+                        isSelected={isSelected}
+                    />
+                </Suspense>
             )}
         </>
     );

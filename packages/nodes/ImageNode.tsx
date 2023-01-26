@@ -6,7 +6,6 @@ import {
     NodeKey,
     SerializedLexicalNode,
     LexicalEditor,
-    DOMConversionMap,
     $applyNodeReplacement,
 } from 'lexical';
 import React from 'react';
@@ -85,9 +84,9 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         };
     }
 
-    createDOM(config: EditorConfig, _editor: LexicalEditor): HTMLElement {
+    createDOM(config: EditorConfig): HTMLElement {
         const div = document.createElement('div');
-        const className = config.theme.imageContainer;
+        const className = config.theme.image;
 
         if (className) div.className = className;
         return div;
@@ -131,10 +130,6 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         this.getWritable().__width = width;
     }
 
-    // decorate() {
-    //     return <div>Image</div>;
-    // }
-
     decorate(): JSX.Element {
         return (
             <ImageComponent
@@ -155,7 +150,9 @@ export function $createImageNode({
     width,
     key,
 }: ImageProps): ImageNode {
-    return new ImageNode(src, altText, height, width, key);
+    return $applyNodeReplacement(
+        new ImageNode(src, altText, height, width, key),
+    );
 }
 
 export function $isImageNode(

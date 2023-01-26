@@ -4,7 +4,6 @@ import { TreeViewPlugin } from '@veridical/plugins';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
 import { defaultVeridicalTheme } from '@veridical/utils';
-import { AddImageDialog } from '../../packages/components';
 
 function EditorStatePlugin() {
     const [editor] = useLexicalComposerContext();
@@ -23,9 +22,11 @@ function EditorFromState({
 }) {
     const [editor] = useLexicalComposerContext();
     useEffect(() => {
-        const editorState = editor.parseEditorState(stringifiedEditorState);
-        editor.setEditorState(editorState);
-    });
+        return () => {
+            const editorState = editor.parseEditorState(stringifiedEditorState);
+            editor.setEditorState(editorState);
+        };
+    }, []);
     return null;
 }
 
@@ -50,6 +51,14 @@ const previousEditorState = {
                 type: 'heading',
                 version: 1,
                 tag: 'h1',
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1661961110372-8a7682543120?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+                altText: 'Laptop Image',
+                height: 780,
+                width: 1170,
+                type: 'image',
+                version: 1,
             },
             {
                 children: [
@@ -530,9 +539,11 @@ export default function Editor() {
             <VeridicalEditorPlugins />
             <TreeViewPlugin />
             {/*<EditorStatePlugin />*/}
-            <EditorFromState
-                stringifiedEditorState={JSON.stringify(previousEditorState)}
-            />
+            {
+                <EditorFromState
+                    stringifiedEditorState={JSON.stringify(previousEditorState)}
+                />
+            }
         </Veridical>
     );
 }
