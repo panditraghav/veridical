@@ -20,6 +20,8 @@ import AutoLinkPlugin from './AutoLinkPlugin';
 import AddLinkDialogPlugin from './AddLinkDialogPlugin';
 import OpenLinkPlugin from './OpenLinkPlugin';
 import HistoryPlugin from '@lexical/react/LexicalHistoryPlugin';
+import EditorFromStatePlugin from './EditorFromStatePlugin';
+import EditorStatePlugin from './EditorStatePlugin';
 
 export {
     MarkdownPlugin,
@@ -40,6 +42,8 @@ export {
     AddLinkDialogPlugin,
     OpenLinkPlugin,
     HistoryPlugin,
+    EditorFromStatePlugin,
+    EditorStatePlugin,
 };
 
 export { hoverMenuContext, useHoverMenuContext };

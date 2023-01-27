@@ -12,37 +12,37 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'bg-dark': colors.neutral['900'],
-                'bg-light': colors.neutral['100'],
+                'editor-bg-dark': colors.neutral['900'],
+                'editor-bg-light': colors.neutral['100'],
 
-                'title-light': colors.neutral['200'],
-                'title-dark': colors.neutral['900'],
+                'editor-title-light': colors.neutral['200'],
+                'editor-title-dark': colors.neutral['900'],
 
-                'h2-light': colors.neutral['200'],
-                'h2-dark': colors.neutral['800'],
+                'editor-h2-light': colors.neutral['200'],
+                'editor-h2-dark': colors.neutral['800'],
 
-                'h3-light': colors.neutral['300'],
-                'h3-dark': colors.neutral['700'],
+                'editor-h3-light': colors.neutral['300'],
+                'editor-h3-dark': colors.neutral['700'],
 
-                'p-light': colors.neutral['300'],
-                'p-dark': colors.neutral['700'],
+                'editor-p-light': colors.neutral['300'],
+                'editor-p-dark': colors.neutral['700'],
 
-                'icon-light': '#e5e7eb',
-                'icon-light-hover': '#f9fafb',
-                'icon-light-selected': '#fb923c',
+                'editor-icon-light': '#e5e7eb',
+                'editor-icon-light-hover': '#f9fafb',
+                'editor-icon-light-selected': '#fb923c',
 
-                'icon-dark': '#374151',
-                'icon-dark-hover': '#1f2937',
-                'icon-dark-selected': '#fb923c',
+                'editor-icon-dark': '#374151',
+                'editor-icon-dark-hover': '#1f2937',
+                'editor-icon-dark-selected': '#fb923c',
 
-                'dialog-bg-dark': colors.neutral['900'],
-                'dialog-bg-light': '#f5f5f5',
+                'editor-dialog-bg-dark': colors.neutral['900'],
+                'editor-dialog-bg-light': '#f5f5f5',
 
-                'item-selected-dark': colors.stone['800'],
-                'item-selected-light': colors.neutral['200'],
+                'editor-item-selected-dark': colors.stone['800'],
+                'editor-item-selected-light': colors.neutral['200'],
 
-                'button-primary': colors.blue['400'],
-                'button-secondary': colors.neutral['600']
+                'editor-button-primary': colors.blue['400'],
+                'editor-button-secondary': colors.neutral['600']
             },
             keyframes: {
                 appear: {

@@ -9,7 +9,7 @@ function useImagePlugin(editor: LexicalEditor) {
     const [showImageDialog, setShowImageDialog] = useState(false);
 
     useEffect(() => {
-        return editor.registerMutationListener(ImageNode, (nodes, payload) => {
+        return editor.registerMutationListener(ImageNode, (nodes) => {
             nodes.forEach((value, key) => {
                 if (value == 'created') {
                     setImageNodeKey(key);
