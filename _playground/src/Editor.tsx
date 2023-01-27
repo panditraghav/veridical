@@ -185,10 +185,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -247,10 +244,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -329,10 +323,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -401,10 +392,27 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
+                    { type: 'linebreak', version: 1 },
                     {
-                        type: 'linebreak',
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: '  ',
+                        type: 'code-highlight',
                         version: 1,
                     },
+                    {
+                        detail: 0,
+                        format: 0,
+                        mode: 'normal',
+                        style: '',
+                        text: '// This is a comment',
+                        type: 'code-highlight',
+                        version: 1,
+                        highlightType: 'comment',
+                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -415,10 +423,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -468,10 +473,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -607,10 +609,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -659,10 +658,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -711,10 +707,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -763,10 +756,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -825,10 +815,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -954,10 +941,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -977,10 +961,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                     {
                         detail: 0,
                         format: 0,
@@ -991,10 +972,7 @@ const previousEditorState = {
                         version: 1,
                         highlightType: 'punctuation',
                     },
-                    {
-                        type: 'linebreak',
-                        version: 1,
-                    },
+                    { type: 'linebreak', version: 1 },
                 ],
                 direction: 'ltr',
                 format: '',

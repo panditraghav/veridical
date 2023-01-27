@@ -1,41 +1,48 @@
 import { VeridicalThemeClasses } from '.';
 
+const tokenAttr = 'dark:text-teal-400 text-cyan-700';
+const tokenProperty = 'dark:text-amber-500';
+const tokenComment = 'dark:text-amber-100 text-neutral-500';
+const tokenVariable = 'dark:text-amber-800';
+const keyword = 'dark:text-purple-300 text-fuchsia-700';
+const string = 'dark:text-lime-500 text-green-600';
+
 export const defaultVeridicalTheme: VeridicalThemeClasses = {
     editorContainer: 'md:max-w-[760px] md:mx-16 w-full px-4',
     contentEditable: 'focus:outline-none',
     characterLimit: 'DefaultEditorTheme__characterLimit',
-    code: 'bg-gray-100 dark:bg-neutral-800 block w-full px-8 py-4 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md',
+    code: 'bg-neutral-100 dark:bg-neutral-800 block w-full px-8 py-4 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md',
     codeHighlight: {
-        atrule: 'DefaultEditorTheme__tokenAttr',
-        attr: 'DefaultEditorTheme__tokenAttr',
-        boolean: 'DefaultEditorTheme__tokenProperty',
+        atrule: tokenAttr,
+        attr: tokenAttr,
+        boolean: tokenProperty,
         builtin: 'DefaultEditorTheme__tokenSelector',
         cdata: 'DefaultEditorTheme__tokenComment',
         char: 'DefaultEditorTheme__tokenSelector',
-        class: 'DefaultEditorTheme__tokenFunction',
-        'class-name': 'DefaultEditorTheme__tokenFunction',
-        comment: 'DefaultEditorTheme__tokenComment',
-        constant: 'DefaultEditorTheme__tokenProperty',
-        deleted: 'DefaultEditorTheme__tokenProperty',
-        doctype: 'DefaultEditorTheme__tokenComment',
+        class: tokenAttr,
+        'class-name': tokenAttr,
+        comment: tokenComment,
+        constant: tokenProperty,
+        deleted: tokenProperty,
+        doctype: tokenComment,
         entity: 'DefaultEditorTheme__tokenOperator',
-        function: 'DefaultEditorTheme__tokenFunction',
-        important: 'DefaultEditorTheme__tokenVariable',
+        function: tokenAttr,
+        important: tokenVariable,
         inserted: 'DefaultEditorTheme__tokenSelector',
-        keyword: 'text-fuchsia-700',
-        namespace: 'DefaultEditorTheme__tokenVariable',
-        number: 'DefaultEditorTheme__tokenProperty',
+        keyword: keyword,
+        namespace: tokenVariable,
+        number: tokenProperty,
         operator: 'DefaultEditorTheme__tokenOperator',
-        prolog: 'DefaultEditorTheme__tokenComment',
-        property: 'DefaultEditorTheme__tokenProperty',
-        punctuation: 'DefaultEditorTheme__tokenPunctuation',
-        regex: 'DefaultEditorTheme__tokenVariable',
+        prolog: tokenComment,
+        property: tokenProperty,
+        punctuation: 'dark:text-gray-100',
+        regex: tokenVariable,
         selector: 'DefaultEditorTheme__tokenSelector',
-        string: 'DefaultEditorTheme__tokenSelector',
-        symbol: 'DefaultEditorTheme__tokenProperty',
-        tag: 'DefaultEditorTheme__tokenProperty',
+        string: string,
+        symbol: tokenProperty,
+        tag: tokenProperty,
         url: 'DefaultEditorTheme__tokenOperator',
-        variable: 'DefaultEditorTheme__tokenVariable',
+        variable: tokenVariable,
     },
     hashtag: 'DefaultEditorTheme__hashtag',
     heading: {
@@ -53,7 +60,8 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     list: {
         ol: 'my-2 pl-8',
         ul: 'my-2 pl-8',
-        listitem: 'text-xl my-1 mx-2 text-editor-p-dark dark:text-editor-p-light',
+        listitem:
+            'text-xl my-1 mx-2 text-editor-p-dark dark:text-editor-p-light',
         listitemChecked: 'DefaultEditorTheme__listItemChecked',
         listitemUnchecked: 'DefaultEditorTheme__listItemUnchecked',
         nested: {
@@ -126,7 +134,8 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
             text: {
                 container: 'px-3',
                 name: 'text-xl font-medium dark:text-editor-title-light',
-                description: 'text-sm text-editor-p-dark dark:text-editor-p-light',
+                description:
+                    'text-sm text-editor-p-dark dark:text-editor-p-light',
             },
         },
     },
