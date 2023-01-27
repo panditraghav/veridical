@@ -208,7 +208,7 @@ export default function HighlightMenuPlugin({ children }: { children?: React.Rea
                 if (
                     $isRangeSelection(selection) &&
                     !selectionHasCodeNode(selection) &&
-                    selection.getTextContent() !== ""
+                    selection.getTextContent().trim() !== ""
                 ) {
                     positionMenu()
                     setShowMenu(true)
