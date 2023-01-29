@@ -10,11 +10,11 @@ export default defineConfig({
     plugins: [react()],
     resolve: {
         alias: {
-            veridical: `${pkgDir}/veridical/`,
-            '@veridical/plugins': `${pkgDir}/plugins/`,
-            '@veridical/components': `${pkgDir}/components/`,
-            '@veridical/nodes': `${pkgDir}/nodes/`,
-            '@veridical/utils': `${pkgDir}/utils/`,
+            veridical: `${pkgDir}/veridical/src/`,
+            '@veridical/plugins': `${pkgDir}/plugins/src/`,
+            '@veridical/components': `${pkgDir}/components/src/`,
+            '@veridical/nodes': `${pkgDir}/nodes/src/`,
+            '@veridical/utils': `${pkgDir}/utils/src/`,
         },
     },
 });

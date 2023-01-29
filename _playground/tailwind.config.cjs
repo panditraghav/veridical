@@ -7,7 +7,7 @@ module.exports = {
     content: [
         './src/**/*.{js,ts,jsx,tsx}',
         'index.html',
-        '../packages/utils/theme/defaultVeridicalTheme.ts',
+        '../packages/utils/src/theme/defaultVeridicalTheme.ts',
     ],
     theme: {
         extend: {

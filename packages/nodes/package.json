@@ -1,0 +1,26 @@
+{
+    "name": "@veridical/nodes",
+    "version": "0.1.3",
+    "description": "Veridical is a WYSIWYG blog editor",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "www.github.com/panditraghav/veridical"
+    },
+    "keywords": [
+        "WYSIWYG",
+        "Editor",
+        "Blog",
+        "Editor",
+        "Lexical"
+    ],
+    "author": "Raghav Pandit",
+    "license": "MIT",
+    "dependencies": {
+        "lexical": "^0.7.6",
+        "react": "^18.2.0"
+    }
+}

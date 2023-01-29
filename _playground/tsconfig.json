@@ -16,11 +16,11 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "paths": {
-            "veridical": ["../packages/veridical/"],
-            "@veridical/components": ["../packages/components/"],
-            "@veridical/plugins": ["../packages/plugins/"],
-            "@veridical/nodes": ["../packages/nodes/"],
-            "@veridical/utils": ["../packages/utils/"]
+            "veridical": ["../packages/veridical/src/"],
+            "@veridical/components": ["../packages/components/src/"],
+            "@veridical/plugins": ["../packages/plugins/src/"],
+            "@veridical/nodes": ["../packages/nodes/src/"],
+            "@veridical/utils": ["../packages/utils/src/"]
         }
     },
     "include": ["src"],

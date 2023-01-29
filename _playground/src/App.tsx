@@ -2,7 +2,7 @@ import './main.css';
 import '../../style/editor_old.css';
 import Editor from './Editor';
 import React, { useEffect, useState } from 'react';
-import { AddImageDialog } from '../../packages/components';
+import { AddImageDialog } from '@veridical/components';
 
 function Header() {
     const [mode, setMode] = useState<'dark' | 'light'>('dark');
