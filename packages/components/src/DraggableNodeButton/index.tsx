@@ -173,6 +173,7 @@ export default function DraggableNodeButton() {
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
                 draggable={true}
+                tabIndex={-1}
             >
                 <DragIcon size="base" className={theme?.icon} />
             </button>

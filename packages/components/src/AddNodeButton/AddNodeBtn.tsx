@@ -10,7 +10,7 @@ export default function AddNodeBtn({ onClick }: AddNodeBtnProps) {
     const theme = useVeridicalTheme()?.hoverBlockOption;
     return (
         <>
-            <button className={theme?.button} onClick={onClick}>
+            <button className={theme?.button} onClick={onClick} tabIndex={-1}>
                 <AddIcon size="base" className={theme?.icon} />
             </button>
         </>

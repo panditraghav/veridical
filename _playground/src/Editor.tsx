@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Veridical, VeridicalEditorPlugins } from 'veridical';
 import {
     TreeViewPlugin,
@@ -1421,13 +1421,13 @@ export default function Editor() {
         <Veridical initialConfig={{ theme: defaultVeridicalTheme }}>
             <VeridicalEditorPlugins />
             {/*<TreeViewPlugin />*/}
-            {
+            {/*
                 <EditorStatePlugin
                     onChange={({ editorState }) => {
                         console.log(JSON.stringify(editorState));
                     }}
                 />
-            }
+            */}
             {
                 <EditorFromStatePlugin
                     stringifiedEditorState={JSON.stringify(previousEditorState)}

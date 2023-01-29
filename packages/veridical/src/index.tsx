@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     LexicalComposer,
     InitialEditorStateType,
@@ -15,8 +15,6 @@ import {
     HoverMenuPlugin,
     AddNodeShortcutPlugin,
     ImagePlugin,
-    RichTextPlugin,
-    ListPlugin,
     HoverBlockOptions,
     CodeLanguageSelection,
     AutoLinkPlugin,
@@ -25,7 +23,10 @@ import {
 } from '@veridical/plugins';
 
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
+import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from 'lexical';
 import {
@@ -93,7 +94,6 @@ function Veridical({
     );
 }
 
-
 function VeridicalEditorPlugins() {
     return (
         <>
@@ -104,6 +104,7 @@ function VeridicalEditorPlugins() {
             <HighlightMenuPlugin />
             <AddLinkDialogPlugin />
             <HistoryPlugin />
+            <TabIndentationPlugin />
             <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
                 <HoverBlockOptions offset={{ left: -50, top: 4 }}>
                     <AddNodeButton />
