@@ -1,9 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import { useHoverMenuContext } from '..';
 import { $isCodeNode, CodeNode } from '@lexical/code';
 import { createPortal } from 'react-dom';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useVeridicalTheme } from '@veridical/utils';
+import { useVeridicalTheme, useHoverMenuContext  } from '@veridical/utils';
 
 function setMenuPosition(
     menuElement: HTMLDivElement | null,

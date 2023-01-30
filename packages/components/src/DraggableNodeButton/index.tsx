@@ -17,9 +17,9 @@ import {
     isAboveOrBelowCenter,
     isHTMLElement,
     useVeridicalTheme,
+    useHoverMenuContext
 } from '@veridical/utils';
 import { DragIcon } from '..';
-import { useHoverMenuContext } from '@veridical/plugins';
 
 const LEFT_OFFSET = -25;
 const DRAG_DATA_FORMAT = 'application/x-veridical-drag';

@@ -6,6 +6,7 @@ import Button from './Button';
 import AddNodeDialog from './AddNodeDialog';
 import OverlayContainer from './OverlayContainer';
 import ErrorBoundary from './ErrorBoundary';
+import CodeLanguageSelectionMenu from './CodeLanguageSelectionMenu';
 
 import AddNodeButton from './AddNodeButton';
 import CopyCodeButton from './CopyCodeButton';
@@ -32,6 +33,7 @@ export {
     DialogContentContainer,
     DialogActionGroup,
     ErrorBoundary,
+    CodeLanguageSelectionMenu,
 };
 
 export type { NodeOption };

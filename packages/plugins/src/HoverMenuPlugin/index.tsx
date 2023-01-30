@@ -1,20 +1,15 @@
-import React, { useRef, useState, useEffect } from "react";
-import { createPortal } from "react-dom";
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
-import { $getNodeByKey, LexicalEditor, LexicalNode } from "lexical";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $getNodeByKey, LexicalEditor, LexicalNode } from 'lexical';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
-import {
-    getHoveredDOMNode,
-    Offset,
-    useVeridicalTheme,
-} from "@veridical/utils";
-import { useHoverMenuContext, hoverMenuContext } from "./hoverMenuContext";
+import { getHoveredDOMNode, Offset, HoverMenuProvider } from '@veridical/utils';
 
 function isOverlay(ev: MouseEvent): boolean {
     let target: HTMLElement | null = ev.target as HTMLElement;
     while (target) {
-        if (target.getAttribute("data-type") === "overlay") return true;
+        if (target.getAttribute('data-type') === 'overlay') return true;
         target = target.parentElement;
     }
     return false;
@@ -23,12 +18,10 @@ function isOverlay(ev: MouseEvent): boolean {
 function useHoverMenuPlugin(
     editor: LexicalEditor,
     children?: React.ReactNode,
-    offset?: Offset
+    offset?: Offset,
 ) {
-    const hoverMenuRef = useRef<HTMLDivElement | null>(null);
-    const theme = useVeridicalTheme();
     const [hoveredDOMNode, setHoveredDOMNode] = useState<HTMLElement | null>(
-        null
+        null,
     );
     const [hoveredLexicalNode, setHoveredLexicalNode] =
         useState<LexicalNode | null>(null);
@@ -39,7 +32,7 @@ function useHoverMenuPlugin(
             const { lexicalDOMNode: domNode, key: nodeKey } = getHoveredDOMNode(
                 ev,
                 editor,
-                offset
+                offset,
             );
             setHoveredDOMNode(domNode);
             editor.update(() => {
@@ -48,22 +41,20 @@ function useHoverMenuPlugin(
                 setHoveredLexicalNode(lexicalNode);
             });
         }
-        document.addEventListener("mousemove", mouseEventListener);
+        document.addEventListener('mousemove', mouseEventListener);
         return () =>
-            document.removeEventListener("mousemove", mouseEventListener);
+            document.removeEventListener('mousemove', mouseEventListener);
     });
 
     return createPortal(
-        <hoverMenuContext.Provider
-            value={{ hoveredDOMNode, hoveredLexicalNode }}
-        >
+        <HoverMenuProvider value={{ hoveredDOMNode, hoveredLexicalNode }}>
             {children}
-        </hoverMenuContext.Provider>,
-        document.body
+        </HoverMenuProvider>,
+        document.body,
     );
 }
 
-export function HoverMenuPlugin({
+export default function HoverMenuPlugin({
     children,
     offset,
 }: {
@@ -73,5 +64,3 @@ export function HoverMenuPlugin({
     const [editor] = useLexicalComposerContext();
     return useHoverMenuPlugin(editor, children, offset);
 }
-
-export { useHoverMenuContext, hoverMenuContext };

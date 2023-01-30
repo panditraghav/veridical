@@ -16,7 +16,6 @@ import {
     AddNodeShortcutPlugin,
     ImagePlugin,
     HoverBlockOptions,
-    CodeLanguageSelection,
     AutoLinkPlugin,
     AddLinkDialogPlugin,
     OpenLinkPlugin,
@@ -31,7 +30,7 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from 'lexical';
 import {
     defaultVeridicalTheme,
-    VeridicalThemeComposer,
+    VeridicalThemeProvider,
 } from '@veridical/utils';
 import type { VeridicalThemeClasses } from '@veridical/utils';
 import {
@@ -39,6 +38,7 @@ import {
     AddNodeButton,
     DraggableNodeButton,
     CopyCodeButton,
+    CodeLanguageSelectionMenu,
     ErrorBoundary,
 } from '@veridical/components';
 import { defaultEditorNodes } from '@veridical/nodes';
@@ -111,7 +111,7 @@ function VeridicalEditorPlugins() {
                     <DraggableNodeButton />
                 </HoverBlockOptions>
                 <CodeActionMenuLeft>
-                    <CodeLanguageSelection />
+                    <CodeLanguageSelectionMenu />
                 </CodeActionMenuLeft>
                 <CodeActionMenuRight>
                     <CopyCodeButton />
@@ -141,9 +141,9 @@ function VeridicalBase({
 }) {
     return (
         <LexicalComposer initialConfig={initialConfig}>
-            <VeridicalThemeComposer theme={initialConfig.theme}>
+            <VeridicalThemeProvider theme={initialConfig.theme}>
                 {children}
-            </VeridicalThemeComposer>
+            </VeridicalThemeProvider>
         </LexicalComposer>
     );
 }

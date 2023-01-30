@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import { EditorThemeClasses } from 'lexical/LexicalEditor';
 import { defaultVeridicalTheme } from './defaultVeridicalTheme';
 
@@ -98,31 +97,8 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     };
 }
 
-const VeridicalThemeContext = React.createContext<
-    VeridicalThemeClasses | null | undefined
->(null);
-
-function VeridicalThemeComposer({
-    theme,
-    children,
-}: {
-    theme?: VeridicalThemeClasses;
-    children?: React.ReactNode;
-}) {
-    return (
-        <VeridicalThemeContext.Provider value={theme}>
-            {children}
-        </VeridicalThemeContext.Provider>
-    );
-}
-
-function useVeridicalTheme(): VeridicalThemeClasses | null | undefined {
-    return useContext(VeridicalThemeContext);
-}
 
 export {
     VeridicalThemeClasses,
-    useVeridicalTheme,
-    VeridicalThemeComposer,
     defaultVeridicalTheme,
 };
