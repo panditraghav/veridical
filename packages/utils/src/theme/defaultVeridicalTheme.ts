@@ -11,7 +11,7 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     editorContainer: 'md:max-w-[760px] md:mx-16 w-full px-4',
     contentEditable: 'focus:outline-none',
     characterLimit: 'DefaultEditorTheme__characterLimit',
-    code: 'bg-neutral-100 dark:bg-neutral-800 block w-full px-8 py-4 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md',
+    code: 'bg-gray-100 dark:bg-neutral-800 block w-full px-8 py-6 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md',
     codeHighlight: {
         atrule: tokenAttr,
         attr: tokenAttr,
@@ -52,7 +52,7 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     image: 'w-full h-auto rounded-sm cursor-pointer',
     veridicalImage: {
-        selected: 'DefaultVeridicalImageSelected',
+        selected: 'box-border border-2 border-editor-button-primary',
         container: 'justify-center my-4 mx-0',
         fallback: 'bg-gray-600 animate-pulse',
     },
@@ -97,40 +97,40 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         strikethrough: 'DefaultEditorTheme__textStrikethrough',
         subscript: 'DefaultEditorTheme__textSubscript',
         superscript: 'DefaultEditorTheme__textSuperscript',
-        underline: 'DefaultEditorTheme__textUnderline',
+        underline: 'underline',
         underlineStrikethrough:
-            'DefaultEditorTheme__textUnderlineStrikethrough',
+            'line-through',
     },
-    placeholder: 'DefaultEditorTheme__Placeholder',
+    placeholder: 'relative top-[-35px] left-1 z-[-10] text-editor-p-dark dark:text-editor-p-light',
     backdrop:
         'fixed top-0 w-full h-full m-0 p-0 flex items-center justify-center backdrop-brightness-50',
     dialog: {
         dialog: 'box-border bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark flex flex-col rounded-md animate-appear border-[1px] border-neutral-700',
         contentContainer: 'mx-4',
-        title: 'text-lg my-4 mx-4 font-semibold text-text-editor-title-light dark:text-title-light',
+        title: 'text-lg my-4 mx-4 font-semibold text-editor-title-dark dark:text-editor-title-light',
         actionGroup: 'flex mt-8 mb-4 justify-end px-4',
     },
     input: {
-        text: 'py-2 w-full rounded-sm px-2 dark:bg-neutral-800 dark:text-editor-p-light focus:outline-button-primary',
+        text: 'py-2 w-full rounded-sm px-2 dark:bg-neutral-800 dark:text-editor-p-light focus:outline-editor-button-primary',
     },
     button: {
         base: 'flex py-2 px-4 rounded-sm font-medium mx-2 min-w-8 ease-linear duration-100',
         primary:
-            'dark:text-editor-p-light dark:fill-p-light border-[1px] border-button-primary hover:cursor-pointer hover:dark:text-editor-title-dark hover:dark:fill-title-dark hover:bg-button-primary',
+            'dark:text-editor-p-light dark:fill-editor-p-light border-[1px] border-editor-button-primary hover:cursor-pointer dark:hover:text-editor-title-dark hover:dark:fill-title-dark hover:bg-editor-button-primary',
         secondary:
-            'dark:text-editor-p-light border-[1px] border-button-secondary hover:bg-button-secondary hover:text-p-light',
+            'dark:text-editor-p-light border-[1px] border-editor-button-secondary hover:bg-editor-button-secondary hover:text-p-light',
         disabled: 'DefaultButton_Disabled',
     },
     addNodeDialog: {
         dialog: 'rounded-md w-auto bg-editor-dialog-bg-light flex flex-col items-center dark:bg-editor-dialog-bg-dark drop-shadow-md dark:drop-shadow-[0_35px_35px_#27272a]',
         searchInput:
-            'outline-none w-[95%] dark:bg-editor-dialog-bg-dark dark:text-editor-p-light drop-shadow-sm rounded-md py-2 px-3 my-3 mx-auto',
+            'outline-none w-[95%] bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark dark:text-editor-p-light rounded-md py-2 px-3 my-3 mx-auto',
         nodeOptions: 'overflow-y-scroll h-[290px] w-[300px]',
         nodeOption: {
-            selected: 'dark:bg-item-selected-dark bg-item-selected-light',
+            selected: 'dark:bg-editor-item-selected-dark bg-editor-item-selected-light',
             container:
-                'flex my-1 py-2 px-2 mx-2 rounded-md hover:cursor-pointer dark:hover:bg-item-selected-dark hover:bg-item-selected-light',
-            icon: 'w-10 h-10 fill-editor-editor-icon-dark-hover dark:fill-editor-editor-icon-light-hover',
+                'flex my-1 py-2 px-2 mx-2 rounded-md hover:cursor-pointer dark:hover:bg-editor-item-selected-dark hover:bg-editor-item-selected-light',
+            icon: 'w-10 h-10 fill-editor-icon-dark-hover dark:fill-editor-icon-light-hover',
             text: {
                 container: 'px-3',
                 name: 'text-xl font-medium dark:text-editor-title-light',
@@ -153,28 +153,25 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         button: 'bg-transparent border-none flex justify-center items-center',
         icon: 'fill-editor-icon-dark hover:fill-editor-icon-dark-hover dark:fill-editor-icon-light dark:hover:fill-editor-icon-light-hover',
     },
-    imageResizer: {
-        container: 'DefaultImageResizerContainer',
-        paddle: 'DefaultImageResizerPaddle',
-    },
+    dragTargetLine: 'absolute bg-editor-drag-target-line-light dark:bg-editor-drag-target-line-dark h-1 rounded-sm',
     codeActionMenu: {
-        menuLeft: 'DefaultCodeActionMenuLeft',
-        menuRight: 'DefaultCodeActionMenuRight',
+        menuLeft: 'flex-row-reverse',
+        menuRight: 'MenuRight',
     },
     codeLanguageSelection: {
-        container: 'DefaultCodeLanguageSelectionContainer',
-        icon: 'DefaultCodeLanguageSelectionIcon',
-        name: 'DefaultCodeLanguageSelectionName',
+        container: 'text-editor-p-dark dark:text-editor-p-light flex items-center box-border p-1 text-xs hover:cursor-pointer',
+        icon: 'fill-editor-icon-dark dark:fill-editor-icon-light',
+        name: 'text-editor-p-dark dark:text-editor-p-light ml-2',
         menu: {
-            container: 'DefaultCodeLanguageSelectionMenuContainer',
-            search: 'DefaultCodeLanguageSelectionMenuSearch',
-            optionContainer: 'DefaultCodeLanguageSelectionMenuOptionContainer',
-            option: 'DefaultCodeLanguageSelectionMenuOption',
-            optionSelected: 'DefaultCodeLanguageSelectionMenuOptionSelected',
-            animation: 'DefaultVeridicalDialogAnimation',
+            container: 'flex flex-col w-[200px] items-center rounded-md bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark border-[1px] dark:border-neutral-700 drop-shadow-md',
+            search: 'w-[90%] py-1 px-1 mx-auto my-3 outline-none bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark text-editor-p-dark dark:text-editor-p-light',
+            optionContainer: 'overflow-y-scroll max-h-[250px] w-full',
+            option: 'py-2 px-2 mx-2 hover:cursor-pointer hover:bg-editor-item-selected-light hover:dark:bg-editor-item-selected-dark text-editor-p-dark dark:text-editor-p-light rounded-sm',
+            optionSelected: 'bg-editor-item-selected-light dark:bg-editor-item-selected-dark',
+            animation: 'animate-appear',
         },
     },
-    copyCodeButton: 'DefaultCopyCodeButton',
+    copyCodeButton: 'py-2 px-4 text-editor-p-dark dark:text-editor-p-light text-xs hover:cursor-pointer',
     highlightMenu: {
         menu:
             'bg-editor-bg-dark dark:bg-editor-bg-light flex' +
@@ -187,8 +184,8 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
             ' dark:hover:fill-editor-editor-icon-dark-hover' +
             ' hover:fill-editor-editor-icon-light-hover my-2 mx-1',
         menuButtonIconSelected:
-            'my-2 mx-1 fill-editor-editor-icon-light-selected' +
-            ' dark:fill-editor-editor-icon-light-selected',
+            'my-2 mx-1 fill-editor-icon-light-selected' +
+            ' dark:fill-editor-icon-dark-selected',
         animation: 'animate-appear',
     },
     addLinkDialog: {

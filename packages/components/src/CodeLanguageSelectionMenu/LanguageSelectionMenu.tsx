@@ -94,7 +94,7 @@ function LanguageOption({
     );
 }
 
-export default function ({
+export default function LanguageSelectionMenu({
     isOpen,
     setLang,
     anchorElement,

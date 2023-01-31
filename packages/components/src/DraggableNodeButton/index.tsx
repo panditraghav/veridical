@@ -17,7 +17,7 @@ import {
     isAboveOrBelowCenter,
     isHTMLElement,
     useVeridicalTheme,
-    useHoverMenuContext
+    useHoverMenuContext,
 } from '@veridical/utils';
 import { DragIcon } from '..';
 
@@ -68,25 +68,20 @@ function setDragImage(dt: DataTransfer, draggedElement: HTMLElement) {
 
 function TargetLine({
     targetLineRef,
-    className,
 }: {
     targetLineRef: React.MutableRefObject<HTMLDivElement | null>;
-    className?: string;
 }) {
+    const theme = useVeridicalTheme();
     return createPortal(
         <div
             ref={targetLineRef}
-            className={className || 'DefaultDraggableNodeButton_targetLine'}
+            className={theme?.dragTargetLine}
+            style={{ position: 'absolute' }}
         />,
         document.body,
     );
 }
 
-export type DraggableNodeButtonStyle = {
-    iconContainer?: string;
-    dragIcon?: string;
-    targetLine?: string;
-};
 export default function DraggableNodeButton() {
     const [editor] = useLexicalComposerContext();
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
@@ -177,10 +172,7 @@ export default function DraggableNodeButton() {
             >
                 <DragIcon size="base" className={theme?.icon} />
             </button>
-            <TargetLine
-                className={'DefaultDraggableNodeButton_targetLine'}
-                targetLineRef={targetLineRef}
-            />
+            <TargetLine targetLineRef={targetLineRef} />
         </>
     );
 }

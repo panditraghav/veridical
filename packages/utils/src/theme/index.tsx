@@ -58,11 +58,7 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         button?: string;
         icon?: string;
     };
-    imageResizer?: {
-        container?: string;
-        paddle?: string;
-    };
-
+    dragTargetLine?: string;
     codeActionMenu?: {
         menuLeft?: string;
         menuRight?: string;
