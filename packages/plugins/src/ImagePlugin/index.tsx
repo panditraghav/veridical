@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LexicalEditor, $getNodeByKey } from 'lexical';
 import { $isImageNode, ImageNode } from '@veridical/nodes';
@@ -12,8 +12,16 @@ function useImagePlugin(editor: LexicalEditor) {
         return editor.registerMutationListener(ImageNode, (nodes) => {
             nodes.forEach((value, key) => {
                 if (value == 'created') {
-                    setImageNodeKey(key);
-                    setShowImageDialog(true);
+                    editor.getEditorState().read(() => {
+                        const imgNode = $getNodeByKey(key);
+                        if (
+                            $isImageNode(imgNode) &&
+                            (imgNode.getSrc() === '' || !imgNode.getSrc())
+                        ) {
+                            setImageNodeKey(key);
+                            setShowImageDialog(true);
+                        }
+                    });
                 }
             });
         });

@@ -26,19 +26,20 @@ const IMAGE: ElementTransformer = {
     dependencies: [ImageNode],
     export: (node) => {
         if (!$isImageNode(node)) return null;
-        return `![${node.getAltText()}](${node.getSrc()})`;
+        return `<img src="${node.getSrc()}" alt="${node.getAltText()}" height="${node.getHeight()}" width="${node.getWidth()}"/>`;
     },
-    regExp: /^!\[(.+)\]\((.+)\)\s/,
+    regExp: /<img src="(.*?)" alt="(.*?)" height="(\d*)" width="(\d*)"\/>/,
     replace: (parentNode, children, match, isImport) => {
-        const altText = match[1];
-        const src = match[2];
+        const src = match[1];
+        const altText = match[2];
+        const height = match[3];
+        const width = match[4];
         if (altText !== '' && src !== '') {
-            //TODO: Change aspect ratios and maxWidth
             const image = $createImageNode({
                 src,
                 altText,
-                width: 1,
-                height: 1,
+                width: parseInt(width),
+                height: parseInt(height),
             });
             parentNode.insertAfter($createParagraphNode());
             parentNode.replace(image);
@@ -69,7 +70,7 @@ const ELEMENT_TRANSFORMERS: ElementTransformer[] = [
     IMAGE,
 ];
 
-export const defaultTransformers: Array<Transformer> = [
+export const MARKDOWN_TRANSFORMERS: Array<Transformer> = [
     ...TEXT_FORMAT_TRANSFORMERS,
     ...ELEMENT_TRANSFORMERS,
 ];

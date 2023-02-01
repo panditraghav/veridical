@@ -1,9 +1,7 @@
-import React from "react"
-import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin"
-import { defaultTransformers } from "./MarkdownTransformers"
+import React from 'react';
+import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
+import { MARKDOWN_TRANSFORMERS } from '@veridical/utils';
 
 export default function MarkdownPlugin() {
-    return (
-        <MarkdownShortcutPlugin transformers={defaultTransformers} />
-    )
+    return <MarkdownShortcutPlugin transformers={MARKDOWN_TRANSFORMERS} />;
 }

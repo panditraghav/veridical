@@ -14,6 +14,8 @@ import AddLinkDialogPlugin from './AddLinkDialogPlugin';
 import OpenLinkPlugin from './OpenLinkPlugin';
 import EditorFromStatePlugin from './EditorFromStatePlugin';
 import EditorStatePlugin from './EditorStatePlugin';
+import ConvertToMarkdownPlugin from './ConvertToMarkdownPlugin';
+import ConvertFromMarkdownPlugin from './ConvertFromMarkdownPlugin';
 
 export {
     MarkdownPlugin,
@@ -32,4 +34,6 @@ export {
     OpenLinkPlugin,
     EditorFromStatePlugin,
     EditorStatePlugin,
+    ConvertToMarkdownPlugin,
+    ConvertFromMarkdownPlugin,
 };

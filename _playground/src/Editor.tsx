@@ -4,6 +4,8 @@ import {
     TreeViewPlugin,
     EditorFromStatePlugin,
     EditorStatePlugin,
+    ConvertToMarkdownPlugin,
+    ConvertFromMarkdownPlugin,
 } from '@veridical/plugins';
 import { defaultVeridicalTheme } from '@veridical/utils';
 
@@ -1417,6 +1419,9 @@ const previousEditorState = {
 };
 
 export default function Editor() {
+    function saveMarkdownToLocalStorage(markdown: string) {
+        localStorage.setItem('blog', markdown);
+    }
     return (
         <Veridical initialConfig={{ theme: defaultVeridicalTheme }}>
             <VeridicalEditorPlugins />
@@ -1428,9 +1433,21 @@ export default function Editor() {
                     }}
                 />
             */}
-            {
+            {/*
                 <EditorFromStatePlugin
                     stringifiedEditorState={JSON.stringify(previousEditorState)}
+                />
+            */}
+            {
+                <ConvertToMarkdownPlugin
+                    onChangeMarkdown={(markdown) => {
+                        saveMarkdownToLocalStorage(markdown);
+                    }}
+                />
+            }
+            {
+                <ConvertFromMarkdownPlugin
+                    markdown={localStorage.getItem('blog') || ''}
                 />
             }
         </Veridical>
