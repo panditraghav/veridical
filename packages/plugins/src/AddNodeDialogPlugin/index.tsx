@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { LexicalNode } from 'lexical';
-import { useVeridicalTheme } from '@veridical/utils';
+import { COMMAND_PRIORITY_EDITOR, LexicalNode } from 'lexical';
+import { useVeridicalTheme, ADD_NODE_DIALOG_COMMAND } from '@veridical/utils';
 import NodeOptions from './NodeOptions';
 import { defaultNodeOptions } from './DefaultNodeOptions';
 import type { NodeOption } from './DefaultNodeOptions';
-import { Dialog } from '..';
+import { Dialog } from '@veridical/components';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
 interface AddNodeDialogProps {
-    isOpen: boolean;
-    selectedNode: LexicalNode;
     nodeOptions?: NodeOption[];
-    onClose: () => void;
 }
 
-export default function AddNodeDialog({
-    isOpen,
-    selectedNode,
+export default function AddNodeDialogPlugin({
     nodeOptions = defaultNodeOptions,
-    onClose,
 }: AddNodeDialogProps) {
+    const [editor] = useLexicalComposerContext();
+    const [selectedNode, setSelectedNode] = useState<LexicalNode | null>(null);
+    const [isOpen, setIsOpen] = useState(false);
     const [searchText, setSearchText] = useState('');
     const theme = useVeridicalTheme();
 
     useEffect(() => {
         setSearchText('');
     }, [isOpen]);
+
+    function onClose() {
+        setIsOpen(false);
+    }
 
     useEffect(() => {
         function escapeListener(ev: KeyboardEvent) {
@@ -35,6 +37,23 @@ export default function AddNodeDialog({
         document.addEventListener('keydown', escapeListener);
         return () => document.removeEventListener('keydown', escapeListener);
     });
+
+    useEffect(() => {
+        return editor.registerCommand(
+            ADD_NODE_DIALOG_COMMAND,
+            ({ selectedNode }) => {
+                if (selectedNode) {
+                    setSelectedNode(selectedNode);
+                    setIsOpen(true);
+                } else {
+                    onClose();
+                    setSelectedNode(null);
+                }
+                return true;
+            },
+            COMMAND_PRIORITY_EDITOR,
+        );
+    }, []);
 
     return (
         <Dialog

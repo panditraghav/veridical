@@ -19,6 +19,7 @@ import {
     AutoLinkPlugin,
     AddLinkDialogPlugin,
     OpenLinkPlugin,
+    AddNodeDialogPlugin
 } from '@veridical/plugins';
 
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
@@ -118,6 +119,7 @@ function VeridicalEditorPlugins() {
                 </CodeActionMenuRight>
             </HoverMenuPlugin>
             <AddNodeShortcutPlugin />
+            <AddNodeDialogPlugin />
             <MarkdownPlugin />
             <ImagePlugin />
             <OpenLinkPlugin />

@@ -15,7 +15,7 @@ import {
     ImageIcon,
     OlIcon,
     UlIcon,
-} from '..';
+} from '@veridical/components';
 import { $createImageNode } from '@veridical/nodes';
 import { $createCodeNode } from '@lexical/code';
 import { $createListItemNode, $createListNode } from '@lexical/list';

@@ -1,50 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { AddNodeDialog } from "@veridical/components";
-import { LexicalNode, $getSelection } from "lexical";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import React, { useEffect } from 'react';
+import { $getSelection } from 'lexical';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { ADD_NODE_DIALOG_COMMAND } from '../../../utils/src';
 
 function defaultIsKeydown(ev: KeyboardEvent) {
-    if (ev.ctrlKey && ev.key === "k") return true;
+    if (ev.ctrlKey && ev.key === 'k') return true;
     return false;
 }
 
 export default function AddNodeShortcutPlugin({
-    isKeyPressed: isKeydown = defaultIsKeydown,
+    isKeydown = defaultIsKeydown,
 }: {
-    isKeyPressed?: (ev: KeyboardEvent) => boolean;
+    isKeydown?: (ev: KeyboardEvent) => boolean;
 }) {
     const [editor] = useLexicalComposerContext();
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [selectedNode, setSelectedNode] = useState<
-        LexicalNode | null | undefined
-    >(null);
 
     useEffect(() => {
         function keydownListener(ev: KeyboardEvent) {
             if (isKeydown(ev)) {
                 ev.preventDefault();
-                setIsDialogOpen(true);
+                editor.getEditorState().read(() => {
+                    const selection = $getSelection();
+                    const node = selection?.getNodes()[0];
+                    editor.dispatchCommand(ADD_NODE_DIALOG_COMMAND, {
+                        selectedNode: node,
+                    });
+                });
             }
         }
-        document.addEventListener("keydown", keydownListener);
-        return () => document.removeEventListener("keydown", keydownListener);
+        document.addEventListener('keydown', keydownListener);
+        return () => document.removeEventListener('keydown', keydownListener);
     });
 
-    useEffect(() => {
-        return editor.registerUpdateListener(({ editorState }) => {
-            editorState.read(() => {
-                const selection = $getSelection();
-                const node = selection?.getNodes()[0];
-                setSelectedNode(node);
-            });
-        });
-    });
-    if (!selectedNode) return null;
-    return (
-        <AddNodeDialog
-            isOpen={isDialogOpen}
-            selectedNode={selectedNode}
-            onClose={() => setIsDialogOpen(false)}
-        />
-    );
+    return null;
 }

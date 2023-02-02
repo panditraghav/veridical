@@ -1,31 +1,25 @@
-import React, { useState } from 'react';
-import AddNodeBtn from './AddNodeBtn';
-import { AddNodeDialog, NodeOption } from '..';
-import { useHoverMenuContext } from '@veridical/utils';
+import React from 'react';
+import { ADD_NODE_DIALOG_COMMAND, useHoverMenuContext } from '@veridical/utils';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { AddIcon } from '..';
+import { useVeridicalTheme } from '@veridical/utils';
 
-export default function AddNodeButton({
-    nodeOptions,
-}: {
-    nodeOptions?: NodeOption[];
-}) {
+export default function AddNodeButton() {
     const { hoveredLexicalNode } = useHoverMenuContext();
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [editor] = useLexicalComposerContext();
+    const theme = useVeridicalTheme()?.hoverBlockOption;
 
     return (
-        <>
-            <AddNodeBtn
-                onClick={() => {
-                    setIsDialogOpen(true);
-                }}
-            />
-            {hoveredLexicalNode && (
-                <AddNodeDialog
-                    isOpen={isDialogOpen}
-                    onClose={() => setIsDialogOpen(false)}
-                    selectedNode={hoveredLexicalNode}
-                    nodeOptions={nodeOptions}
-                />
-            )}
-        </>
+        <button
+            className={theme?.button}
+            onClick={() => {
+                editor.dispatchCommand(ADD_NODE_DIALOG_COMMAND, {
+                    selectedNode: hoveredLexicalNode,
+                });
+            }}
+            tabIndex={-1}
+        >
+            <AddIcon size="base" className={theme?.icon} />
+        </button>
     );
 }

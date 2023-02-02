@@ -7,7 +7,7 @@ import Option from './Option';
 
 interface NodeOptionsProps {
     searchText: string;
-    selectedNode: LexicalNode;
+    selectedNode?: LexicalNode;
     nodeOptions: NodeOption[];
     onClose: () => void;
 }
@@ -81,6 +81,7 @@ export default function NodeOptions({
                 case 'Enter':
                     ev.preventDefault();
                     editor.update(() => {
+                        if(!selectedNode) return;
                         sortedNodeOptions[selectedOptionIndex].nodeCreator(
                             selectedNode,
                         );
