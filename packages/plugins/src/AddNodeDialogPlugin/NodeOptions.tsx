@@ -7,7 +7,7 @@ import Option from './Option';
 
 interface NodeOptionsProps {
     searchText: string;
-    selectedNode?: LexicalNode;
+    selectedNode: LexicalNode | null | undefined;
     nodeOptions: NodeOption[];
     onClose: () => void;
 }

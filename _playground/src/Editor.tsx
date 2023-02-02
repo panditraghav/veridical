@@ -1,10 +1,10 @@
 import { Veridical, VeridicalEditorPlugins } from 'veridical';
 import {
-    TreeViewPlugin,
     ConvertToMarkdownPlugin,
     ConvertFromMarkdownPlugin,
 } from '@veridical/plugins';
 import { defaultVeridicalTheme } from '@veridical/utils';
+import TreeViewPlugin from './TreeViewPlugin';
 
 export default function Editor() {
     function saveMarkdownToLocalStorage(markdown: string) {
@@ -13,7 +13,7 @@ export default function Editor() {
     return (
         <Veridical initialConfig={{ theme: defaultVeridicalTheme }}>
             <VeridicalEditorPlugins />
-            {/*<TreeViewPlugin />*/}
+            {<TreeViewPlugin />}
             {
                 <ConvertToMarkdownPlugin
                     onChangeMarkdown={(markdown) => {

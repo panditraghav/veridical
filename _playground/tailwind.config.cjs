@@ -27,6 +27,12 @@ module.exports = {
                 'editor-p-light': colors.neutral['200'],
                 'editor-p-dark': colors.neutral['700'],
 
+                'editor-quote-light': colors.neutral['300'],
+                'editor-quote-dark': colors.neutral['600'],
+
+                'editor-quote-border-light': colors.neutral['300'],
+                'editor-quote-border-dark': colors.neutral['500'],
+
                 'editor-icon-light': colors.neutral['300'],
                 'editor-icon-light-hover': colors.neutral['200'],
                 'editor-icon-light-selected': colors.neutral['200'],

@@ -1,5 +1,4 @@
 import MarkdownPlugin from './MarkdownPlugin';
-import TreeViewPlugin from './TreeViewPlugin';
 import CodeHighlightPlugin from './CodeHighlightPlugin';
 import PrettierPlugin from './PrettierPlugin';
 import HighlightMenuPlugin from './HighlightMenuPlugin';
@@ -20,7 +19,6 @@ import AddNodeDialogPlugin from './AddNodeDialogPlugin'
 
 export {
     MarkdownPlugin,
-    TreeViewPlugin,
     CodeHighlightPlugin,
     PrettierPlugin,
     HighlightMenuPlugin,

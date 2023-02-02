@@ -11,7 +11,7 @@ export default function Option({
     onClose,
 }: {
     option: NodeOption;
-    selectedNode?: LexicalNode | null;
+    selectedNode: LexicalNode | null | undefined;
     isSelected: boolean;
     editor: LexicalEditor;
     onClose: () => void;

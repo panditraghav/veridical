@@ -15,7 +15,7 @@ export default function AddNodeDialogPlugin({
     nodeOptions = defaultNodeOptions,
 }: AddNodeDialogProps) {
     const [editor] = useLexicalComposerContext();
-    const [selectedNode, setSelectedNode] = useState<LexicalNode | null>(null);
+    const [selectedNode, setSelectedNode] = useState<LexicalNode | null | undefined>(null);
     const [isOpen, setIsOpen] = useState(false);
     const [searchText, setSearchText] = useState('');
     const theme = useVeridicalTheme();

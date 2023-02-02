@@ -1,5 +1,5 @@
 import React from 'react';
-import { $createHeadingNode } from '@lexical/rich-text';
+import { $createHeadingNode, $createQuoteNode } from '@lexical/rich-text';
 import {
     LexicalNode,
     $createTextNode,
@@ -14,6 +14,7 @@ import {
     H3Icon,
     ImageIcon,
     OlIcon,
+    QuoteIcon,
     UlIcon,
 } from '@veridical/components';
 import { $createImageNode } from '@veridical/nodes';
@@ -140,6 +141,25 @@ const TEXT_OPTIONS: NodeOption[] = [
             li.select(0, 0);
         },
         icon: <OlIcon size="md" />,
+    },
+    {
+        name: 'Quote',
+        shortName: 'quote',
+        description: 'Write a quote',
+        nodeCreator: (node) => {
+            const quote = $createQuoteNode()
+            const topParent = getTopLevelParent(node);
+            if (
+                $isParagraphNode(topParent) &&
+                topParent.getTextContent() === ''
+            ) {
+                topParent.replace(quote);
+            } else {
+                topParent?.insertAfter(quote);
+            }
+            quote.select(0, 0);
+        },
+        icon: <QuoteIcon size="md" />,
     },
 ];
 

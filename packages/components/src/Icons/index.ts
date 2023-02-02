@@ -14,6 +14,7 @@ import FormatItalicIcon from './FormatItalicIcon';
 import FormatUnderlineIcon from './FormatUnderlineIcon';
 import ExpandMoreIcon from './ExpandMoreIcon';
 import UploadFileIcon from './UploadFileIcon';
+import QuoteIcon from './QuoteIcon';
 
 export {
     AddIcon,
@@ -32,4 +33,5 @@ export {
     FormatUnderlineIcon,
     ExpandMoreIcon,
     UploadFileIcon,
+    QuoteIcon,
 };
