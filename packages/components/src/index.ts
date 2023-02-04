@@ -1,7 +1,6 @@
 import { Placeholder } from './Placeholder';
 import ImageComponent from './ImageComponent';
 import Backdrop from './Backdrop';
-import AddImageDialog from './AddImageDialog';
 import Button from './Button';
 import OverlayContainer from './OverlayContainer';
 import ErrorBoundary from './ErrorBoundary';
@@ -9,24 +8,26 @@ import CodeLanguageSelectionMenu from './CodeLanguageSelectionMenu';
 
 import AddNodeButton from './AddNodeButton';
 import CopyCodeButton from './CopyCodeButton';
+import EditImageButton from './EditImageButton';
 import DraggableNodeButton from './DraggableNodeButton';
 import { DialogContentContainer, Dialog, DialogActionGroup } from './Dialog';
-import { FileInput, TextInput } from './Input';
+import { FileInput, TextInput, CheckboxInput } from './Input';
 export * from './Icons';
 
 export {
     Placeholder,
     ImageComponent,
     Backdrop,
-    AddImageDialog,
     Button,
     OverlayContainer,
     AddNodeButton,
     DraggableNodeButton,
     CopyCodeButton,
+    EditImageButton,
     Dialog,
     TextInput,
     FileInput,
+    CheckboxInput,
     DialogContentContainer,
     DialogActionGroup,
     ErrorBoundary,

@@ -50,11 +50,11 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
         h2: 'text-5xl font-bold text-editor-h2-dark dark:text-editor-h2-light my-6',
         h3: 'text-3xl font-semibold text-editor-h3-dark dark:text-editor-h3-light my-4',
     },
-    image: 'w-full h-auto rounded-sm cursor-pointer',
+    image: 'w-full h-[420px] rounded-sm cursor-pointer',
     veridicalImage: {
         selected: 'box-border border-2 border-editor-button-primary',
-        container: 'justify-center my-4 mx-0',
-        fallback: 'bg-gray-600 animate-pulse',
+        container: 'flex flex-row justify-center my-4 mx-0',
+        fallback: 'bg-gray-600 animate-pulse h-[420px]',
     },
     link: 'text-blue-600',
     list: {
@@ -85,7 +85,7 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     mark: 'DefaultEditorTheme__mark',
     markOverlap: 'DefaultEditorTheme__markOverlap',
     paragraph: 'text-xl text-editor-p-dark dark:text-editor-p-light my-2',
-    quote: 'border-l-4 border-editor-quote-border-dark dark:border-editor-quote-border-light pl-2 text-xl text-editor-quote-dark dark:text-editor-quote-light',
+    quote: 'border-l-4 border-editor-quote-border-dark dark:border-editor-quote-border-light pl-3 text-xl text-editor-quote-dark dark:text-editor-quote-light italic',
     rtl: 'DefaultEditorTheme__rtl',
     table: 'DefaultEditorTheme__table',
     tableCell: 'DefaultEditorTheme__tableCell',
@@ -112,13 +112,18 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     input: {
         text: 'py-2 w-full rounded-sm px-2 dark:bg-neutral-800 dark:text-editor-p-light focus:outline-editor-button-primary',
+        checkbox:{
+            container: 'mt-4 flex',
+            label: 'text-editor-p-dark dark:text-editor-p-light',
+            input: 'ml-2 hover:cursor-pointer'
+        }
     },
     button: {
         base: 'flex py-2 px-4 rounded-sm font-medium mx-2 min-w-8 ease-linear duration-100',
         primary:
-            'dark:text-editor-p-light dark:fill-editor-p-light border-[1px] border-editor-button-primary hover:cursor-pointer dark:hover:text-editor-title-dark hover:dark:fill-title-dark hover:bg-editor-button-primary',
+            'dark:text-editor-p-light dark:fill-editor-p-light border-[1px] border-editor-button-primary hover:cursor-pointer dark:hover:text-editor-title-dark hover:dark:fill-editor-title-dark hover:bg-editor-button-primary',
         secondary:
-            'dark:text-editor-p-light border-[1px] border-editor-button-secondary hover:bg-editor-button-secondary hover:text-p-light',
+            'dark:text-editor-p-light border-[1px] border-editor-button-secondary hover:bg-editor-button-secondary hover:text-editor-p-light',
         disabled: 'DefaultButton_Disabled',
     },
     addNodeDialog: {
@@ -176,8 +181,6 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
             animation: 'animate-appear',
         },
     },
-    copyCodeButton:
-        'py-2 px-4 text-editor-p-dark dark:text-editor-p-light text-xs hover:cursor-pointer',
     highlightMenu: {
         menu:
             'bg-editor-bg-dark dark:bg-editor-bg-light flex' +
@@ -194,6 +197,9 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
             ' dark:fill-editor-icon-dark-selected',
         animation: 'animate-appear',
     },
+    copyCodeButton:
+        'py-2 px-4 text-editor-p-dark dark:text-editor-p-light text-xs hover:cursor-pointer',
+    editImageButton: 'bg-editor-bg-dark fill-editor-p-light rounded-sm animate-appear',
     addLinkDialog: {
         input:
             'bg-editor-bg-dark dark:bg-editor-bg-light' +

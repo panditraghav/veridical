@@ -22,6 +22,11 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     };
     input?: {
         text?: string;
+        checkbox?: {
+            container?: string;
+            label?: string;
+            input?: string;
+        };
     };
     button?: {
         base?: string;
@@ -84,6 +89,7 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
         };
     };
     copyCodeButton?: string;
+    editImageButton?: string;
     addLinkDialog?: {
         input?: string;
         animation?: string;
@@ -93,8 +99,4 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     };
 }
 
-
-export {
-    VeridicalThemeClasses,
-    defaultVeridicalTheme,
-};
+export { VeridicalThemeClasses, defaultVeridicalTheme };

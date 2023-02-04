@@ -14,12 +14,14 @@ import {
     HighlightMenuPlugin,
     HoverMenuPlugin,
     AddNodeShortcutPlugin,
+    ImageNodeDialogPlugin,
     ImagePlugin,
     HoverBlockOptions,
     AutoLinkPlugin,
     AddLinkDialogPlugin,
     OpenLinkPlugin,
-    AddNodeDialogPlugin
+    AddNodeDialogPlugin,
+    ImageActionMenuRight
 } from '@veridical/plugins';
 
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
@@ -41,6 +43,7 @@ import {
     CopyCodeButton,
     CodeLanguageSelectionMenu,
     ErrorBoundary,
+    EditImageButton,
 } from '@veridical/components';
 import { defaultEditorNodes } from '@veridical/nodes';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
@@ -117,10 +120,14 @@ function VeridicalEditorPlugins() {
                 <CodeActionMenuRight>
                     <CopyCodeButton />
                 </CodeActionMenuRight>
+                <ImageActionMenuRight>
+                    <EditImageButton />
+                </ImageActionMenuRight>
             </HoverMenuPlugin>
             <AddNodeShortcutPlugin />
             <AddNodeDialogPlugin />
             <MarkdownPlugin />
+            <ImageNodeDialogPlugin />
             <ImagePlugin />
             <OpenLinkPlugin />
         </>

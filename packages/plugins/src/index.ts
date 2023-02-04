@@ -15,7 +15,9 @@ import EditorFromStatePlugin from './EditorFromStatePlugin';
 import EditorStatePlugin from './EditorStatePlugin';
 import ConvertToMarkdownPlugin from './ConvertToMarkdownPlugin';
 import ConvertFromMarkdownPlugin from './ConvertFromMarkdownPlugin';
-import AddNodeDialogPlugin from './AddNodeDialogPlugin'
+import AddNodeDialogPlugin from './AddNodeDialogPlugin';
+import ImageNodeDialogPlugin from './ImageDialogPlugin';
+import ImageActionMenuRight from './ImageActionMenuRight';
 
 export {
     MarkdownPlugin,
@@ -26,9 +28,11 @@ export {
     HoverBlockOptions,
     AddNodeDialogPlugin,
     AddNodeShortcutPlugin,
+    ImageNodeDialogPlugin,
     ImagePlugin,
     CodeActionMenuLeft,
     CodeActionMenuRight,
+    ImageActionMenuRight,
     AutoLinkPlugin,
     AddLinkDialogPlugin,
     OpenLinkPlugin,

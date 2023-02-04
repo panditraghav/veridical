@@ -54,6 +54,7 @@ function SuspenseImage({
     alt,
     height,
     width,
+    isMaxWidth,
     isSelected,
     imgRef,
 }: {
@@ -61,6 +62,7 @@ function SuspenseImage({
     alt: string;
     height: number;
     width: number;
+    isMaxWidth: boolean;
     isSelected: boolean;
     imgRef: React.MutableRefObject<HTMLImageElement | null>;
 }) {
@@ -72,8 +74,8 @@ function SuspenseImage({
             src={src}
             alt={alt}
             style={{
-                height: 'auto',
-                width: '100%',
+                height: isMaxWidth ? 'auto' : undefined,
+                width: isMaxWidth ? '100%' : 'auto',
                 aspectRatio: `auto ${width / height}`,
             }}
             className={`${theme?.image} ${
@@ -83,13 +85,20 @@ function SuspenseImage({
     );
 }
 
-function ImageFallback({ width, height }: { width: number; height: number }) {
+function ImageFallback({
+    width,
+    height,
+    isMaxWidth,
+}: {
+    width: number;
+    height: number;
+    isMaxWidth: boolean;
+}) {
     const theme = useVeridicalTheme()?.veridicalImage;
     return (
         <div
             style={{
-                width: '100%',
-                height: 'auto',
+                width: isMaxWidth ? '100%' : 'auto',
                 aspectRatio: `auto ${width / height}`,
             }}
             className={theme?.fallback}
@@ -102,15 +111,16 @@ export default function ImageComponent({
     alt,
     height,
     width,
+    isMaxWidth,
     nodeKey,
 }: {
     src: string;
     alt: string;
     height: number;
     width: number;
+    isMaxWidth: boolean;
     nodeKey: NodeKey;
 }) {
-    const theme = useVeridicalTheme();
     const [editor] = useLexicalComposerContext();
     const [isSelected, setIsSelected, clearSelection] =
         useLexicalNodeSelection(nodeKey);
@@ -216,7 +226,13 @@ export default function ImageComponent({
         <>
             {src !== '' && (
                 <Suspense
-                    fallback={<ImageFallback width={width} height={height} />}
+                    fallback={
+                        <ImageFallback
+                            width={width}
+                            height={height}
+                            isMaxWidth={isMaxWidth}
+                        />
+                    }
                 >
                     <SuspenseImage
                         imgRef={imgRef}
@@ -224,6 +240,7 @@ export default function ImageComponent({
                         alt={alt}
                         width={width}
                         height={height}
+                        isMaxWidth={isMaxWidth}
                         isSelected={isSelected}
                     />
                 </Suspense>

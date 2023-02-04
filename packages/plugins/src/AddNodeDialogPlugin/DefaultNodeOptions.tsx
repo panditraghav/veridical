@@ -147,7 +147,7 @@ const TEXT_OPTIONS: NodeOption[] = [
         shortName: 'quote',
         description: 'Write a quote',
         nodeCreator: (node) => {
-            const quote = $createQuoteNode()
+            const quote = $createQuoteNode();
             const topParent = getTopLevelParent(node);
             if (
                 $isParagraphNode(topParent) &&
@@ -174,6 +174,7 @@ const BLOCK_OPTIONS: NodeOption[] = [
                 altText: '',
                 width: 1,
                 height: 1,
+                isMaxWidth: true,
             });
             const topParent = getTopLevelParent(node);
             if (

@@ -16,6 +16,7 @@ type SerializedImageNode = {
     src: string;
     height: number;
     width: number;
+    isMaxWidth: boolean;
     type: 'image';
     version: 1;
 } & SerializedLexicalNode;
@@ -25,6 +26,7 @@ export interface ImageProps {
     altText: string;
     height: number;
     width: number;
+    isMaxWidth: boolean;
     key?: NodeKey;
 }
 
@@ -33,6 +35,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     __altText: string;
     __width: number;
     __height: number;
+    __isMaxWidth: boolean = true;
 
     static getType(): string {
         return 'image';
@@ -43,6 +46,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         altText: string,
         height: number,
         width: number,
+        isMaxWidth: boolean,
         key?: NodeKey,
     ) {
         super(key);
@@ -50,6 +54,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         this.__altText = altText;
         this.__height = height;
         this.__width = width;
+        this.__isMaxWidth = isMaxWidth;
     }
 
     static clone(node: ImageNode): ImageNode {
@@ -58,17 +63,19 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
             node.getAltText(),
             node.getHeight(),
             node.getWidth(),
+            node.isMaxWidth(),
             node.getKey(),
         );
     }
 
     static importJSON(serializedNode: SerializedImageNode): ImageNode {
-        const { src, altText, height, width } = serializedNode;
+        const { src, altText, height, width, isMaxWidth } = serializedNode;
         return $createImageNode({
             src,
             altText,
             height,
             width,
+            isMaxWidth,
         });
     }
 
@@ -78,6 +85,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
             altText: this.getAltText(),
             height: this.getHeight(),
             width: this.getWidth(),
+            isMaxWidth: this.isMaxWidth(),
             type: 'image',
             version: 1,
         };
@@ -85,7 +93,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
 
     createDOM(config: EditorConfig): HTMLElement {
         const div = document.createElement('div');
-        const className = config.theme.image;
+        const className = config.theme.veridicalImage.container;
 
         if (className) div.className = className;
         return div;
@@ -129,6 +137,13 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         this.getWritable().__width = width;
     }
 
+    isMaxWidth(): boolean {
+        return this.__isMaxWidth;
+    }
+    setIsMaxWidth(isMaxWidth: boolean) {
+        this.getWritable().__isMaxWidth = isMaxWidth;
+    }
+
     decorate(): JSX.Element {
         return (
             <ImageComponent
@@ -136,6 +151,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
                 alt={this.getAltText()}
                 height={this.getHeight()}
                 width={this.getWidth()}
+                isMaxWidth={this.isMaxWidth()}
                 nodeKey={this.getKey()}
             />
         );
@@ -147,10 +163,11 @@ export function $createImageNode({
     altText,
     height,
     width,
+    isMaxWidth,
     key,
 }: ImageProps): ImageNode {
     return $applyNodeReplacement(
-        new ImageNode(src, altText, height, width, key),
+        new ImageNode(src, altText, height, width, isMaxWidth, key),
     );
 }
 
