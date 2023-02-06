@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LinkNode, $isLinkNode } from '@lexical/link';
-import { $getNodeByKey, $getSelection } from 'lexical';
+import { $getNodeByKey } from 'lexical';
 import { useVeridicalTheme } from '@veridical/utils';
 
 const Y_OFFSET = -35;

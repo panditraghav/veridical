@@ -7,7 +7,7 @@ interface IProps {
     markdown: string
 }
 
-export default function ConvertToMarkdownPlugin({markdown}: IProps) {
+export default function ConvertFromMarkdownPlugin({markdown}: IProps) {
     const [editor] = useLexicalComposerContext();
     useEffect(() => {
         editor.update(() => {

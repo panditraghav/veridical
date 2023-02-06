@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { $getSelection } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { ADD_NODE_DIALOG_COMMAND } from '../../../utils/src';
+import { ADD_NODE_DIALOG_COMMAND } from '@veridical/utils';
 
 function defaultIsKeydown(ev: KeyboardEvent) {
     if (ev.ctrlKey && ev.key === 'k') return true;

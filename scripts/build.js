@@ -51,7 +51,7 @@ async function build(package) {
             typescript(),
             image(),
             PeerDepsExternalPlugin(),
-            terser()
+            // terser()
         ],
         onwarn(warning) {
             if (warning.code === 'CIRCULAR_DEPENDENCY') {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LexicalEditor, $getNodeByKey } from 'lexical';
 import { $isImageNode, ImageNode } from '@veridical/nodes';
-import { IMAGE_DIALOG_COMMAND } from '../../../utils/src';
+import { IMAGE_DIALOG_COMMAND } from '@veridical/utils';
 
 function useImagePlugin(editor: LexicalEditor) {
     useEffect(() => {

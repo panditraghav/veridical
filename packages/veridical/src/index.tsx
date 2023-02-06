@@ -14,7 +14,7 @@ import {
     HighlightMenuPlugin,
     HoverMenuPlugin,
     AddNodeShortcutPlugin,
-    ImageNodeDialogPlugin,
+    ImageDialogPlugin,
     ImagePlugin,
     HoverBlockOptions,
     AutoLinkPlugin,
@@ -127,7 +127,7 @@ function VeridicalEditorPlugins() {
             <AddNodeShortcutPlugin />
             <AddNodeDialogPlugin />
             <MarkdownPlugin />
-            <ImageNodeDialogPlugin />
+            <ImageDialogPlugin />
             <ImagePlugin />
             <OpenLinkPlugin />
         </>

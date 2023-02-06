@@ -37,7 +37,7 @@ function getImageDimensions(src: string) {
     );
 }
 
-export default function AddImageDialog() {
+export default function ImageDialogPlugin() {
     const theme = useVeridicalTheme();
     const [editor] = useLexicalComposerContext();
     const [imageNode, setImageNode] = useState<ImageNode | null | undefined>();
