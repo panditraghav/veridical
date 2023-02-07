@@ -107,7 +107,6 @@ export default function ImageDialogPlugin({
     async function handleImageSelection(
         event: React.ChangeEvent<HTMLInputElement>,
     ) {
-        // TODO: Add ability to pass a callback to handle image selection
         const files = event.target.files;
         const file = files ? files[0] : new Blob();
         if (urlFromImageBlob) {
@@ -126,8 +125,8 @@ export default function ImageDialogPlugin({
             editor.update(() => {
                 imageNode?.setSrc(src);
                 imageNode?.setAltText(altText);
-                imageNode?.setHeight(naturalHeight);
-                imageNode?.setWidth(naturalWidth);
+                imageNode?.setNaturalHeight(naturalHeight);
+                imageNode?.setNaturalWidth(naturalWidth);
                 imageNode?.setIsMaxWidth(isMaxWidth);
             });
             setShowDialog(false);

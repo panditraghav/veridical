@@ -172,8 +172,8 @@ const BLOCK_OPTIONS: NodeOption[] = [
             const img = $createImageNode({
                 src: '',
                 altText: '',
-                width: 1,
-                height: 1,
+                naturalWidth: 1,
+                naturalHeight: 1,
                 isMaxWidth: true,
             });
             const topParent = getTopLevelParent(node);

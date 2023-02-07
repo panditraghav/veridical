@@ -28,12 +28,12 @@ const IMAGE: ElementTransformer = {
         if (!$isImageNode(node)) return null;
         const src = node.getSrc();
         const alt = node.getAltText();
-        const width = node.getWidth();
-        const height = node.getHeight();
+        const width = node.getNaturalWidth();
+        const height = node.getNaturalHeight();
         const isMaxWidth = node.isMaxWidth();
-        return `<img src="${src}" alt="${alt}" height="${height}" width="${width}" data-isMaxWidth="${isMaxWidth}"/>`;
+        return `<img src="${src}" alt="${alt}" data-natural-height="${height}" data-natural-width="${width}" data-is-max-width="${isMaxWidth}"/>`;
     },
-    regExp: /<img src="(.*?)" alt="(.*?)" height="(\d*)" width="(\d*)" data-isMaxWidth="(.*?)"\/>/,
+    regExp: /<img src="(.*?)" alt="(.*?)" data-natural-height="(\d*)" data-natural-width="(\d*)" data-is-max-width="(.*?)"\/>/,
     replace: (parentNode, children, match, isImport) => {
         const src = match[1];
         const altText = match[2];
@@ -46,8 +46,8 @@ const IMAGE: ElementTransformer = {
             const image = $createImageNode({
                 src,
                 altText,
-                width: parseInt(width),
-                height: parseInt(height),
+                naturalWidth: parseInt(width),
+                naturalHeight: parseInt(height),
                 isMaxWidth: isMaxWidth,
             });
             parentNode.insertAfter($createParagraphNode());

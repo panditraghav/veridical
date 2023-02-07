@@ -14,8 +14,8 @@ import { ImageComponent } from '@veridical/components';
 type SerializedImageNode = {
     altText: string;
     src: string;
-    height: number;
-    width: number;
+    naturalHeight: number;
+    naturalWidth: number;
     isMaxWidth: boolean;
     type: 'image';
     version: 1;
@@ -24,8 +24,8 @@ type SerializedImageNode = {
 export interface ImageProps {
     src: string;
     altText: string;
-    height: number;
-    width: number;
+    naturalHeight: number;
+    naturalWidth: number;
     isMaxWidth: boolean;
     key?: NodeKey;
 }
@@ -33,8 +33,8 @@ export interface ImageProps {
 export class ImageNode extends DecoratorNode<JSX.Element> {
     __src: string;
     __altText: string;
-    __width: number;
-    __height: number;
+    __naturalWidth: number;
+    __naturalHeight: number;
     __isMaxWidth: boolean = true;
 
     static getType(): string {
@@ -44,16 +44,16 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     constructor(
         src: string,
         altText: string,
-        height: number,
-        width: number,
+        naturalHeight: number,
+        naturalWidth: number,
         isMaxWidth: boolean,
         key?: NodeKey,
     ) {
         super(key);
         this.__src = src;
         this.__altText = altText;
-        this.__height = height;
-        this.__width = width;
+        this.__naturalHeight = naturalHeight;
+        this.__naturalWidth = naturalWidth;
         this.__isMaxWidth = isMaxWidth;
     }
 
@@ -61,20 +61,20 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         return new ImageNode(
             node.getSrc(),
             node.getAltText(),
-            node.getHeight(),
-            node.getWidth(),
+            node.getNaturalHeight(),
+            node.getNaturalWidth(),
             node.isMaxWidth(),
             node.getKey(),
         );
     }
 
     static importJSON(serializedNode: SerializedImageNode): ImageNode {
-        const { src, altText, height, width, isMaxWidth } = serializedNode;
+        const { src, altText, naturalHeight, naturalWidth, isMaxWidth } = serializedNode;
         return $createImageNode({
             src,
             altText,
-            height,
-            width,
+            naturalHeight,
+            naturalWidth,
             isMaxWidth,
         });
     }
@@ -83,8 +83,8 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         return {
             src: this.getSrc(),
             altText: this.getAltText(),
-            height: this.getHeight(),
-            width: this.getWidth(),
+            naturalHeight: this.getNaturalHeight(),
+            naturalWidth: this.getNaturalWidth(),
             isMaxWidth: this.isMaxWidth(),
             type: 'image',
             version: 1,
@@ -124,17 +124,17 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         this.getWritable().__altText = altText;
     }
 
-    getHeight(): number {
-        return this.__height;
+    getNaturalHeight(): number {
+        return this.__naturalHeight;
     }
-    setHeight(height: number) {
-        this.getWritable().__height = height;
+    setNaturalHeight(naturalHeight: number) {
+        this.getWritable().__naturalHeight = naturalHeight;
     }
-    getWidth(): number {
-        return this.__width;
+    getNaturalWidth(): number {
+        return this.__naturalWidth;
     }
-    setWidth(width: number) {
-        this.getWritable().__width = width;
+    setNaturalWidth(naturalWidth: number) {
+        this.getWritable().__naturalWidth = naturalWidth;
     }
 
     isMaxWidth(): boolean {
@@ -149,8 +149,8 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
             <ImageComponent
                 src={this.getSrc()}
                 alt={this.getAltText()}
-                height={this.getHeight()}
-                width={this.getWidth()}
+                naturalHeight={this.getNaturalHeight()}
+                naturalWidth={this.getNaturalWidth()}
                 isMaxWidth={this.isMaxWidth()}
                 nodeKey={this.getKey()}
             />
@@ -161,13 +161,13 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
 export function $createImageNode({
     src,
     altText,
-    height,
-    width,
+    naturalHeight,
+    naturalWidth,
     isMaxWidth,
     key,
 }: ImageProps): ImageNode {
     return $applyNodeReplacement(
-        new ImageNode(src, altText, height, width, isMaxWidth, key),
+        new ImageNode(src, altText, naturalHeight, naturalWidth, isMaxWidth, key),
     );
 }
 

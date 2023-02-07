@@ -52,16 +52,16 @@ function useSuspenseImage(src: string) {
 function SuspenseImage({
     src,
     alt,
-    height,
-    width,
+    naturalHeight,
+    naturalWidth,
     isMaxWidth,
     isSelected,
     imgRef,
 }: {
     src: string;
     alt: string;
-    height: number;
-    width: number;
+    naturalHeight: number;
+    naturalWidth: number;
     isMaxWidth: boolean;
     isSelected: boolean;
     imgRef: React.MutableRefObject<HTMLImageElement | null>;
@@ -76,7 +76,7 @@ function SuspenseImage({
             style={{
                 height: isMaxWidth ? 'auto' : undefined,
                 width: isMaxWidth ? '100%' : 'auto',
-                aspectRatio: `auto ${width / height}`,
+                aspectRatio: `auto ${naturalWidth / naturalHeight}`,
             }}
             className={`${theme?.image} ${
                 isSelected ? theme?.veridicalImage?.selected : ''
@@ -109,15 +109,15 @@ function ImageFallback({
 export default function ImageComponent({
     src,
     alt,
-    height,
-    width,
+    naturalHeight,
+    naturalWidth,
     isMaxWidth,
     nodeKey,
 }: {
     src: string;
     alt: string;
-    height: number;
-    width: number;
+    naturalHeight: number;
+    naturalWidth: number;
     isMaxWidth: boolean;
     nodeKey: NodeKey;
 }) {
@@ -228,8 +228,8 @@ export default function ImageComponent({
                 <Suspense
                     fallback={
                         <ImageFallback
-                            width={width}
-                            height={height}
+                            width={naturalWidth}
+                            height={naturalHeight}
                             isMaxWidth={isMaxWidth}
                         />
                     }
@@ -238,8 +238,8 @@ export default function ImageComponent({
                         imgRef={imgRef}
                         src={src}
                         alt={alt}
-                        width={width}
-                        height={height}
+                        naturalWidth={naturalWidth}
+                        naturalHeight={naturalHeight}
                         isMaxWidth={isMaxWidth}
                         isSelected={isSelected}
                     />
