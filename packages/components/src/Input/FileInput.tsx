@@ -4,17 +4,25 @@ import { UploadFileIcon } from '..';
 
 interface FileInputProps {
     label: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     accept: string;
+    disabled?: boolean;
 }
 
-export default function FileInput({ label, onChange, accept }: FileInputProps) {
+export default function FileInput({
+    label,
+    onChange,
+    accept,
+    disabled = false,
+}: FileInputProps) {
     const theme = useVeridicalTheme()?.button;
     return (
         <>
             <label
                 htmlFor="DefaultAddImageDialog_ImageFileInput"
-                className={`${theme?.base} ${theme?.primary}`}
+                className={`${theme?.base} ${
+                    disabled ? theme?.disabled : theme?.primary
+                }`}
             >
                 <UploadFileIcon size="base" />
                 <div>{label}</div>
@@ -25,6 +33,7 @@ export default function FileInput({ label, onChange, accept }: FileInputProps) {
                 style={{ display: 'none' }}
                 onChange={onChange}
                 accept={accept}
+                disabled={disabled}
             />
         </>
     );

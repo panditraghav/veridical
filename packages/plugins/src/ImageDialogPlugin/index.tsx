@@ -37,7 +37,11 @@ function getImageDimensions(src: string) {
     );
 }
 
-export default function ImageDialogPlugin() {
+export default function ImageDialogPlugin({
+    urlFromImageBlob,
+}: {
+    urlFromImageBlob?: (image: Blob) => Promise<string>;
+}) {
     const theme = useVeridicalTheme();
     const [editor] = useLexicalComposerContext();
     const [imageNode, setImageNode] = useState<ImageNode | null | undefined>();
@@ -100,12 +104,16 @@ export default function ImageDialogPlugin() {
         setIsError(null);
     }, [imageNode]);
 
-    function handleImageSelection(event: React.ChangeEvent<HTMLInputElement>) {
+    async function handleImageSelection(
+        event: React.ChangeEvent<HTMLInputElement>,
+    ) {
         // TODO: Add ability to pass a callback to handle image selection
         const files = event.target.files;
         const file = files ? files[0] : new Blob();
-        const url = URL.createObjectURL(file);
-        setSrc(url);
+        if (urlFromImageBlob) {
+            const url = await urlFromImageBlob(file);
+            setSrc(url);
+        }
     }
 
     async function handleSave() {
@@ -152,6 +160,7 @@ export default function ImageDialogPlugin() {
                         label=""
                         onChange={handleImageSelection}
                         accept="image/jpeg, image/png"
+                        disabled={urlFromImageBlob ? false : true}
                     />
                 </div>
                 <TextInput

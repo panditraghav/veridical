@@ -124,7 +124,7 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
             'dark:text-editor-p-light dark:fill-editor-p-light border-[1px] border-editor-button-primary hover:cursor-pointer dark:hover:text-editor-title-dark hover:dark:fill-editor-title-dark hover:bg-editor-button-primary',
         secondary:
             'dark:text-editor-p-light border-[1px] border-editor-button-secondary hover:bg-editor-button-secondary hover:text-editor-p-light',
-        disabled: 'DefaultButton_Disabled',
+        disabled: 'dark:text-editor-p-light dark:fill-editor-p-light border-[1px] hover:cursor-not-allowed',
     },
     addNodeDialog: {
         dialog: 'rounded-md w-auto bg-editor-dialog-bg-light flex flex-col items-center dark:bg-editor-dialog-bg-dark drop-shadow-md dark:drop-shadow-[0_35px_35px_#27272a]',
