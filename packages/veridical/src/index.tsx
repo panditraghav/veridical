@@ -1,52 +1,18 @@
 import React from 'react';
-import {
-    LexicalComposer,
-    InitialEditorStateType,
-} from '@lexical/react/LexicalComposer';
+import { InitialEditorStateType } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 
-import {
-    MarkdownPlugin,
-    CodeHighlightPlugin,
-    CodeActionMenuLeft,
-    CodeActionMenuRight,
-    PrettierPlugin,
-    HighlightMenuPlugin,
-    HoverMenuPlugin,
-    AddNodeShortcutPlugin,
-    ImageDialogPlugin,
-    ImagePlugin,
-    HoverBlockOptions,
-    AutoLinkPlugin,
-    AddLinkDialogPlugin,
-    OpenLinkPlugin,
-    AddNodeDialogPlugin,
-    ImageActionMenuRight
-} from '@veridical/plugins';
-
-import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
-import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
-import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 
-import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from 'lexical';
-import {
-    defaultVeridicalTheme,
-    VeridicalThemeProvider,
-} from '@veridical/utils';
+import { LexicalEditor, Klass, LexicalNode } from 'lexical';
+import { defaultVeridicalTheme } from '@veridical/utils';
 import type { VeridicalThemeClasses } from '@veridical/utils';
-import {
-    Placeholder,
-    AddNodeButton,
-    DraggableNodeButton,
-    CopyCodeButton,
-    CodeLanguageSelectionMenu,
-    ErrorBoundary,
-    EditImageButton,
-} from '@veridical/components';
+import { Placeholder, ErrorBoundary } from '@veridical/components';
 import { defaultEditorNodes } from '@veridical/nodes';
-import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { CodeHighlightPlugin } from '@veridical/plugins';
+import VeridicalEditorPlugins from './VeridicalEditorPlugins';
+import VeridicalComposer from './VeridicalBase';
 
 type InitialConfig = Readonly<{
     namespace?: string;
@@ -76,7 +42,7 @@ function Veridical({
     };
 
     return (
-        <VeridicalBase initialConfig={config}>
+        <VeridicalComposer initialConfig={config}>
             <div className={config?.theme?.editorContainer}>
                 <RichTextPlugin
                     contentEditable={
@@ -94,67 +60,8 @@ function Veridical({
                 <CodeHighlightPlugin />
                 {children}
             </div>
-        </VeridicalBase>
+        </VeridicalComposer>
     );
 }
 
-function VeridicalEditorPlugins() {
-    return (
-        <>
-            <AutoFocusPlugin />
-            <AutoLinkPlugin />
-            <LinkPlugin />
-            <PrettierPlugin />
-            <HighlightMenuPlugin />
-            <AddLinkDialogPlugin />
-            <HistoryPlugin />
-            <TabIndentationPlugin />
-            <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
-                <HoverBlockOptions offset={{ left: -50, top: 4 }}>
-                    <AddNodeButton />
-                    <DraggableNodeButton />
-                </HoverBlockOptions>
-                <CodeActionMenuLeft>
-                    <CodeLanguageSelectionMenu />
-                </CodeActionMenuLeft>
-                <CodeActionMenuRight>
-                    <CopyCodeButton />
-                </CodeActionMenuRight>
-                <ImageActionMenuRight>
-                    <EditImageButton />
-                </ImageActionMenuRight>
-            </HoverMenuPlugin>
-            <AddNodeShortcutPlugin />
-            <AddNodeDialogPlugin />
-            <MarkdownPlugin />
-            <ImageDialogPlugin />
-            <ImagePlugin />
-            <OpenLinkPlugin />
-        </>
-    );
-}
-
-function VeridicalBase({
-    initialConfig,
-    children,
-}: {
-    initialConfig: Readonly<{
-        namespace: string;
-        nodes?: readonly Klass<LexicalNode>[] | undefined;
-        onError: (error: Error, editor: LexicalEditor) => void;
-        editable?: boolean | undefined;
-        theme?: EditorThemeClasses | undefined;
-        editorState?: InitialEditorStateType | undefined;
-    }>;
-    children?: React.ReactNode;
-}) {
-    return (
-        <LexicalComposer initialConfig={initialConfig}>
-            <VeridicalThemeProvider theme={initialConfig.theme}>
-                {children}
-            </VeridicalThemeProvider>
-        </LexicalComposer>
-    );
-}
-
-export { InitialConfig, Veridical, VeridicalBase, VeridicalEditorPlugins };
+export { InitialConfig, Veridical, VeridicalComposer, VeridicalEditorPlugins };

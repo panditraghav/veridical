@@ -7,15 +7,17 @@ import type { NodeOption } from './DefaultNodeOptions';
 import { Dialog } from '@veridical/components';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
-interface AddNodeDialogProps {
-    nodeOptions?: NodeOption[];
-}
-
 export default function AddNodeDialogPlugin({
     nodeOptions = defaultNodeOptions,
-}: AddNodeDialogProps) {
+    container,
+}: {
+    nodeOptions?: NodeOption[];
+    container: DocumentFragment | Element;
+}) {
     const [editor] = useLexicalComposerContext();
-    const [selectedNode, setSelectedNode] = useState<LexicalNode | null | undefined>(null);
+    const [selectedNode, setSelectedNode] = useState<
+        LexicalNode | null | undefined
+    >(null);
     const [isOpen, setIsOpen] = useState(false);
     const [searchText, setSearchText] = useState('');
     const theme = useVeridicalTheme();
@@ -61,7 +63,7 @@ export default function AddNodeDialogPlugin({
             onClose={onClose}
             width="auto"
             height="auto"
-            anchorElement={document.body}
+            anchorElement={container}
         >
             <input
                 placeholder="Search"

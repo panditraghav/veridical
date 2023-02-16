@@ -67,9 +67,11 @@ function setDragImage(dt: DataTransfer, draggedElement: HTMLElement) {
 }
 
 function TargetLine({
+    container,
     targetLineRef,
 }: {
     targetLineRef: React.MutableRefObject<HTMLDivElement | null>;
+    container: Element | DocumentFragment;
 }) {
     const theme = useVeridicalTheme();
     return createPortal(
@@ -78,11 +80,15 @@ function TargetLine({
             className={theme?.dragTargetLine}
             style={{ position: 'absolute' }}
         />,
-        document.body,
+        container,
     );
 }
 
-export default function DraggableNodeButton() {
+export default function DraggableNodeButton({
+    container,
+}: {
+    container: Element | DocumentFragment;
+}) {
     const [editor] = useLexicalComposerContext();
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const targetLineRef = useRef<HTMLDivElement | null>(null);
@@ -172,7 +178,7 @@ export default function DraggableNodeButton() {
             >
                 <DragIcon size="base" className={theme?.icon} />
             </button>
-            <TargetLine targetLineRef={targetLineRef} />
+            <TargetLine targetLineRef={targetLineRef} container={container} />
         </>
     );
 }

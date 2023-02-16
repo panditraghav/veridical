@@ -100,9 +100,11 @@ export default function LanguageSelectionMenu({
     anchorElement,
     onClose,
     languages,
+    container,
 }: {
     isOpen: boolean;
     setLang: (lang: Language) => void;
+    container: DocumentFragment | Element;
     anchorElement: HTMLElement | null;
     onClose: () => void;
     languages: Language[];
@@ -247,6 +249,6 @@ export default function LanguageSelectionMenu({
                 </div>
             </div>
         </OverlayContainer>,
-        document.body,
+        container,
     );
 }

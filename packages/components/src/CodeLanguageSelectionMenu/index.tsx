@@ -1,6 +1,6 @@
 import { ExpandMoreIcon } from '@veridical/components';
 import React, { useEffect, useState, useRef } from 'react';
-import { useVeridicalTheme, useHoverMenuContext  } from '@veridical/utils';
+import { useVeridicalTheme, useHoverMenuContext } from '@veridical/utils';
 import { $isCodeNode } from '@lexical/code';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import LanguageSelectionMenu from './LanguageSelectionMenu';
@@ -59,8 +59,10 @@ const DefaultLanguages: Language[] = [
 
 export default function CodeLanguageSelectionMenu({
     languages = DefaultLanguages,
+    container,
 }: {
     languages?: Language[];
+    container: Element | DocumentFragment;
 }) {
     const theme = useVeridicalTheme();
     const [editor] = useLexicalComposerContext();
@@ -116,6 +118,7 @@ export default function CodeLanguageSelectionMenu({
                 setLang={(newLang) => setLang(newLang)}
                 onClose={() => setIsOpen(false)}
                 languages={languages}
+                container={container}
             />
         </>
     );

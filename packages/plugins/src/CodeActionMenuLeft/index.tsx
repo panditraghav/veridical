@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { $isCodeNode, CodeNode } from '@lexical/code';
 import { createPortal } from 'react-dom';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useVeridicalTheme, useHoverMenuContext  } from '@veridical/utils';
+import { useVeridicalTheme, useHoverMenuContext } from '@veridical/utils';
 
 function setMenuPosition(
     menuElement: HTMLDivElement | null,
@@ -32,8 +32,10 @@ function hideMenu(
 
 export default function CodeActionMenuLeft({
     children,
+    container,
 }: {
     children?: React.ReactNode;
+    container: Element | DocumentFragment;
 }) {
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const menuRef = useRef<HTMLDivElement | null>(null);
@@ -70,6 +72,6 @@ export default function CodeActionMenuLeft({
         >
             {children}
         </div>,
-        document.body,
+        container,
     );
 }

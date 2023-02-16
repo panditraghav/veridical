@@ -9,7 +9,7 @@ import DialogActionGroup from './DialogActionGroup';
 export type DialogProps = {
     showDialog: boolean;
     onClose: () => void;
-    anchorElement: HTMLElement;
+    anchorElement: Element | DocumentFragment;
     children?: React.ReactNode;
     width?: number | string;
     height?: number | string;
@@ -40,7 +40,4 @@ export function Dialog({
         anchorElement,
     );
 }
-export {
-    DialogContentContainer,
-    DialogActionGroup,
-};
+export { DialogContentContainer, DialogActionGroup };

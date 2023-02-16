@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useVeridicalTheme, useHoverMenuContext  } from '@veridical/utils';
+import { useVeridicalTheme, useHoverMenuContext } from '@veridical/utils';
 import { $isImageNode, ImageNode } from '@veridical/nodes';
 
 function setMenuPosition(
@@ -26,8 +26,10 @@ function hideMenu(menuElement: HTMLElement | null) {
 
 export default function ImageActionMenuRight({
     children,
+    container,
 }: {
     children?: React.ReactNode;
+    container: Element | DocumentFragment;
 }) {
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const menuRef = useRef<HTMLDivElement | null>(null);
@@ -65,6 +67,6 @@ export default function ImageActionMenuRight({
         >
             {children}
         </div>,
-        document.body,
+        container,
     );
 }

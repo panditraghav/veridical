@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import { $getNodeByKey, LexicalEditor, LexicalNode } from 'lexical';
+import { $getNodeByKey, LexicalNode } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
 import { getHoveredDOMNode, Offset, HoverMenuProvider } from '@veridical/utils';
@@ -15,11 +15,16 @@ function isOverlay(ev: MouseEvent): boolean {
     return false;
 }
 
-function useHoverMenuPlugin(
-    editor: LexicalEditor,
-    children?: React.ReactNode,
-    offset?: Offset,
-) {
+export default function HoverMenuPlugin({
+    container,
+    children,
+    offset,
+}: {
+    container: Element | DocumentFragment;
+    children?: React.ReactNode;
+    offset?: Offset;
+}) {
+    const [editor] = useLexicalComposerContext();
     const [hoveredDOMNode, setHoveredDOMNode] = useState<HTMLElement | null>(
         null,
     );
@@ -50,17 +55,6 @@ function useHoverMenuPlugin(
         <HoverMenuProvider value={{ hoveredDOMNode, hoveredLexicalNode }}>
             {children}
         </HoverMenuProvider>,
-        document.body,
+        container,
     );
-}
-
-export default function HoverMenuPlugin({
-    children,
-    offset,
-}: {
-    children?: React.ReactNode;
-    offset?: Offset;
-}) {
-    const [editor] = useLexicalComposerContext();
-    return useHoverMenuPlugin(editor, children, offset);
 }
