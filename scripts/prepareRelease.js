@@ -82,12 +82,14 @@ async function copyDeclarations() {
 async function copyReadme() {
     packages.forEach(async (pkg) => {
         const readmeDest = getDistPath(pkg.name);
-        const readmeSrc = path.resolve(
+        let readmeSrc = path.resolve(
             PROJECT_DIR,
             PACKAGES_DIR,
             pkg.name,
             'README.md',
         );
+        if (pkg.name === 'veridical')
+            readmeSrc = path.resolve(PROJECT_DIR, 'README.md');
         console.log(`copying ${readmeSrc} to ${readmeDest}`);
         await exec(`cp ${readmeSrc} ${readmeDest}/`);
     });
