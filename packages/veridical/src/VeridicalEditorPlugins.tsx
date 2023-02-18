@@ -67,11 +67,11 @@ export default function VeridicalEditorPlugins(): JSX.Element {
                         </ImageActionMenuRight>
                     </HoverMenuPlugin>
                     <AddNodeDialogPlugin container={container} />
+                    <ImageDialogPlugin container={container} />
                 </>
             )}
             <AddNodeShortcutPlugin />
             <MarkdownPlugin />
-            <ImageDialogPlugin />
             <ImagePlugin />
             <OpenLinkPlugin />
         </>

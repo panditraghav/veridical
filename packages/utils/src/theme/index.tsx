@@ -13,6 +13,7 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     imageSelected?: string;
     imageFallback?: string;
     placeholder?: string;
+    overlay?: string;
     backdrop?: string;
     dialog?: {
         dialog?: string;

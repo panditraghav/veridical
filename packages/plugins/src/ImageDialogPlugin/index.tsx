@@ -39,8 +39,10 @@ function getImageDimensions(src: string) {
 
 export default function ImageDialogPlugin({
     urlFromImageBlob,
+    container,
 }: {
     urlFromImageBlob?: (image: Blob) => Promise<string>;
+    container: Element | DocumentFragment;
 }) {
     const theme = useVeridicalTheme();
     const [editor] = useLexicalComposerContext();
@@ -142,7 +144,7 @@ export default function ImageDialogPlugin({
             onClose={onClose}
             width={480}
             height={'auto'}
-            anchorElement={document.body}
+            container={container}
         >
             <div className={theme?.dialog?.title}>
                 {action === 'edit' ? 'Edit Image' : 'Add Image'}

@@ -102,6 +102,7 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     placeholder:
         'relative top-[-35px] left-1 z-[-10] text-editor-p-dark dark:text-editor-p-light',
+    overlay: 'w-screen h-screen absolute top-0 z-50',
     backdrop:
         'fixed top-0 w-full h-full m-0 p-0 flex items-center justify-center backdrop-brightness-50',
     dialog: {

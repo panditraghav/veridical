@@ -63,7 +63,7 @@ export default function AddNodeDialogPlugin({
             onClose={onClose}
             width="auto"
             height="auto"
-            anchorElement={container}
+            container={container}
         >
             <input
                 placeholder="Search"

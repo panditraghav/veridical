@@ -1,20 +1,13 @@
-import React from "react";
+import React from 'react';
+import { useVeridicalTheme } from '@veridical/utils';
 export default function OverlayContainer({
     children,
 }: {
     children?: React.ReactNode;
 }) {
+    const theme = useVeridicalTheme()?.overlay;
     return (
-        <div
-            data-type={"overlay"}
-            style={{
-                width: "100vw",
-                height: "100vh",
-                position: "fixed",
-                top: 0,
-                left: 0,
-            }}
-        >
+        <div className={theme} data-type={'overlay'}>
             {children}
         </div>
     );
