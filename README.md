@@ -7,7 +7,7 @@ This is a WYSIWYG editor using which you can create a blog or other content base
 **npm**
 
 ```sh
-npm install veridical @veridical/nodes @veridical/plugins @veridical/utils
+npm install veridical
 ```
 
 **yarn**

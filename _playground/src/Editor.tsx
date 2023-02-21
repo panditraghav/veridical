@@ -3,9 +3,27 @@ import {
     ConvertToMarkdownPlugin,
     ConvertFromMarkdownPlugin,
 } from '@veridical/plugins';
-import { defaultVeridicalTheme } from '@veridical/utils';
+import {
+    $getFirstImageNode,
+    $getTitleNode,
+    defaultVeridicalTheme,
+} from '@veridical/utils';
 import TreeViewPlugin from './TreeViewPlugin';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { useEffect } from 'react';
 
+function Plugin() {
+    const [editor] = useLexicalComposerContext();
+    useEffect(() => {
+        return editor.registerUpdateListener(({ editorState }) => {
+            editorState.read(() => {
+                console.log('TitleNode: ',$getTitleNode()?.getTextContent());
+                console.log('ImageNode: ',$getFirstImageNode());
+            });
+        });
+    }, []);
+    return null;
+}
 export default function Editor() {
     function saveMarkdownToLocalStorage(markdown: string) {
         localStorage.setItem('blog', markdown);
@@ -26,6 +44,7 @@ export default function Editor() {
                     markdown={localStorage.getItem('blog') || ''}
                 />
             }
+            <Plugin />
         </Veridical>
     );
 }
