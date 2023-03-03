@@ -13,7 +13,7 @@ npm install veridical
 **yarn**
 
 ```sh
-yarn add veridical @veridical/nodes @veridical/plugins @veridical/utils
+yarn add veridical
 ```
 
 ## Usage
@@ -21,17 +21,30 @@ yarn add veridical @veridical/nodes @veridical/plugins @veridical/utils
 ### Basic usage
 
 ```jsx
-import { Veridical } from "veridical";
+import { Veridical, VeridicalEditorPlugins } from 'veridical';
+
+const editortheme: VeridicalThemeClasses = {
+    // .... Theme classes
+}
 
 export default function App() {
-    return <Veridical />;
+    const initialConfig = {
+        namespace: 'new-post-editor',
+        theme: editorTheme,
+    };
+
+    return (
+        <Veridical initialConfig={initialConfig}>
+            <VeridicalEditorPlugins />
+        </Veridical>
+    );
 }
 ```
 
 ### Customization
 
 ```jsx
-import { VeridicalBase, InitialConfig } from "veridical";
+import { VeridicalBase, InitialConfig } from 'veridical';
 import {
     AddNodeButtonPlugin,
     MarkdownPlugin,
@@ -46,12 +59,12 @@ import {
     ImagePlugin,
     RichTextPlugin,
     ListPlugin,
-} from "@veridical/plugins";
-import { defaultEditorNodes } from "@veridical/nodes";
+} from '@veridical/plugins';
+import { defaultEditorNodes } from '@veridical/nodes';
 
 export default function App() {
     const initialConfig: InitialConfig = {
-        namespace: "my-editor",
+        namespace: 'my-editor',
         nodes: defaultEditorNodes,
         onError: (error) => console.log(error),
         theme: defaultVeridicalTheme,
@@ -59,12 +72,12 @@ export default function App() {
     };
     return (
         <VeridicalBase initialConfig={initialConfig}>
-            <div className={"DefaultEditorTheme__EditorContainer"}>
+            <div className={'DefaultEditorTheme__EditorContainer'}>
                 <RichTextPlugin
                     contentEditable={
                         <ContentEditable
                             readOnly={false}
-                            className={"DefaultEditorTheme__ContentEditable"}
+                            className={'DefaultEditorTheme__ContentEditable'}
                         />
                     }
                     placeholder={
@@ -92,4 +105,5 @@ export default function App() {
     );
 }
 ```
+
 You can change the theme in initail config, nodes and plugins according to your needs.
