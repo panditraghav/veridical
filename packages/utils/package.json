@@ -23,7 +23,7 @@
     },
     "homepage": "https://github.com/panditraghav/veridical#readme",
     "dependencies": {
-        "lexical": "^0.7.6",
+        "lexical": "^0.9.0",
         "react": "^18.2.0"
     }
 }
