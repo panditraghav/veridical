@@ -20,18 +20,6 @@ function HTMLPlugin() {
     return null;
 }
 
-function Plugin() {
-    const [editor] = useLexicalComposerContext();
-    useEffect(() => {
-        return editor.registerUpdateListener(({ editorState }) => {
-            editorState.read(() => {
-                console.log('TitleNode: ',$getTitleNode()?.getTextContent());
-                console.log('ImageNode: ',$getFirstImageNode());
-            });
-        });
-    }, []);
-    return null;
-}
 export default function Editor() {
     function saveMarkdownToLocalStorage(markdown: string) {
         localStorage.setItem('blog', markdown);
