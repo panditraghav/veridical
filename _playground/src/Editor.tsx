@@ -5,7 +5,6 @@ import {
     ConvertToMarkdownPlugin,
     ConvertFromMarkdownPlugin,
 } from '@veridical/plugins';
-import { defaultVeridicalTheme } from '@veridical/utils';
 import TreeViewPlugin from './TreeViewPlugin';
 import { useEffect } from 'react';
 
@@ -26,7 +25,7 @@ export default function Editor() {
         localStorage.setItem('blog', markdown);
     }
     return (
-        <Veridical initialConfig={{ theme: defaultVeridicalTheme }}>
+        <Veridical>
             <VeridicalEditorPlugins />
             {<TreeViewPlugin />}
             {

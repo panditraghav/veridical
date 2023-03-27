@@ -33,6 +33,7 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from 'lexical';
 import {
     defaultVeridicalTheme,
+    defaultLexicalTheme,
     VeridicalThemeProvider,
 } from '@veridical/utils';
 import type { VeridicalThemeClasses } from '@veridical/utils';
@@ -53,7 +54,8 @@ type InitialConfig = Readonly<{
     nodes?: ReadonlyArray<Klass<LexicalNode>>;
     onError?: (error: Error, editor: LexicalEditor) => void;
     readOnly?: boolean;
-    theme?: VeridicalThemeClasses;
+    lexicalTheme?: EditorThemeClasses;
+    veridicalTheme?: VeridicalThemeClasses;
     editorState?: InitialEditorStateType;
     editable?: boolean;
 }>;
@@ -72,17 +74,18 @@ function Veridical({
             initialConfig?.onError || ((error, editor) => console.error(error)),
         editable: initialConfig?.editable || true,
         readOnly: initialConfig?.readOnly || false,
-        theme: initialConfig?.theme || defaultVeridicalTheme,
+        theme: initialConfig?.lexicalTheme || defaultLexicalTheme,
+        veridicalTheme: initialConfig?.veridicalTheme || defaultVeridicalTheme,
     };
 
     return (
         <VeridicalBase initialConfig={config}>
-            <div className={config?.theme?.editorContainer}>
+            <div className={config?.veridicalTheme?.editorContainer}>
                 <RichTextPlugin
                     contentEditable={
                         <ContentEditable
                             readOnly={false}
-                            className={config.theme.contentEditable}
+                            className={config.veridicalTheme.contentEditable}
                         />
                     }
                     placeholder={
@@ -140,17 +143,18 @@ function VeridicalBase({
 }: {
     initialConfig: Readonly<{
         namespace: string;
-        nodes?: readonly Klass<LexicalNode>[] | undefined;
+        nodes?: readonly Klass<LexicalNode>[];
         onError: (error: Error, editor: LexicalEditor) => void;
-        editable?: boolean | undefined;
-        theme?: EditorThemeClasses | undefined;
-        editorState?: InitialEditorStateType | undefined;
+        editable?: boolean;
+        theme?: EditorThemeClasses;
+        veridicalTheme?: VeridicalThemeClasses;
+        editorState?: InitialEditorStateType;
     }>;
     children?: React.ReactNode;
 }) {
     return (
         <LexicalComposer initialConfig={initialConfig}>
-            <VeridicalThemeProvider theme={initialConfig.theme}>
+            <VeridicalThemeProvider theme={initialConfig.veridicalTheme}>
                 {children}
             </VeridicalThemeProvider>
         </LexicalComposer>

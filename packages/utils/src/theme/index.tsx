@@ -1,5 +1,6 @@
 import { EditorThemeClasses } from 'lexical/LexicalEditor';
 import { defaultVeridicalTheme } from './defaultVeridicalTheme';
+import { defaultLexicalTheme } from './defaultLexicalTheme';
 
 interface VeridicalThemeClasses extends EditorThemeClasses {
     editorContainer?: string;
@@ -99,4 +100,4 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     };
 }
 
-export { VeridicalThemeClasses, defaultVeridicalTheme };
+export { VeridicalThemeClasses, defaultVeridicalTheme, defaultLexicalTheme };
