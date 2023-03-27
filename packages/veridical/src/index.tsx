@@ -21,7 +21,7 @@ import {
     AddLinkDialogPlugin,
     OpenLinkPlugin,
     AddNodeDialogPlugin,
-    ImageActionMenuRight
+    ImageActionMenuRight,
 } from '@veridical/plugins';
 
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
