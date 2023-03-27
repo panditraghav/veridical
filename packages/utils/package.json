@@ -1,6 +1,6 @@
 {
     "name": "@veridical/utils",
-    "version": "0.1.8",
+    "version": "0.2.0",
     "description": "Utils for veridical",
     "main": "index.js",
     "scripts": {

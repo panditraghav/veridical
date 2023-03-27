@@ -1,36 +1,35 @@
 # Veridical
 
-This is a WYSIWYG editor using which you can create a blog or other content based application and have a medium-like editor in it!
+Veridical is a WYSIWYG editor for blogs made using [lexical](https://lexical.dev)
 
 ## Installation
 
 **npm**
 
 ```sh
-npm install veridical
+npm install veridical @veridical/plugins lexical @lexical/react
 ```
 
-**yarn**
+## How to use
 
-```sh
-yarn add veridical
-```
-
-## Usage
-
-### Basic usage
-
+### Basic editor setup
 ```jsx
 import { Veridical, VeridicalEditorPlugins } from 'veridical';
+import { EditorThemeClasses } from 'lexical'
 
-const editortheme: VeridicalThemeClasses = {
-    // .... Theme classes
+const lexicalTheme: EditorThemeClasses = {
+    // Theme for html elements
+};
+
+const veridicalTheme: VeridicalEditorTheme = {
+    // Theme for ui components
 }
 
 export default function App() {
     const initialConfig = {
         namespace: 'new-post-editor',
-        theme: editorTheme,
+        lexicalTheme,
+        veridicalTheme,
     };
 
     return (
@@ -40,70 +39,13 @@ export default function App() {
     );
 }
 ```
+### Theming
 
-### Customization
+The `initialConfig` requires two theme objects.
+* [`lexicalTheme`](https://github.com/panditraghav/veridical/blob/main/packages/utils/src/theme/defaultLexicalTheme.ts) which is theme for html elements like heading, list, table... etc.
+* [`veridicalTheme`](https://github.com/panditraghav/veridical/blob/main/packages/utils/src/theme/defaultVeridicalTheme.ts) which is theme for editor ui components like Dialogs, Inputs etc.
 
-```jsx
-import { VeridicalBase, InitialConfig } from 'veridical';
-import {
-    AddNodeButtonPlugin,
-    MarkdownPlugin,
-    TreeViewPlugin,
-    CodeActionPlugin,
-    CodeHighlightPlugin,
-    PrettierPlugin,
-    DraggableNodeButton,
-    HighlightMenuPlugin,
-    HoverMenuPlugin,
-    AddNodeShortcutPlugin,
-    ImagePlugin,
-    RichTextPlugin,
-    ListPlugin,
-} from '@veridical/plugins';
-import { defaultEditorNodes } from '@veridical/nodes';
+#### Quick start
+* The css classes that you will add to these theme objects will be added to their respected components/elements
 
-export default function App() {
-    const initialConfig: InitialConfig = {
-        namespace: 'my-editor',
-        nodes: defaultEditorNodes,
-        onError: (error) => console.log(error),
-        theme: defaultVeridicalTheme,
-        editable: true,
-    };
-    return (
-        <VeridicalBase initialConfig={initialConfig}>
-            <div className={'DefaultEditorTheme__EditorContainer'}>
-                <RichTextPlugin
-                    contentEditable={
-                        <ContentEditable
-                            readOnly={false}
-                            className={'DefaultEditorTheme__ContentEditable'}
-                        />
-                    }
-                    placeholder={
-                        <Placeholder text="Press Ctrl + k for command..." />
-                    }
-                />
-                <ListPlugin />
-                <CodeHighlightPlugin />
-                {config.editable && (
-                    <>
-                        <CodeActionPlugin />
-                        <PrettierPlugin />
-                        <HighlightMenuPlugin />
-                        <HoverMenuPlugin offset={{ left: -50, top: 4 }}>
-                            <AddNodeButtonPlugin />
-                            <DraggableNodeButton />
-                        </HoverMenuPlugin>
-                        <AddNodeShortcutPlugin />
-                        <MarkdownPlugin />
-                        <ImagePlugin />
-                    </>
-                )}
-            </div>
-        </VeridicalBase>
-    );
-}
-```
-
-You can change the theme in initail config, nodes and plugins according to your needs.
+* Above links contains themes made using [tailwindcss](https://tailwindcss.com/), you can copy those theme objects into your code. You can copy extended theme from from playground's [tailwind.config.cjs](https://github.com/panditraghav/veridical/blob/5f39b8203165c329145ee28d1146307ebd84727c/_playground/tailwind.config.cjs#L12-L66) and past it into your tailwind.config to get started faster.
