@@ -93,7 +93,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
 
     createDOM(config: EditorConfig): HTMLElement {
         const div = document.createElement('div');
-        const className = config.theme.veridicalImage.container;
+        const className = config.theme.image;
 
         if (className) div.className = className;
         return div;

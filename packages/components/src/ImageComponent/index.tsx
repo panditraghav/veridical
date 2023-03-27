@@ -78,7 +78,7 @@ function SuspenseImage({
                 width: isMaxWidth ? '100%' : 'auto',
                 aspectRatio: `auto ${naturalWidth / naturalHeight}`,
             }}
-            className={`${theme?.image} ${
+            className={`${theme?.veridicalImage?.image} ${
                 isSelected ? theme?.veridicalImage?.selected : ''
             }`}
         />

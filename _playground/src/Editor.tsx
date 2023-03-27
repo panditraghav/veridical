@@ -1,16 +1,24 @@
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $generateHtmlFromNodes } from '@lexical/html';
 import { Veridical, VeridicalEditorPlugins } from 'veridical';
 import {
     ConvertToMarkdownPlugin,
     ConvertFromMarkdownPlugin,
 } from '@veridical/plugins';
-import {
-    $getFirstImageNode,
-    $getTitleNode,
-    defaultVeridicalTheme,
-} from '@veridical/utils';
 import TreeViewPlugin from './TreeViewPlugin';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
+
+function HTMLPlugin() {
+    const [editor] = useLexicalComposerContext();
+    useEffect(() => {
+        return editor.registerUpdateListener(({ editorState }) => {
+            editorState.read(() => {
+                console.log($generateHtmlFromNodes(editor));
+            });
+        });
+    }, [editor]);
+    return null;
+}
 
 function Plugin() {
     const [editor] = useLexicalComposerContext();
@@ -29,7 +37,7 @@ export default function Editor() {
         localStorage.setItem('blog', markdown);
     }
     return (
-        <Veridical initialConfig={{ theme: defaultVeridicalTheme }}>
+        <Veridical>
             <VeridicalEditorPlugins />
             {<TreeViewPlugin />}
             {
@@ -44,7 +52,7 @@ export default function Editor() {
                     markdown={localStorage.getItem('blog') || ''}
                 />
             }
-            <Plugin />
+            <HTMLPlugin />
         </Veridical>
     );
 }

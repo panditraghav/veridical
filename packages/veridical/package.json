@@ -11,12 +11,12 @@
         "url": "www.github.com/panditraghav/veridical"
     },
     "dependencies": {
-        "@lexical/react": "^0.7.6",
-        "@veridical/components": "0.1.8",
-        "@veridical/nodes": "0.1.8",
-        "@veridical/plugins": "0.1.8",
-        "@veridical/utils": "0.1.8",
-        "lexical": "^0.7.6",
+        "@lexical/react": "^0.9.0",
+        "@veridical/components": "0.1.5",
+        "@veridical/nodes": "0.1.5",
+        "@veridical/plugins": "0.1.5",
+        "@veridical/utils": "0.1.5",
+        "lexical": "^0.9.0",
         "react": "^18.2.0"
     },
     "keywords": [
