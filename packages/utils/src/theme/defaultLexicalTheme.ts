@@ -9,6 +9,7 @@ const string = 'dark:text-lime-500 text-green-600';
 
 export const defaultLexicalTheme: EditorThemeClasses = {
     code: 'bg-gray-100 dark:bg-neutral-800 block w-full px-8 py-6 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md',
+    image: 'flex flex-row justify-center my-4 mx-0',
     codeHighlight: {
         atrule: tokenAttr,
         attr: tokenAttr,

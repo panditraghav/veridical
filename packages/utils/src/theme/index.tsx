@@ -6,6 +6,7 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     editorContainer?: string;
     contentEditable?: string;
     veridicalImage?: {
+        image?: string;
         container?: string;
         selected?: string;
         fallback?: string;

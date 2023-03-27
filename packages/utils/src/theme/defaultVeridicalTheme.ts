@@ -3,8 +3,9 @@ import { VeridicalThemeClasses } from '.';
 export const defaultVeridicalTheme: VeridicalThemeClasses = {
     editorContainer: 'md:max-w-[760px] md:mx-16 w-full px-4',
     contentEditable: 'focus:outline-none',
-    image: 'w-full h-[420px] rounded-sm cursor-pointer',
+    image: 'flex flex-row justify-center my-4 mx-0',
     veridicalImage: {
+        image: 'w-full h-[420px] rounded-sm cursor-pointer',
         selected: 'box-border border-2 border-editor-button-primary',
         container: 'flex flex-row justify-center my-4 mx-0',
         fallback: 'bg-gray-600 animate-pulse h-[420px]',
