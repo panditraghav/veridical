@@ -1,40 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-    Button,
-    Dialog,
-    DialogContentContainer,
-    TextInput,
-    FileInput,
-    DialogActionGroup,
-    CheckboxInput,
-} from '@veridical/components';
-import { IMAGE_DIALOG_COMMAND, useVeridicalTheme } from '@veridical/utils';
+import { IMAGE_DIALOG_COMMAND } from '@veridical/utils';
 import { ImageNode } from '@veridical/nodes';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { COMMAND_PRIORITY_EDITOR } from 'lexical';
+import { ImageDialog } from '@veridical/components';
 
 export interface AddImageDialogStyle {
     backdrop?: string;
     dialog?: string;
-}
-
-const DEFAULT_IS_MAX_WIDTH = true;
-
-function getImageDimensions(src: string) {
-    const img = new Image();
-    img.src = src;
-    return new Promise<{ naturalWidth: number; naturalHeight: number }>(
-        (resolve, reject) => {
-            img.onload = () => {
-                const naturalWidth = img.naturalWidth;
-                const naturalHeight = img.naturalHeight;
-                resolve({ naturalWidth, naturalHeight });
-            };
-            img.onerror = (ev) => {
-                reject(ev);
-            };
-        },
-    );
 }
 
 export default function ImageDialogPlugin({
@@ -44,25 +17,10 @@ export default function ImageDialogPlugin({
     urlFromImageBlob?: (image: Blob) => Promise<string>;
     container: Element | DocumentFragment;
 }) {
-    const theme = useVeridicalTheme();
     const [editor] = useLexicalComposerContext();
     const [imageNode, setImageNode] = useState<ImageNode | null | undefined>();
     const [showDialog, setShowDialog] = useState(false);
-    const [src, setSrc] = useState('');
     const [action, setAction] = useState<'edit' | 'add'>('add'); // Is dialog for adding image or editing
-    const [altText, setAltText] = useState('');
-    const [isMaxWidth, setIsMaxWidth] = useState(DEFAULT_IS_MAX_WIDTH);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState<null | string>(null);
-
-    const onClose = useCallback(() => {
-        setShowDialog(false);
-        // If action is edit then don't remove imageNode when closing dialog.
-        if (action === 'edit') return;
-        editor.update(() => {
-            imageNode?.remove();
-        });
-    }, [action, imageNode]);
 
     useEffect(() => {
         return editor.registerCommand(
@@ -81,114 +39,43 @@ export default function ImageDialogPlugin({
         );
     }, [editor]);
 
-    useEffect(() => {
-        if (!showDialog) return;
-        function handleKeyDown(ev: KeyboardEvent) {
-            if (ev.key === 'Escape') {
-                onClose();
-            }
-        }
-        document.addEventListener('keydown', handleKeyDown);
-        return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [onClose, showDialog]);
-
-    useEffect(() => {
-        // When image node changes we set the state with values of new ImageNode
-        setIsLoading(false);
-        setSrc(imageNode?.getSrc() || '');
-        setAltText(imageNode?.getAltText() || '');
-        setIsMaxWidth(() => {
-            if (imageNode) {
-                return imageNode.isMaxWidth();
-            }
-            return DEFAULT_IS_MAX_WIDTH;
+    const onClose = useCallback(() => {
+        setShowDialog(false);
+        // If action is edit then don't remove imageNode when closing dialog.
+        if (action === 'edit') return;
+        editor.update(() => {
+            imageNode?.remove();
         });
-        setIsError(null);
-    }, [imageNode]);
+    }, [action, imageNode]);
 
-    async function handleImageSelection(
-        event: React.ChangeEvent<HTMLInputElement>,
+    async function onSave(
+        src: string,
+        altText: string,
+        naturalHeight: number,
+        naturalWidth: number,
+        isMaxWidth: boolean,
     ) {
-        const files = event.target.files;
-        const file = files ? files[0] : new Blob();
-        if (urlFromImageBlob) {
-            const url = await urlFromImageBlob(file);
-            setSrc(url);
-        }
-    }
-
-    async function handleSave() {
-        try {
-            setIsLoading(true);
-            const { naturalHeight, naturalWidth } = await getImageDimensions(
-                src,
-            );
-            setIsLoading(false);
-            editor.update(() => {
-                imageNode?.setSrc(src);
-                imageNode?.setAltText(altText);
-                imageNode?.setNaturalHeight(naturalHeight);
-                imageNode?.setNaturalWidth(naturalWidth);
-                imageNode?.setIsMaxWidth(isMaxWidth);
-            });
-            setShowDialog(false);
-        } catch (error) {
-            setIsLoading(false);
-            setIsError('Invalid image url');
-        }
+        editor.update(() => {
+            imageNode?.setSrc(src);
+            imageNode?.setAltText(altText);
+            imageNode?.setNaturalHeight(naturalHeight);
+            imageNode?.setNaturalWidth(naturalWidth);
+            imageNode?.setIsMaxWidth(isMaxWidth);
+        });
+        setShowDialog(false);
     }
 
     return (
-        <Dialog
-            showDialog={showDialog}
-            onClose={onClose}
+        <ImageDialog
             width={480}
             height={'auto'}
             container={container}
-        >
-            <div className={theme?.dialog?.title}>
-                {action === 'edit' ? 'Edit Image' : 'Add Image'}
-            </div>
-            <DialogContentContainer>
-                <div className={theme?.addImageDialog?.imageInput?.container}>
-                    <TextInput
-                        type="url"
-                        placeholder="Enter image url"
-                        value={src}
-                        onChange={(e) => setSrc(e.target.value)}
-                        autoFocus={true}
-                    />
-                    <FileInput
-                        label=""
-                        onChange={handleImageSelection}
-                        accept="image/jpeg, image/png"
-                        disabled={urlFromImageBlob ? false : true}
-                    />
-                </div>
-                <TextInput
-                    type="text"
-                    value={altText}
-                    onChange={(e) => setAltText(e.target.value)}
-                    placeholder="Alternative text"
-                />
-                <CheckboxInput
-                    isChecked={isMaxWidth ? isMaxWidth : false}
-                    onChange={(e) => setIsMaxWidth(e.target.checked)}
-                    label="Maximum width: "
-                />
-            </DialogContentContainer>
-            <DialogActionGroup>
-                <Button
-                    type="primary"
-                    onClick={handleSave}
-                    isDisabled={isLoading}
-                >
-                    {'Save'}
-                </Button>
-                <Button type="secondary" onClick={onClose}>
-                    {'Cancel'}
-                </Button>
-            </DialogActionGroup>
-        </Dialog>
+            action={action}
+            urlFromImageBlob={urlFromImageBlob}
+            imageNode={imageNode}
+            showDialog={showDialog}
+            onClose={onClose}
+            onSave={onSave}
+        />
     );
 }

@@ -10,6 +10,7 @@ import AddNodeButton from './AddNodeButton';
 import CopyCodeButton from './CopyCodeButton';
 import EditImageButton from './EditImageButton';
 import DraggableNodeButton from './DraggableNodeButton';
+import ImageDialog from './ImageDialog';
 import { DialogContentContainer, Dialog, DialogActionGroup } from './Dialog';
 import { FileInput, TextInput, CheckboxInput } from './Input';
 export * from './Icons';
@@ -32,4 +33,5 @@ export {
     DialogActionGroup,
     ErrorBoundary,
     CodeLanguageSelectionMenu,
+    ImageDialog,
 };
