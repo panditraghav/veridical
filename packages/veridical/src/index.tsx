@@ -5,7 +5,6 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 
 import { LexicalEditor, Klass, LexicalNode, EditorThemeClasses } from 'lexical';
-import { defaultVeridicalTheme, defaultLexicalTheme } from '@veridical/utils';
 import type { VeridicalThemeClasses } from '@veridical/utils';
 import { Placeholder, ErrorBoundary } from '@veridical/components';
 import { defaultEditorNodes } from '@veridical/nodes';
@@ -40,8 +39,8 @@ function Veridical({
             initialConfig?.onError || ((error, editor) => console.error(error)),
         editable: initialConfig?.editable || true,
         readOnly: initialConfig?.readOnly || false,
-        theme: initialConfig?.lexicalTheme || defaultLexicalTheme,
-        veridicalTheme: initialConfig?.veridicalTheme || defaultVeridicalTheme,
+        theme: initialConfig?.lexicalTheme,
+        veridicalTheme: initialConfig?.veridicalTheme,
     };
 
     return (
@@ -51,7 +50,7 @@ function Veridical({
                     contentEditable={
                         <ContentEditable
                             readOnly={false}
-                            className={config.veridicalTheme.contentEditable}
+                            className={config.veridicalTheme?.contentEditable}
                         />
                     }
                     placeholder={

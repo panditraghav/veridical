@@ -1,6 +1,8 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $generateHtmlFromNodes } from '@lexical/html';
 import { Veridical, VeridicalEditorPlugins } from 'veridical';
+import { lexicalTheme } from './theme/lexicalTheme';
+import { veridicalTheme } from './theme/veridicalTheme';
 import {
     ConvertToMarkdownPlugin,
     ConvertFromMarkdownPlugin,
@@ -21,11 +23,16 @@ function HTMLPlugin() {
 }
 
 export default function Editor() {
+    const initialConfig = {
+        namespace: 'playground',
+        lexicalTheme,
+        veridicalTheme,
+    };
     function saveMarkdownToLocalStorage(markdown: string) {
         localStorage.setItem('blog', markdown);
     }
     return (
-        <Veridical>
+        <Veridical initialConfig={initialConfig}>
             <VeridicalEditorPlugins />
             {<TreeViewPlugin />}
             {

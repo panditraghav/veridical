@@ -1,9 +1,8 @@
-import { VeridicalThemeClasses } from '.';
+import { VeridicalThemeClasses } from '@veridical/utils';
 
-export const defaultVeridicalTheme: VeridicalThemeClasses = {
+export const veridicalTheme: VeridicalThemeClasses = {
     editorContainer: 'md:max-w-[780px] md:mx-auto w-full px-4',
     contentEditable: 'focus:outline-none',
-    image: 'flex flex-row justify-center my-4 mx-0',
     veridicalImage: {
         image: 'w-full h-[420px] rounded-sm cursor-pointer',
         selected: 'box-border border-2 border-editor-button-primary',

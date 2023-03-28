@@ -7,7 +7,7 @@ const tokenVariable = 'dark:text-amber-800';
 const keyword = 'dark:text-purple-300 text-fuchsia-700';
 const string = 'dark:text-lime-500 text-green-600';
 
-export const defaultLexicalTheme: EditorThemeClasses = {
+export const lexicalTheme: EditorThemeClasses = {
     code: 'bg-gray-100 dark:bg-neutral-800 block w-full px-8 py-6 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md',
     image: 'flex flex-row justify-center my-4 mx-0',
     codeHighlight: {

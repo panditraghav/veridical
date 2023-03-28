@@ -1,8 +1,4 @@
-import { EditorThemeClasses } from 'lexical/LexicalEditor';
-import { defaultVeridicalTheme } from './defaultVeridicalTheme';
-import { defaultLexicalTheme } from './defaultLexicalTheme';
-
-interface VeridicalThemeClasses extends EditorThemeClasses {
+interface VeridicalThemeClasses {
     editorContainer?: string;
     contentEditable?: string;
     veridicalImage?: {
@@ -100,6 +96,7 @@ interface VeridicalThemeClasses extends EditorThemeClasses {
     openLinkDialog?: {
         link?: string;
     };
+    [key: string]: any
 }
 
-export { VeridicalThemeClasses, defaultVeridicalTheme, defaultLexicalTheme };
+export { VeridicalThemeClasses };
