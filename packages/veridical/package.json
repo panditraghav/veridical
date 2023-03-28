@@ -1,6 +1,6 @@
 {
     "name": "veridical",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Veridical is a WYSIWYG blog editor",
     "main": "index.js",
     "scripts": {
@@ -12,10 +12,10 @@
     },
     "dependencies": {
         "@lexical/react": "^0.9.0",
-        "@veridical/components": "0.2.0",
-        "@veridical/nodes": "0.2.0",
-        "@veridical/plugins": "0.2.0",
-        "@veridical/utils": "0.2.0",
+        "@veridical/components": "0.2.1",
+        "@veridical/nodes": "0.2.1",
+        "@veridical/plugins": "0.2.1",
+        "@veridical/utils": "0.2.1",
         "lexical": "^0.9.0",
         "react": "^18.2.0"
     },
