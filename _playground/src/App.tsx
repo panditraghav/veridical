@@ -36,7 +36,7 @@ function Header() {
         }
     }
     return (
-        <nav className="sticky top-0 z-30 text-editor-p-dark dark:text-editor-p-light h-12 w-full bg-editor-bg-light dark:bg-editor-bg-dark flex justify-between items-center flex-row shadow-sm shadow-slate-200 dark:shadow-gray-800 mb-24">
+        <nav className="sticky top-0 z-30 text-editor-p-dark dark:text-editor-p-light h-12 w-full bg-editor-bg-light dark:bg-editor-bg-dark flex justify-between items-center flex-row shadow-sm shadow-slate-200 dark:shadow-gray-800 mb-8">
             <div>CurrentMode: {mode}</div>
             <div>
                 <button onClick={onClickHandler} className="mx-4">

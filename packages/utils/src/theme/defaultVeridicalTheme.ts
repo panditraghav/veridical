@@ -1,7 +1,7 @@
 import { VeridicalThemeClasses } from '.';
 
 export const defaultVeridicalTheme: VeridicalThemeClasses = {
-    editorContainer: 'md:max-w-[760px] md:mx-16 w-full px-4',
+    editorContainer: 'md:max-w-[780px] md:mx-auto w-full px-4',
     contentEditable: 'focus:outline-none',
     image: 'flex flex-row justify-center my-4 mx-0',
     veridicalImage: {
@@ -12,9 +12,9 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
     },
     placeholder:
         'relative top-[-35px] left-1 z-[-10] text-editor-p-dark dark:text-editor-p-light',
-    overlay: 'w-screen h-screen absolute top-0 z-50',
+    overlay: 'w-screen h-screen fixed top-0 z-50',
     backdrop:
-        'fixed top-0 w-full h-full m-0 p-0 flex items-center justify-center backdrop-brightness-50',
+        'fixed top-0 w-screen h-screen m-0 p-0 flex items-center justify-center dark:bg-editor-bg-dark/50 bg-editor-bg-light',
     dialog: {
         dialog: 'box-border bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark flex flex-col rounded-md animate-appear border-[1px] border-neutral-700',
         contentContainer: 'mx-4',
@@ -35,7 +35,8 @@ export const defaultVeridicalTheme: VeridicalThemeClasses = {
             'dark:text-editor-p-light dark:fill-editor-p-light border-[1px] border-editor-button-primary hover:cursor-pointer dark:hover:text-editor-title-dark hover:dark:fill-editor-title-dark hover:bg-editor-button-primary',
         secondary:
             'dark:text-editor-p-light border-[1px] border-editor-button-secondary hover:bg-editor-button-secondary hover:text-editor-p-light',
-        disabled: 'dark:text-editor-p-light dark:fill-editor-p-light border-[1px] hover:cursor-not-allowed',
+        disabled:
+            'dark:text-editor-p-light dark:fill-editor-p-light border-[1px] hover:cursor-not-allowed',
     },
     addNodeDialog: {
         dialog: 'rounded-md w-auto bg-editor-dialog-bg-light flex flex-col items-center dark:bg-editor-dialog-bg-dark drop-shadow-md dark:drop-shadow-[0_35px_35px_#27272a]',

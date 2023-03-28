@@ -62,7 +62,7 @@ export default function ImageDialogPlugin({
         editor.update(() => {
             imageNode?.remove();
         });
-    }, [action]);
+    }, [action, imageNode]);
 
     useEffect(() => {
         return editor.registerCommand(

@@ -35,11 +35,11 @@ export default function Editor() {
                     }}
                 />
             }
-            {
+            {/*
                 <ConvertFromMarkdownPlugin
                     markdown={localStorage.getItem('blog') || ''}
                 />
-            }
+            */}
             <HTMLPlugin />
         </Veridical>
     );
