@@ -156,6 +156,7 @@ export default function ImageDialogPlugin({
                         placeholder="Enter image url"
                         value={src}
                         onChange={(e) => setSrc(e.target.value)}
+                        autoFocus={true}
                     />
                     <FileInput
                         label=""

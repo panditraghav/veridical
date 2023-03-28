@@ -6,6 +6,7 @@ interface TextInputProps {
     placeholder: string;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    autoFocus?: boolean;
 }
 
 export default function TextInput({
@@ -13,6 +14,7 @@ export default function TextInput({
     placeholder,
     value,
     onChange,
+    autoFocus,
 }: TextInputProps) {
     const theme = useVeridicalTheme()?.input;
     return (
@@ -22,6 +24,7 @@ export default function TextInput({
             onChange={onChange}
             placeholder={placeholder}
             className={theme?.text}
+            autoFocus={autoFocus}
         />
     );
 }
