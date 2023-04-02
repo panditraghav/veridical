@@ -41,6 +41,7 @@ function Veridical({
         readOnly: initialConfig?.readOnly || false,
         theme: initialConfig?.lexicalTheme,
         veridicalTheme: initialConfig?.veridicalTheme,
+        editorState: initialConfig?.editorState || null,
     };
 
     return (
