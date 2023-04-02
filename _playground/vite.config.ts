@@ -15,6 +15,8 @@ export default defineConfig({
             '@veridical/components': `${pkgDir}/components/src/`,
             '@veridical/nodes': `${pkgDir}/nodes/src/`,
             '@veridical/utils': `${pkgDir}/utils/src/`,
+            lexical: `${pkgDir}/../_playground/node_modules/lexical`,
+            '@lexical': `${pkgDir}/../_playground/node_modules/@lexical`,
         },
     },
 });

@@ -2,7 +2,8 @@
     "name": "@veridical/monorepo",
     "version": "0.2.2",
     "description": "A customizable WYSIWYG editor made with lexical",
-    "private": true,
+    "homepage": "https://panditraghav.github.io/veridical",
+    "private": false,
     "workspaces": [
         "./packages/*"
     ],
@@ -15,6 +16,7 @@
         "prebuild": "npm run clean",
         "prerelease": "node scripts/prepareRelease.js",
         "release": "node scripts/release.js",
+        "publish": "gh-pages -d ./_playground/dist",
         "update-version": "node scripts/updateVersion.js",
         "build": "node scripts/build.js",
         "dev": "npm run dev --prefix _playground"
