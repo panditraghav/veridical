@@ -1,6 +1,6 @@
 {
     "name": "@veridical/nodes",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "Veridical is a WYSIWYG blog editor",
     "main": "index.js",
     "scripts": {
