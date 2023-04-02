@@ -40,7 +40,7 @@ export default function Editor() {
         namespace: 'playground',
         lexicalTheme,
         veridicalTheme,
-        editorState: localStorage.getItem('blog') || '{}',
+        editorState: localStorage.getItem('blog'),
     };
     console.log(initialConfig);
     return (

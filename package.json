@@ -16,6 +16,7 @@
         "prebuild": "npm run clean",
         "prerelease": "node scripts/prepareRelease.js",
         "release": "node scripts/release.js",
+        "prepublish": "npm run build --prefix _playground",
         "publish": "gh-pages -d ./_playground/dist",
         "update-version": "node scripts/updateVersion.js",
         "build": "node scripts/build.js",
