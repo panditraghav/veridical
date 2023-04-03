@@ -13,7 +13,7 @@ export const veridicalTheme: VeridicalThemeClasses = {
         'relative top-[-35px] left-1 z-[-10] text-editor-p-dark dark:text-editor-p-light',
     overlay: 'w-screen h-screen fixed top-0 z-50',
     backdrop:
-        'fixed top-0 w-screen h-screen m-0 p-0 flex items-center justify-center dark:bg-editor-bg-dark/50 bg-editor-bg-light',
+        'fixed top-0 w-screen h-screen m-0 p-0 flex items-center justify-center dark:bg-editor-bg-dark/50 bg-editor-bg-light/50',
     dialog: {
         dialog: 'box-border bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark flex flex-col rounded-md animate-appear border-[1px] border-neutral-700',
         contentContainer: 'mx-4',
