@@ -51,7 +51,7 @@ async function build(package) {
             typescript(),
             image(),
             PeerDepsExternalPlugin(),
-            terser()
+            //terser(),
         ],
         onwarn(warning) {
             if (warning.code === 'CIRCULAR_DEPENDENCY') {
@@ -87,7 +87,7 @@ async function build(package) {
 async function generateOutput(bundle, package) {
     const outputOption = {
         file: getPackageOutputPath(package),
-        format: 'esm',
+        format: 'cjs',
     };
     await bundle.write(outputOption);
 }
