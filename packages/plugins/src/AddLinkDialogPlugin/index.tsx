@@ -3,6 +3,7 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import { LinkNode, $isLinkNode } from '@lexical/link';
 import { $getNodeByKey } from 'lexical';
 import { useVeridicalTheme } from '@veridical/utils';
+import { createPortal } from 'react-dom';
 
 const Y_OFFSET = -35;
 
@@ -27,7 +28,11 @@ function usePosition(linkDomNode: HTMLElement | null): Position {
     return position;
 }
 
-export default function AddLinkDialogPlugin() {
+export default function AddLinkDialogPlugin({
+    container,
+}: {
+    container: Element | DocumentFragment;
+}) {
     const [editor] = useLexicalComposerContext();
     const [linkNode, setLinkNode] = useState<LinkNode | null>(null);
     const [linkDomNode, setLinkDomNode] = useState<HTMLElement | null>(null);
@@ -69,7 +74,7 @@ export default function AddLinkDialogPlugin() {
     }, [editor]);
 
     if (!linkNode) return null;
-    return (
+    return createPortal(
         <input
             style={{ ...position, position: 'absolute' }}
             ref={inputRef}
@@ -89,6 +94,7 @@ export default function AddLinkDialogPlugin() {
                     e.preventDefault();
                 }
             }}
-        />
+        />,
+        container,
     );
 }

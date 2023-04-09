@@ -18,6 +18,7 @@ import {
 } from '@veridical/components';
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { $isCodeNode } from '@lexical/code';
+import { createPortal } from 'react-dom';
 
 const OFFSET_Y = -50;
 
@@ -163,8 +164,10 @@ function FormatUnderlineButton({ isUnderline }: { isUnderline: boolean }) {
 }
 
 export default function HighlightMenuPlugin({
+    container,
     children,
 }: {
+    container: Element | DocumentFragment;
     children?: React.ReactNode;
 }) {
     const menuRef = useRef<HTMLDivElement | null>(null);
@@ -228,21 +231,19 @@ export default function HighlightMenuPlugin({
         });
     }, [editor]);
 
-    return (
-        <>
-            {showMenu && (
-                <div
-                    style={{ position: 'absolute', ...menuPosition }}
-                    className={`${theme?.menu} ${theme?.animation}`}
-                    ref={menuRef}
-                >
-                    <FormatBoldButton isBold={isBold} />
-                    <FormatItalicButton isItalic={isItalic} />
-                    <FormatUnderlineButton isUnderline={isUnderline} />
-                    <FormatLinkButton isLink={isLink} onClose={hideMenu} />
-                    {children}
-                </div>
-            )}
-        </>
+    if (!showMenu) return null;
+    return createPortal(
+        <div
+            style={{ position: 'absolute', ...menuPosition }}
+            className={`${theme?.menu} ${theme?.animation}`}
+            ref={menuRef}
+        >
+            <FormatBoldButton isBold={isBold} />
+            <FormatItalicButton isItalic={isItalic} />
+            <FormatUnderlineButton isUnderline={isUnderline} />
+            <FormatLinkButton isLink={isLink} onClose={hideMenu} />
+            {children}
+        </div>,
+        container,
     );
 }

@@ -42,12 +42,12 @@ export default function VeridicalEditorPlugins(): JSX.Element {
             <AutoLinkPlugin />
             <LinkPlugin />
             <PrettierPlugin />
-            <HighlightMenuPlugin />
-            <AddLinkDialogPlugin />
             <HistoryPlugin />
             <TabIndentationPlugin />
             {container && (
                 <>
+                    <HighlightMenuPlugin container={container} />
+                    <AddLinkDialogPlugin container={container} />
                     <HoverMenuPlugin
                         offset={{ left: -50, top: 4 }}
                         container={container}
