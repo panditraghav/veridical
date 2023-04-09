@@ -20,11 +20,11 @@
     "author": "Raghav Pandit",
     "license": "MIT",
     "dependencies": {
-        "@lexical/react": "^0.9.0",
-        "@lexical/utils": "^0.9.0",
+        "@lexical/react": "^0.9.1",
+        "@lexical/utils": "^0.9.1",
         "@veridical/utils": "0.2.3",
         "@veridical/nodes": "0.2.3",
-        "lexical": "^0.9.0",
+        "lexical": "^0.9.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     }
