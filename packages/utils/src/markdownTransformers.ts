@@ -22,14 +22,14 @@ import {
 } from '@lexical/markdown';
 import { $createParagraphNode } from 'lexical';
 
-const IMAGE: ElementTransformer = {
+export const IMAGE: ElementTransformer = {
     dependencies: [ImageNode],
     export: (node) => {
         if (!$isImageNode(node)) return null;
         const src = node.getSrc();
         const alt = node.getAltText();
-        const width = node.getNaturalWidth();
         const height = node.getNaturalHeight();
+        const width = node.getNaturalWidth();
         const isMaxWidth = node.isMaxWidth();
         return `<img src="${src}" alt="${alt}" data-natural-height="${height}" data-natural-width="${width}" data-is-max-width="${isMaxWidth}"/>`;
     },
@@ -82,5 +82,5 @@ const ELEMENT_TRANSFORMERS: ElementTransformer[] = [
 export const MARKDOWN_TRANSFORMERS: Array<Transformer> = [
     ...TEXT_FORMAT_TRANSFORMERS,
     ...ELEMENT_TRANSFORMERS,
-    ...TEXT_MATCH_TRANSFORMERS
+    ...TEXT_MATCH_TRANSFORMERS,
 ];
