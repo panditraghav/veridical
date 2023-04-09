@@ -18,14 +18,15 @@ function getDistPath(packageName) {
     return path.resolve(PROJECT_DIR, PACKAGES_DIR, packageName, DIST_DIR);
 }
 
-function getDeclarationInputPath(package) {
-    return path.resolve(DECLERATION_DIR, package.name, SRC_DIR, 'index.d.ts');
+function getDeclarationInputPath(packageName) {
+    return path.resolve(DECLERATION_DIR, packageName, SRC_DIR, 'index.d.ts');
 }
 
 async function rollupTypeFor(package) {
     console.log(`Rolluping type for ${package.name}`);
+    const name = package.name.toLowerCase()
     const inputOption = {
-        input: getDeclarationInputPath(package),
+        input: getDeclarationInputPath(name),
         plugins: [dts()],
         external: isExternal(package.external),
         onwarn(warning) {
@@ -53,7 +54,7 @@ async function rollupTypeFor(package) {
         },
     };
     const outputOption = {
-        file: path.resolve(getDistPath(package.name), 'index.d.ts'),
+        file: path.resolve(getDistPath(name), 'index.d.ts'),
         format: 'es',
     };
     let bundle = await rollup(inputOption);
@@ -66,8 +67,9 @@ async function rollupTypeFor(package) {
 async function copyPackageJson() {
     console.log('Copying package.json[s]');
     packages.forEach(async (pkg) => {
-        const pkgJsonPath = getPackageJsonPath(pkg.name);
-        const distDirPath = getDistPath(pkg.name);
+        const name = pkg.name.toLowerCase()
+        const pkgJsonPath = getPackageJsonPath(name);
+        const distDirPath = getDistPath(name);
         console.log(`copying ${pkgJsonPath} to ${distDirPath}`);
         await exec(`cp ${pkgJsonPath} ${distDirPath}/`);
     });
@@ -81,14 +83,15 @@ async function copyDeclarations() {
 
 async function copyReadme() {
     packages.forEach(async (pkg) => {
-        const readmeDest = getDistPath(pkg.name);
+        const name = pkg.name.toLowerCase()
+        const readmeDest = getDistPath(name);
         let readmeSrc = path.resolve(
             PROJECT_DIR,
             PACKAGES_DIR,
-            pkg.name,
+            name,
             'README.md',
         );
-        if (pkg.name === 'veridical')
+        if (name === 'veridical')
             readmeSrc = path.resolve(PROJECT_DIR, 'README.md');
         console.log(`copying ${readmeSrc} to ${readmeDest}`);
         await exec(`cp ${readmeSrc} ${readmeDest}/`);

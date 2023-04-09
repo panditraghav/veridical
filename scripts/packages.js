@@ -25,9 +25,8 @@ const external = [
 
 const packages = [
     {
-        name: 'veridical',
+        name: 'Veridical',
         inputFile: 'index.tsx',
-        outputFile: 'index.js',
         external: [
             ...external,
             '@veridical/plugins',
@@ -37,9 +36,8 @@ const packages = [
         ],
     },
     {
-        name: 'nodes',
+        name: 'Nodes',
         inputFile: 'index.ts',
-        outputFile: 'index.js',
         external: [
             ...external,
             '@veridical/plugins',
@@ -48,9 +46,8 @@ const packages = [
         ],
     },
     {
-        name: 'plugins',
+        name: 'Plugins',
         inputFile: 'index.ts',
-        outputFile: 'index.js',
         external: [
             ...external,
             '@veridical/nodes',
@@ -59,9 +56,8 @@ const packages = [
         ],
     },
     {
-        name: 'components',
+        name: 'Components',
         inputFile: 'index.ts',
-        outputFile: 'index.js',
         external: [
             ...external,
             '@veridical/nodes',
@@ -70,9 +66,8 @@ const packages = [
         ],
     },
     {
-        name: 'utils',
+        name: 'Utils',
         inputFile: 'index.ts',
-        outputFile: 'index.js',
         external: [
             ...external,
             '@veridical/nodes',

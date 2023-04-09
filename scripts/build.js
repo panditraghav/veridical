@@ -13,7 +13,7 @@ const typescript = require('@rollup/plugin-typescript');
 const { terser } = require('rollup-plugin-minification');
 const image = require('@rollup/plugin-image');
 const postcss = require('rollup-plugin-postcss');
-const { readFileSync } = require('node:fs');
+const { readFileSync, writeFileSync } = require('node:fs');
 const PeerDepsExternalPlugin = require('rollup-plugin-peer-deps-external');
 
 //All paths are from packages directory
@@ -21,26 +21,23 @@ const PeerDepsExternalPlugin = require('rollup-plugin-peer-deps-external');
 function getPackageInputPath(package) {
     return path.resolve(
         packagesPath,
-        `${package.name}/${SRC_FOLDER}`,
+        `${package.name.toLowerCase()}/${SRC_FOLDER}`,
         package.inputFile,
     );
 }
 
-function getPackageOutputPath(package) {
+function getPackageOutputPath(package, type) {
+    if (!type) type = 'dev';
+    const extension = 'js';
+    const outputFileName = [package.name, type, extension].join('.');
     return path.resolve(
         packagesPath,
-        `${package.name}/${BUILD_FOLDER}`,
-        package.outputFile,
+        `${package.name.toLowerCase()}/${BUILD_FOLDER}`,
+        outputFileName,
     );
 }
 
-function getPackageJson(package) {
-    return JSON.parse(
-        readFileSync(path.resolve(packagesPath, package.name, 'package.json')),
-    );
-}
-
-async function build(package) {
+async function build(package, type) {
     const inputOption = {
         input: getPackageInputPath(package),
         external: isExternal(package.external),
@@ -78,15 +75,18 @@ async function build(package) {
         },
     };
     let bundle;
+    if (type == 'prod') {
+        inputOption.plugins.push(terser());
+    }
     bundle = await rollup(inputOption);
-    await generateOutput(bundle, package);
+    await generateOutput(bundle, package, type);
     if (bundle) {
         await bundle.close();
     }
 }
-async function generateOutput(bundle, package) {
+async function generateOutput(bundle, package, type) {
     const outputOption = {
-        file: getPackageOutputPath(package),
+        file: getPackageOutputPath(package, type),
         format: 'cjs',
     };
     await bundle.write(outputOption);
@@ -101,11 +101,36 @@ async function buildDecleration() {
     }
 }
 
+function createIndexFiles(packages) {
+    const indexTemplate = readFileSync(
+        path.resolve(baseDir, 'scripts', 'index.js.template'),
+    );
+    let strTemplate = indexTemplate.toString();
+    for (const pkg of packages) {
+        const indexFileStr = strTemplate.replace(/{Name}/g, pkg.name);
+        const outFile = path.resolve(
+            packagesPath,
+            pkg.name.toLowerCase(),
+            'dist',
+            pkg.name + '.js',
+        );
+        writeFileSync(outFile, indexFileStr);
+    }
+}
+
 async function buildAll(packages) {
+    console.log(`Building for developmenet`);
     for (const pkg of packages) {
         console.log(`\nBuilding ${pkg.name}`);
-        await build(pkg);
+        await build(pkg, 'dev');
     }
+    console.log(`Building for production`);
+    for (const pkg of packages) {
+        console.log(`\nBuilding ${pkg.name}`);
+        await build(pkg, 'prod');
+    }
+    console.log('Creating index files');
+    createIndexFiles(packages);
     console.log(`\nBuilding decleration`);
     await buildDecleration();
 }
