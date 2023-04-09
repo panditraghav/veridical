@@ -1,14 +1,11 @@
 {
     "compilerOptions": {
         "noEmit": false,
-        "declaration": true, 
+        "declaration": true,
         "emitDeclarationOnly": true,
         "declarationDir": "./.dec-temp",
         "strict": true
     },
-    "exclude": [
-        "node_modules/**/*",
-        "./playground"
-    ],
+    "exclude": ["node_modules/**/*", "./playground"],
     "extends": "./tsconfig.json"
 }

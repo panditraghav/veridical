@@ -45,7 +45,7 @@ async function build(package, type) {
             nodeResolve(),
             postcss({ extract: true, minimize: true }),
             commonjs(),
-            typescript(),
+            typescript({ compilerOptions: { target: 'ESNext' } }),
             image(),
             PeerDepsExternalPlugin(),
             //terser(),
