@@ -1,6 +1,6 @@
 {
     "name": "@veridical/components",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "description": "Veridical is a WYSIWYG blog editor",
     "main": "Components.js",
     "types": "Components.d.ts",
@@ -20,8 +20,8 @@
     "dependencies": {
         "@lexical/react": "^0.9.1",
         "@lexical/utils": "^0.9.1",
-        "@veridical/utils": "0.2.5",
-        "@veridical/nodes": "0.2.5",
+        "@veridical/utils": "0.2.6",
+        "@veridical/nodes": "0.2.6",
         "lexical": "^0.9.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"

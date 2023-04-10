@@ -1,6 +1,6 @@
 {
     "name": "@veridical/monorepo",
-    "version": "0.2.3",
+    "version": "0.2.6",
     "description": "A customizable WYSIWYG editor made with lexical",
     "homepage": "https://panditraghav.github.io/veridical",
     "private": false,
