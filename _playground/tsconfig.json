@@ -14,14 +14,7 @@
         "resolveJsonModule": true,
         "isolatedModules": false,
         "noEmit": true,
-        "jsx": "react-jsx",
-        "paths": {
-            "veridical": ["../packages/veridical/src/"],
-            "@veridical/components": ["../packages/components/src/"],
-            "@veridical/plugins": ["../packages/plugins/src/"],
-            "@veridical/nodes": ["../packages/nodes/src/"],
-            "@veridical/utils": ["../packages/utils/src/"]
-        }
+        "jsx": "react-jsx"
     },
     "include": ["src"],
     "references": [

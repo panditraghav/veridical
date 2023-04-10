@@ -1,35 +1,19 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $generateHtmlFromNodes } from '@lexical/html';
 import { Veridical, VeridicalEditorPlugins } from 'veridical';
 import { lexicalTheme } from './theme/lexicalTheme';
 import { veridicalTheme } from './theme/veridicalTheme';
 import TreeViewPlugin from './TreeViewPlugin';
 import { useEffect } from 'react';
 
-function saveMarkdownToLocalStorage(markdown: string) {
-    localStorage.setItem('blog', markdown);
+function saveStateToLocalStorage(state: string) {
+    localStorage.setItem('blog', state);
 }
 
-function HTMLPlugin() {
+function SaveStatePlugin() {
     const [editor] = useLexicalComposerContext();
     useEffect(() => {
         return editor.registerUpdateListener(({ editorState }) => {
-            editorState.read(() => {
-                console.log($generateHtmlFromNodes(editor));
-            });
-        });
-    }, [editor]);
-    return null;
-}
-
-function TestPlugin() {
-    const [editor] = useLexicalComposerContext();
-    useEffect(() => {
-        // editor.setEditorState(
-        //     editor.parseEditorState(localStorage.getItem('blog') || '{}'),
-        // );
-        return editor.registerUpdateListener(({ editorState }) => {
-            saveMarkdownToLocalStorage(JSON.stringify(editorState.toJSON()));
+            saveStateToLocalStorage(JSON.stringify(editorState.toJSON()));
         });
     }, []);
     return null;
@@ -51,7 +35,7 @@ export default function Editor() {
                     markdown={localStorage.getItem('blog') || ''}
                 />
             */}
-            <TestPlugin />
+            <SaveStatePlugin />
         </Veridical>
     );
 }
