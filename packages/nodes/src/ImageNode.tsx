@@ -6,6 +6,7 @@ import {
     NodeKey,
     SerializedLexicalNode,
     $applyNodeReplacement,
+    LexicalEditor,
 } from 'lexical';
 import React from 'react';
 
@@ -69,7 +70,8 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     }
 
     static importJSON(serializedNode: SerializedImageNode): ImageNode {
-        const { src, altText, naturalHeight, naturalWidth, isMaxWidth } = serializedNode;
+        const { src, altText, naturalHeight, naturalWidth, isMaxWidth } =
+            serializedNode;
         return $createImageNode({
             src,
             altText,
@@ -103,10 +105,12 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         return false;
     }
 
-    exportDOM(): DOMExportOutput {
+    exportDOM(editor: LexicalEditor): DOMExportOutput {
+        const theme = editor._config.theme;
         const element = document.createElement('img');
         element.setAttribute('src', this.getSrc());
         element.setAttribute('alt', this.getAltText());
+        element.setAttribute('class', theme.image || '');
         return { element };
     }
 
@@ -167,7 +171,14 @@ export function $createImageNode({
     key,
 }: ImageProps): ImageNode {
     return $applyNodeReplacement(
-        new ImageNode(src, altText, naturalHeight, naturalWidth, isMaxWidth, key),
+        new ImageNode(
+            src,
+            altText,
+            naturalHeight,
+            naturalWidth,
+            isMaxWidth,
+            key,
+        ),
     );
 }
 
