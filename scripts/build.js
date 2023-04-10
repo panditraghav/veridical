@@ -112,26 +112,26 @@ function createIndexFiles(packages) {
             packagesPath,
             pkg.name.toLowerCase(),
             'dist',
-            pkg.name + '.js',
+            `${pkg.name}.js`,
         );
         writeFileSync(outFile, indexFileStr);
     }
 }
 
 async function buildAll(packages) {
-    console.log(`Building for developmenet`);
+    console.log(`\nBuilding for developmenet\n`);
     for (const pkg of packages) {
-        console.log(`\nBuilding ${pkg.name}`);
+        console.log(`Building ${pkg.name}`);
         await build(pkg, 'dev');
     }
-    console.log(`Building for production`);
+    console.log(`\nBuilding for production\n`);
     for (const pkg of packages) {
-        console.log(`\nBuilding ${pkg.name}`);
+        console.log(`Building ${pkg.name}`);
         await build(pkg, 'prod');
     }
-    console.log('Creating index files');
+    console.log('Creating index files\n');
     createIndexFiles(packages);
-    console.log(`\nBuilding decleration`);
+    console.log(`Building decleration`);
     await buildDecleration();
 }
 buildAll(packages);

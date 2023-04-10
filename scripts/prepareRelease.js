@@ -24,7 +24,7 @@ function getDeclarationInputPath(packageName) {
 
 async function rollupTypeFor(package) {
     console.log(`Rolluping type for ${package.name}`);
-    const name = package.name.toLowerCase()
+    const name = package.name.toLowerCase();
     const inputOption = {
         input: getDeclarationInputPath(name),
         plugins: [dts()],
@@ -54,7 +54,7 @@ async function rollupTypeFor(package) {
         },
     };
     const outputOption = {
-        file: path.resolve(getDistPath(name), 'index.d.ts'),
+        file: path.resolve(getDistPath(name), `${package.name}.d.ts`),
         format: 'es',
     };
     let bundle = await rollup(inputOption);
@@ -67,7 +67,7 @@ async function rollupTypeFor(package) {
 async function copyPackageJson() {
     console.log('Copying package.json[s]');
     packages.forEach(async (pkg) => {
-        const name = pkg.name.toLowerCase()
+        const name = pkg.name.toLowerCase();
         const pkgJsonPath = getPackageJsonPath(name);
         const distDirPath = getDistPath(name);
         console.log(`copying ${pkgJsonPath} to ${distDirPath}`);
@@ -83,7 +83,7 @@ async function copyDeclarations() {
 
 async function copyReadme() {
     packages.forEach(async (pkg) => {
-        const name = pkg.name.toLowerCase()
+        const name = pkg.name.toLowerCase();
         const readmeDest = getDistPath(name);
         let readmeSrc = path.resolve(
             PROJECT_DIR,
