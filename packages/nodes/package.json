@@ -1,11 +1,9 @@
 {
     "name": "@veridical/nodes",
-    "version": "0.2.3",
+    "version": "0.2.5",
     "description": "Veridical is a WYSIWYG blog editor",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+    "main": "Nodes.js",
+    "types": "Nodes.d.ts",
     "repository": {
         "type": "git",
         "url": "www.github.com/panditraghav/veridical"
