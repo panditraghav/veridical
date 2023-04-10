@@ -17,7 +17,11 @@ async function goToPath(path) {
 
 async function release() {
     packages.forEach(async (pkg) => {
-        const distPath = path.resolve(packagesDir, pkg.name, 'dist');
+        const distPath = path.resolve(
+            packagesDir,
+            pkg.name.toLowerCase(),
+            'dist',
+        );
         const result = await exec(
             `cd ${distPath} && npm publish --access public`,
         );
