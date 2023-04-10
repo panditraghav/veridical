@@ -52,7 +52,10 @@ export default function VeridicalEditorPlugins(): JSX.Element {
                         offset={{ left: -50, top: 4 }}
                         container={container}
                     >
-                        <HoverBlockOptions offset={{ left: -50, top: 4 }}>
+                        <HoverBlockOptions
+                            container={container}
+                            offset={{ left: -50, top: 4 }}
+                        >
                             <AddNodeButton />
                             <DraggableNodeButton container={container} />
                         </HoverBlockOptions>
