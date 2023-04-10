@@ -55,3 +55,7 @@ The `initialConfig` requires two theme objects.
 -   The css classes that you will add to these theme objects will be added to their respected components/elements
 
 -   Above links contains themes made using [tailwindcss](https://tailwindcss.com/), you can copy those theme objects into your code. You can copy extended theme from from playground's [tailwind.config.cjs](https://github.com/panditraghav/veridical/blob/5f39b8203165c329145ee28d1146307ebd84727c/_playground/tailwind.config.cjs#L12-L66) and past it into your tailwind.config to get started faster.
+
+## Plugins
+
+Veridical has some helpful lexical [plugins](https://github.com/panditraghav/veridical/tree/main/packages/plugins) and [nodes](https://github.com/panditraghav/veridical/tree/main/packages/nodes)
