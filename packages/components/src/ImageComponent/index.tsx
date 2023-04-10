@@ -74,8 +74,8 @@ function SuspenseImage({
             src={src}
             alt={alt}
             style={{
-                height: isMaxWidth ? 'auto' : undefined,
                 width: isMaxWidth ? '100%' : 'auto',
+                height: isMaxWidth ? 'auto' : undefined,
                 aspectRatio: `auto ${naturalWidth / naturalHeight}`,
             }}
             className={`${theme?.veridicalImage?.image} ${
@@ -86,12 +86,12 @@ function SuspenseImage({
 }
 
 function ImageFallback({
-    width,
-    height,
+    naturalWidth,
+    naturalHeight,
     isMaxWidth,
 }: {
-    width: number;
-    height: number;
+    naturalWidth: number;
+    naturalHeight: number;
     isMaxWidth: boolean;
 }) {
     const theme = useVeridicalTheme()?.veridicalImage;
@@ -99,7 +99,8 @@ function ImageFallback({
         <div
             style={{
                 width: isMaxWidth ? '100%' : 'auto',
-                aspectRatio: `auto ${width / height}`,
+                height: isMaxWidth ? 'auto' : undefined,
+                aspectRatio: `auto ${naturalWidth / naturalHeight}`,
             }}
             className={theme?.fallback}
         ></div>
@@ -228,8 +229,8 @@ export default function ImageComponent({
                 <Suspense
                     fallback={
                         <ImageFallback
-                            width={naturalWidth}
-                            height={naturalHeight}
+                            naturalWidth={naturalWidth}
+                            naturalHeight={naturalHeight}
                             isMaxWidth={isMaxWidth}
                         />
                     }

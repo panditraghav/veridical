@@ -42,7 +42,6 @@ export default function Editor() {
         veridicalTheme,
         editorState: localStorage.getItem('blog'),
     };
-    console.log(initialConfig);
     return (
         <Veridical initialConfig={initialConfig}>
             <VeridicalEditorPlugins />
