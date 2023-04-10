@@ -9,16 +9,13 @@
     "author": "Raghav Pandit",
     "license": "ISC",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "clean": "rm -rf dist && rm -rf ./.dec-temp",
-        "prerelease": "ts-node --esm scripts/prerelease.ts",
-        "release": "node scripts/release.js",
-        "prepublish-playground": "npm run build --prefix _playground",
-        "publish-playground": "gh-pages -d ./_playground/dist",
-        "update-version": "node scripts/updateVersion.js",
-        "prebuild": "rm -rf dist; rm -rf .dec-temp",
+        "dev": "npm run dev --prefix _playground",
         "build": "ts-node --esm ./scripts/build.ts",
-        "dev": "npm run dev --prefix _playground"
+        "prebuild": "rm -rf dist; rm -rf .dec-temp",
+        "release": "cd dist && npm publish",
+        "prerelease": "ts-node --esm scripts/prerelease.ts",
+        "publish-playground": "gh-pages -d ./_playground/dist",
+        "prepublish-playground": "npm run build --prefix _playground"
     },
     "prettier": {
         "semi": true,
