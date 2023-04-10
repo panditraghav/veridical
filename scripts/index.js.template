@@ -1,3 +1,0 @@
-'use strict'
-const {Name} = process.env.NODE_ENV === 'development' ? require('./{Name}.dev.js') : require('./{Name}.prod.js')
-module.exports = {Name};

@@ -8,15 +8,13 @@
         "forceConsistentCasingInFileNames": true,
         "strict": true,
         "skipLibCheck": true,
-        "paths":{
-            "veridical":["./packages/veridical/src/"],
-            "@veridical/components":["./packages/components/src/"],
-            "@veridical/plugins":["./packages/plugins/src/"],
-            "@veridical/nodes":["./packages/nodes/src/"],
-            "@veridical/utils":["./packages/utils/src/"]
+        "paths": {
+            "veridical": ["./src"],
+            "@veridical/components": ["./src/components"],
+            "@veridical/plugins": ["./src/plugins"],
+            "@veridical/nodes": ["./src/nodes"],
+            "@veridical/utils": ["./src/utils"]
         }
     },
-    "include": [
-        "./packages/**/*"
-    ]
+    "include": ["src/**/*"]
 }
