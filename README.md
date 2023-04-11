@@ -9,14 +9,14 @@ Check it out at [veridical](https://panditraghav.github.io/veridical)
 **npm**
 
 ```sh
-npm install veridical @veridical/plugins lexical @lexical/react
+npm install veridical
 ```
 
 ## How to use
 
 ### Basic editor setup
 
-```jsx
+```tsx
 import { Veridical, VeridicalEditorPlugins } from 'veridical';
 import { EditorThemeClasses } from 'lexical';
 
@@ -86,7 +86,7 @@ Shows a dialog to input link whenever a link node is created.
 Registers command to show AddNodeDialog
 
 ```tsx
-import { ADD_NODE_DIALOG_COMMAND } from '@veridical/utils';
+import { ADD_NODE_DIALOG_COMMAND } from 'veridical';
 
 editor.dispatchCommand(ADD_NODE_DIALOG_COMMAND, {
     selectedNode: node, // New node will be added after this node.
@@ -136,7 +136,7 @@ Shows editing option menu when some text is highlighted.
 Registers command to show image dialog
 
 ```tsx
-import { IMAGE_DIALOG_COMMAND } from '@veridical/utils';
+import { IMAGE_DIALOG_COMMAND } from 'veridical';
 
 editor.dispatchCommand(IMAGE_DIALOG_COMMAND, {
     imageNode: imgNode,
@@ -152,7 +152,7 @@ When new image node is created shows dialog for it.
 
 Adds markdown shortcuts, example type `### ` at beginning of paragraph to convert it to Heading 2.
 
-Using `@lexical/react/LexicalMarkdownShortcutPlugin` and some custom `MARKDOWN_TRANSFORMERS` from `@veridical/utils`
+Using `@lexical/react/LexicalMarkdownShortcutPlugin` and some custom `MARKDOWN_TRANSFORMERS` from `veridical`
 
 ### OpenLinkPlugin
 
@@ -169,6 +169,7 @@ Prettify code on pressing `Alt + Shift + F` (by default).
 Node to display image
 
 ```tsx
+import { $createImageNode } from 'veridical';
 const image = $createImageNode({
     src,
     altText,
