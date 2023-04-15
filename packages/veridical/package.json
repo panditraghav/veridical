@@ -1,0 +1,30 @@
+{
+    "name": "veridical",
+    "version": "0.2.7",
+    "description": "A customizable WYSIWYG editor made with lexical",
+    "homepage": "https://panditraghav.github.io/veridical",
+    "main": "Veridical.js",
+    "types": "Veridical.d.ts",
+    "keywords": [
+        "WYSIWYG Editor",
+        "Blog",
+        "Lexical"
+    ],
+    "author": "Raghav Pandit",
+    "license": "ISC",
+    "dependencies": {
+        "@lexical/code": "^0.9.2",
+        "@lexical/link": "^0.9.2",
+        "@lexical/list": "^0.9.2",
+        "@lexical/markdown": "^0.9.2",
+        "@lexical/overflow": "^0.9.2",
+        "@lexical/react": "^0.9.2",
+        "@lexical/rich-text": "^0.9.2",
+        "@lexical/table": "^0.9.2",
+        "@lexical/utils": "^0.9.2",
+        "lexical": "^0.9.2",
+        "prettier": "^2.8.7",
+        "react": "^18.2.0",
+        "react-error-boundary": "^4.0.3"
+    }
+}

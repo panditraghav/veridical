@@ -1,12 +1,18 @@
+import { $generateHtmlFromNodes } from '@lexical/html';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { useEffect } from 'react';
 import { Veridical, VeridicalEditorPlugins } from 'veridical';
 import { lexicalTheme } from './theme/lexicalTheme';
 import { veridicalTheme } from './theme/veridicalTheme';
 import TreeViewPlugin from './TreeViewPlugin';
-import { useEffect } from 'react';
 
 function saveStateToLocalStorage(state: string) {
     localStorage.setItem('blog', state);
+}
+
+function saveHTMLToLocalStorage(html: string) {
+    console.log(html);
+    localStorage.setItem('html', html);
 }
 
 function SaveStatePlugin() {
@@ -15,7 +21,23 @@ function SaveStatePlugin() {
         return editor.registerUpdateListener(({ editorState }) => {
             saveStateToLocalStorage(JSON.stringify(editorState.toJSON()));
         });
-    }, []);
+    }, [editor]);
+    return null;
+}
+
+function HTMLPlugin({
+    onChangeHTML,
+}: {
+    onChangeHTML: (html: string) => void;
+}) {
+    const [editor] = useLexicalComposerContext();
+    useEffect(() => {
+        return editor.registerUpdateListener(({ editorState }) => {
+            editorState.read(() => {
+                onChangeHTML($generateHtmlFromNodes(editor));
+            });
+        });
+    }, [editor]);
     return null;
 }
 
@@ -36,6 +58,7 @@ export default function Editor() {
                 />
             */}
             <SaveStatePlugin />
+            <HTMLPlugin onChangeHTML={saveHTMLToLocalStorage} />
         </Veridical>
     );
 }

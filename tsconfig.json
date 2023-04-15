@@ -9,12 +9,8 @@
         "strict": true,
         "skipLibCheck": true,
         "paths": {
-            "veridical": ["./src"],
-            "@veridical/components": ["./src/components"],
-            "@veridical/plugins": ["./src/plugins"],
-            "@veridical/nodes": ["./src/nodes"],
-            "@veridical/utils": ["./src/utils"]
+            "veridical": ["./packages/veridical"]
         }
     },
-    "include": ["src/**/*"]
+    "include": ["./packages/veridical/**/*"]
 }

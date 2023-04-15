@@ -1,4 +1,4 @@
-import { VeridicalThemeClasses } from '@veridical/utils';
+import { VeridicalThemeClasses } from 'veridical';
 
 export const veridicalTheme: VeridicalThemeClasses = {
     editorContainer: 'md:max-w-[780px] md:mx-auto w-full px-4',

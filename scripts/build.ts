@@ -1,42 +1,31 @@
-import { InputOptions, OutputOptions, rollup, RollupBuild } from 'rollup';
-import { exec } from 'child-process-promise';
 import commonjs from '@rollup/plugin-commonjs';
-import dts from 'rollup-plugin-dts';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import postcss from 'rollup-plugin-postcss';
-import path from 'path';
-import typescript from '@rollup/plugin-typescript';
 import image from '@rollup/plugin-image';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
+import typescript from '@rollup/plugin-typescript';
+import { exec } from 'child-process-promise';
+import { readFileSync, writeFileSync } from 'fs';
+import path from 'path';
+import { InputOptions, OutputOptions, rollup, RollupBuild } from 'rollup';
+import dts from 'rollup-plugin-dts';
 import external from 'rollup-plugin-peer-deps-external';
+import postcss from 'rollup-plugin-postcss';
+import { fileURLToPath } from 'url';
 
-const externalDeps = [
-    'lexical',
-    '@lexical/react',
-    '@lexical/clipboard',
-    '@lexical/code',
-    '@lexical/dragon',
-    '@lexical/hashtag',
-    '@lexical/history',
-    '@lexical/link',
-    '@lexical/list',
-    '@lexical/mark',
-    '@lexical/markdown',
-    '@lexical/overflow',
-    '@lexical/plain-text',
-    '@lexical/rich-text',
-    '@lexical/selection',
-    '@lexical/table',
-    '@lexical/text',
-    '@lexical/utils',
-    '@lexical/yjs',
-    'react',
-    'react-dom',
-    'prettier',
-];
-
-const baseDir = path.resolve('');
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const basePath = path.resolve(__dirname, '..');
+const packagesPath = path.resolve(basePath, 'packages');
+const veridicalPath = path.resolve(packagesPath, 'veridical');
+const srcPath = path.resolve(veridicalPath, 'src');
+const distPath = path.resolve(veridicalPath, 'dist');
+const readmePath = path.resolve(basePath, 'README.md');
+const packageJSONPath = path.resolve(veridicalPath, 'package.json');
+const outputFileName = 'Veridical';
 
 function isExternal(source: string) {
+    const externalDeps = Object.keys(
+        JSON.parse(readFileSync(packageJSONPath).toString()).dependencies,
+    );
     for (const dep of externalDeps) {
         if (source.includes(dep)) {
             return true;
@@ -46,7 +35,7 @@ function isExternal(source: string) {
 }
 
 const inputOptions: InputOptions = {
-    input: path.resolve('src', 'index.ts'),
+    input: path.resolve(srcPath, 'index.ts'),
     external: isExternal,
     plugins: [
         nodeResolve(),
@@ -59,7 +48,7 @@ const inputOptions: InputOptions = {
     ],
     onwarn(warning) {
         if (warning.code === 'CIRCULAR_DEPENDENCY') {
-            console.log(`${warning.code} : ${warning.message}`);
+            // Ignored
         } else if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
             // Important, but not enough to stop the build
             console.error();
@@ -84,7 +73,12 @@ const inputOptions: InputOptions = {
 
 const outputOptionsList: OutputOptions[] = [
     {
-        file: 'dist/index.js',
+        file: path.resolve(distPath, `${outputFileName}.dev.js`),
+        format: 'cjs',
+    },
+    {
+        file: path.resolve(distPath, `${outputFileName}.prod.js`),
+        plugins: [terser()],
         format: 'cjs',
     },
 ];
@@ -114,18 +108,18 @@ async function generateOutputs(
     }
 }
 async function buildDecleration() {
-    const tsConfigBuildPath = path.resolve(baseDir, 'tsconfig.build.json');
+    const tsConfigBuildPath = path.resolve(basePath, 'tsconfig.build.json');
     try {
         await exec(`tsc -p ${tsConfigBuildPath}`);
         await build(
             {
-                input: path.resolve(baseDir, '.dec-temp', 'index.d.ts'),
+                input: path.resolve(basePath, '.dec-temp', 'index.d.ts'),
                 plugins: [dts()],
                 external: isExternal,
             },
             [
                 {
-                    file: path.resolve(baseDir, 'dist', 'index.d.ts'),
+                    file: path.resolve(distPath, `${outputFileName}.d.ts`),
                     format: 'es',
                 },
             ],
@@ -135,9 +129,19 @@ async function buildDecleration() {
     }
 }
 
+function createMainFile() {
+    const mainFile = `const ${outputFileName} = process.env.NODE_ENV === 'development' ? require('./${outputFileName}.dev.js') : require('./${outputFileName}.prod.js')\n module.exports = ${outputFileName}`;
+    writeFileSync(path.resolve(distPath, `${outputFileName}.js`), mainFile);
+}
+
 async function buildAll() {
     await build(inputOptions, outputOptionsList);
     await buildDecleration();
+    createMainFile();
+
+    //Copy package.json and README.md to dist
+    await exec(`cp ${packageJSONPath} ${distPath}`);
+    await exec(`cp ${readmePath} ${distPath}`);
 }
 
 buildAll();

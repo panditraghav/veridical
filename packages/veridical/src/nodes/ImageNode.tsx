@@ -107,11 +107,23 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
 
     exportDOM(editor: LexicalEditor): DOMExportOutput {
         const theme = editor._config.theme;
-        const element = document.createElement('img');
-        element.setAttribute('src', this.getSrc());
-        element.setAttribute('alt', this.getAltText());
-        element.setAttribute('class', theme.image || '');
-        return { element };
+        const img = document.createElement('img');
+        const container = document.createElement('div');
+        const containerStyle = `aspect-ratio: auto ${
+            this.getNaturalWidth() / this.getNaturalHeight()
+        } width: ${this.isMaxWidth() ? '100%' : 'auto'}; ${
+            this.isMaxWidth() ? 'height: auto;' : ''
+        }`;
+        console.log('Export DOM checking');
+        img.setAttribute('src', this.getSrc());
+        img.setAttribute('alt', this.getAltText());
+        img.setAttribute('class', theme.image || '');
+
+        container.setAttribute('class', theme.imageContainer || '');
+        container.setAttribute('style', containerStyle);
+
+        container.appendChild(img);
+        return { element: container };
     }
 
     getSrc(): string {
