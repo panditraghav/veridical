@@ -111,10 +111,9 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         const container = document.createElement('div');
         const containerStyle = `aspect-ratio: auto ${
             this.getNaturalWidth() / this.getNaturalHeight()
-        } width: ${this.isMaxWidth() ? '100%' : 'auto'}; ${
-            this.isMaxWidth() ? 'height: auto;' : ''
-        }`;
-        console.log('Export DOM checking');
+        } ; width: ${this.isMaxWidth() ? '100%' : 'auto'} ; ${
+            this.isMaxWidth() ? 'height: auto' : ''
+        } ;`;
         img.setAttribute('src', this.getSrc());
         img.setAttribute('alt', this.getAltText());
         img.setAttribute('class', theme.image || '');

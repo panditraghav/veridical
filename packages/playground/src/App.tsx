@@ -80,19 +80,14 @@ function App() {
         setIsHTML(parsed.isHTML || false);
     }, []);
 
-    useEffect(() => {
-        const _isHTML = localStorage.getItem('isHTML');
-        const parsed = JSON.parse(_isHTML || '{}');
-        if (parsed.isHTML !== isHTML)
-            localStorage.setItem('isHTML', JSON.stringify({ isHTML }));
-    }, [isHTML]);
+    function onChangeHTML(newVal: boolean) {
+        setIsHTML(newVal);
+        localStorage.setItem('isHTML', JSON.stringify({ isHTML: newVal }));
+    }
 
     return (
         <>
-            <Header
-                isHTML={isHTML}
-                onChangeIsHTML={(value) => setIsHTML(value)}
-            />
+            <Header isHTML={isHTML} onChangeIsHTML={onChangeHTML} />
             {isHTML ? <FromHTML /> : <Editor />}
         </>
     );
