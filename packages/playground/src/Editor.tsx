@@ -1,4 +1,3 @@
-import { $generateHtmlFromNodes } from '@lexical/html';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
 import { Veridical, VeridicalEditorPlugins } from 'veridical';
@@ -8,11 +7,6 @@ import TreeViewPlugin from './TreeViewPlugin';
 
 function saveStateToLocalStorage(state: string) {
     localStorage.setItem('blog', state);
-}
-
-function saveHTMLToLocalStorage(html: string) {
-    console.log(html);
-    localStorage.setItem('html', html);
 }
 
 function SaveStatePlugin() {
@@ -25,40 +19,19 @@ function SaveStatePlugin() {
     return null;
 }
 
-function HTMLPlugin({
-    onChangeHTML,
-}: {
-    onChangeHTML: (html: string) => void;
-}) {
-    const [editor] = useLexicalComposerContext();
-    useEffect(() => {
-        return editor.registerUpdateListener(({ editorState }) => {
-            editorState.read(() => {
-                onChangeHTML($generateHtmlFromNodes(editor));
-            });
-        });
-    }, [editor]);
-    return null;
-}
-
 export default function Editor() {
+    const editorState = localStorage.getItem('blog');
     const initialConfig = {
         namespace: 'playground',
         lexicalTheme,
         veridicalTheme,
-        editorState: localStorage.getItem('blog'),
+        editorState,
     };
     return (
         <Veridical initialConfig={initialConfig}>
             <VeridicalEditorPlugins />
-            {<TreeViewPlugin />}
-            {/*
-                <ConvertFromMarkdownPlugin
-                    markdown={localStorage.getItem('blog') || ''}
-                />
-            */}
+            <TreeViewPlugin />
             <SaveStatePlugin />
-            <HTMLPlugin onChangeHTML={saveHTMLToLocalStorage} />
         </Veridical>
     );
 }
