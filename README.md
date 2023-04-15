@@ -47,8 +47,8 @@ export default function App() {
 
 The `initialConfig` requires two theme objects.
 
--   [`lexicalTheme`](https://github.com/panditraghav/veridical/blob/main/packages/utils/src/theme/defaultLexicalTheme.ts) which is theme for html elements like heading, list, table... etc.
--   [`veridicalTheme`](https://github.com/panditraghav/veridical/blob/main/packages/utils/src/theme/defaultVeridicalTheme.ts) which is theme for editor ui components like Dialogs, Inputs etc.
+-   [`lexicalTheme`](https://github.com/panditraghav/veridical/blob/main/packages/playground/src/theme/lexicalTheme.ts) which is theme for html elements like heading, list, table... etc.
+-   [`veridicalTheme`](https://github.com/panditraghav/veridical/blob/main/packages/playground/src/theme/veridicalTheme.ts) which is theme for editor ui components like Dialogs, Inputs etc.
 
 #### Quick start
 
