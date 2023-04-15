@@ -75,7 +75,7 @@ The `initialConfig` requires two theme objects.
 -   [OpenLinkPlugin](#OpenLinkPlugin)
 -   [PrettierPlugin](#PrettierPlugin)
 
-See [VeridicalEditorPlugins.tsx](https://github.com/panditraghav/veridical/blob/main/packages/veridical/src/VeridicalEditorPlugins.tsx) for usage of all these plugins along with many plugins from `lexical` and `@lexical/react`
+See [VeridicalEditorPlugins.tsx](https://github.com/panditraghav/veridical/blob/main/packages/veridical/src/veridical/VeridicalEditorPlugins.tsx) for usage of all these plugins along with many plugins from `lexical` and `@lexical/react`
 
 ### AddLinkDialogPlugin
 
