@@ -93,11 +93,8 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         };
     }
 
-    createDOM(config: EditorConfig): HTMLElement {
+    createDOM(): HTMLElement {
         const div = document.createElement('div');
-        const className = config.theme.image;
-
-        if (className) div.className = className;
         return div;
     }
 
@@ -109,17 +106,18 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         const theme = editor._config.theme;
         const img = document.createElement('img');
         const container = document.createElement('div');
-        const containerStyle = `aspect-ratio: auto ${
+        const aspectRatioStyle = `aspect-ratio: auto ${
             this.getNaturalWidth() / this.getNaturalHeight()
-        } ; width: ${this.isMaxWidth() ? '100%' : 'auto'} ; ${
-            this.isMaxWidth() ? 'height: auto' : ''
-        } ;`;
+        }; width: ${this.isMaxWidth() ? '100%' : 'auto'}; ${
+            this.isMaxWidth() ? 'height: auto;' : ''
+        }`;
         img.setAttribute('src', this.getSrc());
         img.setAttribute('alt', this.getAltText());
         img.setAttribute('class', theme.image || '');
+        img.setAttribute('style', aspectRatioStyle);
 
         container.setAttribute('class', theme.imageContainer || '');
-        container.setAttribute('style', containerStyle);
+        //container.setAttribute('style', aspectRatioStyle);
 
         container.appendChild(img);
         return { element: container };

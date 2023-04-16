@@ -13,7 +13,7 @@ import {
     $createParagraphNode,
     $createTextNode,
 } from 'lexical';
-import type { VeridicalThemeClasses } from '../utils';
+import type { VeridicalThemeClasses, LexicalThemeClasses } from '../utils';
 import { Placeholder, ErrorBoundary } from '../components';
 import { defaultEditorNodes } from '../nodes';
 
@@ -27,9 +27,10 @@ type InitialConfig = Readonly<{
     nodes?: ReadonlyArray<Klass<LexicalNode>>;
     onError?: (error: Error, editor: LexicalEditor) => void;
     readOnly?: boolean;
-    lexicalTheme?: EditorThemeClasses;
+    lexicalTheme?: LexicalThemeClasses;
     veridicalTheme?: VeridicalThemeClasses;
     editorState?: InitialEditorStateType;
+    placeholder?: string;
     editable?: boolean;
 }>;
 
@@ -72,7 +73,12 @@ function Veridical({
                         />
                     }
                     placeholder={
-                        <Placeholder text="Press Ctrl + k for command..." />
+                        <Placeholder
+                            text={
+                                initialConfig?.placeholder ||
+                                'Press Ctrl + k for command...'
+                            }
+                        />
                     }
                     ErrorBoundary={ErrorBoundary}
                 />

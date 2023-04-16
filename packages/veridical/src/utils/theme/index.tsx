@@ -1,102 +1,109 @@
+import { EditorThemeClasses } from 'lexical';
+import { EditorThemeClassName } from 'lexical/LexicalEditor';
+
 interface VeridicalThemeClasses {
-    editorContainer?: string;
-    contentEditable?: string;
+    editorContainer?: EditorThemeClassName;
+    contentEditable?: EditorThemeClassName;
     veridicalImage?: {
-        image?: string;
-        container?: string;
-        selected?: string;
-        fallback?: string;
+        image?: EditorThemeClassName;
+        selected?: EditorThemeClassName;
+        fallback?: EditorThemeClassName;
+        container?: EditorThemeClassName;
     };
-    imageContainer?: string;
-    imageSelected?: string;
-    imageFallback?: string;
-    placeholder?: string;
-    overlay?: string;
-    backdrop?: string;
+    imageContainer?: EditorThemeClassName;
+    imageSelected?: EditorThemeClassName;
+    imageFallback?: EditorThemeClassName;
+    placeholder?: EditorThemeClassName;
+    overlay?: EditorThemeClassName;
+    backdrop?: EditorThemeClassName;
     dialog?: {
-        dialog?: string;
-        contentContainer?: string;
-        title?: string;
-        actionGroup?: string;
+        dialog?: EditorThemeClassName;
+        contentContainer?: EditorThemeClassName;
+        title?: EditorThemeClassName;
+        actionGroup?: EditorThemeClassName;
     };
     input?: {
-        text?: string;
+        text?: EditorThemeClassName;
         checkbox?: {
-            container?: string;
-            label?: string;
-            input?: string;
+            container?: EditorThemeClassName;
+            label?: EditorThemeClassName;
+            input?: EditorThemeClassName;
         };
     };
     button?: {
-        base?: string;
-        primary?: string;
-        secondary?: string;
-        disabled?: string;
+        base?: EditorThemeClassName;
+        primary?: EditorThemeClassName;
+        secondary?: EditorThemeClassName;
+        disabled?: EditorThemeClassName;
     };
     addNodeDialog?: {
-        dialog?: string;
-        searchInput?: string;
-        nodeOptions?: string;
+        dialog?: EditorThemeClassName;
+        searchInput?: EditorThemeClassName;
+        nodeOptions?: EditorThemeClassName;
         nodeOption?: {
-            container?: string;
-            selected?: string;
-            icon?: string;
+            container?: EditorThemeClassName;
+            selected?: EditorThemeClassName;
+            icon?: EditorThemeClassName;
             text?: {
-                container?: string;
-                name?: string;
-                description?: string;
+                container?: EditorThemeClassName;
+                name?: EditorThemeClassName;
+                description?: EditorThemeClassName;
             };
         };
     };
     addImageDialog?: {
         imageInput?: {
-            container?: string;
+            container?: EditorThemeClassName;
         };
-        actionButtonGroup?: string;
+        actionButtonGroup?: EditorThemeClassName;
     };
     hoverMenu?: {
-        animation?: string;
+        animation?: EditorThemeClassName;
     };
     hoverBlockOption?: {
-        container?: string;
-        button?: string;
-        icon?: string;
+        container?: EditorThemeClassName;
+        button?: EditorThemeClassName;
+        icon?: EditorThemeClassName;
     };
-    dragTargetLine?: string;
+    dragTargetLine?: EditorThemeClassName;
     codeActionMenu?: {
-        menuLeft?: string;
-        menuRight?: string;
+        menuLeft?: EditorThemeClassName;
+        menuRight?: EditorThemeClassName;
     };
     highlightMenu?: {
-        menu?: string;
-        menuButton?: string;
-        menuButtonIconSelected?: string;
-        menuButtonIcon?: string;
-        animation?: string;
+        menu?: EditorThemeClassName;
+        menuButton?: EditorThemeClassName;
+        menuButtonIconSelected?: EditorThemeClassName;
+        menuButtonIcon?: EditorThemeClassName;
+        animation?: EditorThemeClassName;
     };
     codeLanguageSelection?: {
-        container?: string;
-        name?: string;
-        icon?: string;
+        container?: EditorThemeClassName;
+        name?: EditorThemeClassName;
+        icon?: EditorThemeClassName;
         menu?: {
-            container?: string;
-            search?: string;
-            optionContainer?: string;
-            option?: string;
-            optionSelected?: string;
-            animation?: string;
+            container?: EditorThemeClassName;
+            search?: EditorThemeClassName;
+            optionContainer?: EditorThemeClassName;
+            option?: EditorThemeClassName;
+            optionSelected?: EditorThemeClassName;
+            animation?: EditorThemeClassName;
         };
     };
-    copyCodeButton?: string;
-    editImageButton?: string;
+    copyCodeButton?: EditorThemeClassName;
+    editImageButton?: EditorThemeClassName;
     addLinkDialog?: {
-        input?: string;
-        animation?: string;
+        input?: EditorThemeClassName;
+        animation?: EditorThemeClassName;
     };
     openLinkDialog?: {
-        link?: string;
+        link?: EditorThemeClassName;
     };
-    [key: string]: any
+    [key: string]: any;
 }
 
-export { VeridicalThemeClasses };
+interface LexicalThemeClasses extends EditorThemeClasses {
+    imageContainer?: EditorThemeClassName;
+}
+
+export { VeridicalThemeClasses, LexicalThemeClasses };

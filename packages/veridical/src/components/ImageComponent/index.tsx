@@ -67,21 +67,23 @@ function SuspenseImage({
     imgRef: React.MutableRefObject<HTMLImageElement | null>;
 }) {
     useSuspenseImage(src);
-    const theme = useVeridicalTheme();
+    const theme = useVeridicalTheme()?.veridicalImage;
     return (
-        <img
-            ref={imgRef}
-            src={src}
-            alt={alt}
-            style={{
-                width: isMaxWidth ? '100%' : 'auto',
-                height: isMaxWidth ? 'auto' : undefined,
-                aspectRatio: `auto ${naturalWidth / naturalHeight}`,
-            }}
-            className={`${theme?.veridicalImage?.image} ${
-                isSelected ? theme?.veridicalImage?.selected : ''
-            }`}
-        />
+        <div className={theme?.container}>
+            <img
+                ref={imgRef}
+                src={src}
+                alt={alt}
+                style={{
+                    width: isMaxWidth ? '100%' : 'auto',
+                    height: isMaxWidth ? 'auto' : undefined,
+                    aspectRatio: `auto ${naturalWidth / naturalHeight}`,
+                }}
+                className={`${theme?.image} ${
+                    isSelected ? theme?.selected : ''
+                }`}
+            />
+        </div>
     );
 }
 
@@ -96,14 +98,16 @@ function ImageFallback({
 }) {
     const theme = useVeridicalTheme()?.veridicalImage;
     return (
-        <div
-            style={{
-                width: isMaxWidth ? '100%' : 'auto',
-                height: isMaxWidth ? 'auto' : undefined,
-                aspectRatio: `auto ${naturalWidth / naturalHeight}`,
-            }}
-            className={theme?.fallback}
-        ></div>
+        <div className={theme?.container}>
+            <div
+                style={{
+                    width: isMaxWidth ? '100%' : 'auto',
+                    height: isMaxWidth ? 'auto' : undefined,
+                    aspectRatio: `auto ${naturalWidth / naturalHeight}`,
+                }}
+                className={theme?.fallback}
+            ></div>
+        </div>
     );
 }
 
