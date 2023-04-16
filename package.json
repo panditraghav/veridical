@@ -1,6 +1,6 @@
 {
     "name": "@veridical/monorepo",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "description": "A customizable WYSIWYG editor made with lexical",
     "homepage": "https://panditraghav.github.io/veridical",
     "workspaces": [
@@ -17,8 +17,7 @@
         "prebuild": "npm run clean && npm run tsc",
         "tsc": "tsc -p tsconfig.build.json",
         "clean": "rm -rf packages/veridical/dist; rm -rf .dec-temp",
-        "release": "cd packages/veridical/dist && npm publish",
-        "prerelease": "npm run build"
+        "release": "cd packages/veridical/dist && npm publish"
     },
     "prettier": {
         "semi": true,

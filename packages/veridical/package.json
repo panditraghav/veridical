@@ -1,6 +1,6 @@
 {
     "name": "veridical",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "description": "A customizable WYSIWYG editor made with lexical",
     "homepage": "https://panditraghav.github.io/veridical",
     "main": "Veridical.js",
