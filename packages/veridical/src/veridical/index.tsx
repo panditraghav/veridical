@@ -68,7 +68,6 @@ function Veridical({
                 <RichTextPlugin
                     contentEditable={
                         <ContentEditable
-                            readOnly={false}
                             className={config.veridicalTheme?.contentEditable}
                         />
                     }

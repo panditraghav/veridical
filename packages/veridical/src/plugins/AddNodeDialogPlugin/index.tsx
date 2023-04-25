@@ -86,3 +86,4 @@ export default function AddNodeDialogPlugin({
 }
 
 export type { NodeOption };
+export { defaultNodeOptions };

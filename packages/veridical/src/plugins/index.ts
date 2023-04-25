@@ -14,7 +14,8 @@ import OpenLinkPlugin from './OpenLinkPlugin';
 import EditorStatePlugin from './EditorStatePlugin';
 import ConvertToMarkdownPlugin from './ConvertToMarkdownPlugin';
 import ConvertFromMarkdownPlugin from './ConvertFromMarkdownPlugin';
-import AddNodeDialogPlugin from './AddNodeDialogPlugin';
+import AddNodeDialogPlugin, { defaultNodeOptions } from './AddNodeDialogPlugin';
+import type { NodeOption } from './AddNodeDialogPlugin';
 import ImageDialogPlugin from './ImageDialogPlugin';
 import ImageActionMenuRight from './ImageActionMenuRight';
 
@@ -38,4 +39,7 @@ export {
     EditorStatePlugin,
     ConvertToMarkdownPlugin,
     ConvertFromMarkdownPlugin,
+    defaultNodeOptions,
 };
+
+export type { NodeOption };
