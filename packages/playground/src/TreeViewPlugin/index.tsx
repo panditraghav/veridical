@@ -11,6 +11,7 @@ export default function TreeViewPlugin() {
             timeTravelPanelButtonClassName=""
             timeTravelPanelClassName=""
             timeTravelPanelSliderClassName=""
+            treeTypeButtonClassName="float-right"
             viewClassName="my-10 text-editor-p-dark dark:text-editor-p-light overflow-x-scroll"
         />
     );
