@@ -8,7 +8,7 @@ const keyword = 'dark:text-purple-300 text-fuchsia-700';
 const string = 'dark:text-lime-500 text-green-600';
 
 export const lexicalTheme: LexicalThemeClasses = {
-    code: 'bg-gray-100 dark:bg-neutral-800 block w-full px-8 py-6 my-4 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md',
+    code: 'bg-gray-100 dark:bg-neutral-900 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md block overflow-x-auto w-full md:px-8 md:py-6 text-sm px-6 py-4 my-2 whitespace-pre scrollbar scrollbar-thin dark:scrollbar-track-neutral-700 dark:scrollbar-thumb-neutral-600 scrollbar-track-gray-200 scrollbar-thumb-gray-400',
     image: 'w-full h-[420px] rounded-sm',
     imageContainer: 'flex flex-row justify-center my-4 mx-0',
     codeHighlight: {
@@ -46,16 +46,16 @@ export const lexicalTheme: LexicalThemeClasses = {
     characterLimit: 'DefaultEditorTheme__characterLimit',
     hashtag: 'DefaultEditorTheme__hashtag',
     heading: {
-        h1: 'text-6xl text-editor-title-dark font-bold mt-8 mb-12 dark:text-editor-title-light',
-        h2: 'text-5xl font-bold text-editor-h2-dark dark:text-editor-h2-light my-6',
-        h3: 'text-3xl font-semibold text-editor-h3-dark dark:text-editor-h3-light my-4',
+        h1: 'md:text-6xl md:mt-8 md:mb-12 text-4xl mt-6 mb-8 font-bold text-editor-title-dark dark:text-editor-title-light',
+        h2: 'font-bold md:text-5xl md:my-6 text-3xl my-4 text-editor-h2-dark dark:text-editor-h2-light',
+        h3: 'font-semibold md:text-3xl md:my-4 text-xl my-2 text-editor-h3-dark dark:text-editor-h3-light',
     },
     link: 'text-blue-600',
     list: {
         ol: 'my-2 pl-8',
         ul: 'my-2 pl-8',
         listitem:
-            'text-xl my-1 mx-2 text-editor-p-dark dark:text-editor-p-light',
+            'my-1 mx-2 text-lg text-editor-p-dark dark:text-editor-p-light',
         listitemChecked: 'DefaultEditorTheme__listItemChecked',
         listitemUnchecked: 'DefaultEditorTheme__listItemUnchecked',
         nested: {
@@ -78,7 +78,8 @@ export const lexicalTheme: LexicalThemeClasses = {
     ltr: 'DefaultEditorTheme__ltr',
     mark: 'DefaultEditorTheme__mark',
     markOverlap: 'DefaultEditorTheme__markOverlap',
-    paragraph: 'text-xl text-editor-p-dark dark:text-editor-p-light my-2',
+    paragraph:
+        'md:my-3 md:leading-7 text-lg my-2 text-editor-p-dark dark:text-editor-p-light',
     quote: 'border-l-4 border-editor-quote-border-dark dark:border-editor-quote-border-light pl-3 text-xl text-editor-quote-dark dark:text-editor-quote-light italic',
     rtl: 'DefaultEditorTheme__rtl',
     table: 'DefaultEditorTheme__table',

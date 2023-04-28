@@ -12,7 +12,7 @@ export default function TreeViewPlugin() {
             timeTravelPanelClassName=""
             timeTravelPanelSliderClassName=""
             treeTypeButtonClassName="float-right"
-            viewClassName="my-10 text-editor-p-dark dark:text-editor-p-light overflow-x-scroll"
+            viewClassName="my-10 text-editor-p-dark dark:text-editor-p-light overflow-x-auto scrollbar scrollbar-thin dark:scrollbar-track-neutral-700 dark:scrollbar-thumb-neutral-600 scrollbar-track-gray-200 scrollbar-thumb-gray-400"
         />
     );
 }

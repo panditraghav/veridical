@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
     MarkdownPlugin,
     CodeActionMenuLeft,
@@ -31,11 +31,7 @@ import {
 } from '../components';
 
 export default function VeridicalEditorPlugins(): JSX.Element {
-    const [container, setContainer] = useState<HTMLElement | null>(null);
-    useEffect(() => {
-        setContainer(document.body);
-    }, []);
-
+    const container = document.body;
     return (
         <>
             <AutoFocusPlugin />

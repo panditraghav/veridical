@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 const colors = require('tailwindcss/colors');
+const scrollbar = require('tailwind-scrollbar');
 
 module.exports = {
     darkMode: 'class',
@@ -12,6 +13,17 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                'bg-dark': colors.neutral['800'],
+                'bg-light': colors.neutral['100'],
+
+                'text-dark-01': colors.neutral['900'],
+                'text-dark-02': colors.neutral['800'],
+                'text-dark-03': colors.neutral['600'],
+
+                'text-light-01': colors.neutral['50'],
+                'text-light-02': colors.neutral['100'],
+                'text-light-03': colors.neutral['300'],
+
                 'editor-bg-dark': colors.neutral['900'],
                 'editor-bg-light': colors.neutral['100'],
 
@@ -64,5 +76,5 @@ module.exports = {
             },
         },
     },
-    plugins: [],
+    plugins: [scrollbar()],
 };

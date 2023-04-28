@@ -8,7 +8,6 @@ import {
     LexicalEditor,
     Klass,
     LexicalNode,
-    EditorThemeClasses,
     $getRoot,
     $createParagraphNode,
     $createTextNode,
