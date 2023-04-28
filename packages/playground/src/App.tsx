@@ -10,7 +10,7 @@ function FromHTML() {
     return (
         <div
             dangerouslySetInnerHTML={{ __html: html || '<h1>No HTML </h1>' }}
-            className="md:max-w-[780px] md:mx-auto w-full px-4"
+            className="md:w-8/12 md:mx-auto w-full px-4 mb-24"
         ></div>
     );
 }
