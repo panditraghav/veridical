@@ -13,7 +13,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'bg-dark': colors.neutral['800'],
+                'bg-dark': colors.neutral['900'],
                 'bg-light': colors.neutral['100'],
 
                 'text-dark-01': colors.neutral['900'],

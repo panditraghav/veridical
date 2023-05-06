@@ -8,7 +8,7 @@ const keyword = 'dark:text-purple-300 text-fuchsia-700';
 const string = 'dark:text-lime-500 text-green-600';
 
 export const lexicalTheme: LexicalThemeClasses = {
-    code: 'bg-gray-100 dark:bg-neutral-900 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md block overflow-x-auto w-full md:px-8 md:py-6 px-6 py-4 my-2 whitespace-pre scrollbar scrollbar-thin dark:scrollbar-track-neutral-700 dark:scrollbar-thumb-neutral-600 scrollbar-track-gray-200 scrollbar-thumb-gray-400',
+    code: 'bg-gray-100 dark:bg-neutral-800 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md block overflow-x-auto w-full md:px-8 md:py-6 px-6 py-4 my-2 whitespace-pre scrollbar scrollbar-thin dark:scrollbar-track-neutral-700 dark:scrollbar-thumb-neutral-600 scrollbar-track-gray-200 scrollbar-thumb-gray-400',
     image: 'w-full h-[420px] rounded-sm',
     imageContainer: 'flex flex-row justify-center my-4 mx-0',
     codeHighlight: {

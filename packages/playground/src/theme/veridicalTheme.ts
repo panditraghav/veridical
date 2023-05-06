@@ -14,9 +14,9 @@ export const veridicalTheme: VeridicalThemeClasses = {
         'relative top-[-35px] left-1 z-[-10] text-editor-p-dark dark:text-editor-p-light',
     overlay: 'w-screen h-screen fixed top-0 left-0 z-50',
     backdrop:
-        'fixed top-0 left-0 w-full h-screen m-0 p-0 flex items-center justify-center dark:bg-editor-bg-dark/40 bg-editor-bg-light/40',
+        'fixed top-0 left-0 w-full h-screen m-0 p-0 flex items-center justify-center bg-editor-bg-dark/30',
     dialog: {
-        dialog: 'box-border bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark flex flex-col rounded-md animate-appear border-[1px] border-neutral-700',
+        dialog: 'box-border bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark flex flex-col rounded-md animate-appear border-[1px] dark:border-editor-p-light/30 border-editor-p-dark/30',
         contentContainer: 'mx-4',
         title: 'text-lg my-4 mx-4 font-semibold text-editor-title-dark dark:text-editor-title-light',
         actionGroup: 'flex mt-8 mb-4 justify-end px-4',
@@ -85,7 +85,7 @@ export const veridicalTheme: VeridicalThemeClasses = {
         name: 'text-editor-p-dark dark:text-editor-p-light ml-2',
         menu: {
             container:
-                'flex flex-col w-[200px] items-center rounded-md bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark border-[1px] dark:border-neutral-700 drop-shadow-md',
+                'flex flex-col w-[200px] items-center rounded-md bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark border-[1px] dark:border-editor-p-light/30 border-editor-p-dark/30 drop-shadow-md',
             search: 'w-[90%] py-1 px-1 mx-auto my-3 outline-none bg-editor-dialog-bg-light dark:bg-editor-dialog-bg-dark text-editor-p-dark dark:text-editor-p-light',
             optionContainer:
                 'overflow-y-auto max-h-[250px] w-full scrollbar scrollbar-thin dark:scrollbar-track-neutral-700 dark:scrollbar-thumb-neutral-600 scrollbar-track-gray-200 scrollbar-thumb-gray-400',
