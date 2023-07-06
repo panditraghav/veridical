@@ -1,7 +1,6 @@
 import {
     DecoratorNode,
     DOMExportOutput,
-    EditorConfig,
     LexicalNode,
     NodeKey,
     SerializedLexicalNode,
@@ -36,7 +35,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     __altText: string;
     __naturalWidth: number;
     __naturalHeight: number;
-    __isMaxWidth: boolean = true;
+    __isMaxWidth = true;
 
     static getType(): string {
         return 'image';

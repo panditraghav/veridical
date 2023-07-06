@@ -49,7 +49,7 @@ export default function HoverMenuPlugin({
         document.addEventListener('mousemove', mouseEventListener);
         return () =>
             document.removeEventListener('mousemove', mouseEventListener);
-    });
+    }, [editor, offset]);
 
     return createPortal(
         <HoverMenuProvider value={{ hoveredDOMNode, hoveredLexicalNode }}>

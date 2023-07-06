@@ -46,7 +46,7 @@ export default function ImageDialogPlugin({
         editor.update(() => {
             imageNode?.remove();
         });
-    }, [action, imageNode]);
+    }, [action, editor, imageNode]);
 
     async function onSave(
         src: string,

@@ -127,8 +127,7 @@ export default function ImageComponent({
     nodeKey: NodeKey;
 }) {
     const [editor] = useLexicalComposerContext();
-    const [isSelected, setIsSelected, clearSelection] =
-        useLexicalNodeSelection(nodeKey);
+    const [isSelected, setIsSelected] = useLexicalNodeSelection(nodeKey);
     const imgRef = useRef<HTMLImageElement | null>(null);
 
     useEffect(() => {

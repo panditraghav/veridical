@@ -73,6 +73,7 @@ export default function OpenLinkPlugin() {
             className={`${theme?.link}`}
             style={{ ...dialogStyle, position: 'absolute' }}
             target="_blank"
+            rel="noreferrer"
         >
             {link}
         </a>

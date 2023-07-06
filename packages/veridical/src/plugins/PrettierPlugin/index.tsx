@@ -79,7 +79,9 @@ function usePrettierPlugin(
                         let textContent = codeNode.getTextContent();
                         try {
                             textContent = format(textContent, prettierOptions);
-                        } catch (error) {}
+                        } catch (error) {
+                            /* empty */
+                        }
                         const codeSelection = codeNode.select(0);
                         codeSelection.insertText(textContent);
                     }
@@ -90,7 +92,7 @@ function usePrettierPlugin(
 
         return () =>
             document.removeEventListener('keydown', prettierCommandListener);
-    }, [editor]);
+    }, [editor, isKeydown]);
 
     return null;
 }

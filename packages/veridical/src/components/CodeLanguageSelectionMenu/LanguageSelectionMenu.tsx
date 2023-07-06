@@ -23,7 +23,7 @@ function useSearch(
             return lang.name.match(searchRegex);
         });
         setSearchedLang(sl);
-    }, [searchText]);
+    }, [languages, searchText]);
 
     return [searchedLang];
 }
@@ -86,7 +86,6 @@ function LanguageOption({
             }`}
             key={lang.name}
             onClick={onClick}
-            //@ts-ignore
             ref={optionRef}
         >
             {lang.name}
@@ -119,7 +118,7 @@ export default function LanguageSelectionMenu({
 
     useEffect(() => {
         if (!isOpen) return;
-        function scrollListener(ev: Event) {
+        function scrollListener() {
             setMenuPosition(
                 menuRef.current,
                 anchorElement,
@@ -171,7 +170,16 @@ export default function LanguageSelectionMenu({
             document.removeEventListener('keydown', keydownListener);
             document.removeEventListener('click', clickListener);
         };
-    }, [isOpen, backdropRef, searchedLang]);
+    }, [
+        isOpen,
+        backdropRef,
+        searchedLang,
+        anchorElement,
+        theme?.codeLanguageSelection?.menu?.animation,
+        onClose,
+        setLang,
+        selectedOptionIndex,
+    ]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -187,7 +195,7 @@ export default function LanguageSelectionMenu({
                 theme?.codeLanguageSelection?.menu?.animation,
             );
         }
-    }, [anchorElement, isOpen]);
+    }, [anchorElement, isOpen, theme?.codeLanguageSelection?.menu?.animation]);
 
     useEffect(() => {
         setSelectedOptionIndex(0);
@@ -221,7 +229,6 @@ export default function LanguageSelectionMenu({
                     />
                     <div
                         className={`${theme?.codeLanguageSelection?.menu?.optionContainer}`}
-                        //@ts-ignore
                         ref={optionsContainerRef}
                     >
                         {searchedLang.map((lang) => {

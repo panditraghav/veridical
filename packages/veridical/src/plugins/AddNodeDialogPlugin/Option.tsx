@@ -30,7 +30,7 @@ export default function Option({
             option.nodeCreator(selectedNode);
             onClose();
         });
-    }, [editor, selectedNode, onClose]);
+    }, [editor, selectedNode, option, onClose]);
 
     return (
         <div

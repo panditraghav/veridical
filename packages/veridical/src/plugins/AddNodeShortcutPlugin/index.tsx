@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { $getSelection } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { ADD_NODE_DIALOG_COMMAND } from '../../utils';
@@ -30,7 +30,7 @@ export default function AddNodeShortcutPlugin({
         }
         document.addEventListener('keydown', keydownListener);
         return () => document.removeEventListener('keydown', keydownListener);
-    });
+    }, [editor, isKeydown]);
 
     return null;
 }

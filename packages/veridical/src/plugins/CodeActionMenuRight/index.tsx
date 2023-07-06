@@ -50,7 +50,7 @@ export default function CodeActionMenuRight({
     }, [hoveredLexicalNode, hoveredDOMNode]);
 
     useEffect(() => {
-        return editor.registerMutationListener(CodeNode, (nodes, payload) => {
+        return editor.registerMutationListener(CodeNode, (nodes) => {
             for (const [key, value] of nodes) {
                 if (value === 'destroyed') {
                     hideMenu(menuRef.current);

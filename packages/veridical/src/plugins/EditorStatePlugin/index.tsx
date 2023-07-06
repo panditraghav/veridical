@@ -1,6 +1,6 @@
 import { SerializedEditorState } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function EditorStatePlugin({
     onChange,
@@ -12,6 +12,6 @@ export default function EditorStatePlugin({
         editor.registerUpdateListener(({ editorState }) => {
             onChange({ editorState: editorState.toJSON() });
         });
-    }, [editor]);
+    }, [editor, onChange]);
     return null;
 }

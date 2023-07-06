@@ -52,7 +52,7 @@ export default function AddLinkDialogPlugin({
         if (linkNode && inputRef.current) {
             inputRef.current.focus();
         }
-    }, [linkNode, inputRef.current]);
+    }, [linkNode]);
 
     useEffect(() => {
         return editor.registerMutationListener(LinkNode, (nodes, payload) => {

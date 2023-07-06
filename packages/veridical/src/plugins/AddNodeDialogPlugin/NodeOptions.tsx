@@ -21,7 +21,7 @@ function useSorteNodeOptions(nodeOptions: NodeOption[], searchText: string) {
         }
         const searchRegex = new RegExp(`^${searchText}`, 'i');
         setSortedNodeOptions((options) => {
-            let filteredOptions = options.filter((value) => {
+            const filteredOptions = options.filter((value) => {
                 return (
                     value.name.match(searchRegex) ||
                     value.shortName.match(searchRegex) ||
@@ -39,7 +39,7 @@ function useSorteNodeOptions(nodeOptions: NodeOption[], searchText: string) {
             });
             return [...new Set([...filteredOptions, ...nodeOptions])];
         });
-    }, [searchText]);
+    }, [nodeOptions, searchText]);
 
     return [sortedNodeOptions];
 }

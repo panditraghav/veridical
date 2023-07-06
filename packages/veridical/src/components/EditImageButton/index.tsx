@@ -19,7 +19,7 @@ export default function CopyCodeButton() {
             imageNode: hoveredLexicalNode,
             action: 'edit',
         });
-    }, [hoveredLexicalNode]);
+    }, [editor, hoveredLexicalNode]);
 
     return (
         <button className={`${theme?.editImageButton}`} onClick={onClick}>

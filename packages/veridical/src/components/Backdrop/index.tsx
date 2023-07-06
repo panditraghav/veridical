@@ -24,7 +24,6 @@ export default function Backdrop({
     }, [onClose]);
 
     return (
-        //@ts-ignore
         <div className={theme?.backdrop} ref={backdropRef}>
             {children}
         </div>

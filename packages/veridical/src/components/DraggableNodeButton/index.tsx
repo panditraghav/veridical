@@ -102,7 +102,7 @@ export default function DraggableNodeButton({
             setTragetLinePosition(ev, editor, targetLineRef.current);
             return true;
         },
-        [isDragging],
+        [editor, isDragging],
     );
 
     const onDrop = useCallback(

@@ -55,7 +55,7 @@ export default function AddNodeDialogPlugin({
             },
             COMMAND_PRIORITY_EDITOR,
         );
-    }, []);
+    }, [editor]);
 
     return (
         <Dialog

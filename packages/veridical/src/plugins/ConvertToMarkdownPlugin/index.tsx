@@ -1,6 +1,6 @@
 import { $convertToMarkdownString } from '@lexical/markdown';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { MARKDOWN_TRANSFORMERS } from '../../utils';
 
 interface IProps {
@@ -17,6 +17,6 @@ export default function ConvertToMarkdownPlugin({ onChangeMarkdown }: IProps) {
                 );
             });
         });
-    }, []);
+    }, [editor, onChangeMarkdown]);
     return null;
 }

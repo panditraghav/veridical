@@ -71,8 +71,8 @@ export default function CodeLanguageSelectionMenu({
         value: 'javascript',
     });
     const [isOpen, setIsOpen] = useState(false);
-    const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
-    const buttonRef = useRef<HTMLElement | null>(null);
+    const { hoveredLexicalNode } = useHoverMenuContext();
+    const buttonRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         editor.getEditorState().read(() => {
@@ -87,19 +87,18 @@ export default function CodeLanguageSelectionMenu({
                 }
             }
         });
-    }, [hoveredLexicalNode]);
+    }, [editor, hoveredLexicalNode, languages]);
 
     useEffect(() => {
         editor.update(() => {
             if (!$isCodeNode(hoveredLexicalNode)) return;
             hoveredLexicalNode.setLanguage(lang.value);
         });
-    }, [lang]);
+    }, [editor, hoveredLexicalNode, lang]);
 
     return (
         <>
             <div
-                //@ts-ignore
                 ref={buttonRef}
                 className={`${theme?.codeLanguageSelection?.container}`}
                 onClick={() => setIsOpen(true)}

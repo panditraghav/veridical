@@ -229,7 +229,7 @@ export default function HighlightMenuPlugin({
                 }
             });
         });
-    }, [editor]);
+    }, [editor, positionMenu]);
 
     if (!showMenu) return null;
     return createPortal(

@@ -13,7 +13,7 @@ export default function CopyCodeButton() {
             if (!$isCodeNode(hoveredLexicalNode)) return;
             navigator.clipboard.writeText(hoveredLexicalNode.getTextContent());
         });
-    }, [hoveredLexicalNode]);
+    }, [editor, hoveredLexicalNode]);
 
     return (
         <div className={`${theme?.copyCodeButton}`} onClick={onClick}>

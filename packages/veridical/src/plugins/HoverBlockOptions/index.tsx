@@ -51,7 +51,7 @@ export default function HoverBlockOptions({
         } else {
             setShowMenu(false);
         }
-    }, [hoveredDOMNode]);
+    }, [hoveredDOMNode, offset]);
 
     useEffect(() => {
         return editor.registerUpdateListener(({ dirtyElements }) => {
