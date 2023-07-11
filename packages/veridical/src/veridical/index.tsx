@@ -18,7 +18,6 @@ import { defaultEditorNodes } from '../nodes';
 
 import { CodeHighlightPlugin } from '../plugins';
 
-import VeridicalEditorPlugins from './VeridicalEditorPlugins';
 import VeridicalComposer from './VeridicalComposer';
 
 type InitialConfig = Readonly<{
@@ -88,4 +87,4 @@ function Veridical({
     );
 }
 
-export { InitialConfig, Veridical, VeridicalEditorPlugins, VeridicalComposer };
+export { InitialConfig, Veridical, VeridicalComposer };
