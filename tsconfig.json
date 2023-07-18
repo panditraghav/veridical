@@ -9,7 +9,7 @@
         "strict": true,
         "skipLibCheck": true,
         "paths": {
-            "veridical": ["./packages/veridical"]
+            "@/*": ["./packages/veridical/src/*"]
         }
     },
     "include": ["./packages/veridical/**/*"]
