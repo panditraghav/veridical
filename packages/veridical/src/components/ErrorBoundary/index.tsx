@@ -1,7 +1,7 @@
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-export default function VeridicalErrorBoundary({
+export function VeridicalErrorBoundary({
     children,
     onError,
 }: {

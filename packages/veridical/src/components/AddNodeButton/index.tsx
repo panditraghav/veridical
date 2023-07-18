@@ -1,25 +1,37 @@
-import React from 'react';
-import { ADD_NODE_DIALOG_COMMAND, useHoverMenuContext } from '../../utils';
+import { OPEN_COMMAND_MENU } from '@/commands';
+import { useHoverMenuContext } from '@/utils';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $createParagraphNode, $createTextNode } from 'lexical';
+import React from 'react';
 import { AddIcon } from '..';
-import { useVeridicalTheme } from '../../utils';
 
-export default function AddNodeButton() {
+export function AddNodeButton() {
     const { hoveredLexicalNode } = useHoverMenuContext();
     const [editor] = useLexicalComposerContext();
-    const theme = useVeridicalTheme()?.hoverBlockOption;
+
+    function handleClick() {
+        if (!hoveredLexicalNode) return;
+        editor.update(
+            () => {
+                const p = $createParagraphNode();
+                const text = $createTextNode('');
+                p.append(text);
+                hoveredLexicalNode.insertAfter(p);
+                p.select(0, 0);
+            },
+            {
+                onUpdate: () => {
+                    editor.dispatchCommand(OPEN_COMMAND_MENU, {
+                        searchExpression: /^(?<search>\w*)$/,
+                    });
+                },
+            },
+        );
+    }
 
     return (
-        <button
-            className={theme?.button}
-            onClick={() => {
-                editor.dispatchCommand(ADD_NODE_DIALOG_COMMAND, {
-                    selectedNode: hoveredLexicalNode,
-                });
-            }}
-            tabIndex={-1}
-        >
-            <AddIcon size="base" className={theme?.icon} />
+        <button onClick={handleClick} tabIndex={-1}>
+            <AddIcon size="base" />
         </button>
     );
 }

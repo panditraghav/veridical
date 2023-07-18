@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { $isCodeNode, CodeNode } from '@lexical/code';
 import { createPortal } from 'react-dom';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useVeridicalTheme, useHoverMenuContext } from '../../utils';
+import { useHoverMenuContext } from '@/utils';
 
 function setMenuPosition(
     menuElement: HTMLDivElement | null,
@@ -40,17 +40,12 @@ export default function CodeActionMenuLeft({
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const menuRef = useRef<HTMLDivElement | null>(null);
     const [editor] = useLexicalComposerContext();
-    const theme = useVeridicalTheme();
 
     useEffect(() => {
         if ($isCodeNode(hoveredLexicalNode) && hoveredDOMNode) {
-            setMenuPosition(
-                menuRef.current,
-                hoveredDOMNode,
-                theme?.hoverMenu?.animation,
-            );
+            setMenuPosition(menuRef.current, hoveredDOMNode);
         } else {
-            hideMenu(menuRef.current, theme?.hoverMenu?.animation);
+            hideMenu(menuRef.current);
         }
     }, [hoveredLexicalNode, hoveredDOMNode]);
 
@@ -65,11 +60,7 @@ export default function CodeActionMenuLeft({
     }, [editor]);
 
     return createPortal(
-        <div
-            style={{ position: 'absolute', display: 'none' }}
-            className={theme?.codeActionMenu?.menuLeft}
-            ref={menuRef}
-        >
+        <div style={{ position: 'absolute', display: 'none' }} ref={menuRef}>
             {children}
         </div>,
         container,

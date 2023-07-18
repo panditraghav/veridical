@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $getSelection, $isRangeSelection, LexicalEditor } from 'lexical';
 import { $isLinkNode, LinkNode } from '@lexical/link';
-import { useVeridicalTheme } from '../../utils';
 
 type DialogStyle = {
     left?: number;
@@ -39,7 +38,6 @@ export default function OpenLinkPlugin() {
     const [linkNode, setLinkNode] = useState<LinkNode | null>(null);
     const [link, setLink] = useState<string>('');
     const dialogStyle = useStyle(linkNode, editor);
-    const theme = useVeridicalTheme()?.openLinkDialog;
 
     useEffect(() => {
         return editor.registerUpdateListener(({ editorState }) => {
@@ -70,7 +68,6 @@ export default function OpenLinkPlugin() {
     return (
         <a
             href={link}
-            className={`${theme?.link}`}
             style={{ ...dialogStyle, position: 'absolute' }}
             target="_blank"
             rel="noreferrer"

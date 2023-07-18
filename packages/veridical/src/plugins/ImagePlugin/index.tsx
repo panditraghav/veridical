@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { IMAGE_DIALOG_COMMAND } from '@/commands';
+import { $isImageNode, ImageNode } from '@/nodes';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { LexicalEditor, $getNodeByKey } from 'lexical';
-import { $isImageNode, ImageNode } from '../../nodes';
-import { IMAGE_DIALOG_COMMAND } from '../../utils';
+import { $getNodeByKey, LexicalEditor } from 'lexical';
+import { useEffect } from 'react';
 
 function useImagePlugin(editor: LexicalEditor) {
     useEffect(() => {

@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
-import { useVeridicalTheme, useHoverMenuContext } from '../../utils';
+import { useHoverMenuContext } from '../../utils';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $isCodeNode } from '@lexical/code';
 
-export default function CopyCodeButton() {
-    const theme = useVeridicalTheme();
+export function CopyCodeButton() {
     const { hoveredLexicalNode } = useHoverMenuContext();
     const [editor] = useLexicalComposerContext();
 
@@ -15,9 +14,5 @@ export default function CopyCodeButton() {
         });
     }, [editor, hoveredLexicalNode]);
 
-    return (
-        <div className={`${theme?.copyCodeButton}`} onClick={onClick}>
-            Copy
-        </div>
-    );
+    return <div onClick={onClick}>Copy</div>;
 }

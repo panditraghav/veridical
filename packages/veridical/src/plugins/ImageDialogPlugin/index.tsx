@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { IMAGE_DIALOG_COMMAND } from '../../utils';
-import { ImageNode } from '../../nodes';
+import { IMAGE_DIALOG_COMMAND } from '@/commands';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { COMMAND_PRIORITY_EDITOR } from 'lexical';
-import { ImageDialog } from '../../components';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ImageNode } from '@/nodes';
 
 export interface AddImageDialogStyle {
     backdrop?: string;
@@ -65,17 +64,18 @@ export default function ImageDialogPlugin({
         setShowDialog(false);
     }
 
-    return (
-        <ImageDialog
-            width={480}
-            height={'auto'}
-            container={container}
-            action={action}
-            urlFromImageBlob={urlFromImageBlob}
-            imageNode={imageNode}
-            showDialog={showDialog}
-            onClose={onClose}
-            onSave={onSave}
-        />
-    );
+    return null;
+    // return (
+    //     <ImageDialog
+    //         width={480}
+    //         height={'auto'}
+    //         container={container}
+    //         action={action}
+    //         urlFromImageBlob={urlFromImageBlob}
+    //         imageNode={imageNode}
+    //         showDialog={showDialog}
+    //         onClose={onClose}
+    //         onSave={onSave}
+    //     />
+    // );
 }

@@ -16,9 +16,8 @@ import {
     getHoveredDOMNode,
     isAboveOrBelowCenter,
     isHTMLElement,
-    useVeridicalTheme,
     useHoverMenuContext,
-} from '../../utils';
+} from '@/utils';
 import { DragIcon } from '..';
 
 const LEFT_OFFSET = -25;
@@ -73,18 +72,13 @@ function TargetLine({
     targetLineRef: React.MutableRefObject<HTMLDivElement | null>;
     container: Element | DocumentFragment;
 }) {
-    const theme = useVeridicalTheme();
     return createPortal(
-        <div
-            ref={targetLineRef}
-            className={theme?.dragTargetLine}
-            style={{ position: 'absolute' }}
-        />,
+        <div ref={targetLineRef} style={{ position: 'absolute' }} />,
         container,
     );
 }
 
-export default function DraggableNodeButton({
+export function DraggableNodeButton({
     container,
 }: {
     container: Element | DocumentFragment;
@@ -93,7 +87,6 @@ export default function DraggableNodeButton({
     const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
     const targetLineRef = useRef<HTMLDivElement | null>(null);
     const [isDragging, setIsDragging] = useState(false);
-    const theme = useVeridicalTheme()?.hoverBlockOption;
 
     const onDragOver = useCallback(
         (ev: DragEvent) => {
@@ -170,13 +163,12 @@ export default function DraggableNodeButton({
     return (
         <>
             <button
-                className={theme?.button}
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
                 draggable={true}
                 tabIndex={-1}
             >
-                <DragIcon size="base" className={theme?.icon} />
+                <DragIcon size="base" />
             </button>
             <TargetLine targetLineRef={targetLineRef} container={container} />
         </>

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LinkNode, $isLinkNode } from '@lexical/link';
 import { $getNodeByKey } from 'lexical';
-import { useVeridicalTheme } from '../../utils';
 import { createPortal } from 'react-dom';
 
 const Y_OFFSET = -35;
@@ -39,7 +38,6 @@ export default function AddLinkDialogPlugin({
     const [link, setLink] = useState<string>('');
     const inputRef = useRef<HTMLInputElement | null>(null);
     const position = usePosition(linkDomNode);
-    const theme = useVeridicalTheme()?.addLinkDialog;
 
     const saveLink = useCallback(() => {
         if (!linkNode) return;
@@ -79,7 +77,6 @@ export default function AddLinkDialogPlugin({
             style={{ ...position, position: 'absolute' }}
             ref={inputRef}
             type="url"
-            className={theme?.input}
             spellCheck={false}
             value={link}
             onChange={(e) => setLink(e.target.value)}

@@ -1,3 +1,4 @@
+// TODO: Convert relative paths like @/utils to absolute paths
 import commonjs from '@rollup/plugin-commonjs';
 import image from '@rollup/plugin-image';
 import nodeResolve from '@rollup/plugin-node-resolve';

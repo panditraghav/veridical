@@ -1,5 +1,4 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useVeridicalTheme } from '../../utils';
 import {
     $createRangeSelection,
     $getSelection,
@@ -59,7 +58,6 @@ function FormatLinkButton({
     onClose: () => void;
     isLink: boolean;
 }) {
-    const theme = useVeridicalTheme()?.highlightMenu;
     const [editor] = useLexicalComposerContext();
 
     const getPayload = useCallback((): string | null => {
@@ -81,84 +79,49 @@ function FormatLinkButton({
 
     return (
         <button
-            className={theme?.menuButton}
             onClick={() => {
                 editor.dispatchCommand(TOGGLE_LINK_COMMAND, getPayload());
                 onClose();
             }}
         >
-            <LinkIcon
-                className={
-                    isLink
-                        ? theme?.menuButtonIconSelected
-                        : theme?.menuButtonIcon
-                }
-                size="base"
-            />
+            <LinkIcon size="base" />
         </button>
     );
 }
 
 function FormatItalicButton({ isItalic }: { isItalic: boolean }) {
-    const theme = useVeridicalTheme()?.highlightMenu;
     const [editor] = useLexicalComposerContext();
     return (
         <button
-            className={theme?.menuButton}
             onClick={() =>
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')
             }
         >
-            <FormatItalicIcon
-                className={
-                    isItalic
-                        ? theme?.menuButtonIconSelected
-                        : theme?.menuButtonIcon
-                }
-                size="base"
-            />
+            <FormatItalicIcon size="base" />
         </button>
     );
 }
 
 function FormatBoldButton({ isBold }: { isBold: boolean }) {
-    const theme = useVeridicalTheme()?.highlightMenu;
     const [editor] = useLexicalComposerContext();
     return (
         <button
-            className={`${theme?.menuButton}`}
             onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
         >
-            <FormatBoldIcon
-                className={
-                    isBold
-                        ? theme?.menuButtonIconSelected
-                        : theme?.menuButtonIcon
-                }
-                size="base"
-            />
+            <FormatBoldIcon size="base" />
         </button>
     );
 }
 
 function FormatUnderlineButton({ isUnderline }: { isUnderline: boolean }) {
-    const theme = useVeridicalTheme()?.highlightMenu;
     const [editor] = useLexicalComposerContext();
     return (
         <button
-            className={theme?.menuButton}
             onClick={() =>
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')
             }
         >
-            <FormatUnderlineIcon
-                className={
-                    isUnderline
-                        ? theme?.menuButtonIconSelected
-                        : theme?.menuButtonIcon
-                }
-                size="base"
-            />
+            <FormatUnderlineIcon size="base" />
         </button>
     );
 }
@@ -172,7 +135,6 @@ export default function HighlightMenuPlugin({
 }) {
     const menuRef = useRef<HTMLDivElement | null>(null);
     const [showMenu, setShowMenu] = useState(false);
-    const theme = useVeridicalTheme()?.highlightMenu;
     const [editor] = useLexicalComposerContext();
     const [menuPosition, setMenuPosition] = useState<Position>({
         left: -1000,
@@ -233,11 +195,7 @@ export default function HighlightMenuPlugin({
 
     if (!showMenu) return null;
     return createPortal(
-        <div
-            style={{ position: 'absolute', ...menuPosition }}
-            className={`${theme?.menu} ${theme?.animation}`}
-            ref={menuRef}
-        >
+        <div style={{ position: 'absolute', ...menuPosition }} ref={menuRef}>
             <FormatBoldButton isBold={isBold} />
             <FormatItalicButton isItalic={isItalic} />
             <FormatUnderlineButton isUnderline={isUnderline} />

@@ -1,5 +1,5 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Offset, useHoverMenuContext, useVeridicalTheme } from '../../utils';
+import { Offset, useHoverMenuContext } from '@/utils';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -43,7 +43,6 @@ export default function HoverBlockOptions({
         left: -100,
         top: -100,
     });
-    const theme = useVeridicalTheme();
     useEffect(() => {
         setPosition(getMenuPosition(hoveredDOMNode, offset));
         if (hoveredDOMNode) {
@@ -63,14 +62,7 @@ export default function HoverBlockOptions({
 
     if (!showMenu) return null;
     return createPortal(
-        <div
-            className={`${theme?.hoverBlockOption?.container} ${
-                showMenu ? theme?.hoverMenu?.animation : ''
-            }`}
-            style={{ position: 'absolute', ...position }}
-        >
-            {children}
-        </div>,
+        <div style={{ position: 'absolute', ...position }}>{children}</div>,
         container,
     );
 }
