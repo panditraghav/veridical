@@ -1,6 +1,6 @@
 import './main.css';
-import Editor from './Editor';
-import { useEffect, useState } from 'react';
+import Editor from './components/Editor';
+import React, { useEffect, useState } from 'react';
 import { getHTMLFromEditorJSONString } from './utils/editor';
 import Header from './components/Header';
 

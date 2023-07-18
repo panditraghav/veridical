@@ -7,6 +7,9 @@ const veridicalPath = path.resolve(__dirname, '../veridical', 'src');
 export default defineConfig({
     plugins: [react()],
     resolve: {
-        alias: [{ find: 'veridical', replacement: veridicalPath }],
+        alias: [
+            { find: 'veridical', replacement: veridicalPath },
+            { find: '@', replacement: veridicalPath },
+        ],
     },
 });

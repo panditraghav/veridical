@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Header({
     isHTML,
@@ -18,7 +18,8 @@ export default function Header({
             document.documentElement.classList.remove('dark');
             setMode('light');
         }
-    });
+    }, []);
+
     function onClickHandler() {
         const currentMode = localStorage.getItem('mode');
         const cl = document.documentElement.classList;
@@ -39,7 +40,7 @@ export default function Header({
         }
     }
     return (
-        <nav className="sticky top-0 z-30 text-editor-p-dark dark:text-editor-p-light h-12 w-full bg-bg-light dark:bg-bg-dark flex justify-between items-center flex-row shadow-sm shadow-slate-200 dark:shadow-gray-800 mb-8">
+        <nav className="sticky top-0 z-30 text-editor-p-dark dark:text-editor-p-light h-12 w-full bg-background flex justify-between items-center flex-row shadow-sm shadow-slate-200 dark:shadow-gray-800 mb-8">
             <div>
                 <span className="mx-2">CurrentMode: {mode}</span>
                 <span>Rendering : {isHTML ? 'HTML' : 'Editor'}</span>

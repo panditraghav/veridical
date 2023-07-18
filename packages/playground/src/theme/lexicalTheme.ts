@@ -46,9 +46,9 @@ export const lexicalTheme: LexicalThemeClasses = {
     characterLimit: 'DefaultEditorTheme__characterLimit',
     hashtag: 'DefaultEditorTheme__hashtag',
     heading: {
-        h1: 'md:text-6xl md:mt-8 md:mb-12 text-4xl mt-6 mb-8 font-bold text-editor-title-dark dark:text-editor-title-light',
-        h2: 'font-bold md:text-5xl md:my-6 text-3xl my-4 text-editor-h2-dark dark:text-editor-h2-light',
-        h3: 'font-semibold md:text-3xl md:my-4 text-xl my-2 text-editor-h3-dark dark:text-editor-h3-light',
+        h1: 'md:text-6xl md:mt-8 md:mb-12 text-4xl mt-6 mb-8 font-bold text-foreground',
+        h2: 'font-bold md:text-5xl md:my-6 text-3xl my-4 text-foreground/90',
+        h3: 'font-semibold md:text-3xl md:my-4 text-xl my-2 text-foreground/95',
     },
     link: 'text-blue-600',
     list: {
@@ -78,8 +78,7 @@ export const lexicalTheme: LexicalThemeClasses = {
     ltr: 'DefaultEditorTheme__ltr',
     mark: 'DefaultEditorTheme__mark',
     markOverlap: 'DefaultEditorTheme__markOverlap',
-    paragraph:
-        'md:my-3 md:leading-7 text-lg my-2 text-editor-p-dark dark:text-editor-p-light',
+    paragraph: 'md:my-3 md:leading-7 text-lg my-2 text-foreground/95',
     quote: 'border-l-4 border-editor-quote-border-dark dark:border-editor-quote-border-light pl-3 text-xl text-editor-quote-dark dark:text-editor-quote-light italic',
     rtl: 'DefaultEditorTheme__rtl',
     table: 'DefaultEditorTheme__table',
