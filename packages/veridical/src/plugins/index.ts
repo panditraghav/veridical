@@ -4,7 +4,6 @@ import PrettierPlugin from './PrettierPlugin';
 import HighlightMenuPlugin from './HighlightMenuPlugin';
 import HoverBlockOptions from './HoverBlockOptions';
 import HoverMenuPlugin from './HoverMenuPlugin';
-import AddNodeShortcutPlugin from './AddNodeShortcutPlugin';
 import ImagePlugin from './ImagePlugin';
 import CodeActionMenuLeft from './CodeActionMenuLeft';
 import CodeActionMenuRight from './CodeActionMenuRight';
@@ -14,10 +13,10 @@ import OpenLinkPlugin from './OpenLinkPlugin';
 import EditorStatePlugin from './EditorStatePlugin';
 import ConvertToMarkdownPlugin from './ConvertToMarkdownPlugin';
 import ConvertFromMarkdownPlugin from './ConvertFromMarkdownPlugin';
-import AddNodeDialogPlugin, { defaultNodeOptions } from './AddNodeDialogPlugin';
-import type { NodeOption } from './AddNodeDialogPlugin';
 import ImageDialogPlugin from './ImageDialogPlugin';
 import ImageActionMenuRight from './ImageActionMenuRight';
+import SlashCommandMenuPlugin from './SlashCommandMenuPlugin';
+import CommandMenuPlugin from './CommandMenuPlugin';
 
 export {
     MarkdownPlugin,
@@ -26,8 +25,6 @@ export {
     HighlightMenuPlugin,
     HoverMenuPlugin,
     HoverBlockOptions,
-    AddNodeDialogPlugin,
-    AddNodeShortcutPlugin,
     ImageDialogPlugin,
     ImagePlugin,
     CodeActionMenuLeft,
@@ -39,7 +36,8 @@ export {
     EditorStatePlugin,
     ConvertToMarkdownPlugin,
     ConvertFromMarkdownPlugin,
-    defaultNodeOptions,
+    CommandMenuPlugin,
+    SlashCommandMenuPlugin,
 };
 
-export type { NodeOption };
+export * from './CommandMenuPlugin';
