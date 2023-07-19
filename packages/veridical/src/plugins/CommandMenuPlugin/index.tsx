@@ -2,6 +2,7 @@ import { OPEN_COMMAND_MENU } from '@/commands';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { mergeRegister } from '@lexical/utils';
 import * as Popover from '@radix-ui/react-popover';
+import { Slot } from '@radix-ui/react-slot';
 import { Command } from 'cmdk';
 import {
     $getSelection,
@@ -14,6 +15,7 @@ import {
     KEY_ENTER_COMMAND,
 } from 'lexical';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { RemoveScroll } from 'react-remove-scroll';
 
 const CMDK_ITEM_SELECTOR = `[cmdk-item=""]`;
 const CMDK_SELECT_EVENT = `cmdk-item-select`;
@@ -240,41 +242,43 @@ export default function CommandMenuPlugin({
                 }}
             />
             <Popover.Portal>
-                <Popover.Content
-                    onOpenAutoFocus={(ev) => ev.preventDefault()}
-                    sideOffset={contentSideOffset.current}
-                    align="start"
-                    className={classNames?.popoverContent}
-                >
-                    <Command
-                        className={classNames?.commandRoot}
-                        defaultValue={defaultValue}
-                        value={selectedValue}
-                        label="Slash Command Menu"
-                        onValueChange={setSelectedValue}
-                        ref={cmdkRef}
-                        onMouseDown={(ev) => {
-                            const itemOrNull = getCmdkItem(ev.target);
-                            if (itemOrNull) {
-                                ev.preventDefault();
-                                editor.update(() => {
-                                    deleteSearchText();
-                                    itemOrNull.dispatchEvent(
-                                        new Event(CMDK_SELECT_EVENT),
-                                    );
-                                    closeAndResetState();
-                                });
-                            }
-                        }}
+                <RemoveScroll as={Slot} allowPinchZoom>
+                    <Popover.Content
+                        onOpenAutoFocus={(ev) => ev.preventDefault()}
+                        sideOffset={contentSideOffset.current}
+                        align="start"
+                        className={classNames?.popoverContent}
                     >
-                        <Command.Input
-                            value={searchText}
-                            style={{ display: 'none' }}
-                            autoFocus={false}
-                        />
-                        {children}
-                    </Command>
-                </Popover.Content>
+                        <Command
+                            className={classNames?.commandRoot}
+                            defaultValue={defaultValue}
+                            value={selectedValue}
+                            label="Slash Command Menu"
+                            onValueChange={setSelectedValue}
+                            ref={cmdkRef}
+                            onMouseDown={(ev) => {
+                                const itemOrNull = getCmdkItem(ev.target);
+                                if (itemOrNull) {
+                                    ev.preventDefault();
+                                    editor.update(() => {
+                                        deleteSearchText();
+                                        itemOrNull.dispatchEvent(
+                                            new Event(CMDK_SELECT_EVENT),
+                                        );
+                                        closeAndResetState();
+                                    });
+                                }
+                            }}
+                        >
+                            <Command.Input
+                                value={searchText}
+                                style={{ display: 'none' }}
+                                autoFocus={false}
+                            />
+                            {children}
+                        </Command>
+                    </Popover.Content>
+                </RemoveScroll>
             </Popover.Portal>
         </Popover.Root>
     );
