@@ -1,4 +1,5 @@
 import { OPEN_COMMAND_MENU } from '@/commands';
+import { $isCodeHighlightNode, $isCodeNode } from '@lexical/code';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $getSelection, $isRangeSelection } from 'lexical';
 import { useEffect } from 'react';
@@ -15,9 +16,12 @@ export default function SlashCommandMenuPlugin() {
 
                 if (!$isRangeSelection(selection)) return;
 
+                const node = selection.getNodes()[0];
+                if ($isCodeNode(node) || $isCodeHighlightNode(node)) return;
+
                 const [anchorOffset, focusOffset] =
                     selection.getCharacterOffsets();
-                const node = selection.getNodes()[0];
+
                 const text = node.getTextContent();
 
                 if (
