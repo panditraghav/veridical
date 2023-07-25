@@ -1,6 +1,7 @@
 # Veridical
 
 Veridical is a set of [lexical plugins](https://lexical.dev/docs/react/plugins) that can be used to make a WYSIWYG (What You See Is What You Get) Editor.
+Check out veridical at [https://panditraghav.github.io/veridical](https://panditraghav.github.io/veridical)
 
 ## Install
 
