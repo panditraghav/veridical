@@ -202,7 +202,10 @@ const CommandMenuContent = forwardRef<
 CommandMenuContent.displayName = 'CommandMenuContent';
 
 function CommandMenuCommand(
-    props: React.ComponentPropsWithoutRef<typeof Command>,
+    props: Omit<
+        React.ComponentPropsWithoutRef<typeof Command>,
+        'value' | 'onValueChange' | 'onMouseDown'
+    >,
 ) {
     const [editor] = useLexicalComposerContext();
     const [selectedValue, setSelectedValue] = useState('');
@@ -273,14 +276,7 @@ function CommandMenuCommand(
         );
     }, [editor, onClose, changeItemSelectionBy]);
 
-    const {
-        value: _,
-        onValueChange: __,
-        onMouseDown: ___,
-        children,
-        label,
-        ...etc
-    } = props;
+    const { children, label, ...etc } = props;
 
     return (
         <Command
