@@ -16,7 +16,6 @@ import ConvertFromMarkdownPlugin from './ConvertFromMarkdownPlugin';
 import ImageDialogPlugin from './ImageDialogPlugin';
 import ImageActionMenuRight from './ImageActionMenuRight';
 import SlashCommandMenuPlugin from './SlashCommandMenuPlugin';
-import CommandMenuPlugin from './CommandMenuPlugin';
 
 export {
     MarkdownPlugin,
@@ -36,7 +35,6 @@ export {
     EditorStatePlugin,
     ConvertToMarkdownPlugin,
     ConvertFromMarkdownPlugin,
-    CommandMenuPlugin,
     SlashCommandMenuPlugin,
 };
 

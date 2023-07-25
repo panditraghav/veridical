@@ -30,7 +30,6 @@ export default function SlashCommandMenuPlugin() {
                 ) {
                     const match = text.match(/\/$/);
                     if (match) {
-                        console.log('SlashCommandMenuPlugin: Match');
                         editor.dispatchCommand(OPEN_COMMAND_MENU, {
                             searchExpression: SEARCH_EXPRESSION,
                         });

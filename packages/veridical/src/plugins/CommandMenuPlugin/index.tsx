@@ -14,7 +14,15 @@ import {
     KEY_ARROW_UP_COMMAND,
     KEY_ENTER_COMMAND,
 } from 'lexical';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+    createContext,
+    forwardRef,
+    useCallback,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 
 const CMDK_ITEM_SELECTOR = `[cmdk-item=""]`;
@@ -26,46 +34,34 @@ const CMDK_ROOT_ATTR = 'cmdk-root';
 const CMDK_VALUE_ATTR = `data-value`;
 const CMDK_SELECT_ATTR = 'data-selected';
 
-export type CommandMenuClassNames = {
-    commandRoot?: string;
-    popoverContent?: string;
-};
-
 type CommandMenuProps = {
-    classNames?: CommandMenuClassNames;
-    defaultValue?: string;
     children?: React.ReactNode;
+    removeScroll?: boolean;
 };
 
-function getCmdkItem(target: EventTarget): Element | null {
-    if (!(target instanceof Element)) return null;
+type CommandMenuContextType = {
+    contentSideOffset?: number;
+    searchExpression?: RegExp;
+    onClose?: () => void;
+    searchText: string;
+};
 
-    if (target.hasAttribute(CMDK_ITEM_ATTR)) return target;
+const CommandMenuContext = createContext<CommandMenuContextType>({
+    searchText: '',
+});
+const useCommandMenu = () => useContext(CommandMenuContext);
 
-    let parent: HTMLElement | null | undefined = target.parentElement;
-    while (!parent || !parent.hasAttribute(CMDK_ROOT_ATTR)) {
-        if (parent?.hasAttribute(CMDK_ITEM_ATTR)) return parent;
-        parent = parent?.parentElement;
-    }
-    return null;
-}
-
-export default function CommandMenuPlugin({
-    classNames,
-    defaultValue,
+function CommandMenuPlugin({
     children,
+    removeScroll = true,
 }: CommandMenuProps) {
     const [open, setOpen] = useState(false);
-    const [searchExpression, setSearchExpression] = useState<RegExp | null>(
-        null,
-    );
+    const [searchExpression, setSearchExpression] = useState<RegExp>();
     const [searchText, setSearchText] = useState('');
-    const [selectedValue, setSelectedValue] = useState('');
+    const [contentSideOffset, setContentSideOffset] = useState(0);
     const [editor] = useLexicalComposerContext();
 
-    const cmdkRef = useRef<HTMLDivElement>(null);
     const anchorRef = useRef<HTMLDivElement>(null);
-    const contentSideOffset = useRef<number>(0);
 
     useEffect(() => {
         return editor.registerCommand(
@@ -116,7 +112,7 @@ export default function CommandMenuPlugin({
 
     function closeAndResetState() {
         setOpen(false);
-        setSearchExpression(null);
+        setSearchExpression(undefined);
         setSearchText('');
     }
 
@@ -145,24 +141,76 @@ export default function CommandMenuPlugin({
             }
         }
 
-        contentSideOffset.current = height / 2;
+        setContentSideOffset(height / 2);
         anchor.style.position = 'absolute';
         anchor.style.left = `${left}px`;
         anchor.style.top = `${top + height / 2 + window.scrollY}px`;
     }
 
-    function getSelectedItem() {
-        return cmdkRef.current?.querySelector(
-            `${CMDK_ITEM_SELECTOR}[aria-selected="true"]`,
-        );
+    const contextValue: CommandMenuContextType = {
+        contentSideOffset,
+        searchExpression,
+        searchText,
+        onClose: closeAndResetState,
+    };
+
+    return (
+        <CommandMenuContext.Provider value={contextValue}>
+            <Popover.Root open={open} onOpenChange={setOpen}>
+                <Popover.Anchor
+                    ref={anchorRef}
+                    style={{
+                        position: 'absolute',
+                        visibility: 'hidden',
+                    }}
+                />
+                <Popover.Portal>
+                    {removeScroll ? (
+                        <RemoveScroll as={Slot} allowPinchZoom>
+                            {children}
+                        </RemoveScroll>
+                    ) : (
+                        children
+                    )}
+                </Popover.Portal>
+            </Popover.Root>
+        </CommandMenuContext.Provider>
+    );
+}
+
+const CommandMenuContent = forwardRef<
+    React.ElementRef<typeof Popover.Content>,
+    React.ComponentPropsWithoutRef<typeof Popover.Content>
+>((props, forwardedRef) => {
+    const { contentSideOffset } = useCommandMenu();
+    const { sideOffset, align, onOpenAutoFocus, ...etc } = props;
+
+    function onOpenAutoFocusDefault(ev: Event) {
+        ev.preventDefault();
     }
-    function getValidItems() {
-        if (!cmdkRef.current) return null;
-        return Array.from(
-            cmdkRef.current.querySelectorAll(CMDK_VALID_ITEM_SELECTOR),
-        );
-    }
-    const changeItemSelectionBy = useCallback((changeBy: -1 | 1) => {
+
+    return (
+        <Popover.Content
+            onOpenAutoFocus={onOpenAutoFocus || onOpenAutoFocusDefault}
+            sideOffset={sideOffset || contentSideOffset}
+            align={align || 'start'}
+            ref={forwardedRef}
+            {...etc}
+        />
+    );
+});
+CommandMenuContent.displayName = 'CommandMenuContent';
+
+function CommandMenuCommand(
+    props: React.ComponentPropsWithoutRef<typeof Command>,
+) {
+    const [editor] = useLexicalComposerContext();
+    const [selectedValue, setSelectedValue] = useState('');
+    const { searchExpression, searchText, onClose } = useCommandMenu();
+
+    const cmdkRef = useRef<HTMLDivElement>(null);
+
+    let changeItemSelectionBy = useCallback((changeBy: -1 | 1) => {
         const validItems = getValidItems();
         if (!validItems) return;
         const len = validItems.length;
@@ -177,34 +225,29 @@ export default function CommandMenuPlugin({
         );
     }, []);
 
-    const deleteSearchText = useCallback(() => {
-        if (!searchExpression) return;
-        const selection = $getSelection();
-        if ($isRangeSelection(selection)) {
-            const node = selection.getNodes()[0];
-            if ($isTextNode(node)) {
-                const text = node.getTextContent();
-                const match = text.match(searchExpression);
-
-                if (match) {
-                    node.spliceText(match.index || 0, match[0].length, '');
-                }
-            }
-        }
-    }, [searchExpression]);
+    function getSelectedItem() {
+        return cmdkRef.current?.querySelector(
+            `${CMDK_ITEM_SELECTOR}[aria-selected="true"]`,
+        );
+    }
+    function getValidItems() {
+        if (!cmdkRef.current) return null;
+        return Array.from(
+            cmdkRef.current.querySelectorAll(CMDK_VALID_ITEM_SELECTOR),
+        );
+    }
 
     useEffect(() => {
         return mergeRegister(
             editor.registerCommand(
                 KEY_ENTER_COMMAND,
                 (ev) => {
-                    if (!open) return false;
                     ev?.preventDefault();
-                    deleteSearchText();
+                    $deleteSearchText(searchExpression);
 
                     const item = getSelectedItem();
                     item?.dispatchEvent(new Event(CMDK_SELECT_EVENT));
-                    closeAndResetState();
+                    onClose?.();
                     return true;
                 },
                 COMMAND_PRIORITY_LOW,
@@ -212,7 +255,6 @@ export default function CommandMenuPlugin({
             editor.registerCommand(
                 KEY_ARROW_DOWN_COMMAND,
                 (ev) => {
-                    if (!open) return false;
                     ev.preventDefault();
                     changeItemSelectionBy(1);
                     return true;
@@ -222,7 +264,6 @@ export default function CommandMenuPlugin({
             editor.registerCommand(
                 KEY_ARROW_UP_COMMAND,
                 (ev) => {
-                    if (!open) return false;
                     ev.preventDefault();
                     changeItemSelectionBy(-1);
                     return true;
@@ -230,90 +271,97 @@ export default function CommandMenuPlugin({
                 COMMAND_PRIORITY_LOW,
             ),
         );
-    }, [editor, open, deleteSearchText, changeItemSelectionBy]);
+    }, [editor, onClose, changeItemSelectionBy]);
+
+    const {
+        value: _,
+        onValueChange: __,
+        onMouseDown: ___,
+        children,
+        label,
+        ...etc
+    } = props;
 
     return (
-        <Popover.Root open={open} onOpenChange={setOpen}>
-            <Popover.Anchor
-                ref={anchorRef}
-                style={{
-                    position: 'absolute',
-                    visibility: 'hidden',
-                }}
+        <Command
+            value={selectedValue}
+            label={label || 'Command Menu'}
+            onValueChange={setSelectedValue}
+            ref={cmdkRef}
+            onMouseDown={(ev) => {
+                const itemOrNull = getCmdkItem(ev);
+                if (itemOrNull) {
+                    ev.preventDefault();
+                    editor.update(() => {
+                        $deleteSearchText(searchExpression);
+                        itemOrNull.dispatchEvent(new Event(CMDK_SELECT_EVENT));
+                        onClose?.();
+                    });
+                }
+            }}
+            {...etc}
+        >
+            <Command.Input
+                value={searchText}
+                style={{ display: 'none' }}
+                autoFocus={false}
             />
-            <Popover.Portal>
-                <RemoveScroll as={Slot} allowPinchZoom>
-                    <Popover.Content
-                        onOpenAutoFocus={(ev) => ev.preventDefault()}
-                        sideOffset={contentSideOffset.current}
-                        align="start"
-                        className={classNames?.popoverContent}
-                    >
-                        <Command
-                            className={classNames?.commandRoot}
-                            defaultValue={defaultValue}
-                            value={selectedValue}
-                            label="Slash Command Menu"
-                            onValueChange={setSelectedValue}
-                            ref={cmdkRef}
-                            onMouseDown={(ev) => {
-                                const itemOrNull = getCmdkItem(ev.target);
-                                if (itemOrNull) {
-                                    ev.preventDefault();
-                                    editor.update(() => {
-                                        deleteSearchText();
-                                        itemOrNull.dispatchEvent(
-                                            new Event(CMDK_SELECT_EVENT),
-                                        );
-                                        closeAndResetState();
-                                    });
-                                }
-                            }}
-                        >
-                            <Command.Input
-                                value={searchText}
-                                style={{ display: 'none' }}
-                                autoFocus={false}
-                            />
-                            {children}
-                        </Command>
-                    </Popover.Content>
-                </RemoveScroll>
-            </Popover.Portal>
-        </Popover.Root>
+            {children}
+        </Command>
     );
 }
 
-export const CommandItem = React.forwardRef<
-    React.ElementRef<typeof Command.Item>,
-    React.ComponentPropsWithoutRef<typeof Command.Item>
->((props, forwardedRef) => {
-    return <Command.Item ref={forwardedRef} {...props} />;
-});
-CommandItem.displayName = 'CommandItem';
+function $deleteSearchText(searchExpression?: RegExp) {
+    if (!searchExpression) return;
+    const selection = $getSelection();
+    if ($isRangeSelection(selection)) {
+        const node = selection.getNodes()[0];
+        if ($isTextNode(node)) {
+            const text = node.getTextContent();
+            const match = text.match(searchExpression);
 
-export const CommandEmpty = React.forwardRef<
-    React.ElementRef<typeof Command.Empty>,
-    React.ComponentPropsWithoutRef<typeof Command.Empty>
->((props, forwardedRef) => {
-    return <Command.Empty ref={forwardedRef} {...props} />;
-});
-CommandEmpty.displayName = 'CommandEmpty';
+            if (match) {
+                node.spliceText(match.index || 0, match[0].length, '');
+            }
+        }
+    }
+}
 
-export const CommandList = React.forwardRef<
-    React.ElementRef<typeof Command.List>,
-    React.ComponentPropsWithoutRef<typeof Command.List>
->((props, forwardedRef) => {
-    return <Command.List ref={forwardedRef} {...props} />;
-});
-CommandList.displayName = 'CommandList';
+function getCmdkItem(
+    ev: React.MouseEvent<HTMLElement, MouseEvent>,
+): Element | null {
+    const target = ev.target;
+    if (!(target instanceof Element)) return null;
 
-export const CommandGroup = React.forwardRef<
-    React.ElementRef<typeof Command.Group>,
-    React.ComponentPropsWithoutRef<typeof Command.Group>
->((props, forwardedRef) => {
-    return <Command.Group ref={forwardedRef} {...props} />;
-});
-CommandGroup.displayName = 'CommandGroup';
+    if (target.hasAttribute(CMDK_ITEM_ATTR)) return target;
 
+    let parent: HTMLElement | null | undefined = target.parentElement;
+    while (!parent || !parent.hasAttribute(CMDK_ROOT_ATTR)) {
+        if (parent?.hasAttribute(CMDK_ITEM_ATTR)) return parent;
+        parent = parent?.parentElement;
+    }
+    return null;
+}
+
+const CommandMenuEmpty = Command.Empty;
+const CommandMenuList = Command.List;
+const CommandMenuItem = Command.Item;
+const CommandMenuGroup = Command.Group;
+
+CommandMenuPlugin.List = CommandMenuList;
+CommandMenuPlugin.Empty = CommandMenuEmpty;
+CommandMenuPlugin.Item = CommandMenuItem;
+CommandMenuPlugin.Group = CommandMenuGroup;
+CommandMenuPlugin.Content = CommandMenuContent;
+CommandMenuPlugin.Command = CommandMenuCommand;
+
+export {
+    CommandMenuPlugin,
+    CommandMenuEmpty,
+    CommandMenuList,
+    CommandMenuItem,
+    CommandMenuGroup,
+    CommandMenuContent,
+    CommandMenuCommand,
+};
 export * from './InsertCommands';
