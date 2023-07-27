@@ -14,8 +14,10 @@
         "singleQuote": true
     },
     "dependencies": {
-        "@lexical/headless": "^0.10.0",
-        "@lexical/html": "^0.10.0",
+        "@lexical/headless": "^0.11.3",
+        "@lexical/html": "^0.11.3",
+        "@lexical/react": "^0.11.3",
+        "lexical": "^0.11.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
