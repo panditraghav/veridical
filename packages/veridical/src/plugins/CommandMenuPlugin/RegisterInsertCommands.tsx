@@ -3,7 +3,7 @@ import {
     INSERT_HEADING_COMMAND,
     INSERT_LIST_COMMAND,
 } from '@/commands';
-import { $getHighestSelectedNode } from '@/utils/selection';
+import { $getTopLevelSelectedNode } from '@/utils/selection';
 import { $createCodeNode } from '@lexical/code';
 import { $createListItemNode, $createListNode } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -28,7 +28,7 @@ export function RegisterInsertHeadingCommand() {
                 if (node) {
                     selectedNode = node;
                 } else {
-                    selectedNode = $getHighestSelectedNode();
+                    selectedNode = $getTopLevelSelectedNode();
                 }
                 console.log('Insert Heading command', {
                     headingTag,
@@ -70,7 +70,7 @@ export function RegisterInsertCodeCommand() {
                 if (node) {
                     selectedNode = node;
                 } else {
-                    selectedNode = $getHighestSelectedNode();
+                    selectedNode = $getTopLevelSelectedNode();
                 }
                 if (!selectedNode) return false;
 
@@ -104,7 +104,7 @@ export function RegisterInsertListCommand() {
                 if (node) {
                     selectedNode = node;
                 } else {
-                    selectedNode = $getHighestSelectedNode();
+                    selectedNode = $getTopLevelSelectedNode();
                 }
                 if (!selectedNode) return false;
 

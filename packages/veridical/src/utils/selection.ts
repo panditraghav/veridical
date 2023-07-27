@@ -1,6 +1,6 @@
 import { $getSelection, $isRootNode, LexicalNode } from 'lexical';
 
-export function $getHighestSelectedNode(): LexicalNode | null {
+export function $getTopLevelSelectedNode(): LexicalNode | null {
     const selection = $getSelection();
     const nodes = selection?.getNodes();
     const firstNode = nodes && nodes[0];
