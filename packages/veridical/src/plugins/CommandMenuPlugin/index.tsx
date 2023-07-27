@@ -335,7 +335,6 @@ const CommandMenuItem = forwardRef<
         if (!itemOrNull) return;
 
         ev.preventDefault();
-        console.log('Mouse down', { itemOrNull });
         editor.update(
             () => {
                 $deleteSearchText(searchExpression);
@@ -371,7 +370,6 @@ const CommandMenuItem = forwardRef<
 function $deleteSearchText(searchExpression?: RegExp) {
     if (!searchExpression) return;
     const selection = $getSelection();
-    console.log('Deleting search text', { searchExpression });
     if ($isRangeSelection(selection)) {
         const node = selection.getNodes()[0];
         if ($isTextNode(node)) {
@@ -379,7 +377,7 @@ function $deleteSearchText(searchExpression?: RegExp) {
             const match = text.match(searchExpression);
 
             if (match) {
-                node.spliceText(match.index || 0, match[0].length, '');
+                node.spliceText(match.index || 0, match[0].length, '', true);
             }
         }
     }
@@ -422,3 +420,4 @@ export {
     CommandMenuCommand,
 };
 export * from './RegisterInsertCommands';
+export * from './RegisterMoveCommands';
