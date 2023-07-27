@@ -30,11 +30,6 @@ export function RegisterInsertHeadingCommand() {
                 } else {
                     selectedNode = $getTopLevelSelectedNode();
                 }
-                console.log('Insert Heading command', {
-                    headingTag,
-                    node,
-                    selectedNode,
-                });
                 if (!selectedNode) return false;
 
                 const heading = $createHeadingNode(headingTag);
