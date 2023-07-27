@@ -26,5 +26,5 @@ module.exports = {
         sourceType: 'module',
     },
     plugins: ['@typescript-eslint', 'react', 'react-hooks'],
-    rules: {},
+    rules: { 'react/default-props-match-prop-types': false },
 };
