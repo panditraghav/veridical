@@ -34,11 +34,6 @@ const CMDK_ROOT_ATTR = 'cmdk-root';
 const CMDK_VALUE_ATTR = `data-value`;
 const CMDK_SELECT_ATTR = 'data-selected';
 
-type CommandMenuProps = {
-    children?: React.ReactNode;
-    removeScroll?: boolean;
-};
-
 type CommandMenuContextType = {
     contentSideOffset?: number;
     searchExpression?: RegExp;
@@ -54,21 +49,30 @@ const useCommandMenu = () => useContext(CommandMenuContext);
 function CommandMenuPlugin({
     children,
     removeScroll = true,
-}: CommandMenuProps) {
+}: {
+    children?: React.ReactNode;
+    removeScroll?: boolean;
+}) {
     const [open, setOpen] = useState(false);
-    const [searchExpression, setSearchExpression] = useState<RegExp>();
     const [searchText, setSearchText] = useState('');
     const [contentSideOffset, setContentSideOffset] = useState(0);
     const [editor] = useLexicalComposerContext();
 
     const anchorRef = useRef<HTMLDivElement>(null);
+    const searchExpression = useRef<RegExp>();
+    const selectedNodeKey = useRef<string>();
 
     useEffect(() => {
         return editor.registerCommand(
             OPEN_COMMAND_MENU,
-            ({ searchExpression }) => {
-                setSearchExpression(searchExpression);
+            (payload) => {
                 setOpen(true);
+                searchExpression.current = payload.searchExpression;
+
+                selectedNodeKey.current = editor
+                    .getEditorState()
+                    .read(() => $getSelection()?.getNodes()[0]?.getKey());
+
                 positionAnchor();
                 return true;
             },
@@ -77,7 +81,9 @@ function CommandMenuPlugin({
     }, [editor]);
 
     useEffect(() => {
-        if (!searchExpression || !open) return;
+        const exp = searchExpression.current;
+        if (!open || !exp) return;
+
         return editor.registerUpdateListener(({ editorState }) => {
             editorState.read(() => {
                 const selection = $getSelection();
@@ -95,7 +101,7 @@ function CommandMenuPlugin({
                     anchorOffset === focusOffset &&
                     anchorOffset === text.length
                 ) {
-                    const match = text.match(searchExpression);
+                    const match = text.match(exp);
 
                     if (match && match.groups) {
                         const search = match.groups['search'];
@@ -106,14 +112,26 @@ function CommandMenuPlugin({
                 } else {
                     closeAndResetState();
                 }
+
+                // Close when selected node gets deleted
+                if (
+                    selectedNodeKey.current &&
+                    !editor
+                        .getEditorState()
+                        ._nodeMap.get(selectedNodeKey.current)
+                ) {
+                    closeAndResetState();
+                }
+                selectedNodeKey.current = node.getKey();
             });
         });
     }, [editor, open, searchExpression]);
 
     function closeAndResetState() {
         setOpen(false);
-        setSearchExpression(undefined);
         setSearchText('');
+        searchExpression.current = undefined;
+        selectedNodeKey.current = undefined;
     }
 
     function positionAnchor() {
@@ -149,14 +167,22 @@ function CommandMenuPlugin({
 
     const contextValue: CommandMenuContextType = {
         contentSideOffset,
-        searchExpression,
+        searchExpression: searchExpression.current,
         searchText,
         onClose: closeAndResetState,
     };
 
     return (
         <CommandMenuContext.Provider value={contextValue}>
-            <Popover.Root open={open} onOpenChange={setOpen}>
+            <Popover.Root
+                open={open}
+                onOpenChange={(newOpen) => {
+                    setOpen(newOpen);
+                    if (!newOpen) {
+                        closeAndResetState();
+                    }
+                }}
+            >
                 <Popover.Anchor
                     ref={anchorRef}
                     style={{
@@ -204,7 +230,7 @@ CommandMenuContent.displayName = 'CommandMenuContent';
 function CommandMenuCommand(
     props: Omit<
         React.ComponentPropsWithoutRef<typeof Command>,
-        'value' | 'onValueChange' | 'onMouseDown'
+        'value' | 'onValueChange'
     >,
 ) {
     const [editor] = useLexicalComposerContext();
@@ -284,17 +310,6 @@ function CommandMenuCommand(
             label={label || 'Command Menu'}
             onValueChange={setSelectedValue}
             ref={cmdkRef}
-            onMouseDown={(ev) => {
-                const itemOrNull = getCmdkItem(ev);
-                if (itemOrNull) {
-                    ev.preventDefault();
-                    editor.update(() => {
-                        $deleteSearchText(searchExpression);
-                        itemOrNull.dispatchEvent(new Event(CMDK_SELECT_EVENT));
-                        onClose?.();
-                    });
-                }
-            }}
             {...etc}
         >
             <Command.Input
@@ -307,9 +322,56 @@ function CommandMenuCommand(
     );
 }
 
+const CommandMenuItem = forwardRef<
+    React.ElementRef<typeof Command.Item>,
+    React.ComponentPropsWithoutRef<typeof Command.Item>
+>((props, forwardedRef) => {
+    const [editor] = useLexicalComposerContext();
+    const { onClose, searchExpression } = useCommandMenu();
+    const { onMouseDown, onClickCapture, ...etc } = props;
+
+    function handleMouseDown(ev: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+        const itemOrNull = getCmdkItem(ev);
+        if (!itemOrNull) return;
+
+        ev.preventDefault();
+        console.log('Mouse down', { itemOrNull });
+        editor.update(
+            () => {
+                $deleteSearchText(searchExpression);
+            },
+            {
+                onUpdate: () => {
+                    itemOrNull?.dispatchEvent(new Event(CMDK_SELECT_EVENT));
+                    onClose?.();
+                },
+            },
+        );
+        onMouseDown?.(ev);
+    }
+
+    function handleClickCapture(
+        ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    ) {
+        // Stop onClick event on Command.Item to fire.
+        // We select the item after the search text is deleted.
+        ev.preventDefault();
+        ev.stopPropagation();
+    }
+    return (
+        <Command.Item
+            onClickCapture={onClickCapture || handleClickCapture}
+            onMouseDown={handleMouseDown}
+            ref={forwardedRef}
+            {...etc}
+        />
+    );
+});
+
 function $deleteSearchText(searchExpression?: RegExp) {
     if (!searchExpression) return;
     const selection = $getSelection();
+    console.log('Deleting search text', { searchExpression });
     if ($isRangeSelection(selection)) {
         const node = selection.getNodes()[0];
         if ($isTextNode(node)) {
@@ -341,7 +403,6 @@ function getCmdkItem(
 
 const CommandMenuEmpty = Command.Empty;
 const CommandMenuList = Command.List;
-const CommandMenuItem = Command.Item;
 const CommandMenuGroup = Command.Group;
 
 CommandMenuPlugin.List = CommandMenuList;
@@ -360,4 +421,4 @@ export {
     CommandMenuContent,
     CommandMenuCommand,
 };
-export * from './InsertCommands';
+export * from './RegisterInsertCommands';
