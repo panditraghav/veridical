@@ -4,11 +4,12 @@ import {
     INSERT_LIST_COMMAND,
     INSERT_HEADING_COMMAND,
     INSERT_CODE_COMMAND,
+    MOVE_SELECTED_NODE_COMMAND,
 } from 'veridical/commands';
-import { INSERT_ORDERED_LIST_COMMAND } from '@lexical/list';
 import {
     CommandMenuPlugin as CommandMenu,
     RegisterInsertCommands,
+    RegisterMoveCommand,
 } from 'veridical/plugins/CommandMenuPlugin';
 import {
     CodeIcon,
@@ -33,11 +34,13 @@ export default function CommandMenuPlugin() {
                                 No result
                             </CommandMenu.Empty>
                             <InsertCommands />
+                            <MoveCommands />
                         </CommandMenu.List>
                     </CommandMenu.Command>
                 </CommandMenu.Content>
             </CommandMenu>
             <RegisterInsertCommands />
+            <RegisterMoveCommand />
         </>
     );
 }
@@ -60,6 +63,19 @@ function InsertCommands() {
     );
 }
 
+function MoveCommands() {
+    return (
+        <CommandMenu.Group
+            heading="Move"
+            className="px-1 pt-2 text-xs font-bold text-muted-foreground"
+        >
+            {MOVE_COMMAND_ITEMS.map((item) => {
+                return <CommandItem key={item.name} {...item} />;
+            })}
+        </CommandMenu.Group>
+    );
+}
+
 type CommandItemType = {
     name: string;
     description: string;
@@ -73,7 +89,6 @@ function CommandItem({ name, description, icon, onSelect }: CommandItemType) {
         <CommandMenu.Item
             value={name + ' ' + description}
             onSelect={(value) => {
-                console.log('onSelect', { value });
                 onSelect(editor, value);
             }}
             className="my-1 flex cursor-pointer rounded-md px-1 py-2 data-[selected]:bg-muted"
@@ -139,5 +154,22 @@ const INSERT_COMMAND_ITEMS: CommandItemType[] = [
             editor.dispatchCommand(INSERT_CODE_COMMAND, {
                 language: 'JavaScript',
             }),
+    },
+];
+
+const MOVE_COMMAND_ITEMS: CommandItemType[] = [
+    {
+        name: 'Move Up',
+        description: 'Move selected node up',
+        icon: <H1Icon {...iconProps} />,
+        onSelect: (editor) =>
+            editor.dispatchCommand(MOVE_SELECTED_NODE_COMMAND, { dir: 'up' }),
+    },
+    {
+        name: 'Move Down',
+        description: 'Move selected node down',
+        icon: <H1Icon {...iconProps} />,
+        onSelect: (editor) =>
+            editor.dispatchCommand(MOVE_SELECTED_NODE_COMMAND, { dir: 'down' }),
     },
 ];

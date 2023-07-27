@@ -27,3 +27,7 @@ export const INSERT_LIST_COMMAND = createCommand<{
     type: ListType;
     node?: LexicalNode;
 }>('INSERT_LIST_COMMAND');
+
+export const MOVE_SELECTED_NODE_COMMAND = createCommand<{ dir: 'up' | 'down' }>(
+    'MOVE_UP_COMMAND',
+);
