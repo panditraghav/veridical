@@ -16,7 +16,8 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "paths": {
-            "veridical": ["../veridical/src"]
+            "veridical": ["../veridical/src/"],
+            "veridical/*": ["../veridical/src/*"]
         }
     },
     "include": ["src"],
