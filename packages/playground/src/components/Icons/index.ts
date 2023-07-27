@@ -15,6 +15,8 @@ import FormatUnderlineIcon from './FormatUnderlineIcon';
 import ExpandMoreIcon from './ExpandMoreIcon';
 import UploadFileIcon from './UploadFileIcon';
 import QuoteIcon from './QuoteIcon';
+import MoveUpIcon from './MoveUpIcon';
+import MoveDownIcon from './MoveDownIcon';
 
 export {
     AddIcon,
@@ -34,4 +36,6 @@ export {
     ExpandMoreIcon,
     UploadFileIcon,
     QuoteIcon,
+    MoveUpIcon,
+    MoveDownIcon,
 };

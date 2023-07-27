@@ -18,6 +18,8 @@ import {
     H3Icon,
     OlIcon,
     UlIcon,
+    MoveUpIcon,
+    MoveDownIcon,
 } from '../components/Icons';
 
 export default function CommandMenuPlugin() {
@@ -161,14 +163,14 @@ const MOVE_COMMAND_ITEMS: CommandItemType[] = [
     {
         name: 'Move Up',
         description: 'Move selected node up',
-        icon: <H1Icon {...iconProps} />,
+        icon: <MoveUpIcon {...iconProps} />,
         onSelect: (editor) =>
             editor.dispatchCommand(MOVE_SELECTED_NODE_COMMAND, { dir: 'up' }),
     },
     {
         name: 'Move Down',
         description: 'Move selected node down',
-        icon: <H1Icon {...iconProps} />,
+        icon: <MoveDownIcon {...iconProps} />,
         onSelect: (editor) =>
             editor.dispatchCommand(MOVE_SELECTED_NODE_COMMAND, { dir: 'down' }),
     },
