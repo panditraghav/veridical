@@ -1,4 +1,5 @@
 import { ImageNode } from '@/nodes';
+import { ListType } from '@lexical/list';
 import { HeadingTagType } from '@lexical/rich-text';
 import { createCommand, LexicalNode } from 'lexical';
 
@@ -12,12 +13,17 @@ export const OPEN_COMMAND_MENU = createCommand<{
     searchExpression: RegExp;
 }>('OPEN_COMMAND_MENU');
 
-export const INSERT_HEADING_NODE = createCommand<{
+export const INSERT_HEADING_COMMAND = createCommand<{
     headingTag: HeadingTagType;
     node?: LexicalNode;
-}>('INSERT_HEADING_NODE');
+}>('INSERT_HEADING_COMMAND');
 
-export const INSERT_CODE_NODE = createCommand<{
-    node?: LexicalNode;
+export const INSERT_CODE_COMMAND = createCommand<{
     language?: string | null;
-}>('INSERT_CODE_NODE');
+    node?: LexicalNode;
+}>('INSERT_CODE_COMMAND');
+
+export const INSERT_LIST_COMMAND = createCommand<{
+    type: ListType;
+    node?: LexicalNode;
+}>('INSERT_LIST_COMMAND');
