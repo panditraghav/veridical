@@ -7,32 +7,18 @@ import {
     AddLinkDialogPlugin,
     AddNodeButton,
     AutoLinkPlugin,
-    CodeActionMenuLeft,
-    CodeActionMenuRight,
     CodeHighlightPlugin,
-    CommandEmpty,
-    CommandGroup,
-    CommandList,
-    CommandMenuPlugin,
     defaultEditorNodes,
     DraggableNodeButton,
-    VeridicalErrorBoundary,
     HighlightMenuPlugin,
-    HoverBlockOptions,
-    HoverMenuPlugin,
-    ImageActionMenuRight,
-    ImageDialogPlugin,
+    HoveredNodeOptions,
+    HoveredNodeProvider,
     ImagePlugin,
-    InsertCodeCommand,
-    InsertHeading1Command,
-    InsertHeading2Command,
-    InsertHeading3Command,
     MarkdownPlugin,
     OpenLinkPlugin,
     PrettierPlugin,
-    RegisterInsertCodeCommand,
-    RegisterInsertHeadingCommand,
     SlashCommandMenuPlugin,
+    VeridicalErrorBoundary,
 } from 'veridical';
 import { lexicalTheme } from '../theme/lexicalTheme';
 import TreeViewPlugin from '../TreeViewPlugin';
@@ -44,6 +30,8 @@ import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
+import CommandMenuPlugin from '../plugins/CommandMenu';
+import { AddIcon, DragIcon } from './Icons';
 
 function saveStateToLocalStorage(state: string) {
     localStorage.setItem('blog', state);
@@ -68,19 +56,8 @@ function initializeEditor() {
     }
 }
 
-const CommandItemClassNames = {
-    root: 'flex my-1 py-2 px-2 rounded-md data-[selected="true"]:bg-muted cursor-pointer',
-    text: {
-        root: 'px-4 py-1',
-        title: 'text-lg font-medium text-foreground',
-        description: 'text-xs text-foreground/60',
-    },
-    icon: 'fill-foreground',
-};
-
 export default function Editor() {
     const editorState = localStorage.getItem('blog');
-    const container = document.body;
     return (
         <LexicalComposer
             initialConfig={{
@@ -98,87 +75,41 @@ export default function Editor() {
                         <ContentEditable className="focus:outline-none" />
                     }
                     placeholder={
-                        <div className="relative left-1 top-[-35px] z-[-10] text-muted">
-                            Press <kbd>Ctrl</kbd>+<kbd>K</kbd> for commands
+                        <div className="relative left-0 top-[-35px] z-[-10] text-muted-foreground">
+                            Press / for commands
                         </div>
                     }
                     ErrorBoundary={VeridicalErrorBoundary}
                 />
+                <AutoLinkPlugin />
+                <MarkdownPlugin />
                 <ListPlugin />
                 <CodeHighlightPlugin />
                 <AutoFocusPlugin />
-                <AutoLinkPlugin />
                 <LinkPlugin />
                 <PrettierPlugin />
                 <HistoryPlugin />
                 <TabIndentationPlugin />
-                {container && (
-                    <>
-                        <HighlightMenuPlugin container={container} />
-                        <AddLinkDialogPlugin container={container} />
-                        <HoverMenuPlugin
-                            offset={{ left: -50, top: 4 }}
-                            container={container}
-                        >
-                            <HoverBlockOptions
-                                container={container}
-                                offset={{ left: -50, top: 4 }}
-                            >
-                                <AddNodeButton />
-                                <DraggableNodeButton container={container} />
-                            </HoverBlockOptions>
-                            <CodeActionMenuLeft
-                                container={container}
-                            ></CodeActionMenuLeft>
-                            <CodeActionMenuRight
-                                container={container}
-                            ></CodeActionMenuRight>
-                            <ImageActionMenuRight
-                                container={container}
-                            ></ImageActionMenuRight>
-                        </HoverMenuPlugin>
-                        <ImageDialogPlugin container={container} />
-                    </>
-                )}
-                <MarkdownPlugin />
+                <HighlightMenuPlugin />
+                <AddLinkDialogPlugin />
+                <HoveredNodeProvider offset={{ left: -50, top: 4 }}>
+                    <HoveredNodeOptions
+                        offset={{ left: -50, top: 4 }}
+                        className="data-[state=open]:duration-200 data-[state=open]:ease-in-out data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-95"
+                    >
+                        <AddNodeButton>
+                            <AddIcon className="fill-muted-foreground hover:fill-foreground" />
+                        </AddNodeButton>
+                        <DraggableNodeButton>
+                            <DragIcon className="fill-muted-foreground hover:fill-foreground" />
+                        </DraggableNodeButton>
+                    </HoveredNodeOptions>
+                </HoveredNodeProvider>
                 <ImagePlugin />
                 <OpenLinkPlugin />
                 <TreeViewPlugin />
                 <SaveStatePlugin />
-                <RegisterInsertCodeCommand />
-                <RegisterInsertHeadingCommand />
-                <CommandMenuPlugin
-                    classNames={{
-                        commandRoot:
-                            'box-border flex flex-col rounded-md my-2 border border-border bg-background',
-                        popoverContent:
-                            'data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:ease-out data-[state=open]:duration-300',
-                    }}
-                    defaultValue="Heading 1"
-                >
-                    <CommandEmpty className="py-2 text-center">
-                        No result
-                    </CommandEmpty>
-                    <CommandList className="max-h-[270px] w-[300px] overflow-y-auto scrollbar scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400 dark:scrollbar-track-neutral-700 dark:scrollbar-thumb-neutral-600">
-                        <CommandGroup
-                            heading="Insert nodes"
-                            className="p-2 text-xs font-medium text-muted-foreground"
-                        >
-                            <InsertHeading1Command
-                                classNames={CommandItemClassNames}
-                            />
-                            <InsertHeading2Command
-                                classNames={CommandItemClassNames}
-                            />
-                            <InsertHeading3Command
-                                classNames={CommandItemClassNames}
-                            />
-                            <InsertCodeCommand
-                                classNames={CommandItemClassNames}
-                            />
-                        </CommandGroup>
-                    </CommandList>
-                </CommandMenuPlugin>
+                <CommandMenuPlugin />
                 <SlashCommandMenuPlugin />
             </div>
         </LexicalComposer>
