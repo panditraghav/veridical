@@ -16,9 +16,8 @@ import {
     getHoveredDOMNode,
     isAboveOrBelowCenter,
     isHTMLElement,
-    useHoverMenuContext,
+    useHoveredNode,
 } from '@/utils';
-import { DragIcon } from '..';
 
 const LEFT_OFFSET = -25;
 const DRAG_DATA_FORMAT = 'application/x-veridical-drag';
@@ -66,25 +65,23 @@ function setDragImage(dt: DataTransfer, draggedElement: HTMLElement) {
 }
 
 function TargetLine({
-    container,
     targetLineRef,
 }: {
     targetLineRef: React.MutableRefObject<HTMLDivElement | null>;
-    container: Element | DocumentFragment;
 }) {
     return createPortal(
         <div ref={targetLineRef} style={{ position: 'absolute' }} />,
-        container,
+        document.body,
     );
 }
 
 export function DraggableNodeButton({
-    container,
+    children,
 }: {
-    container: Element | DocumentFragment;
+    children?: React.ReactNode;
 }) {
     const [editor] = useLexicalComposerContext();
-    const { hoveredDOMNode, hoveredLexicalNode } = useHoverMenuContext();
+    const { hoveredDOMNode, hoveredLexicalNode } = useHoveredNode();
     const targetLineRef = useRef<HTMLDivElement | null>(null);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -168,9 +165,9 @@ export function DraggableNodeButton({
                 draggable={true}
                 tabIndex={-1}
             >
-                <DragIcon size="base" />
+                {children}
             </button>
-            <TargetLine targetLineRef={targetLineRef} container={container} />
+            <TargetLine targetLineRef={targetLineRef} />
         </>
     );
 }

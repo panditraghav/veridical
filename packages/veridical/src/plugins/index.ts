@@ -1,9 +1,7 @@
 import MarkdownPlugin from './MarkdownPlugin';
 import CodeHighlightPlugin from './CodeHighlightPlugin';
 import PrettierPlugin from './PrettierPlugin';
-import HighlightMenuPlugin from './HighlightMenuPlugin';
-import HoverBlockOptions from './HoverBlockOptions';
-import HoverMenuPlugin from './HoverMenuPlugin';
+import HighlightMenuPlugin from './FloatingActionMenuPlugin';
 import ImagePlugin from './ImagePlugin';
 import CodeActionMenuLeft from './CodeActionMenuLeft';
 import CodeActionMenuRight from './CodeActionMenuRight';
@@ -16,14 +14,14 @@ import ConvertFromMarkdownPlugin from './ConvertFromMarkdownPlugin';
 import ImageDialogPlugin from './ImageDialogPlugin';
 import ImageActionMenuRight from './ImageActionMenuRight';
 import SlashCommandMenuPlugin from './SlashCommandMenuPlugin';
+import HoveredNodeProvider from './HoveredNodeProvider';
 
 export {
     MarkdownPlugin,
     CodeHighlightPlugin,
     PrettierPlugin,
     HighlightMenuPlugin,
-    HoverMenuPlugin,
-    HoverBlockOptions,
+    HoveredNodeProvider,
     ImageDialogPlugin,
     ImagePlugin,
     CodeActionMenuLeft,
@@ -39,3 +37,4 @@ export {
 };
 
 export * from './CommandMenuPlugin';
+export * from './HoveredNodeOptions';
