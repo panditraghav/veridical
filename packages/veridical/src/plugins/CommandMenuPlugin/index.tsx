@@ -239,7 +239,7 @@ function CommandMenuCommand(
 
     const cmdkRef = useRef<HTMLDivElement>(null);
 
-    let changeItemSelectionBy = useCallback((changeBy: -1 | 1) => {
+    const changeItemSelectionBy = useCallback((changeBy: -1 | 1) => {
         const validItems = getValidItems();
         if (!validItems) return;
         const len = validItems.length;
@@ -300,7 +300,7 @@ function CommandMenuCommand(
                 COMMAND_PRIORITY_LOW,
             ),
         );
-    }, [editor, onClose, changeItemSelectionBy]);
+    }, [editor, onClose, changeItemSelectionBy, searchExpression]);
 
     const { children, label, ...etc } = props;
 
@@ -325,29 +325,31 @@ function CommandMenuCommand(
 const CommandMenuItem = forwardRef<
     React.ElementRef<typeof Command.Item>,
     React.ComponentPropsWithoutRef<typeof Command.Item>
->((props, forwardedRef) => {
+>(({ onMouseDown, onClickCapture, ...props }, forwardedRef) => {
     const [editor] = useLexicalComposerContext();
     const { onClose, searchExpression } = useCommandMenu();
-    const { onMouseDown, onClickCapture, ...etc } = props;
 
-    function handleMouseDown(ev: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-        const itemOrNull = getCmdkItem(ev);
-        if (!itemOrNull) return;
+    const handleMouseDown = useCallback(
+        (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            const itemOrNull = getCmdkItem(ev);
+            if (!itemOrNull) return;
 
-        ev.preventDefault();
-        editor.update(
-            () => {
-                $deleteSearchText(searchExpression);
-            },
-            {
-                onUpdate: () => {
-                    itemOrNull?.dispatchEvent(new Event(CMDK_SELECT_EVENT));
-                    onClose?.();
+            ev.preventDefault();
+            editor.update(
+                () => {
+                    $deleteSearchText(searchExpression);
                 },
-            },
-        );
-        onMouseDown?.(ev);
-    }
+                {
+                    onUpdate: () => {
+                        itemOrNull?.dispatchEvent(new Event(CMDK_SELECT_EVENT));
+                        onClose?.();
+                    },
+                },
+            );
+            onMouseDown?.(ev);
+        },
+        [editor, searchExpression, onClose, onMouseDown],
+    );
 
     function handleClickCapture(
         ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -362,10 +364,12 @@ const CommandMenuItem = forwardRef<
             onClickCapture={onClickCapture || handleClickCapture}
             onMouseDown={handleMouseDown}
             ref={forwardedRef}
-            {...etc}
+            {...props}
         />
     );
 });
+
+CommandMenuItem.displayName = 'CommandMenuItem';
 
 function $deleteSearchText(searchExpression?: RegExp) {
     if (!searchExpression) return;
