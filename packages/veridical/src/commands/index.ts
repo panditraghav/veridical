@@ -8,6 +8,12 @@ export const IMAGE_DIALOG_COMMAND = createCommand<{
     action: 'edit' | 'add';
 }>();
 
+type InsertParagraphCommandPayload = {
+    node?: LexicalNode;
+    content?: string;
+    position?: 'before' | 'after';
+};
+
 /*Command menu*/
 export const OPEN_COMMAND_MENU = createCommand<{
     searchExpression: RegExp;
@@ -28,6 +34,9 @@ export const INSERT_LIST_COMMAND = createCommand<{
     node?: LexicalNode;
 }>('INSERT_LIST_COMMAND');
 
-export const MOVE_SELECTED_NODE_COMMAND = createCommand<{ dir: 'up' | 'down' }>(
-    'MOVE_UP_COMMAND',
-);
+export const MOVE_SELECTED_NODE_COMMAND = createCommand<{
+    dir: 'up' | 'down';
+}>('MOVE_SELECTED_NODE_COMMAND');
+
+export const INSERT_PARAGRAPH_COMMAND =
+    createCommand<InsertParagraphCommandPayload>('INSERT_PARAGRAPH_COMMAND');
