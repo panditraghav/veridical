@@ -1,6 +1,7 @@
-import { INSERT_PARAGRAPH_COMMAND } from '@/commands';
+import { OPEN_COMMAND_MENU } from '@/commands';
 import { useHoveredNode } from '@/utils';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $createParagraphNode } from 'lexical';
 import React from 'react';
 
 export function AddNodeButton(props: React.HTMLAttributes<HTMLButtonElement>) {
@@ -9,11 +10,20 @@ export function AddNodeButton(props: React.HTMLAttributes<HTMLButtonElement>) {
 
     function handleClick() {
         if (!hoveredLexicalNode) return;
-        editor.dispatchCommand(INSERT_PARAGRAPH_COMMAND, {
-            node: hoveredLexicalNode,
-            position: 'after',
-            content: '/',
-        });
+        editor.update(
+            () => {
+                const p = $createParagraphNode();
+                hoveredLexicalNode.insertAfter(p);
+                p.select(0, 0);
+            },
+            {
+                onUpdate: () => {
+                    editor.dispatchCommand(OPEN_COMMAND_MENU, {
+                        searchExpression: /^(?<search>\w*)$/,
+                    });
+                },
+            },
+        );
     }
 
     return <button {...props} onClick={handleClick} tabIndex={-1} />;

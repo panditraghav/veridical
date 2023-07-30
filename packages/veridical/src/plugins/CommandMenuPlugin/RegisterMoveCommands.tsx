@@ -4,10 +4,9 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import {
     $getSelection,
     $isRangeSelection,
-    $isTextNode,
     COMMAND_PRIORITY_LOW,
 } from 'lexical';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export function RegisterMoveCommand() {
     const [editor] = useLexicalComposerContext();

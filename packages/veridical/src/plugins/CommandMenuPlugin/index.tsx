@@ -5,7 +5,6 @@ import * as Popover from '@radix-ui/react-popover';
 import { Slot } from '@radix-ui/react-slot';
 import { Command } from 'cmdk';
 import {
-    $createParagraphNode,
     $getSelection,
     $isRangeSelection,
     $isTextNode,

@@ -83,6 +83,5 @@ export function HoveredNodeOptions({
     );
 }
 
-export * from './InsertParagraphCommand';
 export * from './AddNodeButton';
 export * from './DraggableNodeButton';
