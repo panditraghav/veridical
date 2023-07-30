@@ -2,6 +2,7 @@ import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $createHeadingNode } from '@lexical/rich-text';
 import { $createTextNode, $getRoot } from 'lexical';
+import { ErrorBoundary } from 'react-error-boundary';
 import React, { useEffect } from 'react';
 import {
     AddLinkDialogPlugin,
@@ -18,7 +19,7 @@ import {
     OpenLinkPlugin,
     PrettierPlugin,
     SlashCommandMenuPlugin,
-    VeridicalErrorBoundary,
+    RegisterVeridicalCommands,
 } from 'veridical';
 import { lexicalTheme } from '../theme/lexicalTheme';
 import TreeViewPlugin from '../TreeViewPlugin';
@@ -69,6 +70,7 @@ export default function Editor() {
                 editorState: editorState || initializeEditor,
             }}
         >
+            <RegisterVeridicalCommands />
             <div className="mb-24 w-full px-4 md:mx-auto md:w-8/12">
                 <RichTextPlugin
                     contentEditable={
@@ -95,7 +97,7 @@ export default function Editor() {
                 <HoveredNodeProvider offset={{ left: -50, top: 4 }}>
                     <HoveredNodeOptions
                         offset={{ left: -50, top: 4 }}
-                        className="data-[state=open]:duration-200 data-[state=open]:ease-in-out data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-95"
+                        className="data-[state=open]:duration-200 data-[state=open]:ease-in-out data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-90 flex justify-between space-x-1"
                     >
                         <AddNodeButton>
                             <AddIcon className="fill-muted-foreground hover:fill-foreground" />
@@ -113,5 +115,32 @@ export default function Editor() {
                 <SlashCommandMenuPlugin />
             </div>
         </LexicalComposer>
+    );
+}
+
+export function VeridicalErrorBoundary({
+    children,
+    onError,
+}: {
+    children: React.ReactNode;
+    onError: (error: Error) => void;
+}) {
+    return (
+        <ErrorBoundary
+            fallback={
+                <div
+                    style={{
+                        border: '1px solid #f00',
+                        color: '#f00',
+                        padding: '8px',
+                    }}
+                >
+                    An error was thrown.
+                </div>
+            }
+            onError={onError}
+        >
+            {children}
+        </ErrorBoundary>
     );
 }

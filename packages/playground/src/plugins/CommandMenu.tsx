@@ -6,11 +6,7 @@ import {
     INSERT_CODE_COMMAND,
     MOVE_SELECTED_NODE_COMMAND,
 } from 'veridical/commands';
-import {
-    CommandMenuPlugin as CommandMenu,
-    RegisterInsertCommands,
-    RegisterMoveCommand,
-} from 'veridical/plugins/CommandMenuPlugin';
+import { CommandMenuPlugin as CommandMenu } from 'veridical/plugins/CommandMenuPlugin';
 import {
     CodeIcon,
     H1Icon,
@@ -41,8 +37,6 @@ export default function CommandMenuPlugin() {
                     </CommandMenu.Command>
                 </CommandMenu.Content>
             </CommandMenu>
-            <RegisterInsertCommands />
-            <RegisterMoveCommand />
         </>
     );
 }
