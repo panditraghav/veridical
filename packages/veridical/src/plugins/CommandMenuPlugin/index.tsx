@@ -5,6 +5,7 @@ import * as Popover from '@radix-ui/react-popover';
 import { Slot } from '@radix-ui/react-slot';
 import { Command } from 'cmdk';
 import {
+    $createParagraphNode,
     $getSelection,
     $isRangeSelection,
     $isTextNode,
@@ -382,8 +383,11 @@ function $deleteSearchText(searchExpression?: RegExp) {
 
             if (match) {
                 node.spliceText(match.index || 0, match[0].length, '', true);
+                return;
             }
         }
+        // Force an update so that onUpdate function gets executed
+        node.markDirty();
     }
 }
 

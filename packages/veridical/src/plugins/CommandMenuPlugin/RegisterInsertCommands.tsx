@@ -2,6 +2,7 @@ import {
     INSERT_CODE_COMMAND,
     INSERT_HEADING_COMMAND,
     INSERT_LIST_COMMAND,
+    INSERT_PARAGRAPH_COMMAND,
 } from '@/commands';
 import { $getTopLevelSelectedNode } from '@/utils/selection';
 import { $createCodeNode } from '@lexical/code';
@@ -9,10 +10,10 @@ import { $createListItemNode, $createListNode } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $createHeadingNode } from '@lexical/rich-text';
 import {
+    $createParagraphNode,
     $createTextNode,
     $isParagraphNode,
     COMMAND_PRIORITY_LOW,
-    LexicalNode,
 } from 'lexical';
 import React, { useEffect } from 'react';
 
@@ -22,29 +23,44 @@ export function RegisterInsertHeadingCommand() {
     useEffect(() => {
         return editor.registerCommand(
             INSERT_HEADING_COMMAND,
-            ({ headingTag, node }) => {
-                let selectedNode: LexicalNode | null = null;
+            ({
+                headingTag,
+                selectedNode: node,
+                content,
+                position,
+                replaceOnEmptyParagraph = true,
+            }) => {
+                const selectedNode = node || $getTopLevelSelectedNode();
 
-                if (node) {
-                    selectedNode = node;
-                } else {
-                    selectedNode = $getTopLevelSelectedNode();
-                }
                 if (!selectedNode) return false;
 
+                const offset = content?.length || 0;
                 const heading = $createHeadingNode(headingTag);
-                const textNode = $createTextNode();
+                const textNode = $createTextNode(content);
                 heading.append(textNode);
                 if (
+                    replaceOnEmptyParagraph &&
                     selectedNode.getTextContent() === '' &&
                     $isParagraphNode(selectedNode)
                 ) {
                     selectedNode.replace(heading);
-                } else {
-                    selectedNode.insertAfter(heading);
+                    heading.select(offset, offset);
+                    return true;
                 }
-                heading.select(0, 0);
 
+                switch (position) {
+                    case 'after':
+                        selectedNode.insertAfter(heading);
+                        break;
+                    case 'before':
+                        selectedNode.insertBefore(heading);
+                        break;
+                    default:
+                        selectedNode.insertAfter(heading);
+                        break;
+                }
+
+                heading.select(offset, offset);
                 return true;
             },
             COMMAND_PRIORITY_LOW,
@@ -59,27 +75,41 @@ export function RegisterInsertCodeCommand() {
     useEffect(() => {
         return editor.registerCommand(
             INSERT_CODE_COMMAND,
-            ({ node, language }) => {
-                let selectedNode: LexicalNode | null = null;
+            ({
+                selectedNode: node,
+                language,
+                position,
+                replaceOnEmptyParagraph = true,
+            }) => {
+                const selectedNode = node || $getTopLevelSelectedNode();
 
-                if (node) {
-                    selectedNode = node;
-                } else {
-                    selectedNode = $getTopLevelSelectedNode();
-                }
                 if (!selectedNode) return false;
 
                 const code = $createCodeNode(language);
+
                 if (
+                    replaceOnEmptyParagraph &&
                     selectedNode.getTextContent() === '' &&
                     $isParagraphNode(selectedNode)
                 ) {
                     selectedNode.replace(code);
-                } else {
-                    selectedNode.insertAfter(code);
+                    code.select(0, 0);
+                    return true;
                 }
-                code.select(0, 0);
 
+                switch (position) {
+                    case 'after':
+                        selectedNode.insertAfter(code);
+                        break;
+                    case 'before':
+                        selectedNode.insertBefore(code);
+                        break;
+                    default:
+                        selectedNode.insertAfter(code);
+                        break;
+                }
+
+                code.select(0, 0);
                 return true;
             },
             COMMAND_PRIORITY_LOW,
@@ -93,34 +123,102 @@ export function RegisterInsertListCommand() {
     useEffect(() => {
         return editor.registerCommand(
             INSERT_LIST_COMMAND,
-            ({ node, type }) => {
-                let selectedNode: LexicalNode | null = null;
+            ({
+                selectedNode: node,
+                type,
+                position,
+                content,
+                replaceOnEmptyParagraph = true,
+            }) => {
+                const selectedNode = node || $getTopLevelSelectedNode();
 
-                if (node) {
-                    selectedNode = node;
-                } else {
-                    selectedNode = $getTopLevelSelectedNode();
-                }
                 if (!selectedNode) return false;
 
+                const offset = content?.length || 0;
                 const list = $createListNode(type);
                 const item = $createListItemNode();
+                item.append($createTextNode(content));
                 list.append(item);
+
                 if (
+                    replaceOnEmptyParagraph &&
                     selectedNode.getTextContent() === '' &&
                     $isParagraphNode(selectedNode)
                 ) {
                     selectedNode.replace(list);
-                } else {
-                    selectedNode.insertAfter(list);
+                    item.select(offset, offset);
+                    return true;
                 }
-                list.select(0, 0);
+                switch (position) {
+                    case 'after':
+                        selectedNode.insertAfter(list);
+                        break;
+                    case 'before':
+                        selectedNode.insertBefore(list);
+                        break;
+                    default:
+                        selectedNode.insertAfter(list);
+                        break;
+                }
 
+                list.select(offset, offset);
                 return true;
             },
             COMMAND_PRIORITY_LOW,
         );
     });
+    return null;
+}
+
+export function RegisterInsertParagraphCommand() {
+    const [editor] = useLexicalComposerContext();
+
+    useEffect(() => {
+        return editor.registerCommand(
+            INSERT_PARAGRAPH_COMMAND,
+            ({
+                selectedNode: node,
+                position,
+                content,
+                replaceOnEmptyParagraph = true,
+            }) => {
+                const selectedNode = node || $getTopLevelSelectedNode();
+
+                if (!selectedNode) return false;
+
+                const offset = content?.length || 0;
+                const p = $createParagraphNode();
+                const text = $createTextNode(content);
+                p.append(text);
+
+                if (
+                    replaceOnEmptyParagraph &&
+                    selectedNode.getTextContent() === '' &&
+                    $isParagraphNode(selectedNode)
+                ) {
+                    selectedNode.replace(p);
+                    p.select(offset, offset);
+                    return true;
+                }
+
+                switch (position) {
+                    case 'after':
+                        selectedNode.insertAfter(p);
+                        break;
+                    case 'before':
+                        selectedNode.insertBefore(p);
+                        break;
+                    default:
+                        selectedNode.insertAfter(p);
+                        break;
+                }
+
+                p.select(offset, offset);
+                return true;
+            },
+            COMMAND_PRIORITY_LOW,
+        );
+    }, [editor]);
     return null;
 }
 
@@ -130,6 +228,7 @@ export function RegisterInsertCommands() {
             <RegisterInsertHeadingCommand />
             <RegisterInsertCodeCommand />
             <RegisterInsertListCommand />
+            <RegisterInsertParagraphCommand />
         </>
     );
 }

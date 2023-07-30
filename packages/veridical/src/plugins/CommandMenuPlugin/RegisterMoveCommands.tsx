@@ -39,8 +39,8 @@ export function RegisterMoveCommand() {
                     topLevelSelectedNode.remove();
                     next.insertAfter(topLevelSelectedNode);
                 }
-                if ($isTextNode(selectedNode)) {
-                    selectedNode.select(anchorOffset, focusOffset);
+                if (selectedNode?.select) {
+                    selectedNode?.select(anchorOffset, focusOffset);
                 }
 
                 return true;
