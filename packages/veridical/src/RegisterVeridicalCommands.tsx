@@ -1,19 +1,10 @@
 import React from 'react';
-import {
-    RegisterInsertHeadingCommand,
-    RegisterInsertCodeCommand,
-    RegisterInsertListCommand,
-    RegisterInsertParagraphCommand,
-    RegisterMoveCommand,
-} from '@/plugins';
+import { RegisterMoveCommand, RegisterInsertCommands } from '@/plugins';
 
 export function RegisterVeridicalCommands() {
     return (
         <>
-            <RegisterInsertHeadingCommand />
-            <RegisterInsertCodeCommand />
-            <RegisterInsertListCommand />
-            <RegisterInsertParagraphCommand />
+            <RegisterInsertCommands />
             <RegisterMoveCommand />
         </>
     );
