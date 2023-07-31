@@ -11,7 +11,6 @@ import {
     CodeHighlightPlugin,
     defaultEditorNodes,
     DraggableNodeButton,
-    HighlightMenuPlugin,
     HoveredNodeOptions,
     HoveredNodeProvider,
     ImagePlugin,
@@ -33,6 +32,7 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 import CommandMenuPlugin from '../plugins/CommandMenu';
 import { AddIcon, DragIcon } from './Icons';
+import FloatingActionMenuPlugin from '../plugins/FloatingActionMenu';
 
 function saveStateToLocalStorage(state: string) {
     localStorage.setItem('blog', state);
@@ -92,7 +92,6 @@ export default function Editor() {
                 <PrettierPlugin />
                 <HistoryPlugin />
                 <TabIndentationPlugin />
-                <HighlightMenuPlugin />
                 <AddLinkDialogPlugin />
                 <HoveredNodeProvider offset={{ left: -50, top: 4 }}>
                     <HoveredNodeOptions
@@ -112,6 +111,7 @@ export default function Editor() {
                 <TreeViewPlugin />
                 <SaveStatePlugin />
                 <CommandMenuPlugin />
+                <FloatingActionMenuPlugin />
                 <SlashCommandMenuPlugin />
             </div>
         </LexicalComposer>
