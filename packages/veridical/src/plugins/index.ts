@@ -1,7 +1,6 @@
 import MarkdownPlugin from './MarkdownPlugin';
 import CodeHighlightPlugin from './CodeHighlightPlugin';
 import PrettierPlugin from './PrettierPlugin';
-import HighlightMenuPlugin from './FloatingActionMenuPlugin';
 import ImagePlugin from './ImagePlugin';
 import CodeActionMenuLeft from './CodeActionMenuLeft';
 import CodeActionMenuRight from './CodeActionMenuRight';
@@ -20,7 +19,6 @@ export {
     MarkdownPlugin,
     CodeHighlightPlugin,
     PrettierPlugin,
-    HighlightMenuPlugin,
     HoveredNodeProvider,
     ImageDialogPlugin,
     ImagePlugin,
@@ -38,3 +36,4 @@ export {
 
 export * from './CommandMenuPlugin';
 export * from './HoveredNodeOptions';
+export * from './FloatingActionMenuPlugin';
