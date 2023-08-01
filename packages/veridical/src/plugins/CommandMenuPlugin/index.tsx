@@ -36,7 +36,6 @@ const CMDK_VALUE_ATTR = `data-value`;
 const CMDK_SELECT_ATTR = 'data-selected';
 
 type CommandMenuContextType = {
-    contentSideOffset?: number;
     searchExpression?: RegExp;
     onClose?: () => void;
     searchText: string;
@@ -56,7 +55,6 @@ function CommandMenuPlugin({
 }) {
     const [open, setOpen] = useState(false);
     const [searchText, setSearchText] = useState('');
-    const [contentSideOffset, setContentSideOffset] = useState(0);
     const [editor] = useLexicalComposerContext();
 
     const anchorRef = useRef<HTMLDivElement>(null);
@@ -160,14 +158,13 @@ function CommandMenuPlugin({
             }
         }
 
-        setContentSideOffset(height / 2);
         anchor.style.position = 'absolute';
         anchor.style.left = `${left}px`;
-        anchor.style.top = `${top + height / 2 + window.scrollY}px`;
+        anchor.style.top = `${top + window.scrollY}px`;
+        anchor.style.height = `${height}px`;
     }
 
     const contextValue: CommandMenuContextType = {
-        contentSideOffset,
         searchExpression: searchExpression.current,
         searchText,
         onClose: closeAndResetState,
@@ -209,8 +206,7 @@ const CommandMenuContent = forwardRef<
     React.ElementRef<typeof Popover.Content>,
     React.ComponentPropsWithoutRef<typeof Popover.Content>
 >((props, forwardedRef) => {
-    const { contentSideOffset } = useCommandMenu();
-    const { sideOffset, align, onOpenAutoFocus, ...etc } = props;
+    const { align, onOpenAutoFocus, ...etc } = props;
 
     function onOpenAutoFocusDefault(ev: Event) {
         ev.preventDefault();
@@ -219,7 +215,6 @@ const CommandMenuContent = forwardRef<
     return (
         <Popover.Content
             onOpenAutoFocus={onOpenAutoFocus || onOpenAutoFocusDefault}
-            sideOffset={sideOffset || contentSideOffset}
             align={align || 'start'}
             ref={forwardedRef}
             {...etc}
