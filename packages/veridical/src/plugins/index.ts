@@ -28,3 +28,4 @@ export * from './CommandMenuPlugin';
 export * from './HoveredNodeOptions';
 export * from './FloatingActionMenuPlugin';
 export * from './LinkPopoverPlugin';
+export * from './CaretLinkPopoverPlugin';
