@@ -8,7 +8,7 @@ const keyword = 'dark:text-purple-300 text-fuchsia-700';
 const string = 'dark:text-lime-500 text-green-600';
 
 export const lexicalTheme: EditorThemeClasses = {
-    code: 'bg-gray-100 dark:bg-neutral-800 rounded-md box-border text-gray-800 dark:text-gray-100 drop-shadow-md block overflow-x-auto w-full md:px-8 md:py-6 px-6 py-4 my-2 whitespace-pre scrollbar scrollbar-thin dark:scrollbar-track-neutral-700 dark:scrollbar-thumb-neutral-600 scrollbar-track-gray-200 scrollbar-thumb-gray-400',
+    code: 'bg-muted rounded-md box-border text-foreground drop-shadow-md block overflow-x-auto w-full md:px-8 md:py-6 px-6 py-4 my-2 whitespace-pre scrollbar scrollbar-thin dark:scrollbar-track-neutral-700 dark:scrollbar-thumb-neutral-600 scrollbar-track-gray-200 scrollbar-thumb-gray-400',
     image: 'w-full h-[420px] rounded-sm',
     imageContainer: 'flex flex-row justify-center my-4 mx-0',
     codeHighlight: {
@@ -86,12 +86,12 @@ export const lexicalTheme: EditorThemeClasses = {
     tableCellHeader: 'DefaultEditorTheme__tableCellHeader',
     text: {
         bold: 'font-bold',
-        code: 'DefaultEditorTheme__textCode',
-        italic: 'DefaultEditorTheme__textItalic',
-        strikethrough: 'DefaultEditorTheme__textStrikethrough',
+        code: 'bg-muted text-foreground/90 px-[0.25rem] py-[0.125rem] text-[95%]',
+        italic: 'italic',
+        strikethrough: 'line-through',
         subscript: 'DefaultEditorTheme__textSubscript',
         superscript: 'DefaultEditorTheme__textSuperscript',
         underline: 'underline',
-        underlineStrikethrough: 'line-through',
+        underlineStrikethrough: 'underline line-through',
     },
 };
