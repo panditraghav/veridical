@@ -4,6 +4,7 @@ import { FORMAT_TEXT_COMMAND } from 'lexical';
 import {
     FloatingActionMenuPlugin as FloatingActionMenu,
     FormatsType,
+    LINK_POPOVER_COMMAND,
     useFloatingActionMenu,
 } from 'veridical';
 import {
@@ -90,17 +91,22 @@ function CodeButton() {
 
 function LinkButton() {
     const [editor] = useLexicalComposerContext();
-    const { formats } = useFloatingActionMenu();
+    const { formats, closeMenu } = useFloatingActionMenu();
+
+    function handleClick() {
+        if (formats.link) {
+            editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+        } else {
+            editor.dispatchCommand(LINK_POPOVER_COMMAND, {
+                side: 'top',
+                autoFocus: true,
+                target: '_blank',
+            });
+            closeMenu();
+        }
+    }
     return (
-        <button
-            {...getButtonAttributes(formats, 'link')}
-            onClick={() =>
-                editor.dispatchCommand(
-                    TOGGLE_LINK_COMMAND,
-                    formats.link ? null : 'https://'
-                )
-            }
-        >
+        <button {...getButtonAttributes(formats, 'link')} onClick={handleClick}>
             <LinkIcon size="base" />
         </button>
     );

@@ -17,6 +17,7 @@ import UploadFileIcon from './UploadFileIcon';
 import QuoteIcon from './QuoteIcon';
 import MoveUpIcon from './MoveUpIcon';
 import MoveDownIcon from './MoveDownIcon';
+import OpenNewIcon from './OpenNewIcon';
 
 export {
     AddIcon,
@@ -38,4 +39,5 @@ export {
     QuoteIcon,
     MoveUpIcon,
     MoveDownIcon,
+    OpenNewIcon,
 };

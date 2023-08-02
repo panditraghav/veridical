@@ -1,23 +1,14 @@
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $createHeadingNode } from '@lexical/rich-text';
-import { $createTextNode, $getRoot } from 'lexical';
+import { $createParagraphNode, $getRoot } from 'lexical';
 import { ErrorBoundary } from 'react-error-boundary';
 import React, { useEffect } from 'react';
 import {
-    AddLinkDialogPlugin,
-    AddNodeButton,
-    AutoLinkPlugin,
     CodeHighlightPlugin,
     defaultEditorNodes,
-    DraggableNodeButton,
-    HoveredNodeOptions,
-    HoveredNodeProvider,
     ImagePlugin,
     MarkdownPlugin,
-    OpenLinkPlugin,
     PrettierPlugin,
-    SlashCommandMenuPlugin,
     RegisterVeridicalCommands,
 } from 'veridical';
 import { lexicalTheme } from '../theme/lexicalTheme';
@@ -26,13 +17,13 @@ import TreeViewPlugin from '../TreeViewPlugin';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
-import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 import CommandMenuPlugin from '../plugins/CommandMenu';
-import { AddIcon, DragIcon } from './Icons';
 import FloatingActionMenuPlugin from '../plugins/FloatingActionMenu';
+import LinkPlugins from '../plugins/LinkPlugins';
+import HoveredNodePlugin from '../plugins/HoveredNodePlugin';
 
 function saveStateToLocalStorage(state: string) {
     localStorage.setItem('blog', state);
@@ -51,9 +42,7 @@ function SaveStatePlugin() {
 function initializeEditor() {
     const root = $getRoot();
     if (root.getFirstChild() === null) {
-        const h1 = $createHeadingNode('h1');
-        h1.append($createTextNode('Hello World'));
-        root.append(h1);
+        root.append($createParagraphNode());
     }
 }
 
@@ -83,36 +72,21 @@ export default function Editor() {
                     }
                     ErrorBoundary={VeridicalErrorBoundary}
                 />
-                <AutoLinkPlugin />
                 <MarkdownPlugin />
                 <ListPlugin />
                 <CodeHighlightPlugin />
                 <AutoFocusPlugin />
-                <LinkPlugin />
                 <PrettierPlugin />
                 <HistoryPlugin />
                 <TabIndentationPlugin />
-                <AddLinkDialogPlugin />
-                <HoveredNodeProvider offset={{ left: -50, top: 4 }}>
-                    <HoveredNodeOptions
-                        offset={{ left: -50, top: 4 }}
-                        className="data-[state=open]:duration-200 data-[state=open]:ease-in-out data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-90 flex justify-between space-x-1"
-                    >
-                        <AddNodeButton>
-                            <AddIcon className="fill-muted-foreground hover:fill-foreground" />
-                        </AddNodeButton>
-                        <DraggableNodeButton>
-                            <DragIcon className="fill-muted-foreground hover:fill-foreground" />
-                        </DraggableNodeButton>
-                    </HoveredNodeOptions>
-                </HoveredNodeProvider>
                 <ImagePlugin />
-                <OpenLinkPlugin />
                 <TreeViewPlugin />
                 <SaveStatePlugin />
+
+                <HoveredNodePlugin />
+                <LinkPlugins />
                 <CommandMenuPlugin />
                 <FloatingActionMenuPlugin />
-                <SlashCommandMenuPlugin />
             </div>
         </LexicalComposer>
     );
