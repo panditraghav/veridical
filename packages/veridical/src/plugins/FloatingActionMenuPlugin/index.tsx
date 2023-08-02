@@ -62,9 +62,13 @@ const defaultFormats: FormatsType = {
 
 export type FloatingActionMenuContextType = {
     formats: FormatsType;
+    closeMenu: () => void;
 };
 const FloatingActionMenuContext = createContext<FloatingActionMenuContextType>({
     formats: defaultFormats,
+    closeMenu: () => {
+        /**/
+    },
 });
 const useFloatingActionMenu = () => useContext(FloatingActionMenuContext);
 
@@ -129,6 +133,7 @@ export function FloatingActionMenuPlugin({
 
     const contextValue: FloatingActionMenuContextType = {
         formats,
+        closeMenu: () => setOpen(false),
     };
 
     return (
