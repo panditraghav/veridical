@@ -24,6 +24,7 @@ import CommandMenuPlugin from '../plugins/CommandMenu';
 import FloatingActionMenuPlugin from '../plugins/FloatingActionMenu';
 import LinkPlugins from '../plugins/LinkPlugins';
 import HoveredNodePlugin from '../plugins/HoveredNodePlugin';
+import { useAppContext } from '../utils/context';
 
 function saveStateToLocalStorage(state: string) {
     localStorage.setItem('blog', state);
@@ -47,6 +48,8 @@ function initializeEditor() {
 }
 
 export default function Editor() {
+    const { showTreeView } = useAppContext();
+    console.log('Editor', { showTreeView });
     const editorState = localStorage.getItem('blog');
     return (
         <LexicalComposer
@@ -80,13 +83,13 @@ export default function Editor() {
                 <HistoryPlugin />
                 <TabIndentationPlugin />
                 <ImagePlugin />
-                <TreeViewPlugin />
                 <SaveStatePlugin />
-
                 <HoveredNodePlugin />
                 <LinkPlugins />
                 <CommandMenuPlugin />
                 <FloatingActionMenuPlugin />
+
+                {showTreeView && <TreeViewPlugin />}
             </div>
         </LexicalComposer>
     );

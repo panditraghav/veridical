@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useAppContext } from '../utils/context';
+import {
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuRadioGroup,
+    DropdownMenuRadioItem,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+} from './DropdownMenu';
+import { SettingsIcon } from './Icons';
 
-export default function Header({
-    isHTML,
-    onChangeIsHTML,
-}: {
-    isHTML: boolean;
-    onChangeIsHTML: (isHTML: boolean) => void;
-}) {
-    const [mode, setMode] = useState<'dark' | 'light'>('dark');
+export default function Header() {
+    const { mode, setMode, isHTML, setIsHTML, showTreeView, setShowTreeView } =
+        useAppContext();
 
     useEffect(() => {
         const currentMode = localStorage.getItem('mode');
@@ -18,43 +26,75 @@ export default function Header({
             document.documentElement.classList.remove('dark');
             setMode('light');
         }
-    }, []);
+    }, [setMode]);
 
-    function onClickHandler() {
-        const currentMode = localStorage.getItem('mode');
+    function handleChange(mode: string) {
         const cl = document.documentElement.classList;
-        if (!currentMode) {
-            localStorage.setItem('mode', 'dark');
-            setMode('dark');
-            cl.add(!cl.contains('dark') ? 'dark' : '');
+
+        localStorage.setItem('mode', mode);
+        if (mode === 'dark') {
+            setMode(mode);
+            cl.add('dark');
         } else {
-            if (currentMode === 'dark') {
-                cl.remove('dark');
-                localStorage.setItem('mode', 'light');
-                setMode('light');
-            } else {
-                cl.add(!cl.contains('dark') ? 'dark' : '');
-                localStorage.setItem('mode', 'dark');
-                setMode('dark');
-            }
+            setMode('light');
+            cl.remove('dark');
         }
     }
     return (
-        <nav className="sticky top-0 z-30 text-editor-p-dark dark:text-editor-p-light h-12 w-full bg-background flex justify-between items-center flex-row shadow-sm shadow-slate-200 dark:shadow-gray-800 mb-8">
-            <div>
-                <span className="mx-2">CurrentMode: {mode}</span>
-                <span>Rendering : {isHTML ? 'HTML' : 'Editor'}</span>
-            </div>
-            <div>
-                <button onClick={onClickHandler} className="mx-4">
-                    {mode === 'dark' ? 'Light' : 'Dark'}
-                </button>
-                <button
-                    className="mx-4"
-                    onClick={() => onChangeIsHTML(!isHTML)}
-                >
-                    Use {isHTML ? 'Veridical' : 'HTML'}
-                </button>
+        <nav className="sticky top-0 z-30 w-full py-4 bg-background border-b border-b-muted">
+            <div className="w-8/12 mx-auto flex justify-between">
+                <h1>Veridical</h1>
+                <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <SettingsIcon className="fill-foreground" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent side="bottom" align="end">
+                        <DropdownMenuSub>
+                            <DropdownMenuSubTrigger>
+                                Theme
+                            </DropdownMenuSubTrigger>
+                            <DropdownMenuSubContent>
+                                <DropdownMenuRadioGroup
+                                    value={mode}
+                                    onValueChange={handleChange}
+                                >
+                                    <DropdownMenuRadioItem value="dark">
+                                        Dark
+                                    </DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem value="light">
+                                        Light
+                                    </DropdownMenuRadioItem>
+                                </DropdownMenuRadioGroup>
+                            </DropdownMenuSubContent>
+                        </DropdownMenuSub>
+                        <DropdownMenuSub>
+                            <DropdownMenuSubTrigger>
+                                Render
+                            </DropdownMenuSubTrigger>
+                            <DropdownMenuSubContent>
+                                <DropdownMenuRadioGroup
+                                    value={isHTML ? 'html' : 'veridical'}
+                                    onValueChange={(value) => {
+                                        setIsHTML(value == 'html');
+                                    }}
+                                >
+                                    <DropdownMenuRadioItem value="veridical">
+                                        Veridical
+                                    </DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem value="html">
+                                        HTML
+                                    </DropdownMenuRadioItem>
+                                </DropdownMenuRadioGroup>
+                            </DropdownMenuSubContent>
+                        </DropdownMenuSub>
+                        <DropdownMenuCheckboxItem
+                            checked={showTreeView}
+                            onCheckedChange={setShowTreeView}
+                        >
+                            Tree View
+                        </DropdownMenuCheckboxItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
         </nav>
     );

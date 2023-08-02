@@ -26,10 +26,7 @@ export default function CommandMenuPlugin() {
         <>
             <CommandMenu>
                 <CommandMenu.Content className="data-[state=open] flex h-[270px] flex-col data-[side=top]:justify-end  data-[state=closed]:duration-200 data-[state=open]:duration-150 data-[state=closed]:ease-out data-[state=open]:ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in data-[state=open]:zoom-in-95">
-                    <CommandMenu.Command
-                        defaultValue="Heading 1"
-                        className="box-border flex flex-col rounded-md border border-border bg-background"
-                    >
+                    <CommandMenu.Command className="box-border flex flex-col rounded-md border border-border bg-background">
                         <CommandMenu.List className="max-h-[270px] w-[280px] overflow-y-auto scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400 dark:scrollbar-track-neutral-700 dark:scrollbar-thumb-neutral-600">
                             <CommandMenu.Empty className="py-2 text-center">
                                 No result

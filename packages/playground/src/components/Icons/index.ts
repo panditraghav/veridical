@@ -18,6 +18,7 @@ import QuoteIcon from './QuoteIcon';
 import MoveUpIcon from './MoveUpIcon';
 import MoveDownIcon from './MoveDownIcon';
 import OpenNewIcon from './OpenNewIcon';
+import SettingsIcon from './SettingsIcon';
 
 export {
     AddIcon,
@@ -40,4 +41,5 @@ export {
     MoveUpIcon,
     MoveDownIcon,
     OpenNewIcon,
+    SettingsIcon,
 };

@@ -1,7 +1,8 @@
 import './main.css';
 import Editor from './components/Editor';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getHTMLFromEditorJSONString } from './utils/editor';
+import { AppContext } from './utils/context';
 import Header from './components/Header';
 
 function FromHTML() {
@@ -16,7 +17,9 @@ function FromHTML() {
 }
 
 function App() {
+    const [mode, setMode] = useState<'dark' | 'light'>('dark');
     const [isHTML, setIsHTML] = useState(false);
+    const [showTreeView, setShowTreeView] = useState(true);
 
     useEffect(() => {
         const _isHTML = localStorage.getItem('isHTML');
@@ -30,10 +33,19 @@ function App() {
     }
 
     return (
-        <>
-            <Header isHTML={isHTML} onChangeIsHTML={onChangeHTML} />
+        <AppContext.Provider
+            value={{
+                isHTML,
+                setIsHTML: onChangeHTML,
+                showTreeView,
+                setShowTreeView,
+                mode,
+                setMode,
+            }}
+        >
+            <Header />
             {isHTML ? <FromHTML /> : <Editor />}
-        </>
+        </AppContext.Provider>
     );
 }
 
