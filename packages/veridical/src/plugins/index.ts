@@ -3,8 +3,6 @@ import CodeHighlightPlugin from './CodeHighlightPlugin';
 import PrettierPlugin from './PrettierPlugin';
 import ImagePlugin from './ImagePlugin';
 import AutoLinkPlugin from './AutoLinkPlugin';
-import AddLinkDialogPlugin from './AddLinkDialogPlugin';
-import OpenLinkPlugin from './OpenLinkPlugin';
 import EditorStatePlugin from './EditorStatePlugin';
 import ConvertToMarkdownPlugin from './ConvertToMarkdownPlugin';
 import ConvertFromMarkdownPlugin from './ConvertFromMarkdownPlugin';
@@ -20,8 +18,6 @@ export {
     ImageDialogPlugin,
     ImagePlugin,
     AutoLinkPlugin,
-    AddLinkDialogPlugin,
-    OpenLinkPlugin,
     EditorStatePlugin,
     ConvertToMarkdownPlugin,
     ConvertFromMarkdownPlugin,
