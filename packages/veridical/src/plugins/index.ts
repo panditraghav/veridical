@@ -27,3 +27,4 @@ export {
 export * from './CommandMenuPlugin';
 export * from './HoveredNodeOptions';
 export * from './FloatingActionMenuPlugin';
+export * from './LinkPopoverPlugin';

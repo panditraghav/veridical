@@ -1,6 +1,8 @@
 import { ImageNode } from '@/nodes';
+import { LinkAttributes, LinkNode } from '@lexical/link';
 import { ListType } from '@lexical/list';
 import { HeadingTagType } from '@lexical/rich-text';
+import { PopoverContentProps } from '@radix-ui/react-popover';
 import { createCommand, LexicalNode } from 'lexical';
 
 export const IMAGE_DIALOG_COMMAND = createCommand<{
@@ -43,3 +45,14 @@ export const INSERT_PARAGRAPH_COMMAND = createCommand<InsertCommandPayload>(
 export const MOVE_SELECTED_NODE_COMMAND = createCommand<{
     dir: 'up' | 'down';
 }>('MOVE_SELECTED_NODE_COMMAND');
+
+type LinkPopoverCommandPayload =
+    | ({
+          linkNode?: LinkNode;
+          autoFocus?: boolean;
+          side?: PopoverContentProps['side'];
+      } & LinkAttributes)
+    | null;
+
+export const LINK_POPOVER_COMMAND =
+    createCommand<LinkPopoverCommandPayload>('OPEN_LINK_POPOVER');
