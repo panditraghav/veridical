@@ -11,8 +11,7 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from './DropdownMenu';
-import { FaGithub } from 'react-icons/fa';
-import { AiFillSetting } from 'react-icons/ai';
+import { AiFillGithub, AiFillSetting } from 'react-icons/ai';
 
 export default function Header() {
     const { mode, setMode, isHTML, setIsHTML, showTreeView, setShowTreeView } =
@@ -50,7 +49,7 @@ export default function Header() {
                         href="https://github.com/panditraghav/veridical"
                         target="_blank"
                     >
-                        <FaGithub className="fill-foreground/80 hover:fill-foreground text-xl" />
+                        <AiFillGithub className="fill-foreground/80 hover:fill-foreground text-xl" />
                     </a>
                     <DropdownMenu>
                         <DropdownMenuTrigger>

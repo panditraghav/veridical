@@ -1,27 +1,27 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LexicalEditor } from 'lexical';
 import {
-    INSERT_LIST_COMMAND,
-    INSERT_HEADING_COMMAND,
+    Fa1,
+    Fa2,
+    Fa3,
+    FaCode,
+    FaHeading,
+    FaListOl,
+    FaListUl,
+    FaQuoteRight,
+} from 'react-icons/fa6';
+import { MdMoveUp, MdMoveDown } from 'react-icons/md';
+import {
     INSERT_CODE_COMMAND,
-    MOVE_SELECTED_NODE_COMMAND,
+    INSERT_HEADING_COMMAND,
+    INSERT_LIST_COMMAND,
     INSERT_QUOTE_COMMAND,
+    MOVE_SELECTED_NODE_COMMAND,
 } from 'veridical/commands';
 import {
     CommandMenuPlugin as CommandMenu,
     SlashCommandMenuPlugin,
 } from 'veridical/plugins';
-import {
-    CodeIcon,
-    H1Icon,
-    H2Icon,
-    H3Icon,
-    OlIcon,
-    UlIcon,
-    MoveUpIcon,
-    MoveDownIcon,
-    QuoteIcon,
-} from '../components/Icons';
 
 export default function CommandMenuPlugin() {
     return (
@@ -43,11 +43,6 @@ export default function CommandMenuPlugin() {
         </>
     );
 }
-
-const iconProps: React.ComponentPropsWithoutRef<typeof H1Icon> = {
-    size: 'md',
-    className: 'fill-foreground',
-};
 
 function InsertCommands() {
     return (
@@ -92,7 +87,9 @@ function CommandItem({ name, description, icon, onSelect }: CommandItemType) {
             }}
             className="my-1 flex cursor-pointer rounded-md px-1 py-2 data-[selected]:bg-muted"
         >
-            <div className="rounded-md border p-1">{icon}</div>
+            <div className="rounded-md border flex w-12 h-12 justify-center items-center">
+                {icon}
+            </div>
             <div className="px-2 py-1">
                 <div className="text-lg font-medium text-foreground">
                     {name}
@@ -103,11 +100,38 @@ function CommandItem({ name, description, icon, onSelect }: CommandItemType) {
     );
 }
 
+function H1() {
+    return (
+        <div className="relative flex items-end">
+            <FaHeading className="text-foreground text-2xl pl-1" />
+            <Fa1 className="text-foreground pr-0.5" />
+        </div>
+    );
+}
+function H2() {
+    return (
+        <div className="relative flex items-end">
+            <FaHeading className="text-foreground text-2xl pl-1" />
+            <Fa2 className="text-foreground pr-0.5" />
+        </div>
+    );
+}
+function H3() {
+    return (
+        <div className="relative flex items-end">
+            <FaHeading className="text-foreground text-2xl pl-1" />
+            <Fa3 className="text-foreground pr-0.5" />
+        </div>
+    );
+}
+
+const ICON_CLASSNAME = 'text-3xl text-foreground';
+
 const INSERT_COMMAND_ITEMS: CommandItemType[] = [
     {
         name: 'Heading 1',
         description: 'Title level heading',
-        icon: <H1Icon {...iconProps} />,
+        icon: <H1 />,
         onSelect: (editor) =>
             editor.dispatchCommand(INSERT_HEADING_COMMAND, {
                 headingTag: 'h1',
@@ -116,7 +140,7 @@ const INSERT_COMMAND_ITEMS: CommandItemType[] = [
     {
         name: 'Heading 2',
         description: 'Second level heading',
-        icon: <H2Icon {...iconProps} />,
+        icon: <H2 />,
         onSelect: (editor) =>
             editor.dispatchCommand(INSERT_HEADING_COMMAND, {
                 headingTag: 'h2',
@@ -125,7 +149,7 @@ const INSERT_COMMAND_ITEMS: CommandItemType[] = [
     {
         name: 'Heading 3',
         description: 'Third level heading',
-        icon: <H3Icon {...iconProps} />,
+        icon: <H3 />,
         onSelect: (editor) =>
             editor.dispatchCommand(INSERT_HEADING_COMMAND, {
                 headingTag: 'h3',
@@ -134,27 +158,27 @@ const INSERT_COMMAND_ITEMS: CommandItemType[] = [
     {
         name: 'Ordered List',
         description: 'Numbered list',
-        icon: <OlIcon {...iconProps} />,
+        icon: <FaListOl className={ICON_CLASSNAME} />,
         onSelect: (editor) =>
             editor.dispatchCommand(INSERT_LIST_COMMAND, { type: 'number' }),
     },
     {
         name: 'Unordered List',
         description: 'Bullet list',
-        icon: <UlIcon {...iconProps} />,
+        icon: <FaListUl className={ICON_CLASSNAME} />,
         onSelect: (editor) =>
             editor.dispatchCommand(INSERT_LIST_COMMAND, { type: 'bullet' }),
     },
     {
         name: 'Quote',
         description: 'Write a quote',
-        icon: <QuoteIcon {...iconProps} />,
+        icon: <FaQuoteRight className={ICON_CLASSNAME} />,
         onSelect: (editor) => editor.dispatchCommand(INSERT_QUOTE_COMMAND, {}),
     },
     {
         name: 'Code',
         description: 'Write some code',
-        icon: <CodeIcon {...iconProps} />,
+        icon: <FaCode className={ICON_CLASSNAME} />,
         onSelect: (editor) =>
             editor.dispatchCommand(INSERT_CODE_COMMAND, {
                 language: 'JavaScript',
@@ -166,14 +190,14 @@ const MOVE_COMMAND_ITEMS: CommandItemType[] = [
     {
         name: 'Move Up',
         description: 'Move selected node up',
-        icon: <MoveUpIcon {...iconProps} />,
+        icon: <MdMoveUp className={ICON_CLASSNAME} />,
         onSelect: (editor) =>
             editor.dispatchCommand(MOVE_SELECTED_NODE_COMMAND, { dir: 'up' }),
     },
     {
         name: 'Move Down',
         description: 'Move selected node down',
-        icon: <MoveDownIcon {...iconProps} />,
+        icon: <MdMoveDown className={ICON_CLASSNAME} />,
         onSelect: (editor) =>
             editor.dispatchCommand(MOVE_SELECTED_NODE_COMMAND, { dir: 'down' }),
     },
