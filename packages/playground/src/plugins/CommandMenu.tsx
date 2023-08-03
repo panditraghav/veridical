@@ -5,6 +5,7 @@ import {
     INSERT_HEADING_COMMAND,
     INSERT_CODE_COMMAND,
     MOVE_SELECTED_NODE_COMMAND,
+    INSERT_QUOTE_COMMAND,
 } from 'veridical/commands';
 import {
     CommandMenuPlugin as CommandMenu,
@@ -19,6 +20,7 @@ import {
     UlIcon,
     MoveUpIcon,
     MoveDownIcon,
+    QuoteIcon,
 } from '../components/Icons';
 
 export default function CommandMenuPlugin() {
@@ -142,6 +144,12 @@ const INSERT_COMMAND_ITEMS: CommandItemType[] = [
         icon: <UlIcon {...iconProps} />,
         onSelect: (editor) =>
             editor.dispatchCommand(INSERT_LIST_COMMAND, { type: 'bullet' }),
+    },
+    {
+        name: 'Quote',
+        description: 'Write a quote',
+        icon: <QuoteIcon {...iconProps} />,
+        onSelect: (editor) => editor.dispatchCommand(INSERT_QUOTE_COMMAND, {}),
     },
     {
         name: 'Code',

@@ -42,6 +42,10 @@ export const INSERT_PARAGRAPH_COMMAND = createCommand<InsertCommandPayload>(
     'INSERT_PARAGRAPH_COMMAND',
 );
 
+export const INSERT_QUOTE_COMMAND = createCommand<InsertCommandPayload>(
+    'INSERT_QUOTE_COMMAND',
+);
+
 export const MOVE_SELECTED_NODE_COMMAND = createCommand<{
     dir: 'up' | 'down';
 }>('MOVE_SELECTED_NODE_COMMAND');

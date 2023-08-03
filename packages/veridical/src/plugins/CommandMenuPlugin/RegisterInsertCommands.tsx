@@ -3,12 +3,13 @@ import {
     INSERT_HEADING_COMMAND,
     INSERT_LIST_COMMAND,
     INSERT_PARAGRAPH_COMMAND,
+    INSERT_QUOTE_COMMAND,
 } from '@/commands';
 import { $getTopLevelSelectedNode } from '@/utils/selection';
 import { $createCodeNode } from '@lexical/code';
 import { $createListItemNode, $createListNode } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $createHeadingNode } from '@lexical/rich-text';
+import { $createHeadingNode, $createQuoteNode } from '@lexical/rich-text';
 import {
     $createParagraphNode,
     $createTextNode,
@@ -222,6 +223,58 @@ export function RegisterInsertParagraphCommand() {
     return null;
 }
 
+export function RegisterInsertQuoteCommand() {
+    const [editor] = useLexicalComposerContext();
+
+    useEffect(() => {
+        return editor.registerCommand(
+            INSERT_QUOTE_COMMAND,
+            ({
+                selectedNode: node,
+                position,
+                content,
+                replaceOnEmptyParagraph = true,
+            }) => {
+                const selectedNode = node || $getTopLevelSelectedNode();
+
+                if (!selectedNode) return false;
+
+                const offset = content?.length || 0;
+                const quote = $createQuoteNode();
+                const text = $createTextNode(content);
+                quote.append(text);
+
+                if (
+                    replaceOnEmptyParagraph &&
+                    selectedNode.getTextContent() === '' &&
+                    $isParagraphNode(selectedNode)
+                ) {
+                    selectedNode.replace(quote);
+                    quote.select(offset, offset);
+                    return true;
+                }
+
+                switch (position) {
+                    case 'after':
+                        selectedNode.insertAfter(quote);
+                        break;
+                    case 'before':
+                        selectedNode.insertBefore(quote);
+                        break;
+                    default:
+                        selectedNode.insertAfter(quote);
+                        break;
+                }
+
+                quote.select(offset, offset);
+                return true;
+            },
+            COMMAND_PRIORITY_LOW,
+        );
+    }, [editor]);
+    return null;
+}
+
 export function RegisterInsertCommands() {
     return (
         <>
@@ -229,6 +282,7 @@ export function RegisterInsertCommands() {
             <RegisterInsertCodeCommand />
             <RegisterInsertListCommand />
             <RegisterInsertParagraphCommand />
+            <RegisterInsertQuoteCommand />
         </>
     );
 }
