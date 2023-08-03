@@ -7,19 +7,14 @@ import {
     LINK_POPOVER_COMMAND,
     useFloatingActionMenu,
 } from 'veridical';
-import {
-    CodeIcon,
-    FormatBoldIcon,
-    FormatItalicIcon,
-    FormatUnderlineIcon,
-    LinkIcon,
-} from '../components/Icons';
+import { FaBold, FaCode, FaItalic, FaLink, FaUnderline } from 'react-icons/fa6';
+import { cn } from '../utils/cn';
 
 export default function FloatingActionMenuPlugin() {
     return (
         <FloatingActionMenu>
             <FloatingActionMenu.Content
-                className="bg-foreground rounded-md py-1.5 px-2 data-[state=open]:animate-in data-[state=open]:ease-in-out data-[state=open]:fade-in data-[state=open]:duration-150 data-[state=open]:zoom-in-95 data-[state=open]:data-[side=top]:slide-in-from-bottom-1.5 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:duration-200"
+                className="bg-foreground rounded-md py-1 px-1 data-[state=open]:animate-in data-[state=open]:ease-in-out data-[state=open]:fade-in data-[state=open]:duration-150 data-[state=open]:zoom-in-95 data-[state=open]:data-[side=top]:slide-in-from-bottom-1.5 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:duration-200"
                 sideOffset={8}
             >
                 <FloatingActionMenu.Arrow className="fill-foreground" />
@@ -41,7 +36,7 @@ function BoldButton() {
             {...getButtonAttributes(formats, 'bold')}
             onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
         >
-            <FormatBoldIcon size="base" />
+            <FaBold className={getIconClassName(formats.bold)} />
         </button>
     );
 }
@@ -56,7 +51,7 @@ function UnderlineButton() {
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')
             }
         >
-            <FormatUnderlineIcon size="base" />
+            <FaUnderline className={getIconClassName(formats.underline)} />
         </button>
     );
 }
@@ -71,7 +66,7 @@ function ItalicButton() {
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')
             }
         >
-            <FormatItalicIcon size="base" />
+            <FaItalic className={getIconClassName(formats.italic)} />
         </button>
     );
 }
@@ -84,7 +79,7 @@ function CodeButton() {
             {...getButtonAttributes(formats, 'code')}
             onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code')}
         >
-            <CodeIcon size="base" />
+            <FaCode className={getIconClassName(formats.code)} />
         </button>
     );
 }
@@ -107,7 +102,7 @@ function LinkButton() {
     }
     return (
         <button {...getButtonAttributes(formats, 'link')} onClick={handleClick}>
-            <LinkIcon size="base" />
+            <FaLink className={getIconClassName(formats.link)} />
         </button>
     );
 }
@@ -123,4 +118,12 @@ function getButtonAttributes(
                 : 'hover:bg-muted-foreground/20 fill-background/90'
         }`,
     };
+}
+
+function getIconClassName(selected: boolean) {
+    return cn(
+        'text-xl',
+        selected && 'fill-background',
+        !selected && 'fill-background/90'
+    );
 }

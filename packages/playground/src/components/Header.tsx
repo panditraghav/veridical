@@ -11,7 +11,8 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from './DropdownMenu';
-import { SettingsIcon } from './Icons';
+import { FaGithub } from 'react-icons/fa';
+import { AiFillSetting } from 'react-icons/ai';
 
 export default function Header() {
     const { mode, setMode, isHTML, setIsHTML, showTreeView, setShowTreeView } =
@@ -43,58 +44,66 @@ export default function Header() {
     return (
         <nav className="sticky top-0 z-30 w-full py-4 bg-background border-b border-b-muted">
             <div className="w-8/12 mx-auto flex justify-between">
-                <h1>Veridical</h1>
-                <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        <SettingsIcon className="fill-foreground" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent side="bottom" align="end">
-                        <DropdownMenuSub>
-                            <DropdownMenuSubTrigger>
-                                Theme
-                            </DropdownMenuSubTrigger>
-                            <DropdownMenuSubContent>
-                                <DropdownMenuRadioGroup
-                                    value={mode}
-                                    onValueChange={handleChange}
-                                >
-                                    <DropdownMenuRadioItem value="dark">
-                                        Dark
-                                    </DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="light">
-                                        Light
-                                    </DropdownMenuRadioItem>
-                                </DropdownMenuRadioGroup>
-                            </DropdownMenuSubContent>
-                        </DropdownMenuSub>
-                        <DropdownMenuSub>
-                            <DropdownMenuSubTrigger>
-                                Render
-                            </DropdownMenuSubTrigger>
-                            <DropdownMenuSubContent>
-                                <DropdownMenuRadioGroup
-                                    value={isHTML ? 'html' : 'veridical'}
-                                    onValueChange={(value) => {
-                                        setIsHTML(value == 'html');
-                                    }}
-                                >
-                                    <DropdownMenuRadioItem value="veridical">
-                                        Veridical
-                                    </DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem value="html">
-                                        HTML
-                                    </DropdownMenuRadioItem>
-                                </DropdownMenuRadioGroup>
-                            </DropdownMenuSubContent>
-                        </DropdownMenuSub>
-                        <DropdownMenuCheckboxItem
-                            checked={showTreeView}
-                            onCheckedChange={setShowTreeView}
-                        >
-                            Tree View
-                        </DropdownMenuCheckboxItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <h1 className="text-lg font-medium">Veridical</h1>
+                <div className="flex items-center space-x-2">
+                    <a
+                        href="https://github.com/panditraghav/veridical"
+                        target="_blank"
+                    >
+                        <FaGithub className="fill-foreground/80 hover:fill-foreground text-xl" />
+                    </a>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <AiFillSetting className="fill-foreground/80 hover:fill-foreground text-xl" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent side="bottom" align="end">
+                            <DropdownMenuSub>
+                                <DropdownMenuSubTrigger>
+                                    Theme
+                                </DropdownMenuSubTrigger>
+                                <DropdownMenuSubContent>
+                                    <DropdownMenuRadioGroup
+                                        value={mode}
+                                        onValueChange={handleChange}
+                                    >
+                                        <DropdownMenuRadioItem value="dark">
+                                            Dark
+                                        </DropdownMenuRadioItem>
+                                        <DropdownMenuRadioItem value="light">
+                                            Light
+                                        </DropdownMenuRadioItem>
+                                    </DropdownMenuRadioGroup>
+                                </DropdownMenuSubContent>
+                            </DropdownMenuSub>
+                            <DropdownMenuSub>
+                                <DropdownMenuSubTrigger>
+                                    Render
+                                </DropdownMenuSubTrigger>
+                                <DropdownMenuSubContent>
+                                    <DropdownMenuRadioGroup
+                                        value={isHTML ? 'html' : 'veridical'}
+                                        onValueChange={(value) => {
+                                            setIsHTML(value == 'html');
+                                        }}
+                                    >
+                                        <DropdownMenuRadioItem value="veridical">
+                                            Veridical
+                                        </DropdownMenuRadioItem>
+                                        <DropdownMenuRadioItem value="html">
+                                            HTML
+                                        </DropdownMenuRadioItem>
+                                    </DropdownMenuRadioGroup>
+                                </DropdownMenuSubContent>
+                            </DropdownMenuSub>
+                            <DropdownMenuCheckboxItem
+                                checked={showTreeView}
+                                onCheckedChange={setShowTreeView}
+                            >
+                                Tree View
+                            </DropdownMenuCheckboxItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
             </div>
         </nav>
     );
