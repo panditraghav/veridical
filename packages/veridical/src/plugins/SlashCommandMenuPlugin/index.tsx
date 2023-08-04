@@ -19,6 +19,11 @@ export default function SlashCommandMenuPlugin() {
                 const node = selection.getNodes()[0];
                 if ($isCodeNode(node) || $isCodeHighlightNode(node)) return;
 
+                const parent = node.getParent();
+                const lastChild = parent?.getLastChild();
+
+                if (lastChild?.getKey() !== node.getKey()) return;
+
                 const [anchorOffset, focusOffset] =
                     selection.getCharacterOffsets();
 
