@@ -49,7 +49,6 @@ function initializeEditor() {
 
 export default function Editor() {
     const { showTreeView } = useAppContext();
-    console.log('Editor', { showTreeView });
     const editorState = localStorage.getItem('blog');
     return (
         <LexicalComposer
