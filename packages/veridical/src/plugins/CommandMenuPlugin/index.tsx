@@ -433,3 +433,4 @@ export {
 };
 export * from './RegisterInsertCommands';
 export * from './RegisterMoveCommands';
+export * from './RegisterTurnIntoCommand';

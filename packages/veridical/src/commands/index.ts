@@ -58,5 +58,33 @@ type LinkPopoverCommandPayload =
       } & LinkAttributes)
     | null;
 
-export const LINK_POPOVER_COMMAND =
-    createCommand<LinkPopoverCommandPayload>('OPEN_LINK_POPOVER');
+export const LINK_POPOVER_COMMAND = createCommand<LinkPopoverCommandPayload>(
+    'LINK_POPOVER_COMMAND',
+);
+
+/*---------------Turn into commands-----------------*/
+
+type TurnIntoHeadingCommandPayload = {
+    headingTag: HeadingTagType;
+    selectedNode?: LexicalNode;
+    textOnly?: boolean;
+};
+
+export const TURN_INTO_HEADING_COMMAND =
+    createCommand<TurnIntoHeadingCommandPayload>('TURN_INTO_HEADING_COMMAND');
+
+export const TURN_INTO_PARAGRAPH_COMMAND = createCommand<{
+    selectedNode?: LexicalNode;
+    textOnly?: boolean;
+}>('TURN_INTO_PARAGRAPH_COMMAND');
+
+export const TURN_INTO_QUOTE_COMMAND = createCommand<{
+    selectedNode?: LexicalNode;
+    textOnly?: boolean;
+}>('TURN_INTO_QUOTE_COMMAND');
+
+export const TURN_INTO_LIST_COMMAND = createCommand<{
+    selectedNode?: LexicalNode;
+    listType: ListType;
+    textOnly?: boolean;
+}>('TURN_INTO_LIST_COMMAND');
