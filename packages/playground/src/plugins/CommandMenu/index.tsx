@@ -5,7 +5,6 @@ import {
     SlashCommandMenuPlugin,
 } from 'veridical/plugins';
 import InsertCommands from './InsertCommands';
-import { LargeCommandItemType } from './LargeCommandItem';
 import SmallCommandItem, { SmallCommandItemProps } from './SmallCommandItem';
 import TurnIntoCommands from './TurnIntoCommands';
 
