@@ -42,8 +42,8 @@ export default function Header() {
     }
     return (
         <nav className="sticky top-0 z-30 w-full py-4 bg-background border-b border-b-muted">
-            <div className="w-8/12 mx-auto flex justify-between">
-                <h1 className="text-lg font-medium">Veridical</h1>
+            <div className="md:w-8/12 lg:w-[850px] mx-auto flex justify-between">
+                <h1 className="text-lg font-bold">Veridical</h1>
                 <div className="flex items-center space-x-2">
                     <a
                         href="https://github.com/panditraghav/veridical"

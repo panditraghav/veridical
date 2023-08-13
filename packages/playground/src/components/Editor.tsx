@@ -62,7 +62,7 @@ export default function Editor() {
             }}
         >
             <RegisterVeridicalCommands />
-            <div className="mb-24 w-full px-4 md:mx-auto md:w-8/12">
+            <div className="mb-24 w-full px-4 md:mx-auto md:w-8/12 lg:w-[850px]">
                 <RichTextPlugin
                     contentEditable={
                         <ContentEditable className="focus:outline-none" />
