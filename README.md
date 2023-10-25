@@ -236,3 +236,7 @@ function YourComponentInsideLexicalComposer() {
 ### Link Popover
 
 -   LINK_POPOVER_COMMAND
+
+## Goal of project
+
+The goal of the project is a editor which can be installed as `npm` package and is easy to integrate into your react project. It must be customizable and have a composable API.
