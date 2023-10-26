@@ -94,4 +94,10 @@ export const lexicalTheme: EditorThemeClasses = {
         underline: 'underline',
         underlineStrikethrough: 'underline line-through',
     },
+    editorImage: {
+        image: 'cursor-pointer data-[selected=true]:outline data-[selected=true]:outline-2 data-[selected=true]:outline-orange-200 object-cover data-[max-width=false]:max-h-[400px] w-auto',
+        container:
+            'data-[max-width=false]:flex data-[max-width=false]:justify-center my-4 data-[max-width=false]:max-h-[400px] w-full',
+        fallback: 'data-[max-width=false]:max-h-[400px] w-auto animate-pulse',
+    },
 };

@@ -4,6 +4,7 @@ import {
     Fa3,
     FaCode,
     FaHeading,
+    FaImage,
     FaListOl,
     FaListUl,
     FaParagraph,
@@ -16,6 +17,7 @@ import {
     INSERT_LIST_COMMAND,
     INSERT_PARAGRAPH_COMMAND,
     INSERT_QUOTE_COMMAND,
+    OPEN_ADD_IMAGE_DIALOG,
 } from 'veridical/commands';
 import { LargeCommandItemType, LargeCommandItem } from './LargeCommandItem';
 
@@ -122,5 +124,13 @@ const INSERT_COMMAND_ITEMS: LargeCommandItemType[] = [
         icon: <FaParagraph className={ICON_CLASSNAME} />,
         onSelect: (editor) =>
             editor.dispatchCommand(INSERT_PARAGRAPH_COMMAND, {}),
+    },
+    {
+        name: 'Image',
+        description: 'Add image',
+        icon: <FaImage className={ICON_CLASSNAME} />,
+        onSelect: (editor) => {
+            editor.dispatchCommand(OPEN_ADD_IMAGE_DIALOG, null);
+        },
     },
 ];

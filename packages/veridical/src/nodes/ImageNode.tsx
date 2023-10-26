@@ -57,34 +57,31 @@ function useSuspenseImage(src: string) {
 function SuspenseImage({
     src,
     alt,
-    naturalHeight,
-    naturalWidth,
     isMaxWidth,
-    isSelected,
     imgRef,
+    imageClassName,
+    selected,
 }: {
     src: string;
     alt: string;
-    naturalHeight: number;
-    naturalWidth: number;
     isMaxWidth: boolean;
-    isSelected: boolean;
     imgRef: React.MutableRefObject<HTMLImageElement | null>;
+    imageClassName?: string;
+    selected: boolean;
 }) {
     useSuspenseImage(src);
     return (
-        <div>
-            <img
-                ref={imgRef}
-                src={src}
-                alt={alt}
-                style={{
-                    width: isMaxWidth ? '100%' : 'auto',
-                    height: isMaxWidth ? 'auto' : undefined,
-                    aspectRatio: `auto ${naturalWidth / naturalHeight}`,
-                }}
-            />
-        </div>
+        <img
+            ref={imgRef}
+            src={src}
+            alt={alt}
+            className={imageClassName}
+            data-max-width={isMaxWidth}
+            data-selected={selected}
+            // style={{
+            //     aspectRatio: `auto ${naturalWidth / naturalHeight}`,
+            // }}
+        />
     );
 }
 
@@ -92,21 +89,21 @@ function ImageFallback({
     naturalWidth,
     naturalHeight,
     isMaxWidth,
+    fallbackClassName,
 }: {
     naturalWidth: number;
     naturalHeight: number;
     isMaxWidth: boolean;
+    fallbackClassName?: string;
 }) {
     return (
-        <div>
-            <div
-                style={{
-                    width: isMaxWidth ? '100%' : 'auto',
-                    height: isMaxWidth ? 'auto' : undefined,
-                    aspectRatio: `auto ${naturalWidth / naturalHeight}`,
-                }}
-            ></div>
-        </div>
+        <div
+            className={fallbackClassName}
+            style={{
+                aspectRatio: `auto ${naturalWidth / naturalHeight}`,
+            }}
+            data-max-width={isMaxWidth}
+        />
     );
 }
 
@@ -125,9 +122,10 @@ export default function ImageComponent({
     isMaxWidth: boolean;
     nodeKey: NodeKey;
 }) {
-    const [editor] = useLexicalComposerContext();
+    const [editor, { getTheme }] = useLexicalComposerContext();
     const [isSelected, setIsSelected] = useLexicalNodeSelection(nodeKey);
     const imgRef = useRef<HTMLImageElement | null>(null);
+    const imageTheme = getTheme()?.editorImage;
 
     useEffect(() => {
         function clickListener(ev: MouseEvent) {
@@ -226,11 +224,17 @@ export default function ImageComponent({
     });
 
     return (
-        <>
+        <div
+            data-selected={isSelected}
+            data-max-width={isMaxWidth}
+            style={{ aspectRatio: `auto ${naturalWidth}/${naturalHeight}` }}
+            className={imageTheme?.container}
+        >
             {src !== '' && (
                 <Suspense
                     fallback={
                         <ImageFallback
+                            fallbackClassName={imageTheme?.fallback}
                             naturalWidth={naturalWidth}
                             naturalHeight={naturalHeight}
                             isMaxWidth={isMaxWidth}
@@ -238,17 +242,16 @@ export default function ImageComponent({
                     }
                 >
                     <SuspenseImage
+                        imageClassName={imageTheme?.image}
                         imgRef={imgRef}
                         src={src}
                         alt={alt}
-                        naturalWidth={naturalWidth}
-                        naturalHeight={naturalHeight}
+                        selected={isSelected}
                         isMaxWidth={isMaxWidth}
-                        isSelected={isSelected}
                     />
                 </Suspense>
             )}
-        </>
+        </div>
     );
 }
 
@@ -342,6 +345,13 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         return false;
     }
 
+    isKeyboardSelectable(): boolean {
+        return true;
+    }
+    isInline(): boolean {
+        return false;
+    }
+
     exportDOM(editor: LexicalEditor): DOMExportOutput {
         const theme = editor._config.theme;
         const img = document.createElement('img');
@@ -357,7 +367,6 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         img.setAttribute('style', aspectRatioStyle);
 
         container.setAttribute('class', theme.imageContainer || '');
-        //container.setAttribute('style', aspectRatioStyle);
 
         container.appendChild(img);
         return { element: container };

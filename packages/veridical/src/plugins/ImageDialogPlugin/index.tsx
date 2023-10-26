@@ -1,81 +1,47 @@
-import { IMAGE_DIALOG_COMMAND } from '@/commands';
+import { OPEN_ADD_IMAGE_DIALOG } from '@/commands';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { COMMAND_PRIORITY_EDITOR } from 'lexical';
-import React, { useCallback, useEffect, useState } from 'react';
-import { ImageNode } from '@/nodes';
-
-export interface AddImageDialogStyle {
-    backdrop?: string;
-    dialog?: string;
-}
+import { COMMAND_PRIORITY_LOW } from 'lexical';
+import { useEffect, useState } from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
+import * as React from 'react';
 
 export default function ImageDialogPlugin({
-    urlFromImageBlob,
-    container,
+    children,
+    onOpenChange,
 }: {
-    urlFromImageBlob?: (image: Blob) => Promise<string>;
-    container: Element | DocumentFragment;
+    children: React.ReactNode;
+    onOpenChange?: (open: boolean) => void;
 }) {
     const [editor] = useLexicalComposerContext();
-    const [imageNode, setImageNode] = useState<ImageNode | null | undefined>();
-    const [showDialog, setShowDialog] = useState(false);
-    const [action, setAction] = useState<'edit' | 'add'>('add'); // Is dialog for adding image or editing
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         return editor.registerCommand(
-            IMAGE_DIALOG_COMMAND,
-            ({ imageNode, action }) => {
-                if (imageNode) {
-                    setShowDialog(true);
-                } else {
-                    setShowDialog(false);
-                }
-                setImageNode(imageNode);
-                setAction(action);
+            OPEN_ADD_IMAGE_DIALOG,
+            () => {
+                setOpen(true);
+                onOpenChange?.(true);
                 return true;
             },
-            COMMAND_PRIORITY_EDITOR,
+            COMMAND_PRIORITY_LOW,
         );
-    }, [editor]);
+    }, [editor, onOpenChange]);
 
-    const onClose = useCallback(() => {
-        setShowDialog(false);
-        // If action is edit then don't remove imageNode when closing dialog.
-        if (action === 'edit') return;
-        editor.update(() => {
-            imageNode?.remove();
-        });
-    }, [action, editor, imageNode]);
-
-    async function onSave(
-        src: string,
-        altText: string,
-        naturalHeight: number,
-        naturalWidth: number,
-        isMaxWidth: boolean,
-    ) {
-        editor.update(() => {
-            imageNode?.setSrc(src);
-            imageNode?.setAltText(altText);
-            imageNode?.setNaturalHeight(naturalHeight);
-            imageNode?.setNaturalWidth(naturalWidth);
-            imageNode?.setIsMaxWidth(isMaxWidth);
-        });
-        setShowDialog(false);
-    }
-
-    return null;
-    // return (
-    //     <ImageDialog
-    //         width={480}
-    //         height={'auto'}
-    //         container={container}
-    //         action={action}
-    //         urlFromImageBlob={urlFromImageBlob}
-    //         imageNode={imageNode}
-    //         showDialog={showDialog}
-    //         onClose={onClose}
-    //         onSave={onSave}
-    //     />
-    // );
+    return (
+        <Dialog.Root
+            open={open}
+            onOpenChange={(open) => {
+                setOpen(open);
+                onOpenChange?.(open);
+            }}
+        >
+            <Dialog.Portal>{children}</Dialog.Portal>
+        </Dialog.Root>
+    );
 }
+
+ImageDialogPlugin.Content = Dialog.Content;
+ImageDialogPlugin.Close = Dialog.Close;
+ImageDialogPlugin.Overlay = Dialog.Overlay;
+ImageDialogPlugin.Title = Dialog.Title;
+ImageDialogPlugin.Description = Dialog.Description;

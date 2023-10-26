@@ -6,7 +6,6 @@ import React, { useEffect } from 'react';
 import {
     CodeHighlightPlugin,
     defaultEditorNodes,
-    ImagePlugin,
     MarkdownPlugin,
     PrettierPlugin,
     RegisterVeridicalCommands,
@@ -25,6 +24,7 @@ import FloatingActionMenuPlugin from '../plugins/FloatingActionMenu';
 import LinkPlugins from '../plugins/LinkPlugins';
 import HoveredNodePlugin from '../plugins/HoveredNodePlugin';
 import { useAppContext } from '../utils/context';
+import ImageDialogPlugin from '../plugins/ImageDialogPlugin';
 
 function saveStateToLocalStorage(state: string) {
     localStorage.setItem('blog', state);
@@ -81,11 +81,11 @@ export default function Editor() {
                 <PrettierPlugin />
                 <HistoryPlugin />
                 <TabIndentationPlugin />
-                <ImagePlugin />
                 <SaveStatePlugin />
                 <HoveredNodePlugin />
                 <LinkPlugins />
                 <CommandMenuPlugin />
+                <ImageDialogPlugin />
                 <FloatingActionMenuPlugin />
 
                 {showTreeView && <TreeViewPlugin />}

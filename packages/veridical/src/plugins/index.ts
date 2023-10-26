@@ -1,7 +1,6 @@
 import MarkdownPlugin from './MarkdownPlugin';
 import CodeHighlightPlugin from './CodeHighlightPlugin';
 import PrettierPlugin from './PrettierPlugin';
-import ImagePlugin from './ImagePlugin';
 import AutoLinkPlugin from './AutoLinkPlugin';
 import EditorStatePlugin from './EditorStatePlugin';
 import ConvertToMarkdownPlugin from './ConvertToMarkdownPlugin';
@@ -16,7 +15,6 @@ export {
     PrettierPlugin,
     HoveredNodeProvider,
     ImageDialogPlugin,
-    ImagePlugin,
     AutoLinkPlugin,
     EditorStatePlugin,
     ConvertToMarkdownPlugin,

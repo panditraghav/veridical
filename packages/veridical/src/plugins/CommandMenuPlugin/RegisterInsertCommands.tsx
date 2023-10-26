@@ -1,10 +1,12 @@
 import {
     INSERT_CODE_COMMAND,
     INSERT_HEADING_COMMAND,
+    INSERT_IMAGE_COMMAND,
     INSERT_LIST_COMMAND,
     INSERT_PARAGRAPH_COMMAND,
     INSERT_QUOTE_COMMAND,
 } from '@/commands';
+import { $createImageNode } from '@/nodes';
 import { $getTopLevelSelectedNode } from '@/utils/selection';
 import { $createCodeNode } from '@lexical/code';
 import { $createListItemNode, $createListNode } from '@lexical/list';
@@ -275,6 +277,34 @@ export function RegisterInsertQuoteCommand() {
     return null;
 }
 
+export function RegisterInsertImageCommand() {
+    const [editor] = useLexicalComposerContext();
+    useEffect(() => {
+        return editor.registerCommand(
+            INSERT_IMAGE_COMMAND,
+            (payload) => {
+                const topLevelSelectedNode = $getTopLevelSelectedNode();
+                if (!topLevelSelectedNode) return false;
+                const imageNode = $createImageNode({ ...payload });
+                if (
+                    $isParagraphNode(topLevelSelectedNode) &&
+                    topLevelSelectedNode.getTextContent() == ''
+                ) {
+                    topLevelSelectedNode.insertBefore(imageNode);
+                } else {
+                    topLevelSelectedNode.insertAfter(imageNode);
+                    const p = $createParagraphNode();
+                    imageNode.insertAfter(p);
+                    p.select(0, 0);
+                }
+                return true;
+            },
+            COMMAND_PRIORITY_LOW,
+        );
+    });
+    return null;
+}
+
 export function RegisterInsertCommands() {
     return (
         <>
@@ -283,6 +313,7 @@ export function RegisterInsertCommands() {
             <RegisterInsertListCommand />
             <RegisterInsertParagraphCommand />
             <RegisterInsertQuoteCommand />
+            <RegisterInsertImageCommand />
         </>
     );
 }
