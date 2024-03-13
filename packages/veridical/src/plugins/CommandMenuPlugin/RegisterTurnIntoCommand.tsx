@@ -88,11 +88,7 @@ export function RegisterTurnIntoHeadingCommand() {
                 if (!selectedNode) return false;
 
                 const heading = $createHeadingNode(payload.headingTag);
-                if (
-                    !selectedNode.canReplaceWith(heading) ||
-                    !$isElementNode(selectedNode)
-                )
-                    return false;
+                if (!$isElementNode(selectedNode)) return false;
 
                 $replaceNode(selectedNode, heading, payload.textOnly);
                 return true;
@@ -113,10 +109,7 @@ export function RegisterTurnIntoParagraphCommand() {
                     payload.selectedNode || $getTopLevelSelectedNode();
                 if (!selectedNode) return false;
                 const paragraph = $createParagraphNode();
-                if (
-                    !selectedNode.canReplaceWith(paragraph) ||
-                    !$isElementNode(selectedNode)
-                ) {
+                if (!$isElementNode(selectedNode)) {
                     return false;
                 }
                 $replaceNode(selectedNode, paragraph, payload.textOnly);
@@ -139,10 +132,7 @@ export function RegisterTurnIntoQuoteCommand() {
                     payload.selectedNode || $getTopLevelSelectedNode();
                 if (!selectedNode) return false;
                 const quote = $createQuoteNode();
-                if (
-                    !selectedNode.canReplaceWith(quote) ||
-                    !$isElementNode(selectedNode)
-                ) {
+                if (!$isElementNode(selectedNode)) {
                     return false;
                 }
                 $replaceNode(selectedNode, quote, payload.textOnly);
@@ -167,19 +157,16 @@ export function RegisterTurnIntoListCommand() {
 
                 const listNode = $createListNode(payload.listType);
 
-                if (
-                    !selectedNode.canReplaceWith(listNode) ||
-                    !$isElementNode(selectedNode)
-                ) {
+                if (!$isElementNode(selectedNode)) {
                     return false;
                 }
-
-                const children = selectedNode.getChildren();
 
                 if ($isListNode(selectedNode)) {
                     selectedNode.setListType(payload.listType);
                     return true;
                 }
+
+                const children = selectedNode.getChildren();
 
                 // Creating new list item on every line break
                 let liNode: ListItemNode = $createListItemNode();
@@ -198,8 +185,10 @@ export function RegisterTurnIntoListCommand() {
                 listNode.append(liNode); // Append the last liNode
 
                 selectedNode.replace(listNode);
-                const offset = lastNodeForSelection?.getTextContent().length;
-                lastNodeForSelection?.select(offset, offset);
+                if ($isElementNode(lastNodeForSelection)) {
+                    const offset = lastNodeForSelection.getTextContent().length;
+                    lastNodeForSelection.select(offset, offset);
+                }
                 return true;
             },
             COMMAND_PRIORITY_EDITOR,

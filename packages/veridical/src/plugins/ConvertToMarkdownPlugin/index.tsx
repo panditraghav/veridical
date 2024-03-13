@@ -1,7 +1,7 @@
 import { $convertToMarkdownString } from '@lexical/markdown';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
-import { MARKDOWN_TRANSFORMERS } from '../../utils';
+import { MARKDOWN_TRANSFORMERS } from '@/utils';
 
 interface IProps {
     onChangeMarkdown: (markdown: string) => void;

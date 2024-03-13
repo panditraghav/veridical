@@ -91,10 +91,11 @@ function CommandMenuPlugin({
                     closeAndResetState();
                     return;
                 }
-                const [anchorOffset, focusOffset] =
-                    selection.getCharacterOffsets();
                 const node = selection.getNodes()[0];
                 const text = node.getTextContent();
+
+                const anchorOffset = selection.anchor.offset;
+                const focusOffset = selection.focus.offset;
 
                 if (
                     anchorOffset === focusOffset &&

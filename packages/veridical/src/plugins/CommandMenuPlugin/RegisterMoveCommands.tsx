@@ -3,6 +3,7 @@ import { $getTopLevelSelectedNode } from '@/utils';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {
     $getSelection,
+    $isElementNode,
     $isRangeSelection,
     COMMAND_PRIORITY_LOW,
 } from 'lexical';
@@ -38,8 +39,8 @@ export function RegisterMoveCommand() {
                     topLevelSelectedNode.remove();
                     next.insertAfter(topLevelSelectedNode);
                 }
-                if (selectedNode?.select) {
-                    selectedNode?.select(anchorOffset, focusOffset);
+                if ($isElementNode(selectedNode)) {
+                    selectedNode.select(anchorOffset, focusOffset);
                 }
 
                 return true;

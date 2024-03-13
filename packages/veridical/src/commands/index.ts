@@ -10,7 +10,6 @@ export const OPEN_ADD_IMAGE_DIALOG = createCommand('OPEN_ADD_IMAGE_DIALOG');
 type InsertCommandPayload = {
     selectedNode?: LexicalNode;
     content?: string;
-    position?: 'before' | 'after';
     replaceOnEmptyParagraph?: boolean;
 };
 

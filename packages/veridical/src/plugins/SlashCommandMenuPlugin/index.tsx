@@ -24,8 +24,8 @@ export default function SlashCommandMenuPlugin() {
 
                 if (lastChild?.getKey() !== node.getKey()) return;
 
-                const [anchorOffset, focusOffset] =
-                    selection.getCharacterOffsets();
+                const anchorOffset = selection.anchor.offset;
+                const focusOffset = selection.focus.offset;
 
                 const text = node.getTextContent();
 

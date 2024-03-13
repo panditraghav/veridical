@@ -15,6 +15,7 @@ import { $createHeadingNode, $createQuoteNode } from '@lexical/rich-text';
 import {
     $createParagraphNode,
     $createTextNode,
+    $getEditor,
     $isParagraphNode,
     COMMAND_PRIORITY_LOW,
 } from 'lexical';
@@ -30,17 +31,15 @@ export function RegisterInsertHeadingCommand() {
                 headingTag,
                 selectedNode: node,
                 content,
-                position,
                 replaceOnEmptyParagraph = true,
             }) => {
                 const selectedNode = node || $getTopLevelSelectedNode();
 
                 if (!selectedNode) return false;
-
                 const offset = content?.length || 0;
+
+                const editor = $getEditor();
                 const heading = $createHeadingNode(headingTag);
-                const textNode = $createTextNode(content);
-                heading.append(textNode);
                 if (
                     replaceOnEmptyParagraph &&
                     selectedNode.getTextContent() === '' &&
@@ -48,22 +47,10 @@ export function RegisterInsertHeadingCommand() {
                 ) {
                     selectedNode.replace(heading);
                     heading.select(offset, offset);
-                    return true;
+                } else {
+                    selectedNode.insertAfter(heading);
+                    heading.select(offset, offset);
                 }
-
-                switch (position) {
-                    case 'after':
-                        selectedNode.insertAfter(heading);
-                        break;
-                    case 'before':
-                        selectedNode.insertBefore(heading);
-                        break;
-                    default:
-                        selectedNode.insertAfter(heading);
-                        break;
-                }
-
-                heading.select(offset, offset);
                 return true;
             },
             COMMAND_PRIORITY_LOW,
@@ -81,7 +68,6 @@ export function RegisterInsertCodeCommand() {
             ({
                 selectedNode: node,
                 language,
-                position,
                 replaceOnEmptyParagraph = true,
             }) => {
                 const selectedNode = node || $getTopLevelSelectedNode();
@@ -97,22 +83,10 @@ export function RegisterInsertCodeCommand() {
                 ) {
                     selectedNode.replace(code);
                     code.select(0, 0);
-                    return true;
+                } else {
+                    selectedNode.insertAfter(code);
+                    code.select(0, 0);
                 }
-
-                switch (position) {
-                    case 'after':
-                        selectedNode.insertAfter(code);
-                        break;
-                    case 'before':
-                        selectedNode.insertBefore(code);
-                        break;
-                    default:
-                        selectedNode.insertAfter(code);
-                        break;
-                }
-
-                code.select(0, 0);
                 return true;
             },
             COMMAND_PRIORITY_LOW,
@@ -129,7 +103,6 @@ export function RegisterInsertListCommand() {
             ({
                 selectedNode: node,
                 type,
-                position,
                 content,
                 replaceOnEmptyParagraph = true,
             }) => {
@@ -150,21 +123,10 @@ export function RegisterInsertListCommand() {
                 ) {
                     selectedNode.replace(list);
                     item.select(offset, offset);
-                    return true;
+                } else {
+                    selectedNode.insertAfter(list);
+                    list.select(offset, offset);
                 }
-                switch (position) {
-                    case 'after':
-                        selectedNode.insertAfter(list);
-                        break;
-                    case 'before':
-                        selectedNode.insertBefore(list);
-                        break;
-                    default:
-                        selectedNode.insertAfter(list);
-                        break;
-                }
-
-                list.select(offset, offset);
                 return true;
             },
             COMMAND_PRIORITY_LOW,
@@ -181,7 +143,6 @@ export function RegisterInsertParagraphCommand() {
             INSERT_PARAGRAPH_COMMAND,
             ({
                 selectedNode: node,
-                position,
                 content,
                 replaceOnEmptyParagraph = true,
             }) => {
@@ -201,22 +162,10 @@ export function RegisterInsertParagraphCommand() {
                 ) {
                     selectedNode.replace(p);
                     p.select(offset, offset);
-                    return true;
+                } else {
+                    selectedNode.insertAfter(p);
+                    p.select(offset, offset);
                 }
-
-                switch (position) {
-                    case 'after':
-                        selectedNode.insertAfter(p);
-                        break;
-                    case 'before':
-                        selectedNode.insertBefore(p);
-                        break;
-                    default:
-                        selectedNode.insertAfter(p);
-                        break;
-                }
-
-                p.select(offset, offset);
                 return true;
             },
             COMMAND_PRIORITY_LOW,
@@ -233,7 +182,6 @@ export function RegisterInsertQuoteCommand() {
             INSERT_QUOTE_COMMAND,
             ({
                 selectedNode: node,
-                position,
                 content,
                 replaceOnEmptyParagraph = true,
             }) => {
@@ -245,7 +193,6 @@ export function RegisterInsertQuoteCommand() {
                 const quote = $createQuoteNode();
                 const text = $createTextNode(content);
                 quote.append(text);
-
                 if (
                     replaceOnEmptyParagraph &&
                     selectedNode.getTextContent() === '' &&
@@ -253,22 +200,10 @@ export function RegisterInsertQuoteCommand() {
                 ) {
                     selectedNode.replace(quote);
                     quote.select(offset, offset);
-                    return true;
+                } else {
+                    selectedNode.insertAfter(quote);
+                    quote.select(offset, offset);
                 }
-
-                switch (position) {
-                    case 'after':
-                        selectedNode.insertAfter(quote);
-                        break;
-                    case 'before':
-                        selectedNode.insertBefore(quote);
-                        break;
-                    default:
-                        selectedNode.insertAfter(quote);
-                        break;
-                }
-
-                quote.select(offset, offset);
                 return true;
             },
             COMMAND_PRIORITY_LOW,

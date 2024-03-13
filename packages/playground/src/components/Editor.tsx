@@ -1,4 +1,7 @@
-import { LexicalComposer } from '@lexical/react/LexicalComposer';
+import {
+    InitialConfigType,
+    LexicalComposer,
+} from '@lexical/react/LexicalComposer';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $createParagraphNode, $getRoot } from 'lexical';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -42,6 +45,7 @@ function SaveStatePlugin() {
 
 function initializeEditor() {
     const root = $getRoot();
+    console.log(root);
     if (root.getFirstChild() === null) {
         root.append($createParagraphNode());
     }
@@ -50,17 +54,18 @@ function initializeEditor() {
 export default function Editor() {
     const { showTreeView } = useAppContext();
     const editorState = localStorage.getItem('blog');
+
+    const initialConfig: InitialConfigType = {
+        namespace: 'Playground',
+        theme: lexicalTheme,
+        nodes: [...defaultEditorNodes],
+        editable: true,
+        onError: (error: any) => console.log(error),
+        editorState: editorState || initializeEditor,
+    };
+
     return (
-        <LexicalComposer
-            initialConfig={{
-                namespace: 'playground',
-                theme: lexicalTheme,
-                nodes: defaultEditorNodes,
-                editable: true,
-                onError: (error: any) => console.log(error),
-                editorState: editorState || initializeEditor,
-            }}
-        >
+        <LexicalComposer initialConfig={initialConfig}>
             <RegisterVeridicalCommands />
             <div className="mb-24 w-full px-4 md:mx-auto md:w-8/12 lg:w-[850px]">
                 <RichTextPlugin
