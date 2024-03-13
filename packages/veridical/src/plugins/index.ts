@@ -5,7 +5,7 @@ import AutoLinkPlugin from './AutoLinkPlugin';
 import EditorStatePlugin from './EditorStatePlugin';
 import ConvertToMarkdownPlugin from './ConvertToMarkdownPlugin';
 import ConvertFromMarkdownPlugin from './ConvertFromMarkdownPlugin';
-import ImageDialogPlugin from './ImageDialogPlugin';
+import ImageDialogPlugin from '../../../playground/src/plugins/ImageDialogPlugin';
 import SlashCommandMenuPlugin from './SlashCommandMenuPlugin';
 import HoveredNodeProvider from './HoveredNodeProvider';
 
