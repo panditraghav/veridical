@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, {
+    useEffect,
+    useState,
+    useCallback,
+    useRef,
+    forwardRef,
+} from 'react';
 import { createPortal } from 'react-dom';
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -26,29 +32,29 @@ function setTragetLinePosition(
     ev: DragEvent,
     editor: LexicalEditor,
     targetLine: HTMLDivElement | null,
+    leftOffset: number = LEFT_OFFSET,
 ) {
     const { lexicalDOMNode: targetLexicalDOMNode } = getHoveredDOMNode(
         ev,
         editor,
         {
-            left: LEFT_OFFSET,
+            left: leftOffset,
         },
     );
     if (!targetLexicalDOMNode || !targetLine) return;
     const { top, width, height, left } =
         targetLexicalDOMNode.getBoundingClientRect();
+
+    targetLine.style.display = 'block';
+    targetLine.style.left = `${left}px`;
+    targetLine.style.width = `${width}px`;
+
     switch (isAboveOrBelowCenter(ev, targetLexicalDOMNode)) {
         case 'above':
-            targetLine.style.display = 'block';
             targetLine.style.top = `${top + window.scrollY}px`;
-            targetLine.style.left = `${left}px`;
-            targetLine.style.width = `${width}px`;
             break;
         case 'below':
-            targetLine.style.display = 'block';
             targetLine.style.top = `${top + height + window.scrollY}px`;
-            targetLine.style.left = `${left}px`;
-            targetLine.style.width = `${width}px`;
             break;
     }
 }
@@ -56,28 +62,38 @@ function setTragetLinePosition(
 function removeTargetLine(targetLine: HTMLDivElement | null) {
     if (!targetLine) return;
     targetLine.style.display = 'none';
-    targetLine.style.left = '-1000px';
-    targetLine.style.top = '-1000px';
+    targetLine.style.width = '0px';
+    targetLine.style.height = '0px';
 }
 
 function setDragImage(dt: DataTransfer, draggedElement: HTMLElement) {
     dt.setDragImage(draggedElement, 0, 0);
 }
 
-function TargetLine({
-    targetLineRef,
-}: {
-    targetLineRef: React.MutableRefObject<HTMLDivElement | null>;
-}) {
-    return createPortal(
-        <div ref={targetLineRef} style={{ position: 'absolute' }} />,
-        document.body,
-    );
-}
+const TargetLine = forwardRef<HTMLDivElement, { className?: string }>(
+    ({ className }, ref) => {
+        return createPortal(
+            <div
+                ref={ref}
+                style={{ position: 'absolute' }}
+                className={className}
+            />,
+            document.body,
+        );
+    },
+);
+TargetLine.displayName = 'TargetLine';
 
 export function DraggableNodeButton({
     children,
+    classNames,
+    leftOffset = LEFT_OFFSET,
 }: {
+    classNames?: {
+        targetLine?: string;
+        button?: string;
+    };
+    leftOffset?: number;
     children?: React.ReactNode;
 }) {
     const [editor] = useLexicalComposerContext();
@@ -87,9 +103,15 @@ export function DraggableNodeButton({
 
     const onDragOver = useCallback(
         (ev: DragEvent) => {
+            console.log(targetLineRef.current);
             ev.preventDefault();
             if (!isDragging) return false;
-            setTragetLinePosition(ev, editor, targetLineRef.current);
+            setTragetLinePosition(
+                ev,
+                editor,
+                targetLineRef.current,
+                leftOffset,
+            );
             return true;
         },
         [editor, isDragging],
@@ -99,7 +121,7 @@ export function DraggableNodeButton({
         (ev: DragEvent) => {
             const dt = ev.dataTransfer;
             const { lexicalDOMNode: target } = getHoveredDOMNode(ev, editor, {
-                left: LEFT_OFFSET,
+                left: leftOffset,
             });
 
             if (!dt || !isHTMLElement(target)) return false;
@@ -127,7 +149,7 @@ export function DraggableNodeButton({
             });
             return true;
         },
-        [editor],
+        [editor, leftOffset],
     );
 
     function onDragStart(ev: React.DragEvent<HTMLButtonElement>) {
@@ -164,10 +186,14 @@ export function DraggableNodeButton({
                 onDragEnd={onDragEnd}
                 draggable={true}
                 tabIndex={-1}
+                className={classNames?.button}
             >
                 {children}
             </button>
-            <TargetLine targetLineRef={targetLineRef} />
+            <TargetLine
+                className={classNames?.targetLine}
+                ref={targetLineRef}
+            />
         </>
     );
 }

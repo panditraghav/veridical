@@ -16,7 +16,12 @@ export default function HoveredNodePlugin() {
                 <AddNodeButton>
                     <RxPlus className="fill-muted-foreground hover:fill-foreground text-xl hover:bg-muted rounded-sm" />
                 </AddNodeButton>
-                <DraggableNodeButton>
+                <DraggableNodeButton
+                    classNames={{
+                        targetLine:
+                            'w-full -translate-y-[2px] h-1 rounded-sm bg-foreground/20 animate-in fade-in duration-150 w-0',
+                    }}
+                >
                     <RxDragHandleDots2 className="fill-muted-foreground hover:fill-foreground text-xl hover:bg-muted mr-1" />
                 </DraggableNodeButton>
             </HoveredNodeOptions>
