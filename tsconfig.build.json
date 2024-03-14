@@ -6,6 +6,6 @@
         "declarationDir": "./.dec-temp",
         "strict": true
     },
-    "exclude": ["node_modules/**/*", "./playground"],
+    "include": ["./packages/veridical"],
     "extends": "./tsconfig.json"
 }

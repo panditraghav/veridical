@@ -13,9 +13,9 @@
     "license": "ISC",
     "scripts": {
         "dev": "npm run dev --workspace=playground",
-        "build": "ts-node --esm scripts/build.ts",
+        "build": "node scripts/build.cjs",
         "prebuild": "npm run clean && npm run tsc",
-        "tsc": "tsc -p tsconfig.build.json",
+        "tsc": "tsc --project tsconfig.build.json",
         "clean": "rm -rf packages/veridical/dist; rm -rf .dec-temp",
         "release": "cd packages/veridical/dist && npm publish"
     },

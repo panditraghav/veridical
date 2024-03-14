@@ -1,19 +1,17 @@
 // TODO: Convert relative paths like @/utils to absolute paths
-import commonjs from '@rollup/plugin-commonjs';
-import image from '@rollup/plugin-image';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
-import typescript from '@rollup/plugin-typescript';
-import { exec } from 'child-process-promise';
-import { readFileSync, writeFileSync } from 'fs';
-import path from 'path';
-import { InputOptions, OutputOptions, rollup, RollupBuild } from 'rollup';
-import dts from 'rollup-plugin-dts';
-import external from 'rollup-plugin-peer-deps-external';
-import postcss from 'rollup-plugin-postcss';
-import { fileURLToPath } from 'url';
+const { rollup } = require('rollup');
+const commonjs = require('@rollup/plugin-commonjs');
+const image = require('@rollup/plugin-image');
+const nodeResolve = require('@rollup/plugin-node-resolve');
+const terser = require('@rollup/plugin-terser');
+const typescript = require('@rollup/plugin-typescript');
+const { exec } = require('child-process-promise');
+const { readFileSync, writeFileSync } = require('fs');
+const path = require('path');
+const dts = require('rollup-plugin-dts');
+const external = require('rollup-plugin-peer-deps-external');
+const postcss = require('rollup-plugin-postcss');
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const basePath = path.resolve(__dirname, '..');
 const packagesPath = path.resolve(basePath, 'packages');
 const veridicalPath = path.resolve(packagesPath, 'veridical');
@@ -23,7 +21,7 @@ const readmePath = path.resolve(basePath, 'README.md');
 const packageJSONPath = path.resolve(veridicalPath, 'package.json');
 const outputFileName = 'Veridical';
 
-function isExternal(source: string) {
+function isExternal(source) {
     const externalDeps = Object.keys(
         JSON.parse(readFileSync(packageJSONPath).toString()).dependencies,
     );
@@ -35,7 +33,7 @@ function isExternal(source: string) {
     return false;
 }
 
-const inputOptions: InputOptions = {
+const inputOptions = {
     input: path.resolve(srcPath, 'index.ts'),
     external: isExternal,
     plugins: [
@@ -72,7 +70,7 @@ const inputOptions: InputOptions = {
     },
 };
 
-const outputOptionsList: OutputOptions[] = [
+const outputOptionsList = [
     {
         file: path.resolve(distPath, `${outputFileName}.dev.js`),
         format: 'cjs',
@@ -84,11 +82,8 @@ const outputOptionsList: OutputOptions[] = [
     },
 ];
 
-async function build(
-    inputOptions: InputOptions,
-    outputOptionsList: OutputOptions[],
-) {
-    let bundle: RollupBuild | undefined;
+async function build(inputOptions, outputOptionsList) {
+    let bundle;
     try {
         bundle = await rollup(inputOptions);
         await generateOutputs(bundle, outputOptionsList);
@@ -100,22 +95,17 @@ async function build(
     }
 }
 
-async function generateOutputs(
-    bundle: RollupBuild,
-    outputOptionsList: OutputOptions[],
-) {
+async function generateOutputs(bundle, outputOptionsList) {
     for (const opt of outputOptionsList) {
         await bundle.write(opt);
     }
 }
 async function buildDecleration() {
-    const tsConfigBuildPath = path.resolve(basePath, 'tsconfig.build.json');
     try {
-        await exec(`tsc -p ${tsConfigBuildPath}`);
         await build(
             {
                 input: path.resolve(basePath, '.dec-temp', 'index.d.ts'),
-                plugins: [dts()],
+                plugins: [dts.default()],
                 external: isExternal,
             },
             [
