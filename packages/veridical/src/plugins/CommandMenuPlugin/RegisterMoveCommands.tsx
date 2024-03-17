@@ -5,6 +5,7 @@ import {
     $getSelection,
     $isElementNode,
     $isRangeSelection,
+    $isTextNode,
     COMMAND_PRIORITY_LOW,
 } from 'lexical';
 import { useEffect } from 'react';
@@ -39,7 +40,7 @@ export function RegisterMoveCommand() {
                     topLevelSelectedNode.remove();
                     next.insertAfter(topLevelSelectedNode);
                 }
-                if ($isElementNode(selectedNode)) {
+                if ($isElementNode(selectedNode) || $isTextNode(selectedNode)) {
                     selectedNode.select(anchorOffset, focusOffset);
                 }
 
