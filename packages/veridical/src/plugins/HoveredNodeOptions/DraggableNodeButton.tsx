@@ -48,6 +48,7 @@ function setTragetLinePosition(
     targetLine.style.display = 'block';
     targetLine.style.left = `${left}px`;
     targetLine.style.width = `${width}px`;
+    targetLine.setAttribute('data-visible', 'true');
 
     switch (isAboveOrBelowCenter(ev, targetLexicalDOMNode)) {
         case 'above':
@@ -64,6 +65,7 @@ function removeTargetLine(targetLine: HTMLDivElement | null) {
     targetLine.style.display = 'none';
     targetLine.style.width = '0px';
     targetLine.style.height = '0px';
+    targetLine.setAttribute('data-visible', 'flase');
 }
 
 function setDragImage(dt: DataTransfer, draggedElement: HTMLElement) {
