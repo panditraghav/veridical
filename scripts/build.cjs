@@ -19,7 +19,7 @@ const srcPath = path.resolve(veridicalPath, 'src');
 const distPath = path.resolve(veridicalPath, 'dist');
 const readmePath = path.resolve(basePath, 'README.md');
 const packageJSONPath = path.resolve(veridicalPath, 'package.json');
-const outputFileName = 'Veridical';
+const outputFileName = 'lexical-wysiwyg';
 
 function isExternal(source) {
     const externalDeps = Object.keys(
@@ -121,7 +121,7 @@ async function buildDecleration() {
 }
 
 function createMainFile() {
-    const mainFile = `const ${outputFileName} = process.env.NODE_ENV === 'development' ? require('./${outputFileName}.dev.js') : require('./${outputFileName}.prod.js')\n module.exports = ${outputFileName}`;
+    const mainFile = `const file = process.env.NODE_ENV === 'development' ? require('./${outputFileName}.dev.js') : require('./${outputFileName}.prod.js')\n module.exports = file`;
     writeFileSync(path.resolve(distPath, `${outputFileName}.js`), mainFile);
 }
 

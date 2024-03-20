@@ -11,7 +11,7 @@ import {
     defaultEditorNodes,
     MarkdownPlugin,
     PrettierPlugin,
-    RegisterVeridicalCommands,
+    RegisterCommands,
 } from 'veridical';
 import { lexicalTheme } from '../theme/lexicalTheme';
 import TreeViewPlugin from '../TreeViewPlugin';
@@ -66,7 +66,7 @@ export default function Editor() {
 
     return (
         <LexicalComposer initialConfig={initialConfig}>
-            <RegisterVeridicalCommands />
+            <RegisterCommands />
             <div className="mb-24 w-full px-4 md:mx-auto md:w-8/12 lg:w-[850px]">
                 <RichTextPlugin
                     contentEditable={

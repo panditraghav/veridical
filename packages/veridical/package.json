@@ -1,13 +1,14 @@
 {
-    "name": "veridical",
+    "name": "lexical-wysiwyg",
     "version": "0.1.0",
     "description": "A customizable WYSIWYG editor made with lexical",
     "homepage": "https://panditraghav.github.io/veridical",
     "repository": {
-        "url": "https://github.com/panditraghav/veridical"
+        "type": "git",
+        "url": "https://github.com/panditraghav/veridical.git"
     },
-    "main": "Veridical.js",
-    "types": "Veridical.d.ts",
+    "main": "lexical-wysiwyg.js",
+    "types": "lexical-wysiwyg.d.ts",
     "keywords": [
         "WYSIWYG Editor",
         "Blog",

@@ -5,7 +5,7 @@ import {
     RegisterTurnIntoCommands,
 } from '@/plugins';
 
-export function RegisterVeridicalCommands() {
+export function RegisterCommands() {
     return (
         <>
             <RegisterInsertCommands />
