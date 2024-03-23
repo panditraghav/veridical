@@ -72,24 +72,26 @@ function setDragImage(dt: DataTransfer, draggedElement: HTMLElement) {
     dt.setDragImage(draggedElement, 0, 0);
 }
 
-const TargetLine = forwardRef<HTMLDivElement, { className?: string }>(
-    ({ className }, ref) => {
-        return createPortal(
-            <div
-                ref={ref}
-                style={{ position: 'absolute' }}
-                className={className}
-            />,
-            document.body,
-        );
-    },
-);
+const TargetLine = forwardRef<
+    HTMLDivElement,
+    { className?: string; container?: HTMLElement }
+>(({ className, container }, ref) => {
+    return createPortal(
+        <div
+            ref={ref}
+            style={{ position: 'absolute' }}
+            className={className}
+        />,
+        container || document.body,
+    );
+});
 TargetLine.displayName = 'TargetLine';
 
 export function DraggableNodeButton({
     children,
     classNames,
     leftOffset = LEFT_OFFSET,
+    container,
 }: {
     classNames?: {
         targetLine?: string;
@@ -97,6 +99,7 @@ export function DraggableNodeButton({
     };
     leftOffset?: number;
     children?: React.ReactNode;
+    container?: HTMLElement;
 }) {
     const [editor] = useLexicalComposerContext();
     const { hoveredDOMNode, hoveredLexicalNode } = useHoveredNode();
@@ -193,6 +196,7 @@ export function DraggableNodeButton({
                 {children}
             </button>
             <TargetLine
+                container={container}
                 className={classNames?.targetLine}
                 ref={targetLineRef}
             />

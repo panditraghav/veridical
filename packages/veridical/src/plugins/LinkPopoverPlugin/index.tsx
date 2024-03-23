@@ -31,7 +31,13 @@ const LinkPopoverPluginContext = createContext<LinkPopoverPluginContextType>({
 
 const useLinkPopoverPlugin = () => useContext(LinkPopoverPluginContext);
 
-function LinkPopoverPlugin({ children }: { children?: React.ReactNode }) {
+function LinkPopoverPlugin({
+    children,
+    container,
+}: {
+    children?: React.ReactNode;
+    container?: HTMLElement;
+}) {
     const [editor] = useLexicalComposerContext();
     const [open, setOpen] = useState(false);
     const [url, setUrl] = useState<string>('');
@@ -109,7 +115,9 @@ function LinkPopoverPlugin({ children }: { children?: React.ReactNode }) {
                     ref={anchorRef}
                     style={{ position: 'absolute', visibility: 'hidden' }}
                 />
-                {children}
+                <Popover.Portal container={container}>
+                    {children}
+                </Popover.Portal>
             </Popover.Root>
         </LinkPopoverPluginContext.Provider>
     );

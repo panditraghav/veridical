@@ -74,8 +74,10 @@ const useFloatingActionMenu = () => useContext(FloatingActionMenuContext);
 
 export function FloatingActionMenuPlugin({
     children,
+    container,
 }: {
     children?: React.ReactNode;
+    container?: HTMLElement;
 }) {
     const [open, setOpen] = useState(false);
     const [editor] = useLexicalComposerContext();
@@ -146,7 +148,9 @@ export function FloatingActionMenuPlugin({
                         visibility: 'hidden',
                     }}
                 />
-                <Popover.Portal>{children}</Popover.Portal>
+                <Popover.Portal container={container}>
+                    {children}
+                </Popover.Portal>
             </Popover.Root>
         </FloatingActionMenuContext.Provider>
     );

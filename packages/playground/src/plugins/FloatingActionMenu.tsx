@@ -10,9 +10,13 @@ import {
 import { FaBold, FaCode, FaItalic, FaLink, FaUnderline } from 'react-icons/fa6';
 import { cn } from '../utils/cn';
 
-export default function FloatingActionMenuPlugin() {
+export default function FloatingActionMenuPlugin({
+    container,
+}: {
+    container: HTMLElement;
+}) {
     return (
-        <FloatingActionMenu>
+        <FloatingActionMenu container={container}>
             <FloatingActionMenu.Content
                 className="bg-foreground rounded-md py-1 px-1 data-[state=open]:animate-in data-[state=open]:ease-in-out data-[state=open]:fade-in data-[state=open]:duration-150 data-[state=open]:zoom-in-95 data-[state=open]:data-[side=top]:slide-in-from-bottom-1.5 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:duration-200"
                 sideOffset={8}

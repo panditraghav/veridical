@@ -5,7 +5,7 @@ import {
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $createParagraphNode, $getRoot } from 'lexical';
 import { ErrorBoundary } from 'react-error-boundary';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     CodeHighlightPlugin,
     defaultEditorNodes,
@@ -54,6 +54,14 @@ function initializeEditor() {
 export default function Editor() {
     const { showTreeView } = useAppContext();
     const editorState = localStorage.getItem('blog');
+    const [floatingAnchorElem, setFloatingAnchorElem] =
+        useState<HTMLDivElement | null>(null);
+
+    const onRef = (_floatingAnchorElem: HTMLDivElement) => {
+        if (_floatingAnchorElem !== null) {
+            setFloatingAnchorElem(_floatingAnchorElem);
+        }
+    };
 
     const initialConfig: InitialConfigType = {
         namespace: 'Playground',
@@ -70,7 +78,9 @@ export default function Editor() {
             <div className="mb-24 w-full px-4 md:mx-auto md:w-8/12 lg:w-[850px]">
                 <RichTextPlugin
                     contentEditable={
-                        <ContentEditable className="focus:outline-none" />
+                        <div ref={onRef}>
+                            <ContentEditable className="focus:outline-none" />
+                        </div>
                     }
                     placeholder={
                         <div className="relative left-0 top-[-35px] z-[-10] text-muted-foreground">
@@ -87,11 +97,18 @@ export default function Editor() {
                 <HistoryPlugin />
                 <TabIndentationPlugin />
                 <SaveStatePlugin />
-                <HoveredNodePlugin />
-                <LinkPlugins />
-                <CommandMenuPlugin />
                 <ImageDialogPlugin />
-                <FloatingActionMenuPlugin />
+
+                {floatingAnchorElem && (
+                    <>
+                        <LinkPlugins container={floatingAnchorElem} />
+                        <CommandMenuPlugin container={floatingAnchorElem} />
+                        <HoveredNodePlugin container={floatingAnchorElem} />
+                        <FloatingActionMenuPlugin
+                            container={floatingAnchorElem}
+                        />
+                    </>
+                )}
 
                 {showTreeView && <TreeViewPlugin />}
             </div>

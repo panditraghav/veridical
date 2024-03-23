@@ -23,10 +23,12 @@ function getAnchorPosition(
 export function HoveredNodeOptions({
     children,
     className,
+    container,
     offset,
 }: {
     children?: React.ReactNode;
     className?: string;
+    container?: HTMLElement;
     offset?: Offset;
 }) {
     const { hoveredDOMNode } = useHoveredNode();
@@ -69,7 +71,7 @@ export function HoveredNodeOptions({
                     visibility: 'hidden',
                 }}
             />
-            <Popover.Portal>
+            <Popover.Portal container={container}>
                 <Popover.Content
                     side="left"
                     align="start"

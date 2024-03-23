@@ -48,9 +48,11 @@ const useCommandMenu = () => useContext(CommandMenuContext);
 
 function CommandMenuPlugin({
     children,
+    container,
     removeScroll = true,
 }: {
     children?: React.ReactNode;
+    container?: HTMLElement;
     removeScroll?: boolean;
 }) {
     const [open, setOpen] = useState(false);
@@ -189,7 +191,7 @@ function CommandMenuPlugin({
                         visibility: 'hidden',
                     }}
                 />
-                <Popover.Portal>
+                <Popover.Portal container={container}>
                     {removeScroll ? (
                         <RemoveScroll as={Slot} allowPinchZoom>
                             {children}
