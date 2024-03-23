@@ -33,6 +33,7 @@ function setTragetLinePosition(
     editor: LexicalEditor,
     targetLine: HTMLDivElement | null,
     leftOffset: number = LEFT_OFFSET,
+    container?: HTMLElement,
 ) {
     const { lexicalDOMNode: targetLexicalDOMNode } = getHoveredDOMNode(
         ev,
@@ -46,16 +47,23 @@ function setTragetLinePosition(
         targetLexicalDOMNode.getBoundingClientRect();
 
     targetLine.style.display = 'block';
-    targetLine.style.left = `${left}px`;
+
+    const cRect = container?.getBoundingClientRect();
+
+    targetLine.style.left = `${left - (cRect?.left || 0)}px`;
     targetLine.style.width = `${width}px`;
     targetLine.setAttribute('data-visible', 'true');
 
     switch (isAboveOrBelowCenter(ev, targetLexicalDOMNode)) {
         case 'above':
-            targetLine.style.top = `${top + window.scrollY}px`;
+            targetLine.style.top = `${
+                top + window.scrollY - (cRect?.top || 0)
+            }px`;
             break;
         case 'below':
-            targetLine.style.top = `${top + height + window.scrollY}px`;
+            targetLine.style.top = `${
+                top + window.scrollY + height - (cRect?.top || 0)
+            }px`;
             break;
     }
 }
@@ -116,6 +124,7 @@ export function DraggableNodeButton({
                 editor,
                 targetLineRef.current,
                 leftOffset,
+                container,
             );
             return true;
         },

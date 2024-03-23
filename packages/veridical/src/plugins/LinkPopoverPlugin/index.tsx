@@ -66,8 +66,10 @@ function LinkPopoverPlugin({
             ? linkDomNode.getBoundingClientRect()
             : selectionRange.getBoundingClientRect();
 
-        anchorDom.style.left = `${left}px`;
-        anchorDom.style.top = `${top + window.scrollY}px`;
+        const cRect = container?.getBoundingClientRect();
+
+        anchorDom.style.left = `${left - (cRect?.left || 0)}px`;
+        anchorDom.style.top = `${top + window.scrollY - (cRect?.top || 0)}px`;
         anchorDom.style.width = `${width}px`;
         anchorDom.style.height = `${height}px`;
     }, [editor]);

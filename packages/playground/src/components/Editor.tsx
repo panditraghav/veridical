@@ -75,12 +75,13 @@ export default function Editor() {
     return (
         <LexicalComposer initialConfig={initialConfig}>
             <RegisterCommands />
-            <div className="mb-24 w-full px-4 md:mx-auto md:w-8/12 lg:w-[850px]">
+            <div
+                className="mb-24 w-full px-4 md:mx-auto md:w-8/12 lg:w-[850px] relative"
+                ref={onRef}
+            >
                 <RichTextPlugin
                     contentEditable={
-                        <div ref={onRef}>
-                            <ContentEditable className="focus:outline-none" />
-                        </div>
+                        <ContentEditable className="focus:outline-none relative" />
                     }
                     placeholder={
                         <div className="relative left-0 top-[-35px] z-[-10] text-muted-foreground">

@@ -127,8 +127,10 @@ export function FloatingActionMenuPlugin({
             .getRangeAt(0)
             .getBoundingClientRect();
 
-        anchor.style.left = `${left}px`;
-        anchor.style.top = `${top + window.scrollY}px`;
+        const cRect = container?.getBoundingClientRect();
+
+        anchor.style.left = `${left - (cRect?.left || 0)}px`;
+        anchor.style.top = `${top + window.scrollY - (cRect?.top || 0)}px`;
         anchor.style.width = `${width}px`;
         anchor.style.height = `${height}px`;
     }

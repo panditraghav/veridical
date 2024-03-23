@@ -160,10 +160,10 @@ function CommandMenuPlugin({
                 height = aHeight;
             }
         }
+        const cRect = container?.getBoundingClientRect();
 
-        anchor.style.position = 'absolute';
-        anchor.style.left = `${left}px`;
-        anchor.style.top = `${top + window.scrollY}px`;
+        anchor.style.left = `${left - (cRect?.left || 0)}px`;
+        anchor.style.top = `${top + window.scrollY - (cRect?.top || 0)}px`;
         anchor.style.height = `${height}px`;
     }
 

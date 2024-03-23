@@ -40,9 +40,12 @@ export function HoveredNodeOptions({
         const anchor = anchorRef.current;
         if (!anchor || !position) return;
 
-        anchor.style.position = 'absolute';
-        anchor.style.left = `${position.left}px`;
-        anchor.style.top = `${position.top}px`;
+        const cRect = container?.getBoundingClientRect();
+
+        anchor.style.left = `${position.left - (cRect?.left || 0)}px`;
+        anchor.style.top = `${
+            position.top + window.scrollY - (cRect?.top || 0)
+        }px`;
     }
 
     useEffect(() => {
